@@ -1,0 +1,13 @@
+# Server configuration
+server:
+  port: 8088
+  servlet:
+    context-path: /auth
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bbortt-tv-authorization
+    username: bbortt-tv-authorization
+    password: uwillneverguessthisone
+  redis:
+    host: localhost
+    port: 6379

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    flyway:
+      url: ${spring.datasource.url}
+      user: ${PSQL_FLYWAY_USERNAME:${spring.datasource.username}}
+      password: ${PSQL_FLYWAY_PASSWORD:${spring.datasource.password}}
+    url: ${PSQL_DATASOURCE_JDBC_URL}
+    username: ${PSQL_DATASOURCE_USERNAME}
+    password: ${PSQL_DATASOURCE_PASSWORD}
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
