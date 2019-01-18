@@ -1,0 +1,194 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>web-ui</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>io.github.bbortt.tv.core</groupId>
+        <artifactId>core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <!-- Node configuration -->
+        <nodeVersion>v6.9.1</nodeVersion>
+        <yarnVersion>v0.16.1</yarnVersion>
+        <nodeInstallDirectory>target/node</nodeInstallDirectory>
+
+        <!-- Plugin configuration -->
+        <com.github.eirslett.frontend-maven-plugin-version>1.6</com.github.eirslett.frontend-maven-plugin-version>
+    </properties>
+
+    <build>
+        <defaultGoal>clean package</defaultGoal>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>node</id>
+
+            <activation>
+                <property>
+                    <name>node</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${com.github.eirslett.frontend-maven-plugin-version}</version>
+
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+
+                        <executions>
+                            <!-- download nodejs and npm -->
+                            <execution>
+                                <id>install node and yarn</id>
+                                <phase>generate-resources</phase>
+
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+
+                                <configuration>
+                                    <installDirectory>${nodeInstallDirectory}</installDirectory>
+                                    <nodeVersion>${nodeVersion}</nodeVersion>
+                                    <yarnVersion>${yarnVersion}</yarnVersion>
+                                </configuration>
+                            </execution>
+
+                            <!-- install dependencies -->
+                            <execution>
+                                <id>yarn install</id>
+                                <phase>generate-resources</phase>
+
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+
+                                <configuration>
+                                    <arguments>install</arguments>
+                                    <installDirectory>${nodeInstallDirectory}</installDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>webpack</id>
+
+            <build>
+                <plugins>
+                    <!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${com.github.eirslett.frontend-maven-plugin-version}</version>
+
+                        <configuration>
+                            <skip>false</skip>
+                        </configuration>
+
+                        <executions>
+                            <!-- build frontend -->
+                            <execution>
+                                <id>yarn run build:dev</id>
+                                <phase>generate-resources</phase>
+
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+
+                                <configuration>
+                                    <arguments>run build:dev</arguments>
+                                    <installDirectory>${nodeInstallDirectory}</installDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+
+            <properties>
+                <!-- Activate node profile -->
+                <node>true</node>
+            </properties>
+
+            <build>
+                <plugins>
+                    <!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${com.github.eirslett.frontend-maven-plugin-version}</version>
+
+                        <configuration>
+                            <skip>false</skip>
+                        </configuration>
+
+                        <executions>
+                            <!-- flow type check -->
+                            <execution>
+                                <id>yarn run flow</id>
+                                <phase>generate-resources</phase>
+
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+
+                                <configuration>
+                                    <arguments>run flow</arguments>
+                                    <installDirectory>${nodeInstallDirectory}</installDirectory>
+                                </configuration>
+                            </execution>
+
+                            <!-- test application -->
+                            <execution>
+                                <id>yarn run test</id>
+                                <phase>generate-resources</phase>
+
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+
+                                <configuration>
+                                    <arguments>run test</arguments>
+                                    <installDirectory>${nodeInstallDirectory}</installDirectory>
+                                </configuration>
+                            </execution>
+
+                            <!-- build ui -->
+                            <execution>
+                                <id>yarn run build</id>
+                                <phase>generate-resources</phase>
+
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+
+                                <configuration>
+                                    <arguments>run build</arguments>
+                                    <installDirectory>${nodeInstallDirectory}</installDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

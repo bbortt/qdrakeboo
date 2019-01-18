@@ -36,4 +36,9 @@
     <modules>
         <module>parent</module>
     </modules>
+
+    <properties>
+        <!-- Dependency management -->
+        <spring-boot-version>2.1.2.RELEASE</spring-boot-version>
+    </properties>
 </project>

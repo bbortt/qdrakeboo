@@ -11,6 +11,10 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <modules>
+        <module>core</module>
+    </modules>
+
     <properties>
         <!-- General configuration -->
         <buildNumber>${maven.build.timestamp}</buildNumber>
@@ -19,8 +23,10 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Dependency management -->
-        <spring-boot-version>2.1.2.RELEASE</spring-boot-version>
+        <!-- Plugin configuration -->
+        <jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
+        <maven-failsafe-plugin-version>3.0.0-M3</maven-failsafe-plugin-version>
+        <maven-surefire-plugin-version>3.0.0-M3</maven-surefire-plugin-version>
     </properties>
 
     <dependencyManagement>
@@ -37,26 +43,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-
-            <exclusions>
-                <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-undertow -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,10 +52,102 @@
     </dependencies>
 
     <build>
+        <defaultGoal>clean install</defaultGoal>
+        <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+
         <plugins>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-version}</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin-version}</version>
+
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+
+                        <phase>test</phase>
+
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+
+                        <configuration>
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+
+                            <excludes>
+                                <exclude>**/*IntTest.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin-version}</version>
+
+                <executions>
+                    <execution>
+                        <id>integration-tests</id>
+
+                        <phase>integration-test</phase>
+
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+
+                        <configuration>
+                            <includes>
+                                <include>**/*IntTest.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin-version}</version>
+
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>default-report</id>
+
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
