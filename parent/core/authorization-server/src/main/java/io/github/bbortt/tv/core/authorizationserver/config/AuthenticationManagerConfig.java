@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 
 @Configuration
@@ -35,9 +34,7 @@ public class AuthenticationManagerConfig {
         new AuthenticationManagerBuilder(objectPostProcessor);
 
     builder.authenticationProvider(preAuthenticatedAuthenticationProvider)
-        .userDetailsService(userDetailsService)
-        // TODO: .passwordEncoder(bCryptPasswordEncoder);
-        .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
+        .userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 
     return builder.build();
   }

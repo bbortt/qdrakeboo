@@ -18,7 +18,7 @@ spec:
         - containerPort: 5432
       env:
         - name: POSTGRES_USER
-          value: bbortt-tv-authorization
+          value: bbortt_tv_authorization
         - name: POSTGRES_PASSWORD
           value: uwillneverguessthisone
   restartPolicy: Always
