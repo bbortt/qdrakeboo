@@ -5,10 +5,15 @@ import java.util.Map;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
+import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 
 public class ClientDetailsImpl implements ClientDetails {
 
   private static final long serialVersionUID = 1L;
+
+  public ClientDetailsImpl(Client fromResultSet) {
+    // TODO Auto-generated constructor stub
+  }
 
   @Override
   public String getClientId() {

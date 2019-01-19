@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class User extends AbstractAuditingEntity {
 
-  public static final String TABLE_NAME = "users";
+  public static final String TABLE_NAME = "user";
 
   public static final String USER_CREATED_COLUMN_NAME = "user_created";
   public static final String USER_LAST_UPDATED_COLUMN_NAME = "user_last_updated";
@@ -27,16 +27,6 @@ public class User extends AbstractAuditingEntity {
 
   public User() {
 
-  }
-
-  public User(String username, String email, String password, boolean isEnabled, boolean isBlocked,
-      Set<UserRole> roles) {
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.isEnabled = isEnabled;
-    this.isBlocked = isBlocked;
-    this.roles = roles;
   }
 
   public long getId() {

@@ -34,9 +34,11 @@ public class UserFactory implements EntityFactory<User> {
 
     Set<UserRole> userRoles = new HashSet<>();
     userRoles.add(userRoleFactory.fromResultSet(resultSet));
+
     while (resultSet.next()) {
       userRoles.add(userRoleFactory.fromResultSet(resultSet));
     }
+
     user.setRoles(userRoles);
 
     return user;

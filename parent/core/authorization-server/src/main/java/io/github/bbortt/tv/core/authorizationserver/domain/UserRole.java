@@ -6,7 +6,7 @@ public class UserRole extends AbstractAuditingEntity implements GrantedAuthority
 
   private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME = "user_roles";
+  public static final String TABLE_NAME = "user_role";
 
   public static final String USER_ROLE_CREATED_COLUMN_NAME = "user_role_created";
   public static final String USER_ROLE_LAST_UPDATED_COLUMN_NAME = "user_role_last_updated";
@@ -18,10 +18,6 @@ public class UserRole extends AbstractAuditingEntity implements GrantedAuthority
 
   public UserRole() {
 
-  }
-
-  public UserRole(String name) {
-    this.name = name;
   }
 
   public long getId() {

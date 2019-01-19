@@ -1,0 +1,126 @@
+package io.github.bbortt.tv.core.authorizationserver.domain;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Client extends AbstractAuditingEntity {
+
+  public static final String TABLE_NAME = "client";
+  public static final String CACHE_NAME = "client";
+
+  public static final String CLIENT_CREATED_COLUMN_NAME = "client_created";
+  public static final String CLIENT_LAST_UPDATED_COLUMN_NAME = "client_last_updated";
+
+  public static final String ID_COLUMN_NAME = "id";
+  public static final String CLIENT_ID_COLUMN_NAME = "client_id";
+  public static final String SECRET_COLUMN_NAME = "secret";
+  public static final String IS_SECRET_REQUIRED_COLUMN_NAME = "is_secret_required";
+  public static final String IS_AUTO_APPROVE_COLUMN_NAME = "is_auto_approve";
+  public static final String ACCESS_TOKEN_VALIDITY_SECONDS_COLUMN_NAME = "access_token_validity";
+  public static final String REFRESH_TOKEN_VALIDITY_SECONDS_COLUMN_NAME = "refresh_token_validity";
+  public static final String REDIRECT_URL_COLUMN_NAME = "redirect_url";
+
+  private long id;
+  private String clientId;
+  private String secret;
+  private boolean isSecretRequired = true;
+  private boolean isAutoApprove = false;
+  private int accessTokenValiditySeconds;
+  private int refreshTokenValiditySeconds;
+  private String redirectUrl;
+  private Set<ClientGrantType> grantTypes = new HashSet<>();
+  private Set<ClientAuthority> authorities = new HashSet<>();
+  private Set<ClientScope> scopes = new HashSet<>();
+
+  public Client() {
+
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getClientId() {
+    return clientId;
+  }
+
+  public void setClientId(String clientId) {
+    this.clientId = clientId;
+  }
+
+  public String getSecret() {
+    return secret;
+  }
+
+  public void setSecret(String secret) {
+    this.secret = secret;
+  }
+
+  public boolean isSecretRequired() {
+    return isSecretRequired;
+  }
+
+  public void setSecretRequired(boolean isSecretRequired) {
+    this.isSecretRequired = isSecretRequired;
+  }
+
+  public boolean isAutoApprove() {
+    return isAutoApprove;
+  }
+
+  public void setAutoApprove(boolean isAutoApprove) {
+    this.isAutoApprove = isAutoApprove;
+  }
+
+  public int getAccessTokenValiditySeconds() {
+    return accessTokenValiditySeconds;
+  }
+
+  public void setAccessTokenValiditySeconds(int accessTokenValiditySeconds) {
+    this.accessTokenValiditySeconds = accessTokenValiditySeconds;
+  }
+
+  public int getRefreshTokenValiditySeconds() {
+    return refreshTokenValiditySeconds;
+  }
+
+  public void setRefreshTokenValiditySeconds(int refreshTokenValiditySeconds) {
+    this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
+  }
+
+  public String getRedirectUrl() {
+    return redirectUrl;
+  }
+
+  public void setRedirectUrl(String redirectUrl) {
+    this.redirectUrl = redirectUrl;
+  }
+
+  public Set<ClientGrantType> getGrantTypes() {
+    return grantTypes;
+  }
+
+  public void setGrantTypes(Set<ClientGrantType> grantTypes) {
+    this.grantTypes = grantTypes;
+  }
+
+  public Set<ClientAuthority> getAuthorities() {
+    return authorities;
+  }
+
+  public void setAuthorities(Set<ClientAuthority> authorities) {
+    this.authorities = authorities;
+  }
+
+  public Set<ClientScope> getScopes() {
+    return scopes;
+  }
+
+  public void setScopes(Set<ClientScope> scopes) {
+    this.scopes = scopes;
+  }
+}
