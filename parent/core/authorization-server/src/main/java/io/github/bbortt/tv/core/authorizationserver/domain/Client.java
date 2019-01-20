@@ -28,9 +28,9 @@ public class Client extends AbstractAuditingEntity {
   private int accessTokenValiditySeconds;
   private int refreshTokenValiditySeconds;
   private String redirectUrl;
-  private Set<ClientGrantType> grantTypes = new HashSet<>();
-  private Set<ClientAuthority> authorities = new HashSet<>();
-  private Set<ClientScope> scopes = new HashSet<>();
+  private Set<GrantType> grantTypes = new HashSet<>();
+  private Set<Authority> authorities = new HashSet<>();
+  private Set<Scope> scopes = new HashSet<>();
 
   public Client() {
 
@@ -100,27 +100,27 @@ public class Client extends AbstractAuditingEntity {
     this.redirectUrl = redirectUrl;
   }
 
-  public Set<ClientGrantType> getGrantTypes() {
+  public Set<GrantType> getGrantTypes() {
     return grantTypes;
   }
 
-  public void setGrantTypes(Set<ClientGrantType> grantTypes) {
+  public void setGrantTypes(Set<GrantType> grantTypes) {
     this.grantTypes = grantTypes;
   }
 
-  public Set<ClientAuthority> getAuthorities() {
+  public Set<Authority> getAuthorities() {
     return authorities;
   }
 
-  public void setAuthorities(Set<ClientAuthority> authorities) {
+  public void setAuthorities(Set<Authority> authorities) {
     this.authorities = authorities;
   }
 
-  public Set<ClientScope> getScopes() {
+  public Set<Scope> getScopes() {
     return scopes;
   }
 
-  public void setScopes(Set<ClientScope> scopes) {
+  public void setScopes(Set<Scope> scopes) {
     this.scopes = scopes;
   }
 }

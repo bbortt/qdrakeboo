@@ -3,29 +3,29 @@ package io.github.bbortt.tv.core.authorizationserver.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User extends AbstractAuditingEntity {
+public class Account extends AbstractAuditingEntity {
 
-  public static final String TABLE_NAME = "user";
+  public static final String TABLE_NAME = "account";
 
-  public static final String USER_CREATED_COLUMN_NAME = "user_created";
-  public static final String USER_LAST_UPDATED_COLUMN_NAME = "user_last_updated";
+  public static final String ACCOUNT_CREATED_COLUMN_NAME = "account_created";
+  public static final String ACCOUNT_LAST_UPDATED_COLUMN_NAME = "account_last_updated";
 
   public static final String ID_COLUMN_NAME = "id";
-  public static final String USERNAME_COLUMN_NAME = "username";
+  public static final String ACCOUNTNAME_COLUMN_NAME = "accountname";
   public static final String EMAIL_COLUMN_NAME = "email";
   public static final String PASSWORD_COLUMN_NAME = "password";
   public static final String IS_ENABLED_COLUMN_NAME = "is_enabled";
   public static final String IS_BLOCKED_COLUMN_NAME = "is_blocked";
 
   private long id;
-  private String username;
+  private String accountname;
   private String email;
   private String password;
   private boolean isEnabled = false;
   private boolean isBlocked = false;
-  private Set<UserRole> roles = new HashSet<>();
+  private Set<Role> roles = new HashSet<>();
 
-  public User() {
+  public Account() {
 
   }
 
@@ -37,12 +37,12 @@ public class User extends AbstractAuditingEntity {
     this.id = id;
   }
 
-  public String getUsername() {
-    return username;
+  public String getAccountname() {
+    return accountname;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setAccountname(String accountname) {
+    this.accountname = accountname;
   }
 
   public String getEmail() {
@@ -77,11 +77,11 @@ public class User extends AbstractAuditingEntity {
     this.isBlocked = isBlocked;
   }
 
-  public Set<UserRole> getRoles() {
+  public Set<Role> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<UserRole> roles) {
+  public void setRoles(Set<Role> roles) {
     this.roles = roles;
   }
 }

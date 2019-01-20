@@ -3,15 +3,15 @@ package io.github.bbortt.tv.core.authorizationserver.config.userdetails;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import io.github.bbortt.tv.core.authorizationserver.domain.User;
+import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 
 public class UserDetailsImpl implements UserDetails {
 
   private static final long serialVersionUID = 1L;
 
-  private User user;
+  private Account user;
 
-  public UserDetailsImpl(User user) {
+  public UserDetailsImpl(Account user) {
     this.user = user;
   }
 
@@ -27,7 +27,7 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public String getUsername() {
-    return user.getUsername();
+    return user.getAccountname();
   }
 
   @Override

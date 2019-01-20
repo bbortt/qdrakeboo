@@ -1,154 +1,154 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>parent</artifactId>
-    <packaging>pom</packaging>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>parent</artifactId>
+  <packaging>pom</packaging>
 
-    <parent>
-        <groupId>io.github.bbortt.tv</groupId>
-        <artifactId>bom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+  <parent>
+    <groupId>io.github.bbortt.tv</groupId>
+    <artifactId>bom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
 
-    <modules>
-        <module>core</module>
-    </modules>
+  <modules>
+    <module>core</module>
+  </modules>
 
-    <properties>
-        <!-- General configuration -->
-        <buildNumber>${maven.build.timestamp}</buildNumber>
-        <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <properties>
+    <!-- General configuration -->
+    <buildNumber>${maven.build.timestamp}</buildNumber>
+    <java.version>11</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Plugin configuration -->
-        <jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
-        <maven-failsafe-plugin-version>3.0.0-M3</maven-failsafe-plugin-version>
-        <maven-surefire-plugin-version>3.0.0-M3</maven-surefire-plugin-version>
-    </properties>
+    <!-- Plugin configuration -->
+    <jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
+    <maven-failsafe-plugin-version>3.0.0-M3</maven-failsafe-plugin-version>
+    <maven-surefire-plugin-version>3.0.0-M3</maven-surefire-plugin-version>
+  </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+  <dependencyManagement>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <defaultGoal>clean install</defaultGoal>
-        <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-        <plugins>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-version}</version>
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+    <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+    <plugins>
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot-version}</version>
 
-            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin-version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
-                <executions>
-                    <execution>
-                        <id>default-test</id>
+      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin-version}</version>
 
-                        <phase>test</phase>
+        <executions>
+          <execution>
+            <id>default-test</id>
 
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
+            <phase>test</phase>
 
-                        <configuration>
-                            <includes>
-                                <include>**/*Test.java</include>
-                            </includes>
+            <goals>
+              <goal>test</goal>
+            </goals>
 
-                            <excludes>
-                                <exclude>**/*IntTest.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <configuration>
+              <includes>
+                <include>**/*Test.java</include>
+              </includes>
 
-            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe-plugin-version}</version>
+              <excludes>
+                <exclude>**/*IntTest.java</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
-                <executions>
-                    <execution>
-                        <id>integration-tests</id>
+      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-failsafe-plugin-version}</version>
 
-                        <phase>integration-test</phase>
+        <executions>
+          <execution>
+            <id>integration-tests</id>
 
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
+            <phase>integration-test</phase>
 
-                        <configuration>
-                            <includes>
-                                <include>**/*IntTest.java</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
 
-            <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven-plugin-version}</version>
+            <configuration>
+              <includes>
+                <include>**/*IntTest.java</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
+      <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin-version}</version>
 
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
 
-                    <execution>
-                        <id>default-report</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
 
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+          <execution>
+            <id>default-report</id>
+
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

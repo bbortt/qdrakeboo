@@ -5,14 +5,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import io.github.bbortt.tv.core.authorizationserver.domain.repository.UserRepository;
+import io.github.bbortt.tv.core.authorizationserver.domain.repository.AccountRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-  private final UserRepository userRepository;
+  private final AccountRepository userRepository;
 
-  public UserDetailsServiceImpl(UserRepository userRepository) {
+  public UserDetailsServiceImpl(AccountRepository userRepository) {
     this.userRepository = userRepository;
   }
 

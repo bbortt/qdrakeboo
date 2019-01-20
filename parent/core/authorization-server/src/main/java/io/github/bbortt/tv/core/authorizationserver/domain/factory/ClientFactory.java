@@ -4,25 +4,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+import io.github.bbortt.tv.core.authorizationserver.domain.Authority;
 import io.github.bbortt.tv.core.authorizationserver.domain.Client;
-import io.github.bbortt.tv.core.authorizationserver.domain.ClientAuthority;
-import io.github.bbortt.tv.core.authorizationserver.domain.ClientGrantType;
-import io.github.bbortt.tv.core.authorizationserver.domain.ClientScope;
+import io.github.bbortt.tv.core.authorizationserver.domain.GrantType;
+import io.github.bbortt.tv.core.authorizationserver.domain.Scope;
 
 public class ClientFactory implements EntityFactory<Client> {
 
-  private final ClientAuthorityFactory clientAuthorityFactory;
-  private final ClientGrantTypeFactory clientGrantTypeFactory;
-  private final ClientScopeFactory clientScopeFactory;
+  private final AuthorityFactory authorityFactory;
+  private final GrantTypeFactory grantTypeFactory;
+  private final ScopeFactory scopeFactory;
 
   public static ClientFactory getInstance() {
     return ClientFactoryHolder.INSTANCE;
   }
 
   private ClientFactory() {
-    this.clientAuthorityFactory = ClientAuthorityFactory.getInstance();
-    this.clientGrantTypeFactory = ClientGrantTypeFactory.getInstance();
-    this.clientScopeFactory = ClientScopeFactory.getInstance();
+    this.authorityFactory = AuthorityFactory.getInstance();
+    this.grantTypeFactory = GrantTypeFactory.getInstance();
+    this.scopeFactory = ScopeFactory.getInstance();
   }
 
   @Override
@@ -43,19 +43,19 @@ public class ClientFactory implements EntityFactory<Client> {
         resultSet.getInt(Client.REFRESH_TOKEN_VALIDITY_SECONDS_COLUMN_NAME));
     client.setRedirectUrl(resultSet.getString(Client.REDIRECT_URL_COLUMN_NAME));
 
-    Set<ClientGrantType> grantTypes = new HashSet<>();
-    grantTypes.add(clientGrantTypeFactory.fromResultSet(resultSet));
+    Set<GrantType> grantTypes = new HashSet<>();
+    grantTypes.add(grantTypeFactory.fromResultSet(resultSet));
 
-    Set<ClientAuthority> authorities = new HashSet<>();
-    authorities.add(clientAuthorityFactory.fromResultSet(resultSet));
+    Set<Authority> authorities = new HashSet<>();
+    authorities.add(authorityFactory.fromResultSet(resultSet));
 
-    Set<ClientScope> scopes = new HashSet<>();
-    scopes.add(clientScopeFactory.fromResultSet(resultSet));
+    Set<Scope> scopes = new HashSet<>();
+    scopes.add(scopeFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {
-      grantTypes.add(clientGrantTypeFactory.fromResultSet(resultSet));
-      authorities.add(clientAuthorityFactory.fromResultSet(resultSet));
-      scopes.add(clientScopeFactory.fromResultSet(resultSet));
+      grantTypes.add(grantTypeFactory.fromResultSet(resultSet));
+      authorities.add(authorityFactory.fromResultSet(resultSet));
+      scopes.add(scopeFactory.fromResultSet(resultSet));
     }
 
     client.setGrantTypes(grantTypes);
