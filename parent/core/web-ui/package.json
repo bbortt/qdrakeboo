@@ -1,0 +1,22 @@
+{
+  "name": "web-ui",
+  "version": "1.0.0",
+  "description": "Frontend for bbortt-tv.",
+  "main": "index.js",
+  "repository": "https://github.com/bbortt/my-little-streaming-dream",
+  "author": "Timon Borter",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
