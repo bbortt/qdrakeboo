@@ -2,14 +2,14 @@
 ---          ACCOUNTS           ---
 -----------------------------------
 CREATE TABLE account (
-    id bigserial NOT NULL,
-    created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
-    last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
-    accountname character varying(64) NOT NULL,
-    email character varying(128) NOT NULL,
-    password character(60) NOT NULL,
-    is_enabled boolean NOT NULL DEFAULT FALSE,
-    is_blocked boolean NOT NULL DEFAULT FALSE
+  id bigserial NOT NULL,
+  created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  accountname character varying(64) NOT NULL,
+  email character varying(128) NOT NULL,
+  password character(60) NOT NULL,
+  is_enabled boolean NOT NULL DEFAULT FALSE,
+  is_blocked boolean NOT NULL DEFAULT FALSE
 );
 
 ALTER TABLE ONLY account

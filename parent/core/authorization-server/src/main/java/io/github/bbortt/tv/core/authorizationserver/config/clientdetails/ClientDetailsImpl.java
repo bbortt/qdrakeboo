@@ -1,96 +1,91 @@
 package io.github.bbortt.tv.core.authorizationserver.config.clientdetails;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import io.github.bbortt.tv.core.authorizationserver.domain.Client;
+import io.github.bbortt.tv.core.authorizationserver.domain.GrantType;
+import io.github.bbortt.tv.core.authorizationserver.domain.Scope;
 
 public class ClientDetailsImpl implements ClientDetails {
 
   private static final long serialVersionUID = 1L;
 
-  public ClientDetailsImpl(Client fromResultSet) {
-    // TODO Auto-generated constructor stub
+  private Client client;
+
+  public ClientDetailsImpl(Client client) {
+    this.client = client;
   }
 
   @Override
   public String getClientId() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getClientId();
   }
 
   @Override
   public Set<String> getResourceIds() {
-    // TODO Auto-generated method stub
-    return null;
+    return new HashSet<String>();
   }
 
   @Override
   public boolean isSecretRequired() {
-    // TODO Auto-generated method stub
-    return false;
+    return client.isSecretRequired();
   }
 
   @Override
   public String getClientSecret() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getSecret();
   }
 
   @Override
   public boolean isScoped() {
-    // TODO Auto-generated method stub
-    return false;
+    return client.getScopes() != null && !client.getScopes().isEmpty();
   }
 
   @Override
   public Set<String> getScope() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getScopes().stream().map(Scope::getName).collect(Collectors.toSet());
   }
 
   @Override
   public Set<String> getAuthorizedGrantTypes() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getGrantTypes().stream().map(GrantType::getName).collect(Collectors.toSet());
   }
 
   @Override
   public Set<String> getRegisteredRedirectUri() {
-    // TODO Auto-generated method stub
-    return null;
+    return new HashSet<String>(Arrays.asList(client.getRedirectUris()));
   }
 
   @Override
   public Collection<GrantedAuthority> getAuthorities() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getAuthorities().stream().collect(Collectors.toCollection(ArrayList::new));
   }
 
   @Override
   public Integer getAccessTokenValiditySeconds() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getAccessTokenValiditySeconds();
   }
 
   @Override
   public Integer getRefreshTokenValiditySeconds() {
-    // TODO Auto-generated method stub
-    return null;
+    return client.getRefreshTokenValiditySeconds();
   }
 
   @Override
   public boolean isAutoApprove(String scope) {
-    // TODO Auto-generated method stub
-    return false;
+    return client.isAutoApprove();
   }
 
   @Override
   public Map<String, Object> getAdditionalInformation() {
-    // TODO Auto-generated method stub
-    return null;
+    return new HashMap<>();
   }
-
 }

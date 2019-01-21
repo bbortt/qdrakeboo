@@ -22,8 +22,7 @@ public class PreAuthenticatedAuthenticationTokenUserServiceImpl
 
   @Override
   public UserDetails loadUserDetails(PreAuthenticatedAuthenticationToken token) {
-    final String username = tokenStore.readAuthentication((String) token.getPrincipal()).getName();
-
-    return userDetailsService.loadUserByUsername(username);
+    return userDetailsService
+        .loadUserByUsername(tokenStore.readAuthentication((String) token.getPrincipal()).getName());
   }
 }

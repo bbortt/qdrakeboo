@@ -1,6 +1,10 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-public class Authority extends AbstractAuditingEntity {
+import org.springframework.security.core.GrantedAuthority;
+
+public class Authority extends AbstractAuditingEntity implements GrantedAuthority {
+
+  private static final long serialVersionUID = 1L;
 
   public static final String TABLE_NAME = "authority";
 
@@ -30,5 +34,10 @@ public class Authority extends AbstractAuditingEntity {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  @Override
+  public String getAuthority() {
+    return getName();
   }
 }

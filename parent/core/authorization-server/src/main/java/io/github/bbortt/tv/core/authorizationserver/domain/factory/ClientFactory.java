@@ -41,7 +41,7 @@ public class ClientFactory implements EntityFactory<Client> {
         resultSet.getInt(Client.ACCESS_TOKEN_VALIDITY_SECONDS_COLUMN_NAME));
     client.setRefreshTokenValiditySeconds(
         resultSet.getInt(Client.REFRESH_TOKEN_VALIDITY_SECONDS_COLUMN_NAME));
-    client.setRedirectUrl(resultSet.getString(Client.REDIRECT_URL_COLUMN_NAME));
+    client.setRedirectUris(resultSet.getString(Client.REDIRECT_URIS_COLUMN_NAME));
 
     Set<GrantType> grantTypes = new HashSet<>();
     grantTypes.add(grantTypeFactory.fromResultSet(resultSet));

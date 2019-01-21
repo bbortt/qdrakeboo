@@ -2,6 +2,7 @@ package io.github.bbortt.tv.core.authorizationserver.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.security.core.GrantedAuthority;
 
 public class Client extends AbstractAuditingEntity {
 
@@ -18,7 +19,7 @@ public class Client extends AbstractAuditingEntity {
   public static final String IS_AUTO_APPROVE_COLUMN_NAME = "is_auto_approve";
   public static final String ACCESS_TOKEN_VALIDITY_SECONDS_COLUMN_NAME = "access_token_validity";
   public static final String REFRESH_TOKEN_VALIDITY_SECONDS_COLUMN_NAME = "refresh_token_validity";
-  public static final String REDIRECT_URL_COLUMN_NAME = "redirect_url";
+  public static final String REDIRECT_URIS_COLUMN_NAME = "redirect_uris";
 
   private long id;
   private String clientId;
@@ -27,7 +28,7 @@ public class Client extends AbstractAuditingEntity {
   private boolean isAutoApprove = false;
   private int accessTokenValiditySeconds;
   private int refreshTokenValiditySeconds;
-  private String redirectUrl;
+  private String redirectUris;
   private Set<GrantType> grantTypes = new HashSet<>();
   private Set<Authority> authorities = new HashSet<>();
   private Set<Scope> scopes = new HashSet<>();
@@ -92,12 +93,12 @@ public class Client extends AbstractAuditingEntity {
     this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
   }
 
-  public String getRedirectUrl() {
-    return redirectUrl;
+  public String getRedirectUris() {
+    return redirectUris;
   }
 
-  public void setRedirectUrl(String redirectUrl) {
-    this.redirectUrl = redirectUrl;
+  public void setRedirectUris(String redirectUrl) {
+    this.redirectUris = redirectUrl;
   }
 
   public Set<GrantType> getGrantTypes() {

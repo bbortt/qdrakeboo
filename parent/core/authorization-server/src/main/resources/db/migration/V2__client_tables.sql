@@ -2,16 +2,16 @@
 ---           CLIENTS           ---
 -----------------------------------
 CREATE TABLE client (
- id bigserial NOT NULL,
- created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- client_id character(36) NOT NULL,
- secret character(36),
- secret_required boolean NOT NULL DEFAULT TRUE,
- auto_approve boolean NOT NULL DEFAULT FALSE,
- access_token_validity integer NOT NULL,
- refresh_token_validity integer NOT NULL,
- redirect_url character varying(256)
+  id bigserial NOT NULL,
+  created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  client_id character(36) NOT NULL,
+  secret character(36),
+  secret_required boolean NOT NULL DEFAULT TRUE,
+  auto_approve boolean NOT NULL DEFAULT FALSE,
+  access_token_validity integer NOT NULL,
+  refresh_token_validity integer NOT NULL,
+  redirect_uris character varying(256)
 );
 
 ALTER TABLE ONLY client
@@ -54,10 +54,10 @@ ALTER TABLE ONLY client_has_authorities
 ---         GRANT TYPES         ---
 -----------------------------------
 CREATE TABLE grant_type (
- id bigserial NOT NULL,
- created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- name character varying(32) NOT NULL
+  id bigserial NOT NULL,
+  created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  name character varying(32) NOT NULL
 );
 
 ALTER TABLE ONLY grant_type
@@ -93,10 +93,10 @@ ALTER TABLE ONLY client_has_grant_types
 ---           SCOPES            ---
 -----------------------------------
 CREATE TABLE scope (
- id bigserial NOT NULL,
- created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- name character varying(8) NOT NULL
+  id bigserial NOT NULL,
+  created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  name character varying(8) NOT NULL
 );
 
 ALTER TABLE ONLY scope
@@ -112,10 +112,10 @@ INSERT INTO scope (created, last_updated, name)
 ---           SCOPES            ---
 -----------------------------------
 CREATE TABLE client_has_scopes (
- id bigserial NOT NULL,
- created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
- client_id bigint NOT NULL,
+  id bigserial NOT NULL,
+  created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
+  client_id bigint NOT NULL,
   scope_id bigint NOT NULL
 );
 

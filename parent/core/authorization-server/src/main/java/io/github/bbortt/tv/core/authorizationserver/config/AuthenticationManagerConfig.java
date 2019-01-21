@@ -30,8 +30,7 @@ public class AuthenticationManagerConfig {
 
   @Bean
   public AuthenticationManager authenticationManager() throws Exception {
-    final AuthenticationManagerBuilder builder =
-        new AuthenticationManagerBuilder(objectPostProcessor);
+    AuthenticationManagerBuilder builder = new AuthenticationManagerBuilder(objectPostProcessor);
 
     builder.authenticationProvider(preAuthenticatedAuthenticationProvider)
         .userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
