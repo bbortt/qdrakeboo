@@ -1,4 +1,7 @@
 # Server configuration
+management:
+  server:
+    port: 8099
 server:
   port: 8088
   servlet:
