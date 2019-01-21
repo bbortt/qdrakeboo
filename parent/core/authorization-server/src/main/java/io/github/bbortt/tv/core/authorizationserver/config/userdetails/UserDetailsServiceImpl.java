@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 import io.github.bbortt.tv.core.authorizationserver.domain.repository.AccountRepository;
 
 @Service
@@ -18,11 +19,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Optional<UserDetails> user;
+    Optional<Account> user;
     if (!(user = userRepository.findOneByUsername(username)).isPresent()) {
       throw new UsernameNotFoundException("Username '" + username + "' not found!");
     }
 
-    return user.get();
+    return new UserDetailsImpl(user.get());
   }
 }

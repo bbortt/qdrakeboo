@@ -9,12 +9,10 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.stereotype.Repository;
-import io.github.bbortt.tv.core.authorizationserver.config.clientdetails.ClientDetailsImpl;
 import io.github.bbortt.tv.core.authorizationserver.domain.AbstractAuditingEntity;
-import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 import io.github.bbortt.tv.core.authorizationserver.domain.Authority;
+import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 import io.github.bbortt.tv.core.authorizationserver.domain.GrantType;
 import io.github.bbortt.tv.core.authorizationserver.domain.Scope;
 import io.github.bbortt.tv.core.authorizationserver.domain.factory.ClientFactory;
@@ -63,7 +61,7 @@ public class ClientRepositoryImpl implements ClientRepository {
   }
 
   @Cacheable(cacheNames = {Client.CACHE_NAME}, key = "#result.clientId")
-  public Optional<ClientDetails> findOneByClientId(String clientId) {
+  public Optional<Client> findOneByClientId(String clientId) {
     try (Connection connection = dataSource.getConnection()) {
       PreparedStatement preparedStatement =
           connection.prepareStatement(FIND_ONE_BY_CLIENT_ID_QUERY);
@@ -74,7 +72,7 @@ public class ClientRepositoryImpl implements ClientRepository {
         return Optional.empty();
       }
 
-      return Optional.of(new ClientDetailsImpl(clientFactory.fromResultSet(resultSet)));
+      return Optional.of(clientFactory.fromResultSet(resultSet));
     } catch (SQLException e) {
       LOGGER.error("Error while querying datasource: {}", e.getLocalizedMessage());
       throw new IllegalArgumentException("An unknown error has occured!");

@@ -8,9 +8,7 @@ import java.util.Optional;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-import io.github.bbortt.tv.core.authorizationserver.config.userdetails.UserDetailsImpl;
 import io.github.bbortt.tv.core.authorizationserver.domain.AbstractAuditingEntity;
 import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 import io.github.bbortt.tv.core.authorizationserver.domain.Role;
@@ -47,7 +45,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     this.accountFactory = AccountFactory.getInstance();
   }
 
-  public Optional<UserDetails> findOneByUsername(String username) {
+  public Optional<Account> findOneByUsername(String username) {
     try (Connection connection = dataSource.getConnection()) {
       PreparedStatement preparedStatement =
           connection.prepareStatement(FIND_ONE_BY_ACCOUNTNAME_QUERY);
@@ -58,7 +56,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         return Optional.empty();
       }
 
-      return Optional.of(new UserDetailsImpl(accountFactory.fromResultSet(resultSet)));
+      return Optional.of(accountFactory.fromResultSet(resultSet));
     } catch (SQLException e) {
       LOGGER.error("Error while querying datasource: {}", e.getMessage());
       throw new IllegalArgumentException("An unknown error has occured!");

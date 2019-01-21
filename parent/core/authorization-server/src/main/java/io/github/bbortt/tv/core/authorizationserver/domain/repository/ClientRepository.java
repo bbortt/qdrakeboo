@@ -1,9 +1,9 @@
 package io.github.bbortt.tv.core.authorizationserver.domain.repository;
 
 import java.util.Optional;
-import org.springframework.security.oauth2.provider.ClientDetails;
+import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 
 public interface ClientRepository {
 
-  public Optional<ClientDetails> findOneByClientId(String clientId);
+  public Optional<Client> findOneByClientId(String clientId);
 }

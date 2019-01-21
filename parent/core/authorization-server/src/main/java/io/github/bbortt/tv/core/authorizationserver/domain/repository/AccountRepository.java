@@ -1,9 +1,9 @@
 package io.github.bbortt.tv.core.authorizationserver.domain.repository;
 
 import java.util.Optional;
-import org.springframework.security.core.userdetails.UserDetails;
+import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 
 public interface AccountRepository {
 
-  public Optional<UserDetails> findOneByUsername(String username);
+  public Optional<Account> findOneByUsername(String username);
 }
