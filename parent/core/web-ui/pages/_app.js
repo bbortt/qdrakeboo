@@ -1,3 +1,4 @@
+// @flow
 import App, {Container} from 'next/app'
 import React from 'react'
 import {Provider} from 'react-redux'
