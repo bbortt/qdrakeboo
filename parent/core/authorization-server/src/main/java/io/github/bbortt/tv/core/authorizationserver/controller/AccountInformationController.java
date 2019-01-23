@@ -39,6 +39,8 @@ public class AccountInformationController {
     Map<String, Object> accountInformation = new HashMap<>();
     accountInformation.put("login", account.getAccountname());
     accountInformation.put("email", account.getEmail());
+    accountInformation.put("created_at", account.getCreated());
+    accountInformation.put("updated_at", account.getLastUpdated());
 
     return accountInformation;
   }
