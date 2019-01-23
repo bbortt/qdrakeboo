@@ -1,29 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {serverRenderClock, startClock} from '../store'
-import Examples from '../components/examples'
+
+import {loadData, startClock, tickClock} from '../actions'
+import Page from '../components/page'
 
 class Index extends React.Component {
-  static getInitialProps({reduxStore, req}) {
-    const isServer = !!req
-    reduxStore.dispatch(serverRenderClock(isServer))
+  static async getInitialProps(props) {
+    const {store, isServer} = props.ctx
+    store.dispatch(tickClock(isServer))
 
-    return {}
+    if (!store.getState().placeholderData) {
+      store.dispatch(loadData())
+    }
+
+    return {isServer}
   }
 
   componentDidMount() {
-    const {dispatch} = this.props
-    this.timer = startClock(dispatch)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer)
+    this.props.dispatch(startClock())
   }
 
   render() {
-    return (
-      <Examples/>
-    )
+    return <Page title='Index Page' linkTo='/other' NavigateTo='Other Page'/>
   }
 }
 

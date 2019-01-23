@@ -1,68 +1,32 @@
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import thunkMiddleware from 'redux-thunk'
+import {createStore, applyMiddleware} from 'redux'
+import createSagaMiddleware from 'redux-saga'
 
-const exampleInitialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0
-}
+import rootReducer, {exampleInitialState} from './reducer'
+import rootSaga from './saga'
 
-export const actionTypes = {
-  TICK: 'TICK',
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  RESET: 'RESET'
-}
+const sagaMiddleware = createSagaMiddleware()
 
-// REDUCERS
-export const reducer = (state = exampleInitialState, action) => {
-  switch (action.type) {
-    case actionTypes.TICK:
-      return Object.assign({}, state, {
-        lastUpdate: action.ts,
-        light: !!action.light
-      })
-    case actionTypes.INCREMENT:
-      return Object.assign({}, state, {
-        count: state.count + 1
-      })
-    case actionTypes.DECREMENT:
-      return Object.assign({}, state, {
-        count: state.count - 1
-      })
-    case actionTypes.RESET:
-      return Object.assign({}, state, {
-        count: exampleInitialState.count
-      })
-    default: return state
+const bindMiddleware = (middleware) => {
+  if (process.env.NODE_ENV !== 'production') {
+    const {composeWithDevTools} = require('redux-devtools-extension')
+    return composeWithDevTools(applyMiddleware(...middleware))
   }
+  return applyMiddleware(...middleware)
 }
 
-// ACTIONS
-export const serverRenderClock = (isServer) => dispatch => {
-  return dispatch({ type: actionTypes.TICK, light: !isServer, ts: Date.now() })
+function configureStore(initialState = exampleInitialState) {
+  const store = createStore(
+    rootReducer,
+    initialState,
+    bindMiddleware([sagaMiddleware])
+  )
+
+  store.runSagaTask = () => {
+    store.sagaTask = sagaMiddleware.run(rootSaga)
+  }
+
+  store.runSagaTask()
+  return store
 }
 
-export const startClock = dispatch => {
-  return setInterval(() => {
-    // Dispatch `TICK` every 1 second
-    dispatch({ type: actionTypes.TICK, light: true, ts: Date.now() })
-  }, 1000)
-}
-
-export const incrementCount = () => dispatch => {
-  return dispatch({ type: actionTypes.INCREMENT })
-}
-
-export const decrementCount = () => dispatch => {
-  return dispatch({ type: actionTypes.DECREMENT })
-}
-
-export const resetCount = () => dispatch => {
-  return dispatch({ type: actionTypes.RESET })
-}
-
-export function initializeStore (initialState = exampleInitialState) {
-  return createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)))
-}
+export default configureStore
