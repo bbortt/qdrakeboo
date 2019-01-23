@@ -13,8 +13,8 @@
 
   <properties>
     <!-- Node configuration -->
-    <nodeVersion>v6.9.1</nodeVersion>
-    <yarnVersion>v0.16.1</yarnVersion>
+    <nodeVersion>v10.15.0</nodeVersion>
+    <yarnVersion>v1.13.0</yarnVersion>
     <nodeInstallDirectory>target/node</nodeInstallDirectory>
 
     <!-- Plugin configuration -->
@@ -23,67 +23,55 @@
 
   <build>
     <defaultGoal>clean package</defaultGoal>
+
+    <plugins>
+      <!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>${com.github.eirslett.frontend-maven-plugin-version}</version>
+
+        <configuration>
+          <nodeVersion>${nodeVersion}</nodeVersion>
+          <yarnVersion>${yarnVersion}</yarnVersion>
+          <skip>true</skip>
+        </configuration>
+
+        <executions>
+          <!-- download nodejs and npm -->
+          <execution>
+            <id>install node and yarn</id>
+            <phase>generate-resources</phase>
+
+            <goals>
+              <goal>install-node-and-yarn</goal>
+            </goals>
+
+            <configuration>
+              <installDirectory>${nodeInstallDirectory}</installDirectory>
+            </configuration>
+          </execution>
+
+          <!-- install dependencies -->
+          <execution>
+            <id>yarn install</id>
+            <phase>generate-resources</phase>
+
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+
+            <configuration>
+              <arguments>install</arguments>
+              <installDirectory>${nodeInstallDirectory}</installDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <profiles>
-    <profile>
-      <id>node</id>
-
-      <activation>
-        <property>
-          <name>node</name>
-        </property>
-      </activation>
-
-      <build>
-        <plugins>
-          <!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
-          <plugin>
-            <groupId>com.github.eirslett</groupId>
-            <artifactId>frontend-maven-plugin</artifactId>
-            <version>${com.github.eirslett.frontend-maven-plugin-version}</version>
-
-            <configuration>
-              <skip>true</skip>
-            </configuration>
-
-            <executions>
-              <!-- download nodejs and npm -->
-              <execution>
-                <id>install node and yarn</id>
-                <phase>generate-resources</phase>
-
-                <goals>
-                  <goal>install-node-and-yarn</goal>
-                </goals>
-
-                <configuration>
-                  <installDirectory>${nodeInstallDirectory}</installDirectory>
-                  <nodeVersion>${nodeVersion}</nodeVersion>
-                  <yarnVersion>${yarnVersion}</yarnVersion>
-                </configuration>
-              </execution>
-
-              <!-- install dependencies -->
-              <execution>
-                <id>yarn install</id>
-                <phase>generate-resources</phase>
-
-                <goals>
-                  <goal>yarn</goal>
-                </goals>
-
-                <configuration>
-                  <arguments>install</arguments>
-                  <installDirectory>${nodeInstallDirectory}</installDirectory>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
     <profile>
       <id>webpack</id>
 

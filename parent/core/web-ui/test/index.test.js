@@ -1,7 +1,7 @@
 /* global describe, it */
 import {shallow} from 'enzyme'
 import React from 'react'
-import expect from 'expect.js'
+import {expect} from 'chai'
 
 import App from '../pages/index.js'
 
@@ -9,6 +9,6 @@ describe('App', () => {
   it('renders"', () => {
     const app = shallow(<App/>)
 
-    expect(app.text()).to.equal('')
+    expect(app).to.be.an('object')
   })
 })

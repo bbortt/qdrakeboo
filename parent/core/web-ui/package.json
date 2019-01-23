@@ -10,7 +10,10 @@
   "scripts": {
     "build": "next build",
     "dev": "node server.js",
-    "flow": "flow",
+    "flow": "flow check",
+    "flow:start": "flow",
+    "flow:status": "flow status",
+    "flow:stop": "flow stop",
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "cross-env NODE_ENV=test mocha"
   },
@@ -35,9 +38,9 @@
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "chai": "^4.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "expect.js": "^0.3.1",
     "flow-bin": "^0.91.0",
     "mocha": "^5.2.0",
     "redux-devtools-extension": "^2.13.7"
