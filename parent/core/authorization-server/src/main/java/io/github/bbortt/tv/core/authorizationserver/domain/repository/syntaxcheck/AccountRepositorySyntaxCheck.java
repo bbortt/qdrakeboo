@@ -14,6 +14,6 @@ public class AccountRepositorySyntaxCheck implements RepositorySyntaxCheck {
 
   @Override
   public void checkSyntax() {
-    accountRepository.findOneByUsername("");
+    accountRepository.findOneByAccount("");
   }
 }

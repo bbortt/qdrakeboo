@@ -1,4 +1,4 @@
-package io.github.bbortt.tv.core.authorizationserver.checks;
+package io.github.bbortt.tv.core.authorizationserver.check;
 
 import java.sql.Connection;
 import java.sql.SQLException;

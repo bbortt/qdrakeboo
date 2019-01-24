@@ -5,5 +5,5 @@ import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 
 public interface AccountRepository {
 
-  public Optional<Account> findOneByUsername(String username);
+  public Optional<Account> findOneByAccount(String username);
 }
