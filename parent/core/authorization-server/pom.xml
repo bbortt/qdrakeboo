@@ -54,6 +54,7 @@
 
         <configuration>
           <environmentVariables>
+            <it-redis.port>${it-redis.port}</it-redis.port>
             <it-database.port>${it-database.port}</it-database.port>
           </environmentVariables>
         </configuration>
