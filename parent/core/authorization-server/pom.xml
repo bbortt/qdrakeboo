@@ -90,13 +90,6 @@
                     <env>
                       <POSTGRES_USER>bbortt_tv_authorization</POSTGRES_USER>
                     </env>
-
-                    <wait>
-                      <log>(?s)database system is ready to accept
-                        connections.*database system is ready to accept
-                        connections</log>
-                      <time>20000</time>
-                    </wait>
                   </run>
                 </image>
 
