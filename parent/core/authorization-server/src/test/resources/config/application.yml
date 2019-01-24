@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${it-database.port}/bbortt_tv_authorization
+    username: bbortt_tv_authorization
+    password: bbortt_tv_authorization
+  redis:
+    host: localhost
+    port: ${it-redis.port}

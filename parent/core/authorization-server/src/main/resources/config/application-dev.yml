@@ -1,4 +1,3 @@
-# Server configuration
 management:
   server:
     port: 8099
@@ -10,7 +9,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/bbortt_tv_authorization
     username: bbortt_tv_authorization
-    password: uwillneverguessthisone
+    password: bbortt_tv_authorization
   redis:
     host: localhost
     port: 6379

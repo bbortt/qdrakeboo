@@ -26,6 +26,7 @@
     <!-- Plugin configuration -->
     <jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
     <maven-failsafe-plugin-version>3.0.0-M3</maven-failsafe-plugin-version>
+    <maven-jar-plugin-version>3.1.1</maven-jar-plugin-version>
     <maven-surefire-plugin-version>3.0.0-M3</maven-surefire-plugin-version>
   </properties>
 
@@ -71,6 +72,20 @@
         </executions>
       </plugin>
 
+      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin-version}</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Implementation-Version>${project.version}</Implementation-Version>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
       <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -114,6 +129,7 @@
 
             <goals>
               <goal>integration-test</goal>
+              <goal>verify</goal>
             </goals>
 
             <configuration>

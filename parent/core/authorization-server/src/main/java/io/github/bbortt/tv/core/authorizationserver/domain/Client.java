@@ -2,7 +2,6 @@ package io.github.bbortt.tv.core.authorizationserver.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.security.core.GrantedAuthority;
 
 public class Client extends AbstractAuditingEntity {
 

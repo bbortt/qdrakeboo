@@ -13,6 +13,9 @@ branches:
   only:
   - master
 
+services:
+  - docker
+
 addons:
   sonarcloud:
     organization: "bbortt-github"

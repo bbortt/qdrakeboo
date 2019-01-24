@@ -21,9 +21,6 @@
     <!-- Dependency configuration -->
     <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
     <spring-security-oauth2-autoconfigure-version>2.1.2.RELEASE</spring-security-oauth2-autoconfigure-version>
-
-    <!-- Plugin configuration -->
-    <maven-jar-plugin-version>3.1.1</maven-jar-plugin-version>
   </properties>
 
   <dependencies>
@@ -73,23 +70,5 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>${maven-jar-plugin-version}</version>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Implementation-Version>${project.version}</Implementation-Version>
-            </manifestEntries>
-          </archive>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
   

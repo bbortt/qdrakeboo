@@ -19,8 +19,6 @@ spec:
       env:
         - name: POSTGRES_USER
           value: bbortt_tv_authorization
-        - name: POSTGRES_PASSWORD
-          value: uwillneverguessthisone
   restartPolicy: Always
 ---
 apiVersion: v1
