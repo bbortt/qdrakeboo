@@ -1,4 +1,4 @@
-package io.github.bbortt.tv.core.authorizationserver.test;
+package io.github.bbortt.tv.core.authorizationserver;
 
 import org.junit.Test;
 
