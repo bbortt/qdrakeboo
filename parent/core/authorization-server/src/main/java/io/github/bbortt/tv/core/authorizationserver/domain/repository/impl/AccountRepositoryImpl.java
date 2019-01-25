@@ -45,11 +45,11 @@ public class AccountRepositoryImpl implements AccountRepository {
     this.accountFactory = AccountFactory.getInstance();
   }
 
-  public Optional<Account> findOneByAccount(String username) {
+  public Optional<Account> findOneByAccountname(String accountname) {
     try (Connection connection = dataSource.getConnection()) {
       PreparedStatement preparedStatement =
           connection.prepareStatement(FIND_ONE_BY_ACCOUNTNAME_QUERY);
-      preparedStatement.setString(1, username);
+      preparedStatement.setString(1, accountname);
       ResultSet resultSet = preparedStatement.executeQuery();
 
       if (!resultSet.next()) {

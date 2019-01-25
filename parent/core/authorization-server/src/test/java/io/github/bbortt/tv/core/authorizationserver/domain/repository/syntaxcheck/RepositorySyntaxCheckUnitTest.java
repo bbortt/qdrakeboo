@@ -1,7 +1,10 @@
 package io.github.bbortt.tv.core.authorizationserver.domain.repository.syntaxcheck;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 
 public class RepositorySyntaxCheckUnitTest {
@@ -14,5 +17,14 @@ public class RepositorySyntaxCheckUnitTest {
   @Test
   public void extendsInterface() {
     assertThat(ApplicationListener.class).isAssignableFrom(RepositorySyntaxCheck.class);
+  }
+
+  @Test
+  public void onApplicationEventCallsCheckSyntax() {
+    RepositorySyntaxCheck repositorySyntaxCheckSpy = Mockito.spy(RepositorySyntaxCheck.class);
+
+    repositorySyntaxCheckSpy.onApplicationEvent(Mockito.mock(ApplicationReadyEvent.class));
+
+    verify(repositorySyntaxCheckSpy).checkSyntax();
   }
 }

@@ -9,25 +9,25 @@ public class UserDetailsImpl implements UserDetails {
 
   private static final long serialVersionUID = 1L;
 
-  private Account user;
+  private Account account;
 
-  public UserDetailsImpl(Account user) {
-    this.user = user;
+  public UserDetailsImpl(Account account) {
+    this.account = account;
   }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return user.getRoles();
+    return account.getRoles();
   }
 
   @Override
   public String getPassword() {
-    return user.getPassword();
+    return account.getPassword();
   }
 
   @Override
   public String getUsername() {
-    return user.getAccountname();
+    return account.getAccountname();
   }
 
   @Override
@@ -37,7 +37,7 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public boolean isAccountNonLocked() {
-    return !user.isBlocked();
+    return !account.isBlocked();
   }
 
   @Override
@@ -47,6 +47,6 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-    return user.isEnabled();
+    return account.isEnabled();
   }
 }

@@ -18,7 +18,7 @@
   </modules>
 
   <properties>
-    <!-- Dependency configuration -->
+    <!-- Dependencies -->
     <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
     <spring-security-oauth2-autoconfigure-version>2.1.2.RELEASE</spring-security-oauth2-autoconfigure-version>
   </properties>

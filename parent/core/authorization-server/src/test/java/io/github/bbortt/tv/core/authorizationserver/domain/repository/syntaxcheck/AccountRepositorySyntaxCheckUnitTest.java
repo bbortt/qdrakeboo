@@ -39,7 +39,7 @@ public class AccountRepositorySyntaxCheckUnitTest {
   }
 
   @Test
-  public void constructorAcceptsAccountRepository() {
+  public void constructorAcceptsArguments() {
     assertThat(new AccountRepositorySyntaxCheck(accountRepositorySpy))
         .hasFieldOrPropertyWithValue("accountRepository", accountRepositorySpy);
   }
@@ -57,6 +57,6 @@ public class AccountRepositorySyntaxCheckUnitTest {
   public void checkSyntaxCallsRepositoryMethods() {
     fixture.checkSyntax();
 
-    verify(accountRepositorySpy).findOneByAccount(Mockito.eq(""));
+    verify(accountRepositorySpy).findOneByAccountname(Mockito.eq(""));
   }
 }

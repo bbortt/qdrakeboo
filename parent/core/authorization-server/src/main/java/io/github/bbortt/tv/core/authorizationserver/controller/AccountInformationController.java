@@ -1,6 +1,5 @@
 package io.github.bbortt.tv.core.authorizationserver.controller;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +27,7 @@ public class AccountInformationController {
 
   @GetMapping({"/user", "/me"})
   public Map<String, Object> getAccountInformation(Principal principal,
-      HttpServletResponse httpServletResponse) throws IOException {
+      HttpServletResponse httpServletResponse) {
     if (principal == null) {
       httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
       return ERROR_MESSAGE_MAP;

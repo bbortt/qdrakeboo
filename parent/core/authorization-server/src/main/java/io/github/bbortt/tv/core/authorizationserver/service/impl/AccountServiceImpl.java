@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
   public Account getCurrentAccount() {
     String accountName = SecurityContextHolder.getContext().getAuthentication().getName();
 
-    return accountRepository.findOneByAccount(accountName).orElseThrow(
+    return accountRepository.findOneByAccountname(accountName).orElseThrow(
         () -> new IllegalArgumentException("Cannot find account for '" + accountName + "'!"));
   }
 }

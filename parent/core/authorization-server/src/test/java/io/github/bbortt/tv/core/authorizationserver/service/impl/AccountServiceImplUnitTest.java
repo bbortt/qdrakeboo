@@ -60,7 +60,7 @@ public class AccountServiceImplUnitTest {
   }
 
   @Test
-  public void constructorAcceptsAccountRepository() {
+  public void constructorAcceptsArguments() {
     assertThat(new AccountServiceImpl(accountRepositoryMock))
         .hasFieldOrPropertyWithValue("accountRepository", accountRepositoryMock);
   }
@@ -80,10 +80,10 @@ public class AccountServiceImplUnitTest {
 
     doReturn(currentAccountname).when(authenticationMock).getName();
     doReturn(Optional.of(expectedAccount)).when(accountRepositoryMock)
-        .findOneByAccount(Mockito.eq(currentAccountname));
+        .findOneByAccountname(Mockito.eq(currentAccountname));
 
     assertThat(fixture.getCurrentAccount()).isEqualTo(expectedAccount);
-    verify(accountRepositoryMock).findOneByAccount(Mockito.eq(currentAccountname));
+    verify(accountRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
   }
 
   @Test
@@ -91,12 +91,12 @@ public class AccountServiceImplUnitTest {
     String currentAccountname = "unexisting-accountname";
     doReturn(currentAccountname).when(authenticationMock).getName();
 
-    doReturn(Optional.empty()).when(accountRepositoryMock).findOneByAccount(Mockito.anyString());
+    doReturn(Optional.empty()).when(accountRepositoryMock).findOneByAccountname(Mockito.anyString());
 
     expectedException.expect(IllegalArgumentException.class);
     expectedException.expectMessage("Cannot find account for '" + currentAccountname + "'!");
     fixture.getCurrentAccount();
 
-    verify(accountRepositoryMock).findOneByAccount(Mockito.eq(currentAccountname));
+    verify(accountRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
   }
 }

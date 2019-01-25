@@ -11,16 +11,16 @@ import io.github.bbortt.tv.core.authorizationserver.domain.repository.AccountRep
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-  private final AccountRepository userRepository;
+  private final AccountRepository accountRepository;
 
   public UserDetailsServiceImpl(AccountRepository userRepository) {
-    this.userRepository = userRepository;
+    this.accountRepository = userRepository;
   }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<Account> user;
-    if (!(user = userRepository.findOneByAccount(username)).isPresent()) {
+    if (!(user = accountRepository.findOneByAccountname(username)).isPresent()) {
       throw new UsernameNotFoundException("Username '" + username + "' not found!");
     }
 

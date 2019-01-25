@@ -39,7 +39,7 @@ public class ClientRespositorySyntaxCheckUnitTest {
   }
 
   @Test
-  public void constructorAcceptsAccountRepository() {
+  public void constructorAcceptsArguments() {
     assertThat(new ClientRepositorySyntaxCheck(clientRepositorySpy))
         .hasFieldOrPropertyWithValue("clientRepository", clientRepositorySpy);
   }

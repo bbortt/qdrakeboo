@@ -12,12 +12,12 @@
   </parent>
 
   <properties>
-    <!-- Node configuration -->
+    <!-- Node -->
     <nodeVersion>v10.15.0</nodeVersion>
     <yarnVersion>v1.13.0</yarnVersion>
     <nodeInstallDirectory>target/node</nodeInstallDirectory>
 
-    <!-- Plugin configuration -->
+    <!-- Plugins -->
     <com.github.eirslett.frontend-maven-plugin-version>1.6</com.github.eirslett.frontend-maven-plugin-version>
   </properties>
 

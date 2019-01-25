@@ -10,4 +10,9 @@ public class AuthorizationServerUnitTest {
   public void isAnnotated() {
     assertThat(AuthorizationServer.class).hasAnnotation(SpringBootApplication.class);
   }
+
+  @Test
+  public void hasPublicConstructr() {
+    assertThat(new AuthorizationServer()).isNotNull();
+  }
 }
