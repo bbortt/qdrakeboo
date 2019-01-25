@@ -1,6 +1,8 @@
 const express = require('express')
 const next = require('next')
 
+const clientOAuth2 = require('./getClientOAuth2');
+
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 const handle = app.getRequestHandler()
@@ -9,10 +11,10 @@ app.prepare()
   .then(() => {
     const server = express()
 
-    server.get('/p/:id', (req, res) => {
-      const actualPage = '/post'
-      const queryParams = { id: req.params.id }
-      app.render(req, res, actualPage, queryParams)
+    server.get('/login', (req, res) => {
+      console.log(clientOAuth2)
+
+      res.redirect(clientOAuth2.code.getUri())
     })
 
     server.get('*', (req, res) => {

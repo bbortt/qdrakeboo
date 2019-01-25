@@ -22,17 +22,19 @@ public class AccountRepositoryImpl implements AccountRepository {
 
   // @formatter:off
   private static final String SELECT_FROM_USERS_QUERY =
-      "SELECT a." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Account.ACCOUNT_CREATED_COLUMN_NAME + "," +
-      "     a." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Account.ACCOUNT_LAST_UPDATED_COLUMN_NAME + "," +
+      "SELECT a." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Account.ACCOUNT_CREATED_RESULT_NAME + "," +
+      "     a." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Account.ACCOUNT_LAST_UPDATED_RESULT_NAME + "," +
+      "     r." + Role.ID_COLUMN_NAME + " AS " + Role.ID_RESULT_NAME + "," +
       "     r." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Role.ROLE_CREATED_COLUMN_NAME + "," +
-      "     r." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Role.ROLE_LAST_UPDATED_COLUMN_NAME + "," +
+      "     r." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Role.ROLE_LAST_UPDATED_RESULT_NAME + "," +
+      "     r." + Role.NAME_COLUMN_NAME + " AS " + Role.NAME_RESULT_NAME + "," +
       " * FROM " + Account.TABLE_NAME + " AS a" +
       "   JOIN account_has_roles AS ahr" +
       "     ON a.id = ahr.role_id" +
       "   JOIN " + Role.TABLE_NAME + " AS r" +
       "     ON ahr.role_id = r.id";
 
-  private static final String WHERE_ACCOUNTNAME_CLAUSE = " WHERE a." + Account.ACCOUNTNAME_COLUMN_NAME + " LIKE ?";
+  private static final String WHERE_ACCOUNTNAME_CLAUSE = " WHERE a." + Account.ACCOUNTNAME_RESULT_NAME + " LIKE ?";
 
   private static final String FIND_ONE_BY_ACCOUNTNAME_QUERY = SELECT_FROM_USERS_QUERY + WHERE_ACCOUNTNAME_CLAUSE;
   // @formatter:on

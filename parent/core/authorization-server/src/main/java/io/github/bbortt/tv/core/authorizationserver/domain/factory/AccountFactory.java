@@ -2,8 +2,8 @@ package io.github.bbortt.tv.core.authorizationserver.domain.factory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 import io.github.bbortt.tv.core.authorizationserver.domain.Role;
 
@@ -23,16 +23,18 @@ public class AccountFactory implements EntityFactory<Account> {
   public Account fromResultSet(ResultSet resultSet) throws SQLException {
     Account user = new Account();
 
-    user.setCreated(resultSet.getDate(Account.ACCOUNT_CREATED_COLUMN_NAME));
-    user.setLastUpdated(resultSet.getDate(Account.ACCOUNT_LAST_UPDATED_COLUMN_NAME));
+    user.setId(resultSet.getLong(Account.ID_RESULT_NAME));
+    
+    user.setCreated(resultSet.getDate(Account.ACCOUNT_CREATED_RESULT_NAME));
+    user.setLastUpdated(resultSet.getDate(Account.ACCOUNT_LAST_UPDATED_RESULT_NAME));
 
-    user.setAccountname(resultSet.getString(Account.ACCOUNTNAME_COLUMN_NAME));
-    user.setEmail(resultSet.getString(Account.EMAIL_COLUMN_NAME));
-    user.setPassword(resultSet.getString(Account.PASSWORD_COLUMN_NAME));
-    user.setEnabled(resultSet.getBoolean(Account.IS_ENABLED_COLUMN_NAME));
-    user.setBlocked(resultSet.getBoolean(Account.IS_BLOCKED_COLUMN_NAME));
+    user.setAccountname(resultSet.getString(Account.ACCOUNTNAME_RESULT_NAME));
+    user.setEmail(resultSet.getString(Account.EMAIL_RESULT_NAME));
+    user.setPassword(resultSet.getString(Account.PASSWORD_RESULT_NAME));
+    user.setEnabled(resultSet.getBoolean(Account.IS_ENABLED_RESULT_NAME));
+    user.setBlocked(resultSet.getBoolean(Account.IS_BLOCKED_RESULT_NAME));
 
-    Set<Role> userRoles = new HashSet<>();
+    Set<Role> userRoles = new TreeSet<Role>(Role.COMPARATOR);
     userRoles.add(roleFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {

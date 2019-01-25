@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ClientDetailsServiceImplUnitTest {
 
   @Test
   public void isAnnotated() {
-    assertThat(ClientDetailsServiceImpl.class).hasAnnotation(Service.class);
+    assertThat(ClientDetailsServiceImpl.class).hasAnnotations(Service.class, Primary.class);
   }
 
   @Test

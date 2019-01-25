@@ -17,13 +17,14 @@ public class RootEndpointController {
     ENDPOINTS_INFORMATION_MAP.put("current_user_url", "user");
   }
 
-  @GetMapping
+  @GetMapping({"/"})
   public Map<Object, Object> rootEndpointsInformation(HttpServletRequest httpServletRequest) {
     String currentName = httpServletRequest.getRequestURL().toString();
 
-    return RootEndpointController.ENDPOINTS_INFORMATION_MAP.entrySet().stream().map(entry -> {
-      entry.setValue(currentName + entry.getValue());
-      return entry;
-    }).collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+    return new HashMap<>(RootEndpointController.ENDPOINTS_INFORMATION_MAP).entrySet().stream()
+        .map(entry -> {
+          entry.setValue(currentName + entry.getValue());
+          return entry;
+        }).collect(Collectors.toMap(Entry::getKey, Entry::getValue));
   }
 }

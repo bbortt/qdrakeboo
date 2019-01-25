@@ -1,6 +1,7 @@
 package io.github.bbortt.tv.core.authorizationserver.config.clientdetails;
 
 import java.util.Optional;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
@@ -9,6 +10,7 @@ import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 import io.github.bbortt.tv.core.authorizationserver.domain.repository.ClientRepository;
 
 @Service
+@Primary
 public class ClientDetailsServiceImpl implements ClientDetailsService {
 
   private final ClientRepository clientRepository;

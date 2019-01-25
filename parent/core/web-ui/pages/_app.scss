@@ -1,0 +1,13 @@
+html, body {
+  //height: 100vh;
+
+  .container {
+    height: 50vh;
+    margin-bottom: 10vh;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}

@@ -18,11 +18,13 @@ public class GrantTypeFactory implements EntityFactory<GrantType> {
   public GrantType fromResultSet(ResultSet resultSet) throws SQLException {
     GrantType clientGrantType = new GrantType();
 
-    clientGrantType.setCreated(resultSet.getDate(GrantType.GRANT_TYPE_CREATED_COLUMN_NAME));
-    clientGrantType
-        .setLastUpdated(resultSet.getDate(GrantType.GRANT_TYPE_LAST_UPDATED_COLUMN_NAME));
+    clientGrantType.setId(resultSet.getLong(GrantType.ID_RESULT_NAME));
 
-    clientGrantType.setName(resultSet.getString(GrantType.NAME_COLUMN_NAME));
+    clientGrantType.setCreated(resultSet.getDate(GrantType.GRANT_TYPE_CREATED_RESULT_NAME));
+    clientGrantType
+        .setLastUpdated(resultSet.getDate(GrantType.GRANT_TYPE_LAST_UPDATED_RESULT_NAME));
+
+    clientGrantType.setName(resultSet.getString(GrantType.NAME_RESULT_NAME));
 
     return clientGrantType;
   }

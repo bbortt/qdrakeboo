@@ -18,10 +18,12 @@ public class AuthorityFactory implements EntityFactory<Authority> {
   public Authority fromResultSet(ResultSet resultSet) throws SQLException {
     Authority clientAuthority = new Authority();
 
-    clientAuthority.setCreated(resultSet.getDate(Authority.AUTHORITY_CREATED_COLUMN_NAME));
-    clientAuthority.setLastUpdated(resultSet.getDate(Authority.AUTHORITY_LAST_UPDATED_COLUMN_NAME));
+    clientAuthority.setId(resultSet.getLong(Authority.ID_RESULT_NAME));
 
-    clientAuthority.setName(resultSet.getString(Authority.NAME_COLUMN_NAME));
+    clientAuthority.setCreated(resultSet.getDate(Authority.AUTHORITY_CREATED_RESULT_NAME));
+    clientAuthority.setLastUpdated(resultSet.getDate(Authority.AUTHORITY_LAST_UPDATED_RESULT_NAME));
+
+    clientAuthority.setName(resultSet.getString(Authority.NAME_RESULT_NAME));
 
     return clientAuthority;
   }

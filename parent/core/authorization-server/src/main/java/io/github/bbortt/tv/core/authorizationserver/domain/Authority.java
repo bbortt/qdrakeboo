@@ -1,17 +1,25 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
+import java.util.Comparator;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.security.core.GrantedAuthority;
 
 public class Authority extends AbstractAuditingEntity implements GrantedAuthority {
+
+  public static final Comparator<Authority> COMPARATOR = Comparator.comparingLong(Authority::getId);
 
   private static final long serialVersionUID = 1L;
 
   public static final String TABLE_NAME = "authority";
 
-  public static final String AUTHORITY_CREATED_COLUMN_NAME = "authority_created";
-  public static final String AUTHORITY_LAST_UPDATED_COLUMN_NAME = "authority_last_updated";
+  public static final String AUTHORITY_CREATED_RESULT_NAME = "authority_created";
+  public static final String AUTHORITY_LAST_UPDATED_RESULT_NAME = "authority_last_updated";
+
+  public static final String ID_COLUMN_NAME = "id";
+  public static final String ID_RESULT_NAME = "authority_id";
 
   public static final String NAME_COLUMN_NAME = "name";
+  public static final String NAME_RESULT_NAME = "authority_name";
 
   private long id;
   private String name;
@@ -39,5 +47,10 @@ public class Authority extends AbstractAuditingEntity implements GrantedAuthorit
   @Override
   public String getAuthority() {
     return getName();
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).append(name).build();
   }
 }

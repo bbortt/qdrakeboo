@@ -25,14 +25,20 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   // @formatter:off
   private static final String SELECT_FROM_CLIENTS_QUERY =
-      "SELECT c." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Client.CLIENT_CREATED_COLUMN_NAME + "," +
-      "     c." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Client.CLIENT_LAST_UPDATED_COLUMN_NAME + "," +
-      "     a." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Authority.AUTHORITY_CREATED_COLUMN_NAME + "," +
-      "     a." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Authority.AUTHORITY_LAST_UPDATED_COLUMN_NAME + "," +
-      "     gt." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + GrantType.GRANT_TYPE_CREATED_COLUMN_NAME + "," +
-      "     gt." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + GrantType.GRANT_TYPE_LAST_UPDATED_COLUMN_NAME + "," +
-      "     s." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Scope.SCOPE_CREATED_COLUMN_NAME + "," +
-      "     s." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Scope.SCOPE_LAST_UPDATED_COLUMN_NAME + "," +
+      "SELECT c." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Client.CLIENT_CREATED_RESULT_NAME + "," +
+      "     c." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Client.CLIENT_LAST_UPDATED_RESULT_NAME + "," +
+      "     a." + Authority.ID_COLUMN_NAME + " AS " + Authority.ID_RESULT_NAME + "," +
+      "     a." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Authority.AUTHORITY_CREATED_RESULT_NAME + "," +
+      "     a." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Authority.AUTHORITY_LAST_UPDATED_RESULT_NAME + "," +
+      "     a." + Authority.NAME_COLUMN_NAME + " AS " + Authority.NAME_RESULT_NAME + "," +
+      "     gt." + GrantType.ID_COLUMN_NAME + " AS " + GrantType.ID_RESULT_NAME + "," +
+      "     gt." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + GrantType.GRANT_TYPE_CREATED_RESULT_NAME + "," +
+      "     gt." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + GrantType.GRANT_TYPE_LAST_UPDATED_RESULT_NAME + "," +
+      "     gt." + GrantType.NAME_COLUMN_NAME + " AS " + GrantType.NAME_RESULT_NAME + "," +
+      "     s." + Scope.ID_COLUMN_NAME + " AS " + Scope.ID_RESULT_NAME + "," +
+      "     s." + AbstractAuditingEntity.CREATED_COLUMN_NAME + " AS " + Scope.SCOPE_CREATED_RESULT_NAME + "," +
+      "     s." + AbstractAuditingEntity.LAST_UPDATED_COLUMN_NAME + " AS " + Scope.SCOPE_LAST_UPDATED_RESULT_NAME + "," +
+      "     s." + Scope.NAME_COLUMN_NAME + " AS " + Scope.NAME_RESULT_NAME + "," +
       " * FROM " + Client.TABLE_NAME + " AS c" +
       "   JOIN client_has_authorities as cha" +
       "     ON c.id = cha.client_id" +
@@ -47,7 +53,7 @@ public class ClientRepositoryImpl implements ClientRepository {
       "   JOIN " + Scope.TABLE_NAME + " as s" +
       "     ON chs.scope_id = s.id";
 
-  private static final String WHERE_CLIENT_ID_CLAUSE = " WHERE c." + Client.CLIENT_ID_COLUMN_NAME + " LIKE ?";
+  private static final String WHERE_CLIENT_ID_CLAUSE = " WHERE c." + Client.CLIENT_ID_RESULT_NAME + " LIKE ?";
 
   private static final String FIND_ONE_BY_CLIENT_ID_QUERY = SELECT_FROM_CLIENTS_QUERY + WHERE_CLIENT_ID_CLAUSE;
   // @formatter:on

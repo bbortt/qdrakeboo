@@ -18,10 +18,12 @@ public class ScopeFactory implements EntityFactory<Scope> {
   public Scope fromResultSet(ResultSet resultSet) throws SQLException {
     Scope clientScope = new Scope();
 
-    clientScope.setCreated(resultSet.getDate(Scope.SCOPE_CREATED_COLUMN_NAME));
-    clientScope.setLastUpdated(resultSet.getDate(Scope.SCOPE_LAST_UPDATED_COLUMN_NAME));
+    clientScope.setId(resultSet.getLong(Scope.ID_RESULT_NAME));
+    
+    clientScope.setCreated(resultSet.getDate(Scope.SCOPE_CREATED_RESULT_NAME));
+    clientScope.setLastUpdated(resultSet.getDate(Scope.SCOPE_LAST_UPDATED_RESULT_NAME));
 
-    clientScope.setName(resultSet.getString(Scope.NAME_COLUMN_NAME));
+    clientScope.setName(resultSet.getString(Scope.NAME_RESULT_NAME));
 
     return clientScope;
   }

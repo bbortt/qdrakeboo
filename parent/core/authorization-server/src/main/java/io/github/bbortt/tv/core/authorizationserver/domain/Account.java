@@ -1,21 +1,22 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Account extends AbstractAuditingEntity {
 
   public static final String TABLE_NAME = "account";
 
-  public static final String ACCOUNT_CREATED_COLUMN_NAME = "account_created";
-  public static final String ACCOUNT_LAST_UPDATED_COLUMN_NAME = "account_last_updated";
+  public static final String ACCOUNT_CREATED_RESULT_NAME = "account_created";
+  public static final String ACCOUNT_LAST_UPDATED_RESULT_NAME = "account_last_updated";
 
-  public static final String ID_COLUMN_NAME = "id";
-  public static final String ACCOUNTNAME_COLUMN_NAME = "accountname";
-  public static final String EMAIL_COLUMN_NAME = "email";
-  public static final String PASSWORD_COLUMN_NAME = "password";
-  public static final String IS_ENABLED_COLUMN_NAME = "is_enabled";
-  public static final String IS_BLOCKED_COLUMN_NAME = "is_blocked";
+  public static final String ID_RESULT_NAME = "id";
+  public static final String ACCOUNTNAME_RESULT_NAME = "accountname";
+  public static final String EMAIL_RESULT_NAME = "email";
+  public static final String PASSWORD_RESULT_NAME = "password";
+  public static final String IS_ENABLED_RESULT_NAME = "is_enabled";
+  public static final String IS_BLOCKED_RESULT_NAME = "is_blocked";
 
   private long id;
   private String accountname;
@@ -23,7 +24,7 @@ public class Account extends AbstractAuditingEntity {
   private String password;
   private boolean isEnabled = false;
   private boolean isBlocked = false;
-  private Set<Role> roles = new HashSet<>();
+  private Set<Role> roles = new TreeSet<>(Role.COMPARATOR);
 
   public Account() {
 
@@ -82,6 +83,7 @@ public class Account extends AbstractAuditingEntity {
   }
 
   public void setRoles(Set<Role> roles) {
-    this.roles = roles;
+    this.roles =
+        roles.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Role.COMPARATOR)));
   }
 }

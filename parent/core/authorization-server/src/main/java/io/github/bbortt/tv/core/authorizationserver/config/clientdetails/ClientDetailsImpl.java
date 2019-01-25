@@ -1,8 +1,8 @@
 package io.github.bbortt.tv.core.authorizationserver.config.clientdetails;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -61,7 +61,7 @@ public class ClientDetailsImpl implements ClientDetails {
 
   @Override
   public Set<String> getRegisteredRedirectUri() {
-    return new HashSet<String>(Arrays.asList(client.getRedirectUris()));
+    return new HashSet<String>(Collections.singletonList(client.getRedirectUris()));
   }
 
   @Override

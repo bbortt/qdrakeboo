@@ -1,24 +1,25 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Client extends AbstractAuditingEntity {
 
   public static final String TABLE_NAME = "client";
   public static final String CACHE_NAME = "client";
 
-  public static final String CLIENT_CREATED_COLUMN_NAME = "client_created";
-  public static final String CLIENT_LAST_UPDATED_COLUMN_NAME = "client_last_updated";
+  public static final String CLIENT_CREATED_RESULT_NAME = "client_created";
+  public static final String CLIENT_LAST_UPDATED_RESULT_NAME = "client_last_updated";
 
-  public static final String ID_COLUMN_NAME = "id";
-  public static final String CLIENT_ID_COLUMN_NAME = "client_id";
-  public static final String SECRET_COLUMN_NAME = "secret";
-  public static final String IS_SECRET_REQUIRED_COLUMN_NAME = "is_secret_required";
-  public static final String IS_AUTO_APPROVE_COLUMN_NAME = "is_auto_approve";
-  public static final String ACCESS_TOKEN_VALIDITY_SECONDS_COLUMN_NAME = "access_token_validity";
-  public static final String REFRESH_TOKEN_VALIDITY_SECONDS_COLUMN_NAME = "refresh_token_validity";
-  public static final String REDIRECT_URIS_COLUMN_NAME = "redirect_uris";
+  public static final String ID_RESULT_NAME = "id";
+  public static final String CLIENT_ID_RESULT_NAME = "client_id";
+  public static final String SECRET_RESULT_NAME = "secret";
+  public static final String SECRET_REQUIRED_RESULT_NAME = "secret_required";
+  public static final String AUTO_APPROVE_RESULT_NAME = "auto_approve";
+  public static final String ACCESS_TOKEN_VALIDITY_SECONDS_RESULT_NAME = "access_token_validity";
+  public static final String REFRESH_TOKEN_VALIDITY_SECONDS_RESULT_NAME = "refresh_token_validity";
+  public static final String REDIRECT_URIS_RESULT_NAME = "redirect_uris";
 
   private long id;
   private String clientId;
@@ -28,9 +29,9 @@ public class Client extends AbstractAuditingEntity {
   private int accessTokenValiditySeconds;
   private int refreshTokenValiditySeconds;
   private String redirectUris;
-  private Set<GrantType> grantTypes = new HashSet<>();
-  private Set<Authority> authorities = new HashSet<>();
-  private Set<Scope> scopes = new HashSet<>();
+  private Set<GrantType> grantTypes = new TreeSet<>(GrantType.COMPARATOR);
+  private Set<Authority> authorities = new TreeSet<>(Authority.COMPARATOR);
+  private Set<Scope> scopes = new TreeSet<>(Scope.COMPARATOR);
 
   public Client() {
 
@@ -105,7 +106,8 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public void setGrantTypes(Set<GrantType> grantTypes) {
-    this.grantTypes = grantTypes;
+    this.grantTypes = grantTypes.stream()
+        .collect(Collectors.toCollection(() -> new TreeSet<>(GrantType.COMPARATOR)));
   }
 
   public Set<Authority> getAuthorities() {
@@ -113,7 +115,8 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public void setAuthorities(Set<Authority> authorities) {
-    this.authorities = authorities;
+    this.authorities = authorities.stream()
+        .collect(Collectors.toCollection(() -> new TreeSet<>(Authority.COMPARATOR)));
   }
 
   public Set<Scope> getScopes() {
@@ -121,6 +124,7 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public void setScopes(Set<Scope> scopes) {
-    this.scopes = scopes;
+    this.scopes =
+        scopes.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Scope.COMPARATOR)));
   }
 }
