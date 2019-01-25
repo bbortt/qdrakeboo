@@ -2,7 +2,7 @@ package io.github.bbortt.tv.core.authorizationserver.domain;
 
 import java.util.Set;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateAwareHashSet;
 
 public class Client extends AbstractAuditingEntity {
 
@@ -31,9 +31,9 @@ public class Client extends AbstractAuditingEntity {
   private int accessTokenValiditySeconds;
   private int refreshTokenValiditySeconds;
   private String redirectUris;
-  private Set<GrantType> grantTypes = new DublicateCheckingSet<>();
-  private Set<Authority> authorities = new DublicateCheckingSet<>();
-  private Set<Scope> scopes = new DublicateCheckingSet<>();
+  private Set<GrantType> grantTypes = new DublicateAwareHashSet<>();
+  private Set<Authority> authorities = new DublicateAwareHashSet<>();
+  private Set<Scope> scopes = new DublicateAwareHashSet<>();
 
   public Client() {
 

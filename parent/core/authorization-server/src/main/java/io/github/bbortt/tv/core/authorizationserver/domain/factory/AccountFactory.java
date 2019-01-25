@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Set;
 import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 import io.github.bbortt.tv.core.authorizationserver.domain.Role;
-import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateAwareHashSet;
 
 public class AccountFactory implements EntityFactory<Account> {
 
@@ -34,7 +34,7 @@ public class AccountFactory implements EntityFactory<Account> {
     user.setEnabled(resultSet.getBoolean(Account.IS_ENABLED_RESULT_NAME));
     user.setBlocked(resultSet.getBoolean(Account.IS_BLOCKED_RESULT_NAME));
 
-    Set<Role> userRoles = new DublicateCheckingSet<>();
+    Set<Role> userRoles = new DublicateAwareHashSet<>();
     userRoles.add(roleFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {

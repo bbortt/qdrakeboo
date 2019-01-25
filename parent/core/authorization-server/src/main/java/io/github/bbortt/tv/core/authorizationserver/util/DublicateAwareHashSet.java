@@ -3,7 +3,7 @@ package io.github.bbortt.tv.core.authorizationserver.util;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DublicateCheckingSet<E> extends HashSet<E> implements Set<E> {
+public class DublicateAwareHashSet<E> extends HashSet<E> implements Set<E> {
 
   private static final long serialVersionUID = 1L;
 

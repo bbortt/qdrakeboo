@@ -3,7 +3,7 @@ package io.github.bbortt.tv.core.authorizationserver.domain;
 import java.io.Serializable;
 import java.util.Set;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateAwareHashSet;
 
 public class Account extends AbstractAuditingEntity implements Serializable {
 
@@ -27,7 +27,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   private String password;
   private boolean isEnabled = false;
   private boolean isBlocked = false;
-  private Set<Role> roles = new DublicateCheckingSet<>();
+  private Set<Role> roles = new DublicateAwareHashSet<>();
 
   public Account() {
 

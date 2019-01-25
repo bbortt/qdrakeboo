@@ -7,7 +7,7 @@ import io.github.bbortt.tv.core.authorizationserver.domain.Authority;
 import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 import io.github.bbortt.tv.core.authorizationserver.domain.GrantType;
 import io.github.bbortt.tv.core.authorizationserver.domain.Scope;
-import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateAwareHashSet;
 
 public class ClientFactory implements EntityFactory<Client> {
 
@@ -44,13 +44,13 @@ public class ClientFactory implements EntityFactory<Client> {
         resultSet.getInt(Client.REFRESH_TOKEN_VALIDITY_SECONDS_RESULT_NAME));
     client.setRedirectUris(resultSet.getString(Client.REDIRECT_URIS_RESULT_NAME));
 
-    Set<GrantType> grantTypes = new DublicateCheckingSet<>();
+    Set<GrantType> grantTypes = new DublicateAwareHashSet<>();
     grantTypes.add(grantTypeFactory.fromResultSet(resultSet));
 
-    Set<Authority> authorities = new DublicateCheckingSet<>();
+    Set<Authority> authorities = new DublicateAwareHashSet<>();
     authorities.add(authorityFactory.fromResultSet(resultSet));
 
-    Set<Scope> scopes = new DublicateCheckingSet<>();
+    Set<Scope> scopes = new DublicateAwareHashSet<>();
     scopes.add(scopeFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {
