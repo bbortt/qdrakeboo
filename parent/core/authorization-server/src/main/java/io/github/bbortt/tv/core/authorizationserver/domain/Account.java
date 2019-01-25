@@ -1,8 +1,9 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
 
 public class Account extends AbstractAuditingEntity implements Serializable {
 
@@ -26,7 +27,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   private String password;
   private boolean isEnabled = false;
   private boolean isBlocked = false;
-  private Set<Role> roles = new HashSet<>();
+  private Set<Role> roles = new DublicateCheckingSet<>();
 
   public Account() {
 
@@ -87,5 +88,11 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   public void setRoles(Set<Role> roles) {
     this.roles.clear();
     this.roles.addAll(roles);
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).append(id).append(accountname).append(email).append(isEnabled)
+        .append(isBlocked).append(roles).build();
   }
 }

@@ -2,10 +2,10 @@ package io.github.bbortt.tv.core.authorizationserver.domain.factory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Set;
 import io.github.bbortt.tv.core.authorizationserver.domain.Account;
 import io.github.bbortt.tv.core.authorizationserver.domain.Role;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
 
 public class AccountFactory implements EntityFactory<Account> {
 
@@ -34,7 +34,7 @@ public class AccountFactory implements EntityFactory<Account> {
     user.setEnabled(resultSet.getBoolean(Account.IS_ENABLED_RESULT_NAME));
     user.setBlocked(resultSet.getBoolean(Account.IS_BLOCKED_RESULT_NAME));
 
-    Set<Role> userRoles = new HashSet<Role>();
+    Set<Role> userRoles = new DublicateCheckingSet<>();
     userRoles.add(roleFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {

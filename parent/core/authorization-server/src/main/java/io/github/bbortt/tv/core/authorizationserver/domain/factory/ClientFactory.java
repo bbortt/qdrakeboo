@@ -2,12 +2,12 @@ package io.github.bbortt.tv.core.authorizationserver.domain.factory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Set;
 import io.github.bbortt.tv.core.authorizationserver.domain.Authority;
 import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 import io.github.bbortt.tv.core.authorizationserver.domain.GrantType;
 import io.github.bbortt.tv.core.authorizationserver.domain.Scope;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
 
 public class ClientFactory implements EntityFactory<Client> {
 
@@ -44,13 +44,13 @@ public class ClientFactory implements EntityFactory<Client> {
         resultSet.getInt(Client.REFRESH_TOKEN_VALIDITY_SECONDS_RESULT_NAME));
     client.setRedirectUris(resultSet.getString(Client.REDIRECT_URIS_RESULT_NAME));
 
-    Set<GrantType> grantTypes = new HashSet<>();
+    Set<GrantType> grantTypes = new DublicateCheckingSet<>();
     grantTypes.add(grantTypeFactory.fromResultSet(resultSet));
 
-    Set<Authority> authorities = new HashSet<>();
+    Set<Authority> authorities = new DublicateCheckingSet<>();
     authorities.add(authorityFactory.fromResultSet(resultSet));
 
-    Set<Scope> scopes = new HashSet<>();
+    Set<Scope> scopes = new DublicateCheckingSet<>();
     scopes.add(scopeFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {

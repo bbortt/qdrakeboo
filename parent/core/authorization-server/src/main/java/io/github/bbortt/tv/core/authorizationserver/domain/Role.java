@@ -65,6 +65,6 @@ public class Role extends AbstractAuditingEntity implements GrantedAuthority {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this).append(name).build();
+    return new ToStringBuilder(this).append(id).append(name).build();
   }
 }

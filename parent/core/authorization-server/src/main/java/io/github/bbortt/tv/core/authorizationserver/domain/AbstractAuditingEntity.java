@@ -43,8 +43,7 @@ public abstract class AbstractAuditingEntity implements Serializable {
       return false;
     }
     AbstractAuditingEntity abstractAuditingEntity = (AbstractAuditingEntity) object;
-    return new EqualsBuilder().appendSuper(super.equals(object))
-        .append(created, abstractAuditingEntity.created)
+    return new EqualsBuilder().append(created, abstractAuditingEntity.created)
         .append(lastUpdated, abstractAuditingEntity.lastUpdated).isEquals();
   }
 }

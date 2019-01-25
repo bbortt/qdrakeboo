@@ -1,6 +1,8 @@
 package io.github.bbortt.tv.core.authorizationserver.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -9,9 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  private final Environment environment;
   private final AuthenticationManager authenticationManager;
 
-  public WebSecurityConfig(AuthenticationManager authenticationManager) {
+  public WebSecurityConfig(Environment environment, AuthenticationManager authenticationManager) {
+    this.environment = environment;
     this.authenticationManager = authenticationManager;
   }
 
@@ -22,7 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.debug(true);
+    if (environment.acceptsProfiles(Profiles.of("dev"))) {
+      web.debug(true);
+    }
   }
 
   @Override

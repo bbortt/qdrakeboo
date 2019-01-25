@@ -1,7 +1,8 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-import java.util.HashSet;
 import java.util.Set;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import io.github.bbortt.tv.core.authorizationserver.util.DublicateCheckingSet;
 
 public class Client extends AbstractAuditingEntity {
 
@@ -30,9 +31,9 @@ public class Client extends AbstractAuditingEntity {
   private int accessTokenValiditySeconds;
   private int refreshTokenValiditySeconds;
   private String redirectUris;
-  private Set<GrantType> grantTypes = new HashSet<>();
-  private Set<Authority> authorities = new HashSet<>();
-  private Set<Scope> scopes = new HashSet<>();
+  private Set<GrantType> grantTypes = new DublicateCheckingSet<>();
+  private Set<Authority> authorities = new DublicateCheckingSet<>();
+  private Set<Scope> scopes = new DublicateCheckingSet<>();
 
   public Client() {
 
@@ -127,5 +128,13 @@ public class Client extends AbstractAuditingEntity {
   public void setScopes(Set<Scope> scopes) {
     this.scopes.clear();
     this.scopes.addAll(scopes);
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).append(id).append(clientId).append(isSecretRequired)
+        .append(isAutoApprove).append(accessTokenValiditySeconds)
+        .append(refreshTokenValiditySeconds).append(redirectUris).append(grantTypes)
+        .append(authorities).append(scopes).build();
   }
 }
