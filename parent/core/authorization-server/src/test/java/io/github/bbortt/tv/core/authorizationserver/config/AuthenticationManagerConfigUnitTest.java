@@ -16,6 +16,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 
 public class AuthenticationManagerConfigUnitTest {
@@ -82,6 +83,7 @@ public class AuthenticationManagerConfigUnitTest {
 
     assertThat(daoProvider.isPresent()).isTrue();
     assertThat((DaoAuthenticationProvider) daoProvider.get())
-        .hasFieldOrPropertyWithValue("userDetailsService", userDetailsServiceMock);
+        .hasFieldOrPropertyWithValue("userDetailsService", userDetailsServiceMock)
+        .extracting("passwordEncoder").first().isInstanceOf(BCryptPasswordEncoder.class);
   }
 }

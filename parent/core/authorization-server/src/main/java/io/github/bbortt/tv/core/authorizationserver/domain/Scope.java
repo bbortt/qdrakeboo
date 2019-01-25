@@ -1,11 +1,11 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-import java.util.Comparator;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Scope extends AbstractAuditingEntity {
 
-  public static final Comparator<Scope> COMPARATOR = Comparator.comparingLong(Scope::getId);
+  private static final long serialVersionUID = 1L;
 
   public static final String TABLE_NAME = "scope";
 
@@ -39,6 +39,22 @@ public class Scope extends AbstractAuditingEntity {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    if (object.getClass() != getClass()) {
+      return false;
+    }
+    Scope scope = (Scope) object;
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(id, scope.id)
+        .append(name, scope.name).isEquals();
   }
 
   @Override

@@ -1,11 +1,11 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-import java.util.Comparator;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class GrantType extends AbstractAuditingEntity {
 
-  public static final Comparator<GrantType> COMPARATOR = Comparator.comparingLong(GrantType::getId);
+  private static final long serialVersionUID = 1L;
 
   public static final String TABLE_NAME = "grant_type";
 
@@ -39,6 +39,23 @@ public class GrantType extends AbstractAuditingEntity {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    if (object.getClass() != getClass()) {
+      return false;
+    }
+    GrantType grantType = (GrantType) object;
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(id, grantType.id)
+        .append(name, grantType.name).isEquals();
   }
 
   @Override

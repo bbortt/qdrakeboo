@@ -6,7 +6,7 @@ CREATE TABLE client (
   created timestamp without time zone NOT NULL DEFAULT now()::timestamp,
   last_updated timestamp without time zone NOT NULL DEFAULT now()::timestamp,
   client_id character(36) NOT NULL,
-  secret character(36),
+  secret character(60) NOT NULL,
   secret_required boolean NOT NULL DEFAULT TRUE,
   auto_approve boolean NOT NULL DEFAULT FALSE,
   access_token_validity integer NOT NULL,

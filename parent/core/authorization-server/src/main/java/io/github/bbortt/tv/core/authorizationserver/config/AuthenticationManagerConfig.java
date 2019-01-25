@@ -16,16 +16,12 @@ public class AuthenticationManagerConfig {
   private final PreAuthenticatedAuthenticationProvider preAuthenticatedAuthenticationProvider;
   private final UserDetailsService userDetailsService;
 
-  private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
   public AuthenticationManagerConfig(ObjectPostProcessor<Object> objectPostProcessor,
       PreAuthenticatedAuthenticationProvider preAuthenticatedAuthenticationProvider,
       UserDetailsService userDetailsService) {
     this.objectPostProcessor = objectPostProcessor;
     this.preAuthenticatedAuthenticationProvider = preAuthenticatedAuthenticationProvider;
     this.userDetailsService = userDetailsService;
-
-    this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
   }
 
   @Bean
@@ -33,7 +29,7 @@ public class AuthenticationManagerConfig {
     AuthenticationManagerBuilder builder = new AuthenticationManagerBuilder(objectPostProcessor);
 
     builder.authenticationProvider(preAuthenticatedAuthenticationProvider)
-        .userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        .userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 
     return builder.build();
   }

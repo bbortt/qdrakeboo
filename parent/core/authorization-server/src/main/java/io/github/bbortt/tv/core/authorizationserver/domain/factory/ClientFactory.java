@@ -4,9 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import io.github.bbortt.tv.core.authorizationserver.domain.Authority;
 import io.github.bbortt.tv.core.authorizationserver.domain.Client;
 import io.github.bbortt.tv.core.authorizationserver.domain.GrantType;
@@ -47,18 +44,16 @@ public class ClientFactory implements EntityFactory<Client> {
         resultSet.getInt(Client.REFRESH_TOKEN_VALIDITY_SECONDS_RESULT_NAME));
     client.setRedirectUris(resultSet.getString(Client.REDIRECT_URIS_RESULT_NAME));
 
-    Set<GrantType> grantTypes = new TreeSet<>(GrantType.COMPARATOR);
+    Set<GrantType> grantTypes = new HashSet<>();
     grantTypes.add(grantTypeFactory.fromResultSet(resultSet));
 
-    Set<Authority> authorities = new TreeSet<>(Authority.COMPARATOR);
+    Set<Authority> authorities = new HashSet<>();
     authorities.add(authorityFactory.fromResultSet(resultSet));
 
-    Set<Scope> scopes = new TreeSet<>(Scope.COMPARATOR);
+    Set<Scope> scopes = new HashSet<>();
     scopes.add(scopeFactory.fromResultSet(resultSet));
 
     while (resultSet.next()) {
-      System.out.println(resultSet.toString());
-
       grantTypes.add(grantTypeFactory.fromResultSet(resultSet));
       authorities.add(authorityFactory.fromResultSet(resultSet));
       scopes.add(scopeFactory.fromResultSet(resultSet));
@@ -67,10 +62,6 @@ public class ClientFactory implements EntityFactory<Client> {
     client.setGrantTypes(grantTypes);
     client.setAuthorities(authorities);
     client.setScopes(scopes);
-
-    System.out.println(grantTypes);
-    System.out.println(authorities);
-    System.out.println(scopes);
 
     return client;
   }

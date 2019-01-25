@@ -2,6 +2,7 @@ package io.github.bbortt.tv.core.authorizationserver.config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import java.lang.reflect.Method;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,8 +10,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
@@ -57,6 +60,18 @@ public class AuthorizationServerConfigUnitTest {
             .hasFieldOrPropertyWithValue("clientDetailsService", clientDetailsServiceMock)
             .hasFieldOrPropertyWithValue("authenticationManager", authenticationManagerMock)
             .hasFieldOrPropertyWithValue("tokenStore", tokenStoreMock);
+  }
+
+  @Test
+  public void passwordEncoderIsAnnotated() throws NoSuchMethodException, SecurityException {
+    Method passwordEncoder = AuthorizationServerConfig.class.getDeclaredMethod("passwordEncoder");
+
+    assertThat(passwordEncoder.getDeclaredAnnotation(Bean.class)).isNotNull();
+  }
+
+  @Test
+  public void passwordEncoderReturnsBcryptPasswordEncoder() {
+    assertThat(fixture.passwordEncoder()).isInstanceOf(BCryptPasswordEncoder.class);
   }
 
   @Test

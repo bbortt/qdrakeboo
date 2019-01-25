@@ -1,14 +1,12 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
-import java.util.Comparator;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.security.core.GrantedAuthority;
 
 public class Role extends AbstractAuditingEntity implements GrantedAuthority {
 
   private static final long serialVersionUID = 1L;
-
-  public static final Comparator<Role> COMPARATOR = Comparator.comparingLong(Role::getId);
 
   public static final String TABLE_NAME = "role";
 
@@ -47,6 +45,22 @@ public class Role extends AbstractAuditingEntity implements GrantedAuthority {
   @Override
   public String getAuthority() {
     return getName();
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    if (object.getClass() != getClass()) {
+      return false;
+    }
+    Role role = (Role) object;
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(id, role.id)
+        .append(name, role.name).isEquals();
   }
 
   @Override

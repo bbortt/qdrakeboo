@@ -1,10 +1,12 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
-public class Account extends AbstractAuditingEntity {
+public class Account extends AbstractAuditingEntity implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   public static final String TABLE_NAME = "account";
 
@@ -24,7 +26,7 @@ public class Account extends AbstractAuditingEntity {
   private String password;
   private boolean isEnabled = false;
   private boolean isBlocked = false;
-  private Set<Role> roles = new TreeSet<>(Role.COMPARATOR);
+  private Set<Role> roles = new HashSet<>();
 
   public Account() {
 
@@ -83,7 +85,7 @@ public class Account extends AbstractAuditingEntity {
   }
 
   public void setRoles(Set<Role> roles) {
-    this.roles =
-        roles.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Role.COMPARATOR)));
+    this.roles.clear();
+    this.roles.addAll(roles);
   }
 }

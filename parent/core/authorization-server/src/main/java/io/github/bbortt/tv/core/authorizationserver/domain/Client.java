@@ -1,10 +1,11 @@
 package io.github.bbortt.tv.core.authorizationserver.domain;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Client extends AbstractAuditingEntity {
+
+  private static final long serialVersionUID = 1L;
 
   public static final String TABLE_NAME = "client";
   public static final String CACHE_NAME = "client";
@@ -29,9 +30,9 @@ public class Client extends AbstractAuditingEntity {
   private int accessTokenValiditySeconds;
   private int refreshTokenValiditySeconds;
   private String redirectUris;
-  private Set<GrantType> grantTypes = new TreeSet<>(GrantType.COMPARATOR);
-  private Set<Authority> authorities = new TreeSet<>(Authority.COMPARATOR);
-  private Set<Scope> scopes = new TreeSet<>(Scope.COMPARATOR);
+  private Set<GrantType> grantTypes = new HashSet<>();
+  private Set<Authority> authorities = new HashSet<>();
+  private Set<Scope> scopes = new HashSet<>();
 
   public Client() {
 
@@ -106,8 +107,8 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public void setGrantTypes(Set<GrantType> grantTypes) {
-    this.grantTypes = grantTypes.stream()
-        .collect(Collectors.toCollection(() -> new TreeSet<>(GrantType.COMPARATOR)));
+    this.grantTypes.clear();
+    this.grantTypes.addAll(grantTypes);
   }
 
   public Set<Authority> getAuthorities() {
@@ -115,8 +116,8 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public void setAuthorities(Set<Authority> authorities) {
-    this.authorities = authorities.stream()
-        .collect(Collectors.toCollection(() -> new TreeSet<>(Authority.COMPARATOR)));
+    this.authorities.clear();
+    this.authorities.addAll(authorities);
   }
 
   public Set<Scope> getScopes() {
@@ -124,7 +125,7 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public void setScopes(Set<Scope> scopes) {
-    this.scopes =
-        scopes.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Scope.COMPARATOR)));
+    this.scopes.clear();
+    this.scopes.addAll(scopes);
   }
 }
