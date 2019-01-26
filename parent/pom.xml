@@ -63,6 +63,10 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot-version}</version>
 
+        <configuration>
+          <classifier>exec</classifier>
+        </configuration>
+
         <executions>
           <execution>
             <goals>
@@ -70,6 +74,16 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+
+        <configuration>
+          <mainClass>${mainClass}</mainClass>
+        </configuration>
       </plugin>
 
       <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->

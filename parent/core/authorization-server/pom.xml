@@ -12,7 +12,7 @@
 
   <properties>
     <!-- General -->
-    <start-class>io.github.bbortt.tv.core.authorizationserver.AuthorizationServer</start-class>
+    <mainClass>io.github.bbortt.tv.core.authorizationserver.AuthorizationServer</mainClass>
 
     <!-- Plugins -->
     <docker-maven-plugin-version>0.28.0</docker-maven-plugin-version>
