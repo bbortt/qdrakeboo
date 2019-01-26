@@ -1,9 +1,10 @@
-html, body {
-  //height: 100vh;
+html, body, #__next {
+  height: 100vh;
+  margin: 0;
 
   .container {
-    height: 50vh;
-    margin-bottom: 10vh;
+    min-height: 100vh;
+    margin-bottom: -10vh;
   }
 }
 

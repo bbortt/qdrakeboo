@@ -1,9 +1,10 @@
 package io.github.bbortt.tv.core.authorizationserver.util;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DublicateAwareHashSet<E> extends HashSet<E> implements Set<E> {
+public class DublicateAwareHashSet<E> extends HashSet<E> implements Set<E>, Serializable {
 
   private static final long serialVersionUID = 1L;
 

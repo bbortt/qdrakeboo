@@ -8,9 +8,9 @@ class Footer extends React.Component {
   render() {
     return (
       <footer>
-        <p>
+        <div className='text-center'>
           Made with &hearts; | Developed on <a href='https://github.com/bbortt/my-little-streaming-dream'>GitHub</a>
-        </p>
+        </div>
       </footer>
     )
   }

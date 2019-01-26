@@ -29,7 +29,9 @@ class ReduxContextAwareApp extends App {
     return (
       <Container>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <div className='container'>
+            <Component {...pageProps} />
+          </div>
 
           <Footer/>
         </Provider>

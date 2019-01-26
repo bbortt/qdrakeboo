@@ -1,5 +1,10 @@
 footer {
+  height: 10vh;
   flex-shrink: 0;
-  text-align: center;
-  background-color: red;
+  background-color: lightgrey;
+
+  .text-center {
+    text-align: center;
+    padding-top: 4vh;
+  }
 }
