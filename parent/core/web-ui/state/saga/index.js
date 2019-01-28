@@ -1,9 +1,9 @@
-import es6promise from 'es6-promise'
+import {all} from 'redux-saga/effects'
 
 import {authenticationSaga} from './authentication.saga'
 
-es6promise.polyfill()
-
-export default function* () {
-  yield authenticationSaga()
+export default function* rootSaga() {
+  yield all([
+    authenticationSaga()
+  ])
 }

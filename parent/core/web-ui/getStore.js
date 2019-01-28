@@ -17,13 +17,13 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-const getStore = createStore(
+const store = createStore(
   rootReducer,
   bindMiddleware([sagaMiddleware])
 )
 
-getStore.sagaTask = sagaMiddleware.run(rootSaga)
+store.sagaTask = sagaMiddleware.run(rootSaga)
 
 export default () => {
-  return getStore
+  return store
 }

@@ -1,22 +1,22 @@
-import es6promise from 'es6-promise'
-
-import {takeEvery} from 'redux-saga/effects'
+import {call, put, takeEvery} from 'redux-saga/effects'
 
 import axios from 'axios'
 
-import {AuthenticationTypes} from '../actions'
-import {authenticationFailed, authenticationSucceed} from '../facade'
+import {AuthenticationFailedAction, AuthenticationSucceedAction, AuthenticationTypes} from '../actions'
 
 import getConfig from 'next/config'
 
 const {publicRuntimeConfig} = getConfig()
 
-es6promise.polyfill()
-
 function* fetchAuthentication(action) {
-  axios.get(`${action.payload.isServer ? publicRuntimeConfig.uiServerUrl : ''}/auth`)
-    .then((response) => authenticationSucceed(response.data))
-    .catch((error) => authenticationFailed())
+  console.log('authentication saga called')
+
+  try {
+    const response = yield call(axios.get, `${action.payload.isServer ? publicRuntimeConfig.uiServerUrl : ''}/auth`)
+    yield put(AuthenticationSucceedAction(response.data))
+  } catch (e) {
+    yield put(AuthenticationFailedAction())
+  }
 }
 
 export function* authenticationSaga() {

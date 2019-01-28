@@ -21,7 +21,7 @@ const oauth2Client = new ClientOAuth2({
 
 const handle = app.getRequestHandler()
 
-var auth = {}
+let auth = false
 
 app.prepare()
   .then(() => {
@@ -40,12 +40,17 @@ app.prepare()
       res.redirect(oauth2Client.code.getUri())
     })
 
-    server.get('/auth', (req, res) => {
-      if (!auth || auth === {}) {
-        res.sendStatus(401)
-      }
+    server.get('/logout', (req, res) => {
+      auth = false
+      res.redirect('/')
+    })
 
-      res.json(auth)
+    server.get('/auth', (req, res) => {
+      if (!auth) {
+        res.sendStatus(401)
+      } else {
+        res.json(auth)
+      }
     })
 
     server.get('*', (req, res) => {
