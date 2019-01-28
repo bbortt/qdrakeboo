@@ -9,8 +9,6 @@ import getConfig from 'next/config'
 const {publicRuntimeConfig} = getConfig()
 
 function* fetchAuthentication(action) {
-  console.log('authentication saga called')
-
   try {
     const response = yield call(axios.get, `${action.payload.isServer ? publicRuntimeConfig.uiServerUrl : ''}/auth`)
     yield put(AuthenticationSucceedAction(response.data))

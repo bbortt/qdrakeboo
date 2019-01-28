@@ -22,8 +22,12 @@ const store = createStore(
   bindMiddleware([sagaMiddleware])
 )
 
-store.sagaTask = sagaMiddleware.run(rootSaga)
+store.runSagaTask = () => {
+  store.sagaTask = sagaMiddleware.run(rootSaga)
+}
 
-export default () => {
+store.runSagaTask()
+
+export default function getStore() {
   return store
 }

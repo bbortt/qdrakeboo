@@ -6,18 +6,29 @@ import {requestAuthentication} from '../state/facade'
 class Index extends React.Component {
 
   static async getInitialProps(props) {
-    const {isServer} = props.ctx
+    const {isServer, store} = props.ctx
 
     requestAuthentication(isServer)
 
-    return {isServer}
+    return {isServer, isAuthenticated: store.getState().authenticationReducer.isAuthenticated}
   }
 
   render() {
     return (
-      <a href='login'>
-        <button>Sign In</button>
-      </a>
+      <div>
+        <h1>Welcome, stranger!</h1>
+
+        {
+          this.props.isAuthenticated ?
+            <a href='logout'>
+              <button>Logout</button>
+            </a>
+            :
+            <a href='login'>
+              <button>Sign In</button>
+            </a>
+        }
+      </div>
     )
   }
 }

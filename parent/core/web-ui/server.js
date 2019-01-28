@@ -21,7 +21,7 @@ const oauth2Client = new ClientOAuth2({
 
 const handle = app.getRequestHandler()
 
-let auth = false
+let auth = true
 
 app.prepare()
   .then(() => {
@@ -29,11 +29,14 @@ app.prepare()
 
     server.get('/', (req, res) => {
       oauth2Client.code.getToken(req.originalUrl)
-        .then((user) => auth = user.data)
-        .catch((error) => {
+        .then((user) => {
+          console.log('no worries - i got you #LOL')
+          auth = user.data
+          return handle(req, res)
         })
-
-      return handle(req, res)
+        .catch((error) => {
+          return handle(req, res)
+        })
     })
 
     server.get('/login', (req, res) => {
@@ -42,7 +45,7 @@ app.prepare()
 
     server.get('/logout', (req, res) => {
       auth = false
-      res.redirect('/')
+      return handle(req, res)
     })
 
     server.get('/auth', (req, res) => {
