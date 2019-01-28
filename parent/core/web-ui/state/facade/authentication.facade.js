@@ -1,21 +1,17 @@
 import getStore from '../../getStore'
 
-import {
-  authenticationFailed as authenticationFailedAction,
-  authenticationRequest,
-  authenticationSucceed as authenticationSucceedAction
-} from '../actions'
+import {AuthenticationFailedAction, AuthenticationRequestAction, AuthenticationSucceedAction} from '../actions'
 
 const dispatch = getStore().dispatch
 
-export const requestAuthentication = () => {
-  dispatch(authenticationRequest())
+export const requestAuthentication = (isServer) => {
+  dispatch(AuthenticationRequestAction(isServer))
 }
 
 export const authenticationFailed = () => {
-  dispatch(authenticationFailedAction())
+  dispatch(AuthenticationFailedAction())
 }
 
-export const authenticationSucceed = () => {
-  dispatch(authenticationSucceedAction())
+export const authenticationSucceed = (auth) => {
+  dispatch(AuthenticationSucceedAction(auth))
 }

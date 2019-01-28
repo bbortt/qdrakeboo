@@ -9,6 +9,9 @@ module.exports = {
     redirectUri: 'http://localhost:3000',
     scopes: ['read']
   },
-  publicRuntimeConfig: {},
+  publicRuntimeConfig: {
+    uiServerUrl: 'http://localhost:3000',
+    apiServerUrl: ''
+  },
   ...withSass()
 }

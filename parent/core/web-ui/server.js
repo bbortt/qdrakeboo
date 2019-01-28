@@ -8,8 +8,6 @@ const ClientOAuth2 = require('client-oauth2')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 
-console.log(config)
-
 const serverRuntimeConfig = config.serverRuntimeConfig
 
 const oauth2Client = new ClientOAuth2({
@@ -23,13 +21,15 @@ const oauth2Client = new ClientOAuth2({
 
 const handle = app.getRequestHandler()
 
+var auth = {}
+
 app.prepare()
   .then(() => {
     const server = express()
 
     server.get('/', (req, res) => {
       oauth2Client.code.getToken(req.originalUrl)
-        .then((user) => console.log(user))
+        .then((user) => auth = user.data)
         .catch((error) => {
         })
 
@@ -38,6 +38,14 @@ app.prepare()
 
     server.get('/login', (req, res) => {
       res.redirect(oauth2Client.code.getUri())
+    })
+
+    server.get('/auth', (req, res) => {
+      if (!auth || auth === {}) {
+        res.sendStatus(401)
+      }
+
+      res.json(auth)
     })
 
     server.get('*', (req, res) => {
