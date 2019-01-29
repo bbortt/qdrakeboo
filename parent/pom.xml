@@ -24,6 +24,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Plugins -->
+    <dockerfile-maven-plugin-version>1.4.10</dockerfile-maven-plugin-version>
     <jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
     <maven-failsafe-plugin-version>3.0.0-M3</maven-failsafe-plugin-version>
     <maven-jar-plugin-version>3.1.1</maven-jar-plugin-version>
@@ -55,6 +56,17 @@
   <build>
     <defaultGoal>clean install</defaultGoal>
     <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+
+    <pluginManagement>
+      <plugins>
+        <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+        <plugin>
+          <groupId>com.spotify</groupId>
+          <artifactId>dockerfile-maven-plugin</artifactId>
+          <version>${dockerfile-maven-plugin-version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
 
     <plugins>
       <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->

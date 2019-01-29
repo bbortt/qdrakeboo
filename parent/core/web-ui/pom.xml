@@ -104,6 +104,23 @@
               </execution>
             </executions>
           </plugin>
+
+          <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+          <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+
+            <configuration>
+              <configuration>
+                <repository>${DOCKER_REPOSITORY}</repository>
+                <tag>${project.version}</tag>
+
+                <buildArgs>
+
+                </buildArgs>
+              </configuration>
+            </configuration>
+          </plugin>
         </plugins>
       </build>
     </profile>
