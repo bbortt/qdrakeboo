@@ -23,35 +23,34 @@ const handle = app.getRequestHandler()
 
 let auth = false
 
-app.prepare()
-.then(() => {
+app.prepare().then(() => {
   const server = express()
 
   server.get('/', (req, res) => {
+    if (auth) {
+      return res.redirect('/home')
+    }
+
     oauth2Client.code.getToken(req.originalUrl)
     .then((user) => {
       auth = user.data
-      return handle(req, res)
+      res.redirect('/home')
     })
     .catch((error) => handle(req, res))
   })
 
   server.get('/login', (req, res) => {
-    // Enable this if no oauth2 server present
-    auth = true
-    res.writeHead(302, {
-      Location: '/'
-    })
-    res.end()
-    // res.redirect(oauth2Client.code.getUri())
+    res.redirect(oauth2Client.code.getUri())
   })
 
   server.get('/logout', (req, res) => {
     auth = false
-    return handle(req, res)
+
+    res.redirect(serverRuntimeConfig.logoutUri)
   })
 
   server.get('/auth', (req, res) => {
+    // TODO: Query user info api
     if (!auth) {
       res.sendStatus(401)
     } else {
@@ -60,6 +59,10 @@ app.prepare()
   })
 
   server.get('*', (req, res) => {
+    if (!auth) {
+      return res.redirect('/login')
+    }
+
     return handle(req, res)
   })
 

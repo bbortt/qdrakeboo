@@ -26,7 +26,7 @@ export default (initialState = initialState) => {
   )
 
   store.runSagaTask = () => {
-    store.sagaTask = store.sagaMiddleware.run(rootSaga)
+    store.sagaTask = sagaMiddleware.run(rootSaga)
   }
 
   store.runSagaTask()
