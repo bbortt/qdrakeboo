@@ -59,7 +59,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven-failsafe-plugin-version}</version>
 
         <configuration>
           <environmentVariables>
@@ -132,6 +131,23 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+
+        <configuration>
+          <configuration>
+            <repository>${DOCKER_REPOSITORY}</repository>
+            <tag>${project.version}</tag>
+
+            <buildArgs>
+              <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+            </buildArgs>
+          </configuration>
+        </configuration>
       </plugin>
     </plugins>
   </build>
