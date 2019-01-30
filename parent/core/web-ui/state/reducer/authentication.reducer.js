@@ -1,18 +1,18 @@
-import {AuthenticationTypes} from '../actions'
+import {AuthenticationActionTypes} from '../actions'
 
-const initialState = {
+export const initialAuthenticationState = {
   auth: {},
   isAuthenticated: false
 }
 
-const authenticationReducer = (state = initialState, action) => {
+export default (state = initialAuthenticationState, action) => {
   switch (action.type) {
-    case AuthenticationTypes.AUTHENTICATION_FAILED:
+    case AuthenticationActionTypes.AUTHENTICATION_FAILED:
       return {
         ...state,
         isAuthenticated: false
       }
-    case AuthenticationTypes.AUTHENTICATION_SUCCEED:
+    case AuthenticationActionTypes.AUTHENTICATION_SUCCEED:
       return {
         ...state,
         auth: action.payload,
@@ -22,5 +22,3 @@ const authenticationReducer = (state = initialState, action) => {
       return state
   }
 }
-
-export default authenticationReducer

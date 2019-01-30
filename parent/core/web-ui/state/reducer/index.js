@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux'
 
-import authenticationReducer from './authentication.reducer'
+import authenticationReducer, {initialAuthenticationState} from './authentication.reducer'
+
+export const initialState = {
+  authentication: initialAuthenticationState
+}
 
 export default combineReducers({
-  authenticationReducer
+  authentication: authenticationReducer
 })

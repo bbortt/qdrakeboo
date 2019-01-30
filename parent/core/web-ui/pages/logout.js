@@ -1,27 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {requestAuthentication} from '../state/facade'
+import {AuthenticationRequestAction} from '../state/actions'
 
 class Index extends React.Component {
 
   static async getInitialProps(props) {
-    const {isServer} = props.ctx
+    const {isServer, store} = props.ctx
 
-    requestAuthentication(isServer)
+    store.dispatch(AuthenticationRequestAction(isServer))
 
     return {isServer}
   }
 
   render() {
     return (
-      <div>
-        <h1>Logged out!</h1>
+        <div>
+          <h1>There he goes - the poor lonesome cowboy..</h1>
 
-        <a href='/'>
-          <button>Back to index</button>
-        </a>
-      </div>
+          <a href='/'>
+            <button>Return</button>
+          </a>
+        </div>
     )
   }
 }

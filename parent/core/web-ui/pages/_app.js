@@ -1,18 +1,12 @@
 import App, {Container} from 'next/app'
-
 import React from 'react'
 import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 
-import getStore from '../getStore'
-
-import Footer from '../components/layout/footer.component'
-
-require('./_app.scss')
+import configureStore from '../configureStore'
 
 class ReduxContextAwareApp extends App {
-
   static async getInitialProps({Component, ctx}) {
     let pageProps = {}
 
@@ -25,19 +19,15 @@ class ReduxContextAwareApp extends App {
 
   render() {
     const {Component, pageProps, store} = this.props
-
     return (
-      <Container>
-        <Provider store={store}>
-          <div className='container'>
+        <Container>
+          <Provider store={store}>
             <Component {...pageProps} />
-          </div>
-
-          <Footer/>
-        </Provider>
-      </Container>
+          </Provider>
+        </Container>
     )
   }
 }
 
-export default withRedux(getStore)(withReduxSaga({async: true})(ReduxContextAwareApp))
+export default withRedux(configureStore)(
+    withReduxSaga({async: true})(ReduxContextAwareApp))

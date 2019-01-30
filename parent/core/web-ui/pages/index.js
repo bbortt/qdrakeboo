@@ -1,36 +1,52 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {requestAuthentication} from '../state/facade'
+import {requestAuthentication} from '../state/facade/authentication.facade'
 
 class Index extends React.Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isAuthenticated: props.isAuthenticated
+    }
+  }
+
   static async getInitialProps(props) {
-    const {isServer, store} = props.ctx
+    const {store, isServer} = props.ctx
 
-    requestAuthentication(isServer)
+    requestAuthentication(props.ctx)
 
-    return {isServer, isAuthenticated: store.getState().authenticationReducer.isAuthenticated}
+    return {isServer}
   }
 
   render() {
-    return (
-      <div>
-        <h1>Welcome, stranger!</h1>
+    const {isAuthenticated} = this.state
 
-        {
-          this.props.isAuthenticated ?
-            <a href='logout'>
-              <button>Logout</button>
-            </a>
-            :
-            <a href='login'>
-              <button>Sign In</button>
-            </a>
-        }
-      </div>
+    return (
+        <div>
+          <h1>Welcome, stranger!</h1>
+
+          {
+            isAuthenticated ?
+                <a href='logout'>
+                  <button>Logout</button>
+                </a>
+                :
+                <a href='login'>
+                  <button>Sign In</button>
+                </a>
+          }
+        </div>
     )
   }
 }
 
-export default connect()(Index)
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.authentication.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps)(Index)

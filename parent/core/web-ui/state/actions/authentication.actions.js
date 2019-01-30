@@ -1,4 +1,4 @@
-export const AuthenticationTypes = {
+export const AuthenticationActionTypes = {
   AUTHENTICATION_REQUEST: 'Authentication: Request',
   AUTHENTICATION_FAILED: 'Authentication: Failed',
   AUTHENTICATION_SUCCEED: 'Authentication: Succeed'
@@ -6,7 +6,7 @@ export const AuthenticationTypes = {
 
 export const AuthenticationRequestAction = (isServer) => {
   return {
-    type: AuthenticationTypes.AUTHENTICATION_REQUEST,
+    type: AuthenticationActionTypes.AUTHENTICATION_REQUEST,
     payload: {
       'isServer': isServer
     }
@@ -15,13 +15,13 @@ export const AuthenticationRequestAction = (isServer) => {
 
 export const AuthenticationFailedAction = () => {
   return {
-    type: AuthenticationTypes.AUTHENTICATION_FAILED
+    type: AuthenticationActionTypes.AUTHENTICATION_FAILED
   }
 }
 
 export const AuthenticationSucceedAction = (auth) => {
   return {
-    type: AuthenticationTypes.AUTHENTICATION_SUCCEED,
+    type: AuthenticationActionTypes.AUTHENTICATION_SUCCEED,
     payload: auth
   }
 }
