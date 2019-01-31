@@ -1,11 +1,17 @@
+// @flow
 import {combineReducers} from 'redux'
 
-import authenticationReducer, {initialAuthenticationState} from './authentication.reducer'
+import type {SessionState} from './session.reducer';
+import sessionReducer, {initialSessionState} from './session.reducer'
 
-export const initialState = {
-  authentication: initialAuthenticationState
+export type ReduxState = {
+  session: SessionState
+}
+
+export const initialState: ReduxState = {
+  session: initialSessionState
 }
 
 export default combineReducers({
-  authentication: authenticationReducer
+  session: sessionReducer
 })

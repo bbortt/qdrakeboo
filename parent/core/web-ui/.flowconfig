@@ -1,8 +1,18 @@
 [ignore]
-.*/node_modules/*
+.*/coverage/.*
+.*/deprecated/.*
+.*/public/.*
 
 [include]
+.*/components/.*
+.*/pages/.*
+.*/state/.*
 
 [libs]
 
+[lints]
+
 [options]
+module.use_strict=true
+
+[strict]
