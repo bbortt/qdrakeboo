@@ -12,8 +12,8 @@
   </parent>
 
   <modules>
-    <module>core</module>
     <module>local-development</module>
+    <module>core</module>
   </modules>
 
   <properties>

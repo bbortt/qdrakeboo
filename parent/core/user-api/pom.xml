@@ -12,6 +12,6 @@
 
   <properties>
     <!-- General -->
-    <mainClass>io.github.bbortt.tv.core.authorizationserver.AuthorizationServer</mainClass>
+    <mainClass>io.github.bbortt.tv.core.userapi.UserApi</mainClass>
   </properties>
 </project>
