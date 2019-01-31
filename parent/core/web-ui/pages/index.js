@@ -1,7 +1,10 @@
 import React from 'react'
+
 import {connect} from 'react-redux'
 
-class Index extends React.Component {
+import AnonymousPage from '../components/session/AnonymousPage';
+
+class Index extends AnonymousPage {
 
   render() {
     return (

@@ -26,31 +26,17 @@ let auth = false
 app.prepare().then(() => {
   const server = express()
 
-  server.get('/', (req, res) => {
-    if (auth) {
-      return res.redirect('/home')
-    }
-
-    oauth2Client.code.getToken(req.originalUrl)
-    .then((user) => {
-      auth = user.data
-      res.redirect('/home')
-    })
-    .catch((error) => handle(req, res))
-  })
-
   server.get('/login', (req, res) => {
     res.redirect(oauth2Client.code.getUri())
   })
 
   server.get('/logout', (req, res) => {
     auth = false
-
     res.redirect(serverRuntimeConfig.logoutUri)
   })
 
   server.get('/auth', (req, res) => {
-    // TODO: Query user info api
+    // TODO: Query user info
     if (!auth) {
       res.sendStatus(401)
     } else {
@@ -59,11 +45,12 @@ app.prepare().then(() => {
   })
 
   server.get('*', (req, res) => {
-    if (!auth) {
-      return res.redirect('/login')
-    }
-
-    return handle(req, res)
+    oauth2Client.code.getToken(req.originalUrl)
+    .then((user) => {
+      auth = user.data
+      res.redirect('/home')
+    })
+    .catch((error) => handle(req, res))
   })
 
   server.listen(3000, (err) => {

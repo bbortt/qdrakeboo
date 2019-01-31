@@ -1,7 +1,10 @@
 import React from 'react'
+
 import {connect} from 'react-redux'
 
-class Home extends React.Component {
+import AuthenticatedPage from '../components/session/AuthenticatedPage';
+
+class Home extends AuthenticatedPage {
 
   render() {
     return (

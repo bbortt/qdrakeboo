@@ -7,7 +7,6 @@ module.exports = {
     accessTokenUri: 'http://localhost:8088/auth/oauth/token',
     authorizationUri: 'http://localhost:8088/auth/oauth/authorize',
     logoutUri: 'http://localhost:8088/auth/logout',
-    userInfoUri: 'http://localhost:8088/auth/user',
     redirectUri: 'http://localhost:3000',
     scopes: ['read']
   },
