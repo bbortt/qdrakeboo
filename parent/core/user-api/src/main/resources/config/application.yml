@@ -1,0 +1,9 @@
+security:
+  oauth2:
+    client:
+      clientId: ${CLIENT_ID}
+      clientSecret: ${CLIENT_SECRET}
+      accessTokenUri: ${TOKEN_URI}
+      userAuthorizationUri: ${AUTHORIZATION_URI}
+    resource:
+      userInfoUri: ${USER_INFO_URI}
