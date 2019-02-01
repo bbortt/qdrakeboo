@@ -41,4 +41,14 @@
     <!-- Dependency management -->
     <spring-boot-version>2.1.2.RELEASE</spring-boot-version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.github.bbortt.tv.dev</groupId>
+        <artifactId>spring-cloud-netflix-eureka-client-autoconfiguration</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>

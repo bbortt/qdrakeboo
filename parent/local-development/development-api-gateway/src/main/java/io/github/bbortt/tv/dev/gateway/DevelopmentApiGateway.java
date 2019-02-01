@@ -1,4 +1,4 @@
-package io.github.bbortt.tv.localdevelopment.developmentapigateway;
+package io.github.bbortt.tv.dev.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

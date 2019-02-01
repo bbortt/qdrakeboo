@@ -8,3 +8,4 @@ security:
     resource:
       userInfoUri: http://localhost:8088/auth/user
 server:  port: 8081
+spring:  application:    name: user

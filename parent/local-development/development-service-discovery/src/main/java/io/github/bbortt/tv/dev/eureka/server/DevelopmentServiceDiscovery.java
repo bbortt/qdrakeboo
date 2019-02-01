@@ -1,4 +1,4 @@
-package io.github.bbortt.tv.localdevelopment.developmentservicediscovery;
+package io.github.bbortt.tv.dev.eureka.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
