@@ -1,5 +1,5 @@
 // @flow
-import {all, call, put, takeLatest} from 'redux-saga/effects'
+import {call, put, takeLatest} from 'redux-saga/effects'
 
 import axios from 'axios'
 
@@ -25,7 +25,5 @@ function* fetchAuthentication(action: SessionRequestAction) {
 }
 
 export default function* sessionSaga(): Iterable<any> {
-  yield all([
-    takeLatest(SESSION_REQUEST, fetchAuthentication)
-  ])
+  takeLatest(SESSION_REQUEST, fetchAuthentication)
 }
