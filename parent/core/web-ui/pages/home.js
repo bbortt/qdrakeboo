@@ -3,7 +3,7 @@ import React from 'react'
 
 import {connect} from 'react-redux'
 
-import withAuthenticationOnly from '../lib/with-authentication-only';
+import withAuthenticationOnly from '../lib/security/with-authentication-only';
 
 class Home extends React.Component<Home.propTypes> {
 

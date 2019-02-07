@@ -3,7 +3,7 @@ import React from 'react'
 
 import {connect} from 'react-redux'
 
-import withoutAuthenticationOnly from '../lib/without-authentication-only';
+import withoutAuthenticationOnly from '../lib/security/without-authentication-only';
 
 class Index extends React.Component<Index.propTypes> {
 

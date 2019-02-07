@@ -18,10 +18,16 @@ function* fetchAuthentication(action: SessionRequestAction) {
   try {
     const response = yield call(axios.get,
         `${action.isServer ? publicRuntimeConfig.uiServerUrl : ''}/auth`)
+    yield call(setAuthorization, response.data.token_type,
+        response.data.access_token)
     yield put(sessionRequestSucceed(response.data))
   } catch (e) {
     yield put(sessionRequestFailed())
   }
+}
+
+function* setAuthorization(type: string, auth: string) {
+  axios.defaults.headers.common['Authorization'] = `${type}: ${auth}`
 }
 
 export default function* sessionSaga(): Iterable<any> {
