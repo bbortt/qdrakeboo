@@ -25,5 +25,5 @@ function* fetchAuthentication(action: SessionRequestAction) {
 }
 
 export default function* sessionSaga(): Iterable<any> {
-  takeLatest(SESSION_REQUEST, fetchAuthentication)
+  yield takeLatest(SESSION_REQUEST, fetchAuthentication)
 }

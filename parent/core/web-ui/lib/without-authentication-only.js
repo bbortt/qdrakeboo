@@ -14,14 +14,19 @@ export default function withoutAuthenticationOnly(Component: React.Component): R
 
     static async getInitialProps({ctx}) {
       const {isServer, res, store} = ctx
-      const {session} = store.getState();
+      const session = store.getState().session;
 
       if (!session.loading) {
         await store.dispatch(sessionRequest(isServer))
       }
 
       const unsubscribe = store.subscribe(() => {
-        if (session.oauth2 !== {}) {
+        const updatedSession = store.getState().session
+
+        console.log('updated: ', updatedSession)
+
+        if (!updatedSession.loading
+            && Object.keys(updatedSession.oauth2).length !== 0) {
           if (res) {
             res.redirect(authenticatedEntryPoint)
           } else {
@@ -41,7 +46,7 @@ export default function withoutAuthenticationOnly(Component: React.Component): R
     }
 
     render() {
-      return <component {...this.props} />
+      return <Component {...this.props} />
     }
   }
 }
