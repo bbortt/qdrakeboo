@@ -3,9 +3,9 @@ import React from 'react'
 
 import {connect} from 'react-redux'
 
-import AnonymousPage from '../components/session/AnonymousPage';
+import withoutAuthenticationOnly from '../lib/without-authentication-only';
 
-class Index extends AnonymousPage {
+class Index extends React.Component<Index.propTypes> {
 
   render() {
     return (
@@ -20,4 +20,4 @@ class Index extends AnonymousPage {
   }
 }
 
-export default connect()(Index)
+export default connect()(withoutAuthenticationOnly(Index))

@@ -1,36 +1,42 @@
 // @flow
 import type {SessionAction} from '../actions';
-import {SESSION_REQUEST_FAILED, SESSION_REQUEST_SUCCEED} from '../actions';
+import {
+  SESSION_REQUEST,
+  SESSION_REQUEST_FAILED,
+  SESSION_REQUEST_SUCCEED
+} from '../actions';
 
 export type SessionState = {
-  +isAuthenticated: boolean,
   +user: any,
   +oauth2: any,
-  +requested: boolean
+  +loading: boolean
 }
 
 export const initialSessionState: SessionState = {
-  isAuthenticated: false,
   user: {},
   oauth2: {},
-  requested: false
+  loading: false
 }
 
 export default (state: SessionState = initialSessionState,
     action: SessionAction) => {
   switch (action.type) {
+    case SESSION_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
     case SESSION_REQUEST_FAILED:
       return {
         ...state,
-        isAuthenticated: false,
-        requested: true
+        oauth2: {},
+        loading: false
       }
     case SESSION_REQUEST_SUCCEED:
       return {
         ...state,
-        isAuthenticated: true,
         oauth2: action.authentication,
-        requested: true
+        loading: false
       }
     default:
       return state

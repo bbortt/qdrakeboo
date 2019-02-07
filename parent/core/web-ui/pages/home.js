@@ -3,9 +3,9 @@ import React from 'react'
 
 import {connect} from 'react-redux'
 
-import AuthenticatedPage from '../components/session/AuthenticatedPage';
+import withAuthenticationOnly from '../lib/with-authentication-only';
 
-class Home extends AuthenticatedPage {
+class Home extends React.Component<Home.propTypes> {
 
   render() {
     return (
@@ -23,4 +23,4 @@ class Home extends AuthenticatedPage {
   }
 }
 
-export default connect()(Home)
+export default connect()(withAuthenticationOnly(Home))
