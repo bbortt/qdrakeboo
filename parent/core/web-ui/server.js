@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session')
 
 const next = require('next')
 const config = require('./next.config')
@@ -9,6 +10,18 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 
 const serverRuntimeConfig = config.serverRuntimeConfig
+
+const sessionConfig = {
+  secret: serverRuntimeConfig.cookieSecret,
+  cookie: {}
+}
+
+if (!dev) {
+  app.set('trust proxy', 1)
+  sessionConfig.cookie.secure = true
+}
+
+app.use(session(sessionConfig))
 
 const oauth2Client = new ClientOAuth2({
   clientId: serverRuntimeConfig.clientId,
@@ -21,42 +34,44 @@ const oauth2Client = new ClientOAuth2({
 
 const handle = app.getRequestHandler()
 
-let auth = false
-
 app.prepare().then(() => {
   const server = express()
 
+  server.get('/', (req, res) => {
+    if (req.session.auth) {
+      return res.redirect('/home')
+    }
+
+    return handle(req, res)
+  })
+
   server.get('/login', (req, res) => {
-    res.redirect(oauth2Client.code.getUri())
+    oauth2Client.code.getToken(req.originalUrl)
+    .then((user) => {
+      req.session.auth = user.data
+      return res.redirect('/home')
+    })
+    .catch((error) => res.redirect(oauth2Client.code.getUri()))
   })
 
   server.get('/logout', (req, res) => {
-    auth = false
-    res.redirect(serverRuntimeConfig.logoutUri)
-  })
-
-  server.get('/auth', (req, res) => {
-    // TODO: Query user info
-    if (!auth) {
-      res.sendStatus(401)
-    } else {
-      res.json(auth)
-    }
+    req.session.destroy()
+    return res.redirect(serverRuntimeConfig.logoutUri)
   })
 
   server.get('*', (req, res) => {
-    oauth2Client.code.getToken(req.originalUrl)
-    .then((user) => {
-      auth = user.data
-      res.redirect('/home')
-    })
-    .catch((error) => handle(req, res))
+    if (!req.session.auth) {
+      return res.redirect('/login')
+    }
+
+    return handle(req, res)
   })
 
   server.listen(3000, (err) => {
     if (err) {
       throw err
     }
+
     console.log('> Ready on http://localhost:3000')
   })
 })
