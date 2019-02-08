@@ -6,7 +6,7 @@ INSERT INTO client
       crypt('8779af4a-d120-4bea-9993-dea2fbc4b571', gen_salt('bf')),
       3600,
       7200,
-      'http://localhost:3000'
+      'http://localhost:3000/login'
     );
 
 INSERT INTO client_has_grant_types
