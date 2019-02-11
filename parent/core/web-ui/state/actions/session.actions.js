@@ -1,25 +1,13 @@
 // @flow
-export const SESSION_REQUEST: string = 'Session: Request'
-export const SESSION_REQUEST_FAILED: string = 'Session: Failed'
-export const SESSION_REQUEST_SUCCEED: string = 'Session: Succeed'
+import {Token} from 'client-oauth2';
 
-export type SessionRequestAction = { type: string, isServer: boolean }
-export type SessionRequestFailedAction = { type: string }
-export type SessionRequestSucceedAction = { type: string, authentication: any }
+export const SET_TOKEN: string = 'Session: Set'
+
+export type SetTokenAction = { type: string, token: Token }
 
 export type SessionAction =
-    SessionRequestAction
-    | SessionRequestFailedAction
-    | SessionRequestSucceedAction
+    SetTokenAction
 
-export function sessionRequest(isServer: boolean): SessionRequestAction {
-  return {type: SESSION_REQUEST, isServer: isServer}
-}
-
-export function sessionRequestFailed(): SessionRequestFailedAction {
-  return {type: SESSION_REQUEST_FAILED}
-}
-
-export function sessionRequestSucceed(authentication: any): SessionRequestSucceedAction {
-  return {type: SESSION_REQUEST_SUCCEED, authentication: authentication}
+export function setToken(token: Token): SetTokenAction {
+  return {type: SET_TOKEN, token: token}
 }

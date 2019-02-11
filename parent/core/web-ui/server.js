@@ -12,16 +12,10 @@ const app = next({dev})
 const serverRuntimeConfig = config.serverRuntimeConfig
 
 const sessionConfig = {
-  secret: serverRuntimeConfig.cookieSecret,
-  cookie: {}
+  resave: false,
+  saveUninitialized: true,
+  secret: serverRuntimeConfig.cookieSecret
 }
-
-if (!dev) {
-  app.set('trust proxy', 1)
-  sessionConfig.cookie.secure = true
-}
-
-app.use(session(sessionConfig))
 
 const oauth2Client = new ClientOAuth2({
   clientId: serverRuntimeConfig.clientId,
@@ -37,8 +31,15 @@ const handle = app.getRequestHandler()
 app.prepare().then(() => {
   const server = express()
 
+  if (!dev) {
+    server.set('trust proxy', 1)
+    sessionConfig.cookie.secure = true
+  }
+
+  server.use(session(sessionConfig))
+
   server.get('/', (req, res) => {
-    if (req.session.auth) {
+    if (req.session.token) {
       return res.redirect('/home')
     }
 
@@ -48,7 +49,7 @@ app.prepare().then(() => {
   server.get('/login', (req, res) => {
     oauth2Client.code.getToken(req.originalUrl)
     .then((user) => {
-      req.session.auth = user.data
+      req.session.token = user.data
       return res.redirect('/home')
     })
     .catch((error) => res.redirect(oauth2Client.code.getUri()))
@@ -60,7 +61,7 @@ app.prepare().then(() => {
   })
 
   server.get('*', (req, res) => {
-    if (!req.session.auth) {
+    if (!req.session.token) {
       return res.redirect('/login')
     }
 

@@ -1,9 +1,5 @@
 import React from 'react';
 
-import Router from 'next/router';
-
-import {sessionRequest} from '../../state/actions';
-
 const authenticatedEntryPoint = '/home'
 
 export default function withoutAuthenticationOnly(Component: React.Component): React.Component {
@@ -13,36 +9,18 @@ export default function withoutAuthenticationOnly(Component: React.Component): R
     || 'AnonymousPage'})`
 
     static async getInitialProps({ctx}) {
-      const {isServer, res, store} = ctx
-      const session = store.getState().session;
+      const {isServer, req, res} = ctx
 
-      if (!session.loading) {
-        await store.dispatch(sessionRequest(isServer))
+      if (req.session.token && res) {
+        res.redirect(authenticatedEntryPoint)
       }
-
-      const unsubscribe = store.subscribe(() => {
-        const updatedSession = store.getState().session
-
-        console.log('updated: ', updatedSession)
-
-        if (!updatedSession.loading
-            && Object.keys(updatedSession.oauth2).length !== 0) {
-          if (res) {
-            res.redirect(authenticatedEntryPoint)
-          } else {
-            Router.push(authenticatedEntryPoint)
-          }
-
-          unsubscribe()
-        }
-      })
 
       let pageProps = {}
       if (Component.getInitialProps) {
         pageProps = await Component.getInitialProps(props)
       }
 
-      return pageProps
+      return {isServer, ...pageProps}
     }
 
     render() {

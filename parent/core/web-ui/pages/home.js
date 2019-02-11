@@ -2,6 +2,7 @@
 import React from 'react'
 
 import {connect} from 'react-redux'
+import type {ReduxState} from '../state/reducer';
 
 import withAuthenticationOnly from '../lib/security/with-authentication-only';
 
