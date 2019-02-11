@@ -2,11 +2,16 @@
 import React from 'react'
 
 import {connect} from 'react-redux'
-import type {ReduxState} from '../state/reducer';
+
+import axios from 'axios'
 
 import withAuthenticationOnly from '../lib/security/with-authentication-only';
 
 class Home extends React.Component<Home.propTypes> {
+
+  componentWillMount(): void {
+    console.log('axios config: ', axios.defaults.headers.common)
+  }
 
   render() {
     return (

@@ -13,7 +13,7 @@ module.exports = {
   },
   publicRuntimeConfig: {
     uiServerUrl: 'http://localhost:3000',
-    apiServerUrl: ''
+    apiServerUrl: 'http://localhost:8080'
   },
   ...withSass()
 }

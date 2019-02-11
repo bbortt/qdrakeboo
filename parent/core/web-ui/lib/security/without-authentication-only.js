@@ -1,18 +1,28 @@
 import React from 'react';
 
+import Router from 'next/router'
+
+import getAuthenticationToken from './get-authentication-token';
+
 const authenticatedEntryPoint = '/home'
 
-export default function withoutAuthenticationOnly(Component: React.Component): React.Component {
+export default (Component: React.Component): React.Component => {
   return class AnonymousPage extends React.Component {
     static displayName = `withoutAuthenticationOnly(${Component.displayName
     || Component.name
     || 'AnonymousPage'})`
 
     static async getInitialProps({ctx}) {
-      const {isServer, req, res} = ctx
+      const {res} = ctx
 
-      if (req.session.token && res) {
-        res.redirect(authenticatedEntryPoint)
+      const token = getAuthenticationToken(ctx)
+
+      if (token) {
+        if (res) {
+          res.redirect(authenticatedEntryPoint)
+        } else {
+          Router.push(authenticatedEntryPoint)
+        }
       }
 
       let pageProps = {}
@@ -20,7 +30,7 @@ export default function withoutAuthenticationOnly(Component: React.Component): R
         pageProps = await Component.getInitialProps(props)
       }
 
-      return {isServer, ...pageProps}
+      return {...pageProps}
     }
 
     render() {

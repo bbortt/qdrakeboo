@@ -12,7 +12,7 @@
 
   <properties>
     <!-- General -->
-    <mainClass>io.github.bbortt.tv.localdevelopment.developmentapigateway.DevelopmentApiGateway</mainClass>
+    <mainClass>io.github.bbortt.tv.dev.gateway.DevelopmentApiGateway</mainClass>
   </properties>
 
   <dependencies>

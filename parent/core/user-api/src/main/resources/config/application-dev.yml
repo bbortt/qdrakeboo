@@ -1,3 +1,6 @@
+logging:
+  level:
+    ROOT: DEBUG
 security:
   oauth2:
     client:

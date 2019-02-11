@@ -1,22 +1,33 @@
 import React from 'react';
 
+import Router from 'next/router';
+
+import cookies from 'js-cookie';
+import {TOKEN_COOKIE_NAME} from './security.constants';
+
+import getAuthenticationToken from './get-authentication-token'
+
 import {setToken} from '../../state/actions';
 
 const loginEndpoint = '/login'
 
-export default function withAuthenticationOnly(Component: React.Component): React.Component {
+export default (Component: React.Component): React.Component => {
   return class AuthenticatedPage extends React.Component {
     static displayName = `withAuthenticationOnly(${Component.displayName
     || Component.name
     || 'AuthenticatedPage'})`
 
     static async getInitialProps({ctx}) {
-      const {isServer, req, res, store} = ctx
+      const {res} = ctx
 
-      if (!req.session.token && res) {
-        res.redirect(loginEndpoint)
-      } else {
-        store.dispatch(setToken(req.session.token))
+      const token = getAuthenticationToken(ctx)
+
+      if (!token) {
+        if (res) {
+          res.redirect(loginEndpoint)
+        } else {
+          Router.push(loginEndpoint)
+        }
       }
 
       let pageProps = {}
@@ -24,7 +35,16 @@ export default function withAuthenticationOnly(Component: React.Component): Reac
         pageProps = await Component.getInitialProps(props)
       }
 
-      return {isServer, ...pageProps}
+      return {token, ...pageProps}
+    }
+
+    constructor(props) {
+      super(props)
+
+      const token = cookies.get(TOKEN_COOKIE_NAME)
+      if (token) {
+        props.dispatch(setToken(JSON.parse(token)))
+      }
     }
 
     render() {

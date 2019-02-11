@@ -1,5 +1,5 @@
 // @flow
-import {Token} from 'client-oauth2';
+import Token from '../../domain/session/Token';
 
 export const SET_TOKEN: string = 'Session: Set'
 

@@ -1,5 +1,8 @@
 const express = require('express')
-const session = require('express-session')
+
+const cookieParser = require('cookie-parser')
+const TOKEN_COOKIE_NAME = require(
+    './lib/security/security.constants').TOKEN_COOKIE_NAME
 
 const next = require('next')
 const config = require('./next.config')
@@ -10,12 +13,6 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 
 const serverRuntimeConfig = config.serverRuntimeConfig
-
-const sessionConfig = {
-  resave: false,
-  saveUninitialized: true,
-  secret: serverRuntimeConfig.cookieSecret
-}
 
 const oauth2Client = new ClientOAuth2({
   clientId: serverRuntimeConfig.clientId,
@@ -31,40 +28,27 @@ const handle = app.getRequestHandler()
 app.prepare().then(() => {
   const server = express()
 
-  if (!dev) {
-    server.set('trust proxy', 1)
-    sessionConfig.cookie.secure = true
-  }
-
-  server.use(session(sessionConfig))
+  server.use(cookieParser())
 
   server.get('/', (req, res) => {
-    if (req.session.token) {
-      return res.redirect('/home')
-    }
-
     return handle(req, res)
   })
 
   server.get('/login', (req, res) => {
     oauth2Client.code.getToken(req.originalUrl)
-    .then((user) => {
-      req.session.token = user.data
+    .then((response) => {
+      res.cookie(TOKEN_COOKIE_NAME, JSON.stringify(response.data))
       return res.redirect('/home')
     })
-    .catch((error) => res.redirect(oauth2Client.code.getUri()))
+    .catch(() => res.redirect(oauth2Client.code.getUri()))
   })
 
   server.get('/logout', (req, res) => {
-    req.session.destroy()
+    res.clearCookie(TOKEN_COOKIE_NAME)
     return res.redirect(serverRuntimeConfig.logoutUri)
   })
 
   server.get('*', (req, res) => {
-    if (!req.session.token) {
-      return res.redirect('/login')
-    }
-
     return handle(req, res)
   })
 

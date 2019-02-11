@@ -12,13 +12,14 @@ import configureStore from '../configureStore'
 class ReduxContextAwareApp extends App {
 
   static async getInitialProps({Component, ctx}) {
+    const {isServer} = ctx
     let pageProps = {}
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps({ctx})
     }
 
-    return {pageProps}
+    return {isServer, ...pageProps}
   }
 
   render() {

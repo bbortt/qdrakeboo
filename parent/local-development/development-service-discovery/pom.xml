@@ -12,7 +12,7 @@
 
   <properties>
     <!-- General -->
-    <mainClass>io.github.bbortt.tv.localdevelopment.developmentservicediscovery.DevelopmentServiceDiscovery</mainClass>
+    <mainClass>io.github.bbortt.tv.dev.eureka.server.DevelopmentServiceDiscovery</mainClass>
   </properties>
 
   <dependencies>

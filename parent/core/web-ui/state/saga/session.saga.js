@@ -6,14 +6,14 @@ import axios from 'axios'
 import type {SetTokenAction} from '../actions';
 import {SET_TOKEN} from '../actions'
 
-import {Token} from 'client-oauth2';
+import Token from '../../domain/session/Token';
 
 function* setTokenSaga(action: SetTokenAction) {
   yield call(setAxiosAuthorization, action.token)
 }
 
 function* setAxiosAuthorization(token: Token) {
-  axios.defaults.headers.common['Authorization'] = `${token.tokenType}: ${token.accessToken}`
+  axios.defaults.headers.common['Authorization'] = `${token.token_type}: ${token.access_token}`
 }
 
 export default function* sessionSaga(): Iterable<any> {
