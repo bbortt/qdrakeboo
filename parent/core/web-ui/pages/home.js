@@ -10,7 +10,9 @@ import withAuthenticationOnly from '../lib/security/with-authentication-only';
 class Home extends React.Component<Home.propTypes> {
 
   componentWillMount(): void {
-    console.log('axios config: ', axios.defaults.headers.common)
+    axios.get('http://localhost:8081/user')
+    .then((response) => console.log('got: ', response))
+    .catch((error) => console.log('sad.. ', error))
   }
 
   render() {
