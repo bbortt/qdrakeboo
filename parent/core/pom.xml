@@ -13,15 +13,12 @@
   </parent>
 
   <modules>
-    <module>authorization-server</module>
-    <module>web-ui</module>
     <module>user-api</module>
   </modules>
 
   <properties>
     <!-- Dependencies -->
     <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
-    <spring-security-oauth2-autoconfigure-version>2.1.2.RELEASE</spring-security-oauth2-autoconfigure-version>
   </properties>
 
   <dependencies>
@@ -51,11 +48,11 @@
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth.boot/spring-security-oauth2-autoconfigure -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
     <dependency>
-      <groupId>org.springframework.security.oauth.boot</groupId>
-      <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-      <version>${spring-security-oauth2-autoconfigure-version}</version>
+      <groupId>org.springframework.security.oauth</groupId>
+      <artifactId>spring-security-oauth2</artifactId>
+      <version>${spring-security-oauth2-version}</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
