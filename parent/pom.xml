@@ -12,8 +12,10 @@
   </parent>
 
   <modules>
-    <module>local-development</module>
+    <module>web-ui</module>
+    <module>authorization-server</module>
     <module>core</module>
+    <module>local-development</module>
   </modules>
 
   <properties>
@@ -24,8 +26,12 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <!-- Dependency management -->
+    <spring-boot-version>2.1.2.RELEASE</spring-boot-version>
+
     <!-- Plugins -->
     <dockerfile-maven-plugin-version>1.4.10</dockerfile-maven-plugin-version>
+    <exec-maven-plugin-version>1.6.0</exec-maven-plugin-version>
     <jacoco-maven-plugin-version>0.8.2</jacoco-maven-plugin-version>
     <maven-failsafe-plugin-version>3.0.0-M3</maven-failsafe-plugin-version>
     <maven-jar-plugin-version>3.1.1</maven-jar-plugin-version>
@@ -46,6 +52,12 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -93,6 +105,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec-maven-plugin-version}</version>
 
         <configuration>
           <mainClass>${mainClass}</mainClass>
