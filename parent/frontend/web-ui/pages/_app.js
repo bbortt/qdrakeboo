@@ -35,5 +35,4 @@ class ReduxContextAwareApp extends App {
   }
 }
 
-export default withRedux(configureStore)(
-    withReduxSaga()(ReduxContextAwareApp))
+export default withRedux(configureStore)(withReduxSaga(ReduxContextAwareApp))
