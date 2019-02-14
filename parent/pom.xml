@@ -12,10 +12,10 @@
   </parent>
 
   <modules>
-    <module>web-ui</module>
-    <module>authorization-server</module>
-    <module>core</module>
     <module>local-development</module>
+    <module>frontend</module>
+    <module>core</module>
+    <module>authorization-server</module>
   </modules>
 
   <properties>
