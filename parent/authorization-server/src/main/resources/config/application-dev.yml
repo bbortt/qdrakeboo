@@ -7,7 +7,7 @@ server:
     context-path: /auth
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bbortt_tv_authorization
+    jdbc-url: jdbc:postgresql://localhost:5432/bbortt_tv_authorization
     username: bbortt_tv_authorization
     password: bbortt_tv_authorization
   redis:

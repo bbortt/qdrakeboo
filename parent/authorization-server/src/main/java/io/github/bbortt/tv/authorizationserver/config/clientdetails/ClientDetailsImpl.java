@@ -31,7 +31,7 @@ public class ClientDetailsImpl implements ClientDetails {
 
   @Override
   public Set<String> getResourceIds() {
-    return new HashSet<String>();
+    return new HashSet<String>(Collections.singletonList(client.getResourceIds()));
   }
 
   @Override
