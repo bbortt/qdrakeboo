@@ -1,5 +1,5 @@
 // @flow
-import {select, takeLatest} from 'redux-saga/effects'
+import {call, select, takeLatest} from 'redux-saga/effects'
 
 import axios from 'axios'
 

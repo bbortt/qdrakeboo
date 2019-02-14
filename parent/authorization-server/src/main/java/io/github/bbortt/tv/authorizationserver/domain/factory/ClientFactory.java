@@ -36,6 +36,7 @@ public class ClientFactory implements EntityFactory<Client> {
 
     client.setClientId(resultSet.getString(Client.CLIENT_ID_RESULT_NAME));
     client.setSecret(resultSet.getString(Client.SECRET_RESULT_NAME));
+    client.setResourceIds(resultSet.getString(Client.RESOURCE_IDS_NAME));
     client.setSecretRequired(resultSet.getBoolean(Client.SECRET_REQUIRED_RESULT_NAME));
     client.setAutoApprove(resultSet.getBoolean(Client.AUTO_APPROVE_RESULT_NAME));
     client.setAccessTokenValiditySeconds(

@@ -7,9 +7,14 @@ server:
     context-path: /auth
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bbortt_tv_authorization
+    jdbc-url: jdbc:postgresql://localhost:5432/${spring.datasource.username}
     username: bbortt_tv_authorization
-    password: bbortt_tv_authorization
+    password: ${spring.datasource.username}
   redis:
     host: localhost
     port: 6379
+tokenstore:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/${tokenstore.datasource.username}
+    username: bbortt_tv_tokenstore
+    password: ${tokenstore.datasource.username}

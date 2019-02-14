@@ -17,6 +17,7 @@ public class Client extends AbstractAuditingEntity {
   public static final String ID_RESULT_NAME = "id";
   public static final String CLIENT_ID_RESULT_NAME = "client_id";
   public static final String SECRET_RESULT_NAME = "secret";
+  public static final String RESOURCE_IDS_NAME = "resource_ids";
   public static final String SECRET_REQUIRED_RESULT_NAME = "secret_required";
   public static final String AUTO_APPROVE_RESULT_NAME = "auto_approve";
   public static final String ACCESS_TOKEN_VALIDITY_SECONDS_RESULT_NAME = "access_token_validity";
@@ -26,6 +27,7 @@ public class Client extends AbstractAuditingEntity {
   private long id;
   private String clientId;
   private String secret;
+  private String resourceIds;
   private boolean isSecretRequired = true;
   private boolean isAutoApprove = false;
   private int accessTokenValiditySeconds;
@@ -61,6 +63,14 @@ public class Client extends AbstractAuditingEntity {
 
   public void setSecret(String secret) {
     this.secret = secret;
+  }
+
+  public String getResourceIds() {
+    return resourceIds;
+  }
+
+  public void setResourceIds(String resourceIds) {
+    this.resourceIds = resourceIds;
   }
 
   public boolean isSecretRequired() {
