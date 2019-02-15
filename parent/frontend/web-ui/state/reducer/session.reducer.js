@@ -1,9 +1,9 @@
 // @flow
-import UserInfo from '../../domain/session/UserInfo';
-import Token from '../../domain/session/Token';
+import Token from '../../domain/session/Token'
+import UserInfo from '../../domain/session/UserInfo'
 
-import type {SessionAction} from '../actions';
-import {SET_TOKEN, SET_USER_INFO} from '../actions';
+import type {SessionAction} from '../actions'
+import {SET_TOKEN, SET_USER_INFO} from '../actions'
 
 export type SessionState = {
   +token: Token,

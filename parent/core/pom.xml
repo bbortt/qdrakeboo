@@ -60,6 +60,12 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>io.github.bbortt.tv.dev</groupId>
+      <artifactId>spring-cloud-netflix-eureka-client-autoconfiguration</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

@@ -1,18 +1,19 @@
 INSERT INTO client
-    (client_id, secret, access_token_validity, refresh_token_validity, redirect_uris)
+    (client_id, secret, resource_ids, access_token_validity, refresh_token_validity, redirect_uris)
   VALUES
     (
       'cea19e6f-fa31-407f-a05a-a20d28c4c74d',
       crypt('8779af4a-d120-4bea-9993-dea2fbc4b571', gen_salt('bf')),
+      'ui',
       3600,
       7200,
-      'http://localhost:3000/login'
+      'http://localhost:3000/session'
     );
 
 INSERT INTO client_has_grant_types
     (client_id, grant_type_id)
   VALUES
-    (1, 1);
+    (1, 1), (1, 2);
 
 INSERT INTO authority
     (name)

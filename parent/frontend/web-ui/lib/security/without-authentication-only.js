@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 import Router from 'next/router'
 
-import getAuthenticationToken from './get-authentication-token';
+import getAuthenticationToken from './get-authentication-token'
 
 const authenticatedEntryPoint = '/home'
 

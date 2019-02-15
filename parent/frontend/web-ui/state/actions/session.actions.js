@@ -1,6 +1,6 @@
 // @flow
-import Token from '../../domain/session/Token';
-import UserInfo from '../../domain/session/UserInfo';
+import Token from '../../domain/session/Token'
+import UserInfo from '../../domain/session/UserInfo'
 
 export const SET_TOKEN: string = 'Session: Set Token'
 export const REQUEST_USER_INFO: string = 'Session: Request User-Info'

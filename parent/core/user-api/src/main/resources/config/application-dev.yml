@@ -1,13 +1,1 @@
-eureka:  client:    enabled: false
-logging:
-  level:
-    ROOT: DEBUG
-security:
-  oauth2:
-    client:
-      clientId: deea2da1-21a6-492c-a0f3-a5e9cd6301e2
-      clientSecret: 54e76b2f-fc53-4ec2-aee5-8d9df2fff625      accessTokenUri: http://localhost:8088/auth/oauth/token
-      userAuthorizationUri: http://localhost:8088/auth/oauth/authorize
-    resource:
-      userInfoUri: http://localhost:8088/auth/userserver:  port: 8081
-spring:  application:    name: user
+logging:  level:    ROOT: DEBUGserver:  port: 8081spring:  application:    name: usersecurity:  oauth2:    client:      clientId: deea2da1-21a6-492c-a0f3-a5e9cd6301e2      clientSecret: 54e76b2f-fc53-4ec2-aee5-8d9df2fff625      checkTokenUri: http://localhost:8088/auth/oauth/check_token

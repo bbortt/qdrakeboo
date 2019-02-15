@@ -9,6 +9,10 @@ import withReduxSaga from 'next-redux-saga'
 
 import configureStore from '../configureStore'
 
+import authenticationErrorHandler from '../lib/security/authentication-error-handler.interceptor'
+
+authenticationErrorHandler()
+
 class ReduxContextAwareApp extends App {
 
   static async getInitialProps({Component, ctx}) {

@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import Router from 'next/router';
+import Router from 'next/router'
 
-import cookies from 'js-cookie';
-import {TOKEN_COOKIE_NAME} from './security.constants';
+import cookies from 'js-cookie'
+import {TOKEN_COOKIE_NAME} from './security.constants'
 
 import getAuthenticationToken from './get-authentication-token'
 
-import {setToken} from '../../state/actions';
+import {setToken} from '../../state/actions'
 
-const loginEndpoint = '/login'
+const loginEndpoint = '/session'
 
 export default (Component: React.Component): React.Component => {
   return class AuthenticatedPage extends React.Component {
@@ -42,6 +42,7 @@ export default (Component: React.Component): React.Component => {
       super(props)
 
       const token = cookies.get(TOKEN_COOKIE_NAME)
+
       if (token) {
         props.dispatch(setToken(JSON.parse(token)))
       }

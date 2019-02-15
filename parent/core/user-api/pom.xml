@@ -15,12 +15,4 @@
     <!-- General -->
     <mainClass>io.github.bbortt.tv.core.userapi.UserApi</mainClass>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>io.github.bbortt.tv.dev</groupId>
-      <artifactId>spring-cloud-netflix-eureka-client-autoconfiguration</artifactId>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
 </project>

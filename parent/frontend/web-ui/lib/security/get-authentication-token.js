@@ -10,5 +10,5 @@ export default (context): Token => {
     return JSON.parse(token)
   }
 
-  return token;
+  return token
 }

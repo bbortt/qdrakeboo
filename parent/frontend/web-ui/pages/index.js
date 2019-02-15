@@ -3,7 +3,7 @@ import React from 'react'
 
 import {connect} from 'react-redux'
 
-import withoutAuthenticationOnly from '../lib/security/without-authentication-only';
+import withoutAuthenticationOnly from '../lib/security/without-authentication-only'
 
 class Index extends React.Component<Index.propTypes> {
 
@@ -12,7 +12,7 @@ class Index extends React.Component<Index.propTypes> {
         <div className='Index'>
           <h1>Welcome, stranger!</h1>
 
-          <a href='login'>
+          <a href='session'>
             <button>Sign In</button>
           </a>
         </div>

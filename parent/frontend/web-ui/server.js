@@ -34,13 +34,21 @@ app.prepare().then(() => {
     return handle(req, res)
   })
 
-  server.get('/login', (req, res) => {
-    oauth2Client.code.getToken(req.originalUrl)
-    .then((response) => {
-      res.cookie(TOKEN_COOKIE_NAME, JSON.stringify(response.data))
-      return res.redirect('/home')
-    })
-    .catch(() => res.redirect(oauth2Client.code.getUri()))
+  server.get('/session', (req, res) => {
+    storeToken(() => oauth2Client.code.getToken(req.originalUrl), res, '/home')
+  })
+
+  server.get('/session/renew', (req, res) => {
+    const token = req.cookies[TOKEN_COOKIE_NAME]
+
+    storeToken(() =>
+            oauth2Client.createToken(
+                token.access_token,
+                token.refresh_token,
+                token.token_type,
+                {}).refresh(),
+        res,
+        req.query.redirect)
   })
 
   server.get('/logout', (req, res) => {
@@ -64,3 +72,16 @@ app.prepare().then(() => {
   console.error(ex.stack)
   process.exit(1)
 })
+
+const storeToken = (tokenRequest, res, redirectUrl) => {
+  tokenRequest().then((response) => {
+    res.cookie(TOKEN_COOKIE_NAME, JSON.stringify(
+        {
+          token_type: response.data.token_type,
+          access_token: response.data.access_token,
+          refresh_token: response.data.refresh_token
+        }))
+    return res.redirect(redirectUrl)
+  })
+  .catch(() => res.redirect(oauth2Client.code.getUri()))
+}
