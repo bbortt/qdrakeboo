@@ -9,9 +9,8 @@ import withReduxSaga from 'next-redux-saga'
 
 import configureStore from '../configureStore'
 
-import authenticationErrorHandler from '../lib/security/authentication-error-handler.interceptor'
-
-authenticationErrorHandler()
+import authenticationErrorHandler
+  from '../lib/security/authentication-error-handler.interceptor'
 
 class ReduxContextAwareApp extends App {
 
@@ -24,6 +23,14 @@ class ReduxContextAwareApp extends App {
     }
 
     return {isServer, ...pageProps}
+  }
+
+  constructor(props) {
+    super(props)
+
+    const {store} = this.props
+
+    authenticationErrorHandler(store)
   }
 
   render() {

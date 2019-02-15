@@ -12,14 +12,6 @@ import {getToken} from '../facade/session.facade'
 
 const sessionEndpoint = '/session'
 
-function* requestSession(action: RequestSessionAction) {
-  yield  redirect(sessionEndpoint, action.response)
-}
-
-export function* requestSessionSaga() {
-  yield takeLatest(REQUEST_SESSION, requestSession)
-}
-
 function* redirect(url: string, response: any | null) {
   if (response) {
     response.redirect(url)
@@ -28,10 +20,18 @@ function* redirect(url: string, response: any | null) {
   }
 }
 
+function* requestSession(action: RequestSessionAction) {
+  yield redirect(sessionEndpoint, action.response)
+}
+
+export function* requestSessionSaga() {
+  yield takeLatest(REQUEST_SESSION, requestSession)
+}
+
 function* requestUserInfo(action: RequestUserInfoAction) {
   const token = yield select(getToken)
 
-  const response = yield call(axios.get, 'http://localhost:8080/user', {
+  const response = yield call(axios.get, 'http://localhost:8081/', {
     headers: {
       'Authorization': `${token.token_type} ${token.access_token}`
     }

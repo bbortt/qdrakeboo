@@ -1,6 +1,15 @@
+// @flow
+import Router from 'next/router'
+
+import {Store} from 'redux';
+
 import axios from 'axios'
 
-const addRequestInterceptor = () => {
+import {getToken} from '../../state/facade/session.facade';
+
+import {getDateWithTimezoneOffset} from '../date/get-date-with-timezone-offset'
+
+const addRequestInterceptor = (store: Store) => {
   axios.interceptors.request.use(function (config) {
     return config;
   }, function (error) {
@@ -8,19 +17,22 @@ const addRequestInterceptor = () => {
   })
 }
 
-const addResponseInterceptor = () => {
+const addResponseInterceptor = (store: Store) => {
   axios.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
-    if (error.response.status === 401){
-      window.location.href = `/session/renew?redirect=${window.location.pathname}`
-    }
+    const token = getToken(store.getState())
 
-    return Promise.reject(error);
+    if (error.response.status === 401 && token.expires
+        < getDateWithTimezoneOffset().getTime()) {
+      Router.push(`/session/renew?redirect=${Router.rout}`)
+    } else {
+      return Promise.reject(error);
+    }
   })
 }
 
-export default () => {
-  addRequestInterceptor()
-  addResponseInterceptor()
+export default (store: Store) => {
+  addRequestInterceptor(store)
+  addResponseInterceptor(store)
 }
