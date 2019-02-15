@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "yarn webpack:server && next build",
+    "build": "next build",
     "dev": "node server.js",
     "flow": "flow check",
     "flow:start": "flow",
@@ -16,7 +16,6 @@
     "flow:stop": "flow stop",
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "cross-env NODE_ENV=test mocha",
-    "webpack:server": "webpack --progress --config webpack.server.config.js"
   },
   "dependencies": {
     "@zeit/next-sass": "1.0.1",
@@ -51,7 +50,6 @@
     "eslint": "^5.13.0",
     "flow-bin": "^0.93.0",
     "mocha": "^5.2.0",
-    "redux-devtools-extension": "^2.13.8",
-    "webpack-cli": "^3.2.3"
+    "redux-devtools-extension": "^2.13.8"
   }
 }
