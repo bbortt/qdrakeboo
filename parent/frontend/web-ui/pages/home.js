@@ -9,7 +9,9 @@ import withAuthenticationOnly from '../lib/security/with-authentication-only'
 
 class Home extends React.Component<Home.propTypes> {
 
-  componentWillMount(): void {
+  constructor(props) {
+    super(props)
+
     this.props.dispatch(requestUserInfo())
   }
 

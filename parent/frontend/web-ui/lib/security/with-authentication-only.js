@@ -1,15 +1,11 @@
 import React from 'react'
 
-import Router from 'next/router'
-
 import cookies from 'js-cookie'
 import {TOKEN_COOKIE_NAME} from './security.constants'
 
 import getAuthenticationToken from './get-authentication-token'
 
-import {setToken} from '../../state/actions'
-
-const loginEndpoint = '/session'
+import {requestSession, setToken} from '../../state/actions'
 
 export default (Component: React.Component): React.Component => {
   return class AuthenticatedPage extends React.Component {
@@ -18,16 +14,12 @@ export default (Component: React.Component): React.Component => {
     || 'AuthenticatedPage'})`
 
     static async getInitialProps({ctx}) {
-      const {res} = ctx
+      const {res, store} = ctx
 
       const token = getAuthenticationToken(ctx)
 
       if (!token) {
-        if (res) {
-          res.redirect(loginEndpoint)
-        } else {
-          Router.push(loginEndpoint)
-        }
+        store.dispatch(requestSession(res))
       }
 
       let pageProps = {}

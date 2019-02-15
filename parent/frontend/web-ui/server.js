@@ -41,6 +41,10 @@ app.prepare().then(() => {
   server.get('/session/renew', (req, res) => {
     const token = req.cookies[TOKEN_COOKIE_NAME]
 
+    if (!token) {
+      return res.redirect('/session')
+    }
+
     storeToken(() =>
             oauth2Client.createToken(
                 token.access_token,
