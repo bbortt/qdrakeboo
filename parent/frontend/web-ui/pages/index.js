@@ -10,13 +10,7 @@ import withoutAuthenticationOnly
 
 class Index extends React.Component<Index.propTypes> {
 
-  constructor(props) {
-    super(props)
-
-    this.signin = this.signin.bind(this)
-  }
-
-  signin() {
+  signIn = () => {
     this.props.dispatch(requestSession())
   }
 
@@ -25,7 +19,7 @@ class Index extends React.Component<Index.propTypes> {
         <div className='Index'>
           <h1>Welcome, stranger!</h1>
 
-          <button onClick={this.signin}>Sign In</button>
+          <button onClick={this.signIn}>Sign In</button>
         </div>
     )
   }

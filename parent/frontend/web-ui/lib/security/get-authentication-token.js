@@ -3,7 +3,7 @@ import nextCookie from 'next-cookies'
 
 import Token from '../../domain/session/Token'
 
-export default (context): Token => {
+export default (context: any): Token => {
   const {token} = nextCookie(context)
 
   if (token) {

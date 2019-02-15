@@ -24,7 +24,7 @@ function* requestSession(action: RequestSessionAction) {
   yield redirect(sessionEndpoint, action.response)
 }
 
-export function* requestSessionSaga() {
+export function* requestSessionSaga(): Iterable<any> {
   yield takeLatest(REQUEST_SESSION, requestSession)
 }
 

@@ -7,13 +7,14 @@ import getAuthenticationToken from './get-authentication-token'
 
 const authenticatedEntryPoint = '/home'
 
-export default (Component: React.Component): React.Component => {
-  return class AnonymousPage extends React.Component {
+// $FlowFixMe
+export default (Component: React.Component) => {
+  return class AnonymousPage extends React.Component<AnonymousPage.propTypes> {
     static displayName = `withoutAuthenticationOnly(${Component.displayName
     || Component.name
     || 'AnonymousPage'})`
 
-    static async getInitialProps({ctx}) {
+    static async getInitialProps({ctx}: any) {
       const {res} = ctx
 
       const token = getAuthenticationToken(ctx)
@@ -28,7 +29,7 @@ export default (Component: React.Component): React.Component => {
 
       let pageProps = {}
       if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(props)
+        pageProps = await Component.getInitialProps({ctx})
       }
 
       return {...pageProps}

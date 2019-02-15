@@ -8,13 +8,14 @@ import getAuthenticationToken from './get-authentication-token'
 
 import {requestSession, setToken} from '../../state/actions'
 
-export default (Component: React.Component): React.Component => {
-  return class AuthenticatedPage extends React.Component {
+// $FlowFixMe
+export default (Component: React.Component) => {
+  return class AuthenticatedPage extends React.Component<AuthenticatedPage.propTypes> {
     static displayName = `withAuthenticationOnly(${Component.displayName
     || Component.name
     || 'AuthenticatedPage'})`
 
-    static async getInitialProps({ctx}) {
+    static async getInitialProps({ctx}: any) {
       const {res, store} = ctx
 
       const token = getAuthenticationToken(ctx)
@@ -25,13 +26,13 @@ export default (Component: React.Component): React.Component => {
 
       let pageProps = {}
       if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(props)
+        pageProps = await Component.getInitialProps({ctx})
       }
 
       return {token, ...pageProps}
     }
 
-    constructor(props) {
+    constructor(props: AuthenticatedPage.propTypes) {
       super(props)
 
       const token = cookies.get(TOKEN_COOKIE_NAME)

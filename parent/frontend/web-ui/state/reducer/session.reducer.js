@@ -11,8 +11,8 @@ export type SessionState = {
 }
 
 export const initialSessionState: SessionState = {
-  token: {},
-  userInfo: {}
+  token: new Token(),
+  userInfo: new UserInfo()
 }
 
 export default (state: SessionState = initialSessionState,
