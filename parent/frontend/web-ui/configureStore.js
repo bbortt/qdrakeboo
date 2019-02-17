@@ -10,19 +10,19 @@ const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
     const {composeWithDevTools} = require('redux-devtools-extension')
     return composeWithDevTools(
-        applyMiddleware(crashReportingMiddleware, loggingMiddleware,
-            ...middleware))
+      applyMiddleware(crashReportingMiddleware, loggingMiddleware,
+        ...middleware))
   }
   return applyMiddleware(...middleware)
 }
 
-const sagaMiddleware = createSagaMiddleware()
-
 export default (initialState = initialState) => {
+  const sagaMiddleware = createSagaMiddleware()
+
   const store = createStore(
-      rootReducer,
-      initialState,
-      bindMiddleware([sagaMiddleware])
+    rootReducer,
+    initialState,
+    bindMiddleware([sagaMiddleware])
   )
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
