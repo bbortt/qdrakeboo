@@ -15,6 +15,16 @@ export default (Component: React.Component) => {
     || Component.name
     || 'AuthenticatedPage'})`
 
+    constructor(props: AuthenticatedPage.propTypes) {
+      super(props)
+
+      const token = cookies.get(TOKEN_COOKIE_NAME)
+
+      if (token) {
+        props.dispatch(setToken(JSON.parse(token)))
+      }
+    }
+
     static async getInitialProps({ctx}: any) {
       const {res, store} = ctx
 
@@ -30,16 +40,6 @@ export default (Component: React.Component) => {
       }
 
       return {token, ...pageProps}
-    }
-
-    constructor(props: AuthenticatedPage.propTypes) {
-      super(props)
-
-      const token = cookies.get(TOKEN_COOKIE_NAME)
-
-      if (token) {
-        props.dispatch(setToken(JSON.parse(token)))
-      }
     }
 
     render() {

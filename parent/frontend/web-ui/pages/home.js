@@ -9,24 +9,24 @@ import withAuthenticationOnly from '../lib/security/with-authentication-only'
 
 class Home extends React.Component<Home.propTypes> {
 
-  constructor(props) {
-    super(props)
+  static async getInitialProps({ctx}) {
+    const {store} = ctx
 
-    this.props.dispatch(requestUserInfo())
+    store.dispatch(requestUserInfo())
   }
 
   render() {
     return (
-        <div className='Home'>
-          <h1>Hi there</h1>
+      <div className='Home'>
+        <h1>Hi there</h1>
 
-          <p>Your current auth looks like the following:
-          </p>
+        <p>Your current auth looks like the following:
+        </p>
 
-          <a href='logout'>
-            <button>Logout</button>
-          </a>
-        </div>
+        <a href='logout'>
+          <button>Logout</button>
+        </a>
+      </div>
     )
   }
 }

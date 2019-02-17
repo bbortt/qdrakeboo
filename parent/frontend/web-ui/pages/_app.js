@@ -9,10 +9,17 @@ import withReduxSaga from 'next-redux-saga'
 
 import configureStore from '../configureStore'
 
-import authenticationErrorHandler
-  from '../lib/security/authentication-error-handler.interceptor'
+import authenticationErrorHandler from '../lib/security/authentication-error-handler.interceptor'
 
 class ReduxContextAwareApp extends App {
+
+  constructor(props) {
+    super(props)
+
+    const {store} = this.props
+
+    authenticationErrorHandler(store)
+  }
 
   static async getInitialProps({Component, ctx}) {
     const {isServer} = ctx
@@ -25,23 +32,15 @@ class ReduxContextAwareApp extends App {
     return {isServer, ...pageProps}
   }
 
-  constructor(props) {
-    super(props)
-
-    const {store} = this.props
-
-    authenticationErrorHandler(store)
-  }
-
   render() {
     const {Component, pageProps, store} = this.props
 
     return (
-        <Container>
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
-        </Container>
+      <Container>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </Container>
     )
   }
 }

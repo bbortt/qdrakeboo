@@ -5,8 +5,7 @@ import {connect} from 'react-redux'
 
 import {requestSession} from '../state/actions';
 
-import withoutAuthenticationOnly
-  from '../lib/security/without-authentication-only'
+import withoutAuthenticationOnly from '../lib/security/without-authentication-only'
 
 class Index extends React.Component<Index.propTypes> {
 
@@ -16,11 +15,11 @@ class Index extends React.Component<Index.propTypes> {
 
   render() {
     return (
-        <div className='Index'>
-          <h1>Welcome, stranger!</h1>
+      <div className='Index'>
+        <h1>Welcome, stranger!</h1>
 
-          <button onClick={this.signIn}>Sign In</button>
-        </div>
+        <button onClick={this.signIn}>Sign In</button>
+      </div>
     )
   }
 }

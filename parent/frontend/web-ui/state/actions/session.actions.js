@@ -13,10 +13,10 @@ export type RequestUserInfoAction = { type: string }
 export type SetUserInfoAction = { type: string, userInfo: UserInfo }
 
 export type SessionAction =
-    RequestSessionAction |
-    SetTokenAction |
-    RequestUserInfoAction |
-    SetUserInfoAction
+  RequestSessionAction |
+  SetTokenAction |
+  RequestUserInfoAction |
+  SetUserInfoAction
 
 export function requestSession(response: any): RequestSessionAction {
   return {type: REQUEST_SESSION, response: response}

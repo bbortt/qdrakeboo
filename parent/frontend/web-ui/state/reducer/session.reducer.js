@@ -16,7 +16,7 @@ export const initialSessionState: SessionState = {
 }
 
 export default (state: SessionState = initialSessionState,
-    action: SessionAction) => {
+                action: SessionAction) => {
   switch (action.type) {
     case SET_TOKEN:
       return {

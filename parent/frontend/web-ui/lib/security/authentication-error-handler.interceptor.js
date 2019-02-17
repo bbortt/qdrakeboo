@@ -24,7 +24,7 @@ const addResponseInterceptor = (store: Store) => {
     const token = getToken(store.getState())
 
     if (error.response.status === 401 && token.expires
-        < getDateWithTimezoneOffset().getTime()) {
+      < getDateWithTimezoneOffset().getTime()) {
       Router.push(`/session/renew?redirect=${Router.rout}`)
     } else {
       return Promise.reject(error);
