@@ -12,7 +12,6 @@ module.exports = {
     scopes: ['read']
   },
   publicRuntimeConfig: {
-    uiServerUrl: 'http://localhost:3000',
     apiServerUrl: 'http://localhost:8080'
   },
   ...withSass()

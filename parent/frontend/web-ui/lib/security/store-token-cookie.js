@@ -12,7 +12,7 @@ module.exports.storeTokenCookie = (tokenRequest, res, redirectUrl,
         token_type: response.data.token_type,
         access_token: response.data.access_token,
         refresh_token: response.data.refresh_token,
-        expires: getDateWithTimezoneOffset.getTime()
+        expires: getDateWithTimezoneOffset().getTime()
           + (response.data.expires_in /* seconds */ * 1000)
       }))
     return res.redirect(redirectUrl)

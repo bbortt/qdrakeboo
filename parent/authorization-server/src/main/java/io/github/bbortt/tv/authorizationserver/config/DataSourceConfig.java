@@ -25,7 +25,7 @@ public class DataSourceConfig {
     @Bean
     @Profile("no-redis")
     @ConfigurationProperties("tokenstore.datasource")
-    public HikariDataSource jdbcTokenStoreDatasource() {
+    public HikariDataSource jdbcTokenStoreDatasource() {      
       return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
   }

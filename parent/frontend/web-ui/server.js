@@ -7,9 +7,9 @@ const ClientOAuth2 = require('client-oauth2')
 
 const cookieParser = require('cookie-parser')
 const storeTokenCookie = require(
-    './lib/security/store-token-cookie').storeTokenCookie
+  './lib/security/store-token-cookie').storeTokenCookie
 const TOKEN_COOKIE_NAME = require(
-    './lib/security/security.constants').TOKEN_COOKIE_NAME
+  './lib/security/security.constants').TOKEN_COOKIE_NAME
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
@@ -38,8 +38,8 @@ app.prepare().then(() => {
 
   server.get('/session', (req, res) => {
     return storeTokenCookie(
-        () => oauth2Client.code.getToken(req.originalUrl),
-        res, '/home', oauth2Client)
+      () => oauth2Client.code.getToken(req.originalUrl),
+      res, '/home', oauth2Client)
   })
 
   server.get('/session/renew', (req, res) => {
@@ -50,13 +50,13 @@ app.prepare().then(() => {
     }
 
     return storeTokenCookie(
-        () =>
-            oauth2Client.createToken(
-                token.access_token,
-                token.refresh_token,
-                token.token_type,
-                {}).refresh(),
-        res, req.query.redirect, oauth2Client)
+      () =>
+        oauth2Client.createToken(
+          token.access_token,
+          token.refresh_token,
+          token.token_type,
+          {}).refresh(),
+      res, req.query.redirect, oauth2Client)
   })
 
   server.get('/logout', (req, res) => {
@@ -76,7 +76,7 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000')
   })
 })
-.catch((ex) => {
-  console.error(ex.stack)
-  process.exit(1)
-})
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })

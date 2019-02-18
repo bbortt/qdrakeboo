@@ -1,6 +1,7 @@
 package io.github.bbortt.tv.authorizationserver.config;
 
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,8 +25,9 @@ public class TokenStoreConfig {
 
     @Bean
     @Profile("no-redis")
-    public TokenStore tokenStore(DataSource jdbcDataSource) {
-      return new JdbcTokenStore(jdbcDataSource);
+    public TokenStore tokenStore(
+        @Qualifier("jdbcTokenStoreDatasource") DataSource jdbcTokenStoreDatasource) {
+      return new JdbcTokenStore(jdbcTokenStoreDatasource);
     }
   }
 }

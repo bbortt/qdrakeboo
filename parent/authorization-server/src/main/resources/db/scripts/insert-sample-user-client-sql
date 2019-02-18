@@ -1,7 +1,7 @@
 -- RUN `insert-sample-ui-client.sql` first!
 
 INSERT INTO client
-    (client_id, secret, resource_ids, access_token_validity, refresh_token_validity, redirect_uris)
+    (client_id, secret, resource_ids, access_token_validity, refresh_token_validity)
   VALUES
     (
       'deea2da1-21a6-492c-a0f3-a5e9cd6301e2',

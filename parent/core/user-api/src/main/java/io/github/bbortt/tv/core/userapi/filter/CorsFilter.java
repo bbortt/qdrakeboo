@@ -1,4 +1,4 @@
-package io.github.bbortt.tv.core.userapi;
+package io.github.bbortt.tv.core.userapi.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

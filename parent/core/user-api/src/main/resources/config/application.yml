@@ -1,3 +1,6 @@
+management:
+  server:
+    port: 8090
 security:
   oauth2:
     client:
