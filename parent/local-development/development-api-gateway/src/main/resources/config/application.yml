@@ -4,3 +4,12 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: true
+zuul:
+  routes:
+    user-api:
+      custom-sensitive-headers: true
+      path: /user/**
+      sensitive-headers:
+      - Cookie
+      - Set-Cookie
+      serviceId: user

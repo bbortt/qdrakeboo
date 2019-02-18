@@ -41,8 +41,6 @@ function* requestUserInfo(action: RequestUserInfoAction) {
       }
     })
   } catch (error) {
-    console.log('error: ', error)
-
     // TODO: Dispatch error
   }
 }
