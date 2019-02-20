@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON DATABASE bbortt_tv_tokenstore TO bbortt_tv_tokenstore;
 \connect bbortt_tv_tokenstore
 
 -----------------------------------
----			TOKEN STORE			---
+---         TOKEN STORE         ---
 -----------------------------------
 CREATE TABLE oauth_access_token (
 	token_id character varying(256) NOT NULL,
@@ -25,7 +25,7 @@ ALTER TABLE ONLY oauth_access_token
     ADD CONSTRAINT oauth_access_token_pkey PRIMARY KEY (token_id);
 
 -----------------------------------
----		  REFRESH TOKENS		---
+---       REFRESH TOKENS        ---
 -----------------------------------
 CREATE TABLE oauth_refresh_token (
 	token_id character varying(256) NOT NULL,
