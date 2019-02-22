@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
 
   <name>My little streaming dream</name>
-  <description> I still dream about my own streaming service.. Just for private usage :)</description>
+  <description>I still dream about my own streaming service.. Just for private usage :)</description>
   <url>https://github.com/bbortt/my-little-streaming-dream</url>
 
   <licenses>
@@ -39,6 +39,12 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>io.github.bbortt.tv.lib</groupId>
+        <artifactId>oauth2-client-autoconfiguration</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>io.github.bbortt.tv.dev</groupId>
         <artifactId>spring-cloud-netflix-eureka-client-autoconfiguration</artifactId>

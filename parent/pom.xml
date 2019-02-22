@@ -14,6 +14,7 @@
   <modules>
     <module>local-development</module>
     <module>frontend</module>
+    <module>lib</module>
     <module>core</module>
     <module>authorization-server</module>
   </modules>

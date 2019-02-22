@@ -15,11 +15,6 @@
     <module>user-api</module>
   </modules>
 
-  <properties>
-    <!-- Dependencies -->
-    <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
-  </properties>
-
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
     <dependency>
@@ -47,11 +42,9 @@
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
     <dependency>
-      <groupId>org.springframework.security.oauth</groupId>
-      <artifactId>spring-security-oauth2</artifactId>
-      <version>${spring-security-oauth2-version}</version>
+      <groupId>io.github.bbortt.tv.lib</groupId>
+      <artifactId>oauth2-client-autoconfiguration</artifactId>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->

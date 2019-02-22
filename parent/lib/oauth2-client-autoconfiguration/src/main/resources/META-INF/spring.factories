@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.CorsFilterAutoconfiguration,
+io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.OAuth2ClientAutoconfiguration
