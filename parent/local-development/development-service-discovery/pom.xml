@@ -13,7 +13,7 @@
 
   <properties>
     <!-- General -->
-    <mainClass>io.github.bbortt.tv.dev.eureka.server.DevelopmentServiceDiscovery</mainClass>
+    <mainClass>io.github.bbortt.tv.dev.servicediscovery.DevelopmentServiceDiscovery</mainClass>
   </properties>
 
   <dependencies>
