@@ -6,7 +6,7 @@ INSERT INTO client
     (
       'deea2da1-21a6-492c-a0f3-a5e9cd6301e2',
       crypt('54e76b2f-fc53-4ec2-aee5-8d9df2fff625', gen_salt('bf')),
-      'user-api',
+      'microservice',
       3600,
       7200
     );
@@ -19,7 +19,7 @@ INSERT INTO client_has_grant_types
 INSERT INTO authority
     (name)
   VALUES
-    ('user');
+    ('principal');
 
 INSERT INTO client_has_authorities
     (client_id, authority_id)
