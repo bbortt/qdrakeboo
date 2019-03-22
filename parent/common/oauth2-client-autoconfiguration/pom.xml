@@ -14,7 +14,7 @@
   <properties>
     <!-- Dependencies -->
     <servlet-api-version>2.5</servlet-api-version>
-    <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
+    <spring-security-oauth2-version>2.3.5.RELEASE</spring-security-oauth2-version>
   </properties>
 
   <dependencies>

@@ -19,16 +19,16 @@
   },
   "dependencies": {
     "@zeit/next-sass": "1.0.1",
-    "axios": "0.18.0",
+    "axios": "^0.18.0",
     "client-oauth2": "4.2.3",
-    "cookie-parser": "^1.4.4",
     "cross-env": "5.2.0",
     "express": "4.16.4",
-    "js-cookie": "^2.2.0",
+    "express-async-await": "^1.1.0",
+    "express-session": "^1.15.6",
     "next": "^8.0.1",
-    "next-cookies": "^1.1.0",
     "next-redux-saga": "^4.0.0",
     "next-redux-wrapper": "3.0.0-alpha.1",
+    "node-fetch": "^2.3.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
@@ -36,7 +36,7 @@
     "react-redux": "6.0.0",
     "redux": "4.0.1",
     "redux-saga": "1.0.1",
-    "webpack": "^4.29.3"
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

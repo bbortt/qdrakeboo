@@ -150,6 +150,7 @@
 
               <excludes>
                 <exclude>**/*IntTest.java</exclude>
+                <exclude>**/*IntegrationTest.java</exclude>
               </excludes>
             </configuration>
           </execution>
@@ -175,6 +176,7 @@
             <configuration>
               <includes>
                 <include>**/*IntTest.java</include>
+                <include>**/*IntegrationTest.java</include>
               </includes>
             </configuration>
           </execution>

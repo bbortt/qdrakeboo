@@ -1,20 +1,29 @@
 const express = require('express')
+const session = require('express-session')
+const async = require('express-async-await')
+
+const fetch = require('node-fetch')
 
 const next = require('next')
 const config = require('./next.config')
 
 const ClientOAuth2 = require('client-oauth2')
 
-const cookieParser = require('cookie-parser')
-const storeTokenCookie = require(
-  './lib/security/store-token-cookie').storeTokenCookie
-const TOKEN_COOKIE_NAME = require(
-  './lib/security/security.constants').TOKEN_COOKIE_NAME
+const sessionUtils = require('./lib/security/session-utils')
+const getDateWithTimezoneOffset = require('./lib/date/get-date-with-timezone-offset')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 
 const serverRuntimeConfig = config.serverRuntimeConfig
+
+// TODO: REDIS Store
+const sessionConfig = {
+  secret: serverRuntimeConfig.sessionSecret,
+  cookie: {},
+  resave: false,
+  saveUninitialized: false
+}
 
 const oauth2Client = new ClientOAuth2({
   clientId: serverRuntimeConfig.clientId,
@@ -30,41 +39,69 @@ const handle = app.getRequestHandler()
 app.prepare().then(() => {
   const server = express()
 
-  server.use(cookieParser())
+  if (!dev) {
+    server.set('trust proxy', 1)
+    sessionConfig.cookie.secure = true
+  }
+
+  server.use(session(sessionConfig))
 
   server.get('/', (req, res) => {
+    if (req.session.token) {
+      return res.redirect('/home')
+    }
+
     return handle(req, res)
   })
 
   server.get('/session', (req, res) => {
-    return storeTokenCookie(
-      () => oauth2Client.code.getToken(req.originalUrl),
-      res, '/home', oauth2Client)
+    oauth2Client.code.getToken(req.originalUrl).then((token) => {
+      sessionUtils.saveTokenToSession(token, req.session)
+
+      return res.redirect('/home')
+    }, () => res.redirect(oauth2Client.code.getUri()))
   })
 
   server.get('/session/renew', (req, res) => {
-    const token = req.cookies[TOKEN_COOKIE_NAME]
-
-    if (!token) {
+    if (!req.session.token || req.session.token.expires > getDateWithTimezoneOffset().getTime()) {
       return res.redirect('/session')
     }
 
-    return storeTokenCookie(
-      () =>
-        oauth2Client.createToken(
-          token.access_token,
-          token.refresh_token,
-          token.token_type,
-          {}).refresh(),
-      res, req.query.redirect, oauth2Client)
+    const oldToken = sessionUtils.getTokenFromSession(req.session, oauth2Client)
+      .refresh()
+      .then((token) => {
+        sessionUtils.saveTokenToSession(token, req.session)
+
+        res.redirect(req.query.redirect)
+      }, () => res.redirect('/session'))
   })
 
   server.get('/logout', (req, res) => {
-    res.clearCookie(TOKEN_COOKIE_NAME)
-    return res.redirect(serverRuntimeConfig.logoutUri)
+    req.session.destroy((error) => {
+      // TODO: Handle error?
+
+      return res.redirect(serverRuntimeConfig.logoutUri)
+    })
   })
 
+  server.get('/api/:endpoint', async (req, res) => {
+    const token = sessionUtils.getTokenFromSession(req.session, oauth2Client)
+
+    const response = await fetch(`${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `${token.tokenType} ${token.accessToken}`
+      }
+    })
+
+    return await response.json()
+  });
+
   server.get('*', (req, res) => {
+    if (!sessionUtils.getTokenFromSession(req.session, oauth2Client)) {
+      return res.redirect('/session')
+    }
+
     return handle(req, res)
   })
 

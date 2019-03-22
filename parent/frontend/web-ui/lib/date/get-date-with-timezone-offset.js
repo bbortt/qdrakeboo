@@ -1,5 +1,5 @@
 // @node js (server.js)
-module.exports.getDateWithTimezoneOffset = () => {
+module.exports = () => {
   const currentDate = new Date()
 
   return new Date(

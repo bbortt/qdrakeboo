@@ -5,14 +5,10 @@ import {connect} from 'react-redux'
 
 import {requestUserInfo} from '../state/actions'
 
-import withAuthenticationOnly from '../lib/security/with-authentication-only'
-
 class Home extends React.Component<Home.propTypes> {
 
-  static async getInitialProps({ctx}) {
-    const {store} = ctx
-
-    store.dispatch(requestUserInfo())
+  componentWillMount(): void {
+    this.props.dispatch(requestUserInfo())
   }
 
   render() {
@@ -31,4 +27,4 @@ class Home extends React.Component<Home.propTypes> {
   }
 }
 
-export default connect()(withAuthenticationOnly(Home))
+export default connect()(Home)

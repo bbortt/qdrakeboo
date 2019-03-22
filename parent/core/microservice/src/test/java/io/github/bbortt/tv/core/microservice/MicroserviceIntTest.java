@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Microservice.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
-public class MicroserviceIntegrationTest {
+public class MicroserviceIntTest {
 
   @Test
   public void contextLoads() {

@@ -1,16 +1,13 @@
 // @flow
 import React from 'react'
+import Router from 'next/router'
 
 import {connect} from 'react-redux'
-
-import {requestSession} from '../state/actions';
-
-import withoutAuthenticationOnly from '../lib/security/without-authentication-only'
 
 class Index extends React.Component<Index.propTypes> {
 
   signIn = () => {
-    this.props.dispatch(requestSession())
+    Router.push('/session')
   }
 
   render() {
@@ -24,4 +21,4 @@ class Index extends React.Component<Index.propTypes> {
   }
 }
 
-export default connect()(withoutAuthenticationOnly(Index))
+export default connect()(Index)
