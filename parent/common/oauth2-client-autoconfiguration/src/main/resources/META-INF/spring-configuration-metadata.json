@@ -8,7 +8,7 @@
 		{
 			"name": "oauth2.client.cors",
 			"type": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties.Cors",
-			"sourceType": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties.Cors"
+			"sourceType": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties$Cors"
 		}
 	],
 	"properties": [
@@ -19,7 +19,7 @@
 		},
 		{
 			"name": "oauth2.client.clientSecret",
-			"type": "java.net.String",
+			"type": "java.lang.String",
 			"sourceType": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties"
 		},
 		{
@@ -29,13 +29,13 @@
 		},
 		{
 			"name": "oauth2.client.checkTokenUri",
-			"type": "java.net.String",
+			"type": "java.lang.String",
 			"sourceType": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties"
 		},
 		{
 			"name": "oauth2.client.cors.enabled",
 			"type": "java.lang.Boolean",
-			"sourceType": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties.Cors"
+			"sourceType": "io.github.bbortt.tv.lib.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties$Cors"
 		}
 	]
 }
