@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import Router from 'next/router'
 
 import {connect} from 'react-redux'
 
@@ -7,8 +8,16 @@ import {requestUserInfo} from '../state/actions'
 
 class Home extends React.Component<Home.propTypes> {
 
-  componentWillMount(): void {
-    this.props.dispatch(requestUserInfo())
+  static async getInitialProps({ctx}) {
+    const {isServer, req, store} = ctx
+
+    store.dispatch(requestUserInfo(isServer ? req.headers.cookie : null))
+
+    return {}
+  }
+
+  logout = () => {
+    Router.push('/logout')
   }
 
   render() {
@@ -16,15 +25,14 @@ class Home extends React.Component<Home.propTypes> {
       <div className='Home'>
         <h1>Hi there</h1>
 
-        <p>Your current auth looks like the following:
+        <p>
+          User-Info: {JSON.stringify(this.props.userInfo)}
         </p>
 
-        <a href='logout'>
-          <button>Logout</button>
-        </a>
+        <button onClick={this.logout}>Logout</button>
       </div>
     )
   }
 }
 
-export default connect()(Home)
+export default connect(state => state.session)(Home)

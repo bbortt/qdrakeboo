@@ -11,9 +11,13 @@ import {REQUEST_USER_INFO} from '../actions'
 const {publicRuntimeConfig} = getConfig()
 
 function* requestUserInfo(action: RequestUserInfoAction) {
-  const response = yield call(axios.get, `${publicRuntimeConfig.publicApiUrl}/account`,)
+  const response = yield call(axios.get, `${publicRuntimeConfig.publicApiUrl}/microservice/principal`, {
+    headers: {
+      cookie: action.sessionCookie ? action.sessionCookie : ''
+    }
+  })
 
-  console.log('response: ', response)
+  console.log('response received: ', response)
 }
 
 export function* requestUserInfoSaga(): Iterable<any> {

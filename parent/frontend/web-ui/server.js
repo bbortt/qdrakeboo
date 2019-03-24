@@ -47,10 +47,6 @@ app.prepare().then(() => {
   server.use(session(sessionConfig))
 
   server.get('/', (req, res) => {
-    if (req.session.token) {
-      return res.redirect('/home')
-    }
-
     return handle(req, res)
   })
 
@@ -67,12 +63,12 @@ app.prepare().then(() => {
       return res.redirect('/session')
     }
 
-    const oldToken = sessionUtils.getTokenFromSession(req.session, oauth2Client)
+    sessionUtils.getTokenFromSession(req.session, oauth2Client)
       .refresh()
       .then((token) => {
         sessionUtils.saveTokenToSession(token, req.session)
 
-        res.redirect(req.query.redirect)
+        res.redirect(req.query.redirect ? req.query.redirect : '/home')
       }, () => res.redirect('/session'))
   })
 
@@ -84,24 +80,33 @@ app.prepare().then(() => {
     })
   })
 
-  server.get('/api/:endpoint', async (req, res) => {
+  server.get('/api/:endpoint*', async (req, res) => {
     const token = sessionUtils.getTokenFromSession(req.session, oauth2Client)
 
-    const response = await fetch(`${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `${token.tokenType} ${token.accessToken}`
-      }
-    })
-
-    return await response.json()
-  });
-
-  server.get('*', (req, res) => {
-    if (!sessionUtils.getTokenFromSession(req.session, oauth2Client)) {
+    if (!token) {
       return res.redirect('/session')
     }
 
+    console.log('endpoints: ', `${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`)
+
+    try {
+      const response = await fetch(`${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `${token.tokenType} ${token.accessToken}`
+        }
+      })
+
+      console.log('server response: ', response)
+
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(await response.json()));
+    } catch (error) {
+      console.log('request error: ', error)
+    }
+  });
+
+  server.get('*', (req, res) => {
     return handle(req, res)
   })
 

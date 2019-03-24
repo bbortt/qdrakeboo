@@ -10,9 +10,9 @@ module.exports.getTokenFromSession = (session, oauth2Client) => {
   const {token} = session
 
   return oauth2Client.createToken(
-    token.access_token,
-    token.refresh_token,
-    token.token_type,
+    token.accessToken,
+    token.refreshToken,
+    token.tokenType,
     {})
 }
 

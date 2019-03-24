@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 class Index extends React.Component<Index.propTypes> {
 
   signIn = () => {
-    Router.push('/session')
+    Router.push('/session/renew')
   }
 
   render() {
@@ -21,4 +21,4 @@ class Index extends React.Component<Index.propTypes> {
   }
 }
 
-export default connect()(Index)
+export default connect(state => state.session)(Index)

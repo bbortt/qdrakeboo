@@ -6,10 +6,10 @@ eureka:
     fetchRegistry: true
 zuul:
   routes:
-    user-api:
+    microservice:
       custom-sensitive-headers: true
-      path: /user/**
+      path: /microservice/**
       sensitive-headers:
       - Cookie
       - Set-Cookie
-      serviceId: user
+      serviceId: microservice
