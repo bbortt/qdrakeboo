@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
-
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.GrantType;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Scope;
@@ -32,7 +31,7 @@ public class ClientDetailsImpl implements ClientDetails {
 
   @Override
   public Set<String> getResourceIds() {
-    return new HashSet<String>(Collections.singletonList(client.getResourceIds()));
+    return Set.of(client.getResourceIds());
   }
 
   @Override

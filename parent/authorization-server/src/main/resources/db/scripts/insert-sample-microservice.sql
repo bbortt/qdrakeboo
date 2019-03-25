@@ -19,7 +19,7 @@ INSERT INTO client_has_grant_types
 INSERT INTO authority
     (name)
   VALUES
-    ('principal');
+    ('microservice');
 
 INSERT INTO client_has_authorities
     (client_id, authority_id)

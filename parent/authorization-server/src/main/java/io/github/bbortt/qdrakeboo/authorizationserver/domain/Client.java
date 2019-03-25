@@ -2,7 +2,6 @@ package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
 import java.util.Set;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import io.github.bbortt.qdrakeboo.authorizationserver.util.DublicateAwareHashSet;
 
 public class Client extends AbstractAuditingEntity {

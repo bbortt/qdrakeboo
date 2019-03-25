@@ -4,7 +4,7 @@ const getDateWithTimezoneOffset = require('../date/getDateWithTimezoneOffset')
 
 module.exports.getTokenFromSession = (session, oauth2Client) => {
   if (!session.token) {
-    return null;
+    return null
   }
 
   const {token} = session

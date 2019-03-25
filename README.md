@@ -1,4 +1,4 @@
-My (little) Streaming Dream
+Qdrakeboo
 ======
 
 The private streaming service for geeks.
@@ -12,3 +12,10 @@ The private streaming service for geeks.
 * Functionality > Style
 
 **Dive into the code and try it out!**
+
+# TODO's
+
+* Session-Store on express server
+* Session-Store on authorization server
+* Little administrative GUI on authorization server
+* Move Resource-Ids to separate table (n to n)

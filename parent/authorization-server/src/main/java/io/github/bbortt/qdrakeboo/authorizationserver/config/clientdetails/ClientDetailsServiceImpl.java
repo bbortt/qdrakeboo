@@ -22,11 +22,11 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
 
   @Override
   public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-    Optional<Client> user;
-    if (!(user = clientRepository.findOneByClientId(clientId)).isPresent()) {
+    Optional<Client> client;
+    if (!(client = clientRepository.findOneByClientId(clientId)).isPresent()) {
       throw new ClientRegistrationException("No client with id '" + clientId + "' registered!");
     }
 
-    return new ClientDetailsImpl(user.get());
+    return new ClientDetailsImpl(client.get());
   }
 }

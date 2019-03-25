@@ -2,5 +2,5 @@
 import axios from 'axios'
 
 export default () => {
-  axios.defaults.maxRedirects = 0;
+  axios.defaults.maxRedirects = 0
 }

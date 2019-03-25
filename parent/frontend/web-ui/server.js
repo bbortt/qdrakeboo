@@ -10,7 +10,8 @@ const config = require('./next.config')
 const ClientOAuth2 = require('client-oauth2')
 
 const sessionUtils = require('./lib/security/session-utils')
-const getDateWithTimezoneOffset = require('./lib/date/getDateWithTimezoneOffset')
+const getDateWithTimezoneOffset = require(
+    './lib/date/getDateWithTimezoneOffset')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
@@ -59,17 +60,18 @@ app.prepare().then(() => {
   })
 
   server.get('/session/renew', (req, res) => {
-    if (!req.session.token || req.session.token.expires > getDateWithTimezoneOffset().getTime()) {
+    if (!req.session.token || req.session.token.expires
+        > getDateWithTimezoneOffset().getTime()) {
       return res.redirect('/session')
     }
 
     sessionUtils.getTokenFromSession(req.session, oauth2Client)
-      .refresh()
-      .then((token) => {
-        sessionUtils.saveTokenToSession(token, req.session)
+    .refresh()
+    .then((token) => {
+      sessionUtils.saveTokenToSession(token, req.session)
 
-        res.redirect(req.query.redirect ? req.query.redirect : '/home')
-      }, () => res.redirect('/session'))
+      res.redirect(req.query.redirect ? req.query.redirect : '/home')
+    }, () => res.redirect('/session'))
   })
 
   server.get('/logout', (req, res) => {
@@ -80,7 +82,7 @@ app.prepare().then(() => {
     })
   })
 
-  server.get('/api/:endpoint*', async (req, res) => {
+  server.get('/api/*', async (req, res) => {
     const token = sessionUtils.getTokenFromSession(req.session, oauth2Client)
 
     if (!token) {
@@ -88,21 +90,22 @@ app.prepare().then(() => {
     }
 
     try {
-      const response = await fetch(`${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `${token.tokenType} ${token.accessToken}`
-        }
-      })
+      const response = await fetch(
+          `${serverRuntimeConfig.apiUrl}${req.originalUrl.replace('/api', '')}`,
+          {
+            method: 'GET',
+            headers: {
+              'Authorization': `${token.tokenType} ${token.accessToken}`
+            }
+          })
 
-      console.log('server response: ', response)
-
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify(await response.json()));
+      res.status(response.status)
+      res.setHeader('content-type', response.headers.get('content-type'))
+      res.end(JSON.stringify(await response.json()))
     } catch (error) {
       console.log('request error: ', error)
     }
-  });
+  })
 
   server.get('*', (req, res) => {
     return handle(req, res)
@@ -116,7 +119,7 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000')
   })
 })
-  .catch((ex) => {
-    console.error(ex.stack)
-    process.exit(1)
-  })
+.catch((ex) => {
+  console.error(ex.stack)
+  process.exit(1)
+})
