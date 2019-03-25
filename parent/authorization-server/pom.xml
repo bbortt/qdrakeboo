@@ -15,7 +15,7 @@
     <mainClass>io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer</mainClass>
 
     <!-- Dependencies -->
-    <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
+    <spring-security-oauth2-version>2.3.5.RELEASE</spring-security-oauth2-version>
 
     <!-- Plugins -->
     <docker-maven-plugin-version>0.28.0</docker-maven-plugin-version>
