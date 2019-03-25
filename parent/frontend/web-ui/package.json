@@ -1,9 +1,9 @@
 {
   "name": "web-ui",
   "version": "1.0.0",
-  "description": "Frontend for bbortt-tv.",
+  "description": "Frontend for qdrakeboo.",
   "main": "index.js",
-  "repository": "https://github.com/bbortt/my-little-streaming-dream",
+  "repository": "https://github.com/bbortt/qdrakeboo",
   "author": "Timon Borter",
   "license": "MIT",
   "private": false,

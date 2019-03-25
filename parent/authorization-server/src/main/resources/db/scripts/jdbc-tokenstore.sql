@@ -1,12 +1,12 @@
 -- create database
-CREATE DATABASE bbortt_tv_tokenstore;
+CREATE DATABASE qdrakeboo_tokenstore;
 
 -- user configuration
-CREATE USER bbortt_tv_tokenstore WITH PASSWORD 'bbortt_tv_tokenstore';
-GRANT ALL PRIVILEGES ON DATABASE bbortt_tv_tokenstore TO bbortt_tv_tokenstore;
+CREATE USER qdrakeboo_tokenstore WITH PASSWORD 'qdrakeboo_tokenstore';
+GRANT ALL PRIVILEGES ON DATABASE qdrakeboo_tokenstore TO qdrakeboo_tokenstore;
 
 -- connect to the database
-\connect bbortt_tv_tokenstore
+\connect qdrakeboo_tokenstore
 
 -----------------------------------
 ---         TOKEN STORE         ---

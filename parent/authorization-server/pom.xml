@@ -5,14 +5,14 @@
   <artifactId>authorization-server</artifactId>
 
   <parent>
-    <groupId>io.github.bbortt.tv</groupId>
+    <groupId>io.github.bbortt.qdrakeboo</groupId>
     <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <properties>
     <!-- General -->
-    <mainClass>io.github.bbortt.tv.core.authorizationserver.AuthorizationServer</mainClass>
+    <mainClass>io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer</mainClass>
 
     <!-- Dependencies -->
     <spring-security-oauth2-version>2.3.4.RELEASE</spring-security-oauth2-version>
@@ -149,7 +149,7 @@
                 <image>
                   <name>postgres:11.1-alpine</name>
 
-                  <alias>bbortt-tv-authorization-it-postgres</alias>
+                  <alias>qdrakeboo-authorization-it-postgres</alias>
 
                   <run>
                     <ports>
@@ -157,7 +157,7 @@
                     </ports>
 
                     <env>
-                      <POSTGRES_USER>bbortt_tv_authorization</POSTGRES_USER>
+                      <POSTGRES_USER>qdrakeboo_authorization</POSTGRES_USER>
                     </env>
                   </run>
                 </image>
@@ -165,7 +165,7 @@
                 <image>
                   <name>redis:5.0.3</name>
 
-                  <alias>bbortt-tv-authorization-it-redis</alias>
+                  <alias>qdrakeboo-authorization-it-redis</alias>
 
                   <run>
                     <ports>

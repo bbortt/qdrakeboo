@@ -7,9 +7,9 @@ server:
     context-path: /auth
 spring:
   datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/bbortt_tv_authorization
-    username: bbortt_tv_authorization
-    password: bbortt_tv_authorization
+    jdbc-url: jdbc:postgresql://localhost:5432/qdrakeboo_authorization
+    username: qdrakeboo_authorization
+    password: qdrakeboo_authorization
   redis:
     host: localhost
     port: 6379

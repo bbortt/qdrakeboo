@@ -1,8 +1,8 @@
 spring:
   datasource:
-    jdbc-url: jdbc:postgresql://localhost:${it-database.port}/bbortt_tv_authorization
-    username: bbortt_tv_authorization
-    password: bbortt_tv_authorization
+    jdbc-url: jdbc:postgresql://localhost:${it-database.port}/qdrakeboo_authorization
+    username: qdrakeboo_authorization
+    password: qdrakeboo_authorization
   redis:
     host: localhost
     port: ${it-redis.port}
