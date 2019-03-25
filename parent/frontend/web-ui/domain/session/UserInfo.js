@@ -1,3 +1,4 @@
 // @flow
-export default class UserInfo {
-}
+type UserInfo = {}
+
+export default UserInfo

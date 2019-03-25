@@ -1,5 +1,5 @@
 // @flow
-import UserInfo from '../../domain/session/UserInfo'
+import type {UserInfo} from '../../domain/session/UserInfo'
 
 import type {SessionAction} from '../actions'
 import {SET_USER_INFO} from '../actions'
@@ -9,7 +9,7 @@ export type SessionState = {
 }
 
 export const initialSessionState: SessionState = {
-  userInfo: new UserInfo()
+  userInfo: {}
 }
 
 export default (state: SessionState = initialSessionState,

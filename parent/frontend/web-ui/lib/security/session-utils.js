@@ -1,6 +1,6 @@
 // @node js (server.js)
 
-const getDateWithTimezoneOffset = require('../date/get-date-with-timezone-offset')
+const getDateWithTimezoneOffset = require('../date/getDateWithTimezoneOffset')
 
 module.exports.getTokenFromSession = (session, oauth2Client) => {
   if (!session.token) {

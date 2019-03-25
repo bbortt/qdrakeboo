@@ -7,12 +7,17 @@ import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 
+import configureAxios from '../lib/axios/configureAxios'
+
 import configureStore from '../configureStore'
 
 class ReduxContextAwareApp extends App {
 
   static async getInitialProps({Component, ctx}) {
     const {isServer} = ctx
+
+    configureAxios()
+
     let pageProps = {}
 
     if (Component.getInitialProps) {

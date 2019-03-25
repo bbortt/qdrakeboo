@@ -10,7 +10,7 @@ const config = require('./next.config')
 const ClientOAuth2 = require('client-oauth2')
 
 const sessionUtils = require('./lib/security/session-utils')
-const getDateWithTimezoneOffset = require('./lib/date/get-date-with-timezone-offset')
+const getDateWithTimezoneOffset = require('./lib/date/getDateWithTimezoneOffset')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
@@ -86,8 +86,6 @@ app.prepare().then(() => {
     if (!token) {
       return res.redirect('/session')
     }
-
-    console.log('endpoints: ', `${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`)
 
     try {
       const response = await fetch(`${serverRuntimeConfig.apiUrl}/${req.params.endpoint}`, {

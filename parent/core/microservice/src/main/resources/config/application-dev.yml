@@ -1,6 +1,3 @@
-logging:
-  level:
-    ROOT: DEBUG
 oauth2:
   client:
     clientId: deea2da1-21a6-492c-a0f3-a5e9cd6301e2
