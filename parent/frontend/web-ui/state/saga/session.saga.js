@@ -27,6 +27,7 @@ function* requestUserInfo(action: RequestUserInfoAction) {
 
     yield put(setUserInfo(response.data))
   } catch (error) {
+    // TODO: Global axios handler
     if (error.response) {
       switch (error.response.status) {
         case 302:

@@ -2,16 +2,16 @@ const express = require('express')
 const session = require('express-session')
 const async = require('express-async-await')
 
-const fetch = require('node-fetch')
-
 const next = require('next')
 const config = require('./next.config')
 
+const handleGetApiRequest = require('./server/handleGetApiRequest')
+
 const ClientOAuth2 = require('client-oauth2')
 
-const sessionUtils = require('./lib/security/session-utils')
+const sessionUtils = require('./server/security/session-utils')
 const getDateWithTimezoneOffset = require(
-    './lib/date/getDateWithTimezoneOffset')
+    './server/date/getDateWithTimezoneOffset')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
@@ -83,28 +83,7 @@ app.prepare().then(() => {
   })
 
   server.get('/api/*', async (req, res) => {
-    const token = sessionUtils.getTokenFromSession(req.session, oauth2Client)
-
-    if (!token) {
-      return res.redirect('/session')
-    }
-
-    try {
-      const response = await fetch(
-          `${serverRuntimeConfig.apiUrl}${req.originalUrl.replace('/api', '')}`,
-          {
-            method: 'GET',
-            headers: {
-              'Authorization': `${token.tokenType} ${token.accessToken}`
-            }
-          })
-
-      res.status(response.status)
-      res.setHeader('content-type', response.headers.get('content-type'))
-      res.end(JSON.stringify(await response.json()))
-    } catch (error) {
-      console.log('request error: ', error)
-    }
+    await handleGetApiRequest(req, res, oauth2Client)
   })
 
   server.get('*', (req, res) => {

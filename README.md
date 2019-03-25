@@ -17,5 +17,6 @@ The private streaming service for geeks.
 
 * Session-Store on express server
 * Session-Store on authorization server
+* Global error handling (concept/implementation) in frontend
 * Little administrative GUI on authorization server
-* Move Resource-Ids to separate table (n to n)
+* Learn more about resource ids?
