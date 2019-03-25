@@ -1,8 +1,6 @@
 // @flow
-type NextContext = {
+export type NextContext = {
   isServer: boolean;
   req: any;
   res: any;
 }
-
-export default NextContext

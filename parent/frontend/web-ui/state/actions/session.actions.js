@@ -1,6 +1,4 @@
 // @flow
-import {AppComponentContext} from 'next/app'
-
 import type {UserInfo} from '../../domain/session/UserInfo'
 import type {NextContext} from '../../lib/axios/NextContext';
 

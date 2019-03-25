@@ -1,5 +1,5 @@
 // @flow
-import type {UserInfo} from '../../domain/session/UserInfo'
+import type {UserInfo} from "../../domain/session/UserInfo";
 
 import type {SessionAction} from '../actions'
 import {SET_USER_INFO} from '../actions'

@@ -1,4 +1,2 @@
 // @flow
-type UserInfo = {}
-
-export default UserInfo
+export type UserInfo = {}
