@@ -5,13 +5,10 @@ const async = require('express-async-await')
 const next = require('next')
 const config = require('./next.config')
 
-const handleGetApiRequest = require('./server/handleGetApiRequest')
-
-const ClientOAuth2 = require('client-oauth2')
-
-const sessionUtils = require('./server/security/session-utils')
-const getDateWithTimezoneOffset = require(
-    './server/date/getDateWithTimezoneOffset')
+const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
+const handleSessionRenewRequest = require(
+    './server/handler/handleSessionRenewRequest.js')
+const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
@@ -26,15 +23,6 @@ const sessionConfig = {
   saveUninitialized: false
 }
 
-const oauth2Client = new ClientOAuth2({
-  clientId: serverRuntimeConfig.clientId,
-  clientSecret: serverRuntimeConfig.clientSecret,
-  accessTokenUri: serverRuntimeConfig.accessTokenUri,
-  authorizationUri: serverRuntimeConfig.authorizationUri,
-  redirectUri: serverRuntimeConfig.redirectUri,
-  scopes: serverRuntimeConfig.scopes
-})
-
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
@@ -47,48 +35,23 @@ app.prepare().then(() => {
 
   server.use(session(sessionConfig))
 
-  server.get('/', (req, res) => {
-    return handle(req, res)
-  })
+  server.get('/', (req, res) => handle(req, res))
 
-  server.get('/session', (req, res) => {
-    oauth2Client.code.getToken(req.originalUrl).then((token) => {
-      sessionUtils.saveTokenToSession(token, req.session)
+  server.get('/session',
+      async (req, res) => await handleSessionRequest(req, res))
 
-      return res.redirect('/home')
-    }, () => res.redirect(oauth2Client.code.getUri()))
-  })
+  server.get('/session/renew',
+      async (req, res) => await handleSessionRenewRequest(req, res))
 
-  server.get('/session/renew', (req, res) => {
-    if (!req.session.token || req.session.token.expires
-        > getDateWithTimezoneOffset().getTime()) {
-      return res.redirect('/session')
-    }
+  server.get('/logout', async (req, res) => req.session.destroy((error) => {
+    // TODO: Handle error?
 
-    sessionUtils.getTokenFromSession(req.session, oauth2Client)
-    .refresh()
-    .then((token) => {
-      sessionUtils.saveTokenToSession(token, req.session)
+    return res.redirect(serverRuntimeConfig.logoutUri)
+  }))
 
-      res.redirect(req.query.redirect ? req.query.redirect : '/home')
-    }, () => res.redirect('/session'))
-  })
+  server.get('/api/*', async (req, res) => await handleGetApiRequest(req, res))
 
-  server.get('/logout', (req, res) => {
-    req.session.destroy((error) => {
-      // TODO: Handle error?
-
-      return res.redirect(serverRuntimeConfig.logoutUri)
-    })
-  })
-
-  server.get('/api/*', async (req, res) => {
-    await handleGetApiRequest(req, res, oauth2Client)
-  })
-
-  server.get('*', (req, res) => {
-    return handle(req, res)
-  })
+  server.get('*', (req, res) => handle(req, res))
 
   server.listen(3000, (err) => {
     if (err) {

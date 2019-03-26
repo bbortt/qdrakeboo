@@ -1,12 +1,22 @@
 // @node js (server.js)
 const fetch = require('node-fetch')
 
-const config = require('../next.config')
+const config = require('../../next.config')
 const serverRuntimeConfig = config.serverRuntimeConfig
 
-const sessionUtils = require('./security/session-utils')
+const ClientOAuth2 = require('client-oauth2')
+const oauth2Client = new ClientOAuth2({
+  clientId: serverRuntimeConfig.clientId,
+  clientSecret: serverRuntimeConfig.clientSecret,
+  accessTokenUri: serverRuntimeConfig.accessTokenUri,
+  authorizationUri: serverRuntimeConfig.authorizationUri,
+  redirectUri: serverRuntimeConfig.redirectUri,
+  scopes: serverRuntimeConfig.scopes
+})
 
-module.exports = async (req, res, oauth2Client) => {
+const sessionUtils = require('../security/session-utils')
+
+module.exports = async (req, res) => {
   const token = sessionUtils.getTokenFromSession(req.session, oauth2Client)
 
   if (!token) {

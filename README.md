@@ -20,3 +20,5 @@ The private streaming service for geeks.
 * Little administrative GUI on authorization server
 * Learn more about resource ids?
 * Consider moving to Bazel
+* How to monitor express server (actuator?)
+* Check Spring-Actuators
