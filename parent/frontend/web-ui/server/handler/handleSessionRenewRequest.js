@@ -14,7 +14,7 @@ const oauth2Client = new ClientOAuth2({
 
 const sessionUtils = require('../security/session-utils')
 const getDateWithTimezoneOffset = require(
-    './server/date/getDateWithTimezoneOffset')
+    '../date/getDateWithTimezoneOffset')
 
 module.exports = async (req, res) => {
   if (!req.session.token || req.session.token.expires

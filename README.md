@@ -22,3 +22,4 @@ The private streaming service for geeks.
 * Consider moving to Bazel
 * How to monitor express server (actuator?)
 * Check Spring-Actuators
+* Next JS with Foundation CSS
