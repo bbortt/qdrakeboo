@@ -1,6 +1,5 @@
 const express = require('express')
 const session = require('express-session')
-const async = require('express-async-await')
 
 const next = require('next')
 const config = require('./next.config')
@@ -37,13 +36,12 @@ app.prepare().then(() => {
 
   server.get('/', (req, res) => handle(req, res))
 
-  server.get('/session',
-      async (req, res) => await handleSessionRequest(req, res))
+  server.get('/session', (req, res) => handleSessionRequest(req, res))
 
   server.get('/session/renew',
-      async (req, res) => await handleSessionRenewRequest(req, res))
+      (req, res) => handleSessionRenewRequest(req, res))
 
-  server.get('/logout', async (req, res) => req.session.destroy((error) => {
+  server.get('/logout', (req, res) => req.session.destroy((error) => {
     // TODO: Handle error?
 
     return res.redirect(serverRuntimeConfig.logoutUri)

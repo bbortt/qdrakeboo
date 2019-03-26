@@ -1,7 +1,20 @@
 // @node js (server.js)
 const getDateWithTimezoneOffset = require('../date/getDateWithTimezoneOffset')
 
-module.exports.getTokenFromSession = (session, oauth2Client) => {
+const config = require('../../next.config')
+const serverRuntimeConfig = config.serverRuntimeConfig
+
+const ClientOAuth2 = require('client-oauth2')
+const oauth2Client = new ClientOAuth2({
+  clientId: serverRuntimeConfig.clientId,
+  clientSecret: serverRuntimeConfig.clientSecret,
+  accessTokenUri: serverRuntimeConfig.accessTokenUri,
+  authorizationUri: serverRuntimeConfig.authorizationUri,
+  redirectUri: serverRuntimeConfig.redirectUri,
+  scopes: serverRuntimeConfig.scopes
+})
+
+module.exports.getTokenFromSession = (session) => {
   if (!session.token) {
     return null
   }

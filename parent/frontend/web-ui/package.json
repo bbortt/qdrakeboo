@@ -23,7 +23,6 @@
     "client-oauth2": "4.2.3",
     "cross-env": "5.2.0",
     "express": "4.16.4",
-    "express-async-await": "^1.1.0",
     "express-session": "^1.15.6",
     "next": "^8.0.1",
     "next-redux-saga": "^4.0.0",

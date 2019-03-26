@@ -23,3 +23,4 @@ The private streaming service for geeks.
 * How to monitor express server (actuator?)
 * Check Spring-Actuators
 * Next JS with Foundation CSS
+* Add a propper logging framework to frontend (server side)

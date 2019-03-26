@@ -2886,13 +2886,6 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-express-async-await@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/express-async-await/-/express-async-await-1.1.0.tgz#6621d4d575a0f140afdc2c004390f15e9715f873"
-  integrity sha512-CZC3G6yZWiRzNS6jou0kvvlvFUZiu5SocGOIgJhqNRxCjphRRcMQkxEtmMgVDLFwYvY09VnMTF4c8SFl5T+WLQ==
-  dependencies:
-    express "^4.15.4"
-
 express-session@^1.15.6:
   version "1.15.6"
   resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.15.6.tgz#47b4160c88f42ab70fe8a508e31cbff76757ab0a"
@@ -2908,7 +2901,7 @@ express-session@^1.15.6:
     uid-safe "~2.1.5"
     utils-merge "1.0.1"
 
-express@4.16.4, express@^4.15.4:
+express@4.16.4:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
   integrity sha512-j12Uuyb4FMrd/qQAm6uCHAkPtO8FDTRJZBDd5D2KOL2eLaz1yUNdUB/NOIyq0iU4q4cFarsUCrnFDPBcnksuOg==

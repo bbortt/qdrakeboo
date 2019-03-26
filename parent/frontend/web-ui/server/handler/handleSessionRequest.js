@@ -14,7 +14,7 @@ const oauth2Client = new ClientOAuth2({
 
 const sessionUtils = require('../security/session-utils')
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
   oauth2Client.code.getToken(req.originalUrl).then((token) => {
     sessionUtils.saveTokenToSession(token, req.session)
 
