@@ -7,9 +7,15 @@ import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 
-import configureAxios from '../lib/axios/configureAxios'
+import configureAxios from '../app/common/axios/configureAxios'
 
 import configureStore from '../configureStore'
+
+// Styles
+require('./_app.scss')
+require('jquery/dist/jquery.min')
+require('what-input/dist/what-input.min')
+require('foundation-sites/dist/js/foundation.min')
 
 class ReduxContextAwareApp extends App {
 

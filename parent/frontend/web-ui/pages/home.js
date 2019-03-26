@@ -4,7 +4,7 @@ import Router from 'next/router'
 
 import {connect} from 'react-redux'
 
-import {requestUserInfo} from '../state/actions'
+import {requestUserInfo} from '../app/state/actions'
 
 class Home extends React.Component<Home.propTypes> {
 
@@ -29,7 +29,7 @@ class Home extends React.Component<Home.propTypes> {
           User-Info: {JSON.stringify(this.props.userInfo)}
         </p>
 
-        <button onClick={this.logout}>Logout</button>
+        <button className='button' onClick={this.logout}>Logout</button>
       </div>
     )
   }

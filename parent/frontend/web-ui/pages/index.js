@@ -15,7 +15,7 @@ class Index extends React.Component<Index.propTypes> {
       <div className='Index'>
         <h1>Welcome, stranger!</h1>
 
-        <button onClick={this.signIn}>Sign In</button>
+        <button className='button' onClick={this.signIn}>Sign In</button>
       </div>
     )
   }
