@@ -15,8 +15,8 @@ The private streaming service for geeks.
 
 # TODO's
 
-* Session-Store on express server
-* Session-Store on authorization server
+* Session-Store on express server (REDIS)
 * Global error handling (concept/implementation) in frontend
 * Little administrative GUI on authorization server
 * Learn more about resource ids?
+* Consider moving to Bazel
