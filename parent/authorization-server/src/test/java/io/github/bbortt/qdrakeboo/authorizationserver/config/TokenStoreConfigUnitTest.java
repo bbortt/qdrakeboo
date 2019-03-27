@@ -22,7 +22,6 @@ public class TokenStoreConfigUnitTest {
     assertThat(TokenStoreConfig.class).hasAnnotation(Configuration.class);
   }
 
-
   @Test
   public void hasPublicConstructor() {
     assertThat(new TokenStoreConfig()).isNotNull();

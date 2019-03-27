@@ -15,7 +15,8 @@
     "flow:status": "flow status",
     "flow:stop": "flow stop",
     "start": "cross-env NODE_ENV=production node server.js",
-    "test": "cross-env NODE_ENV=test mocha"
+    "test": "cross-env NODE_ENV=test mocha",
+    "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
     "@zeit/next-sass": "1.0.1",
@@ -52,6 +53,7 @@
     "eslint": "^5.13.0",
     "flow-bin": "^0.93.0",
     "mocha": "^5.2.0",
+    "npm-check": "^5.9.0",
     "redux-devtools-extension": "^2.13.8"
   }
 }

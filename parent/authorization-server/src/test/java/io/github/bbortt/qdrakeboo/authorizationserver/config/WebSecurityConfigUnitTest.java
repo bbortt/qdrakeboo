@@ -23,7 +23,6 @@ public class WebSecurityConfigUnitTest {
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-
   @Mock
   AuthenticationManager authenticationManagerMock;
 

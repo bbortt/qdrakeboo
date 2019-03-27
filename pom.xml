@@ -37,6 +37,11 @@
     <module>parent</module>
   </modules>
 
+  <properties>
+    <!-- Plugin configuration -->
+    <gitflow-maven-plugin-version>1.11.0</gitflow-maven-plugin-version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -52,4 +57,24 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.amashchenko.maven.plugin</groupId>
+        <artifactId>gitflow-maven-plugin</artifactId>
+        <version>${gitflow-maven-plugin-version}</version>
+
+        <configuration>
+          <gitFlowConfig>
+            <developmentBranch>master</developmentBranch>
+          </gitFlowConfig>
+
+          <gpgSignCommit>true</gpgSignCommit>
+          <installProject>true</installProject>
+          <preReleaseGoals>clean</preReleaseGoals>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

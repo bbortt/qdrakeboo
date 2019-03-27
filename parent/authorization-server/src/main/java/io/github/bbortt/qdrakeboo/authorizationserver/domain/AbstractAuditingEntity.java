@@ -30,7 +30,6 @@ public abstract class AbstractAuditingEntity implements Serializable {
     this.lastUpdated = lastUpdated;
   }
 
-
   @Override
   public boolean equals(Object object) {
     if (object == null) {

@@ -3,12 +3,17 @@ MAINTAINER Timon Borter <bbortt.github.io>
 
 WORKDIR /home/node
 
-COPY package*.json ./
-RUN yarn --production
+COPY package*.json .
+RUN npm install
 
-COPY .next ./
+COPY .next .
+
+COPY server.js .
+COPY next.config.js .
+COPY server .
+RUN npm run build
 
 EXPOSE 3000
 
 USER node
-CMD [ "yarn", "start" ]
+CMD [ "npm", "start" ]
