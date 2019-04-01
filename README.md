@@ -16,7 +16,6 @@ The private streaming service for geeks.
 
 # TODO's
 
-* Session-Store on express server (REDIS)
 * Global error handling (concept/implementation) in frontend
 * Little administrative GUI on authorization server
   * Hibernate on authorization server?
@@ -26,5 +25,5 @@ The private streaming service for geeks.
 * How to monitor express server (actuator?)
 * Check Spring-Actuators
 * Add a propper logging framework to frontend (server side)
-* Package server.js (frontend) to /dist using webpack
+* How to package server? Current implementation is uggly!
 * Configure gitflow-plugin: patch package.json version (npm version patch)

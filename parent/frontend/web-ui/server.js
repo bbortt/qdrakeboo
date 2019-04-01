@@ -6,7 +6,7 @@ const config = require('./next.config')
 
 const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
 const handleSessionRenewRequest = require(
-    './server/handler/handleSessionRenewRequest.js')
+  './server/handler/handleSessionRenewRequest.js')
 const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -20,6 +20,12 @@ const sessionConfig = {
   cookie: {},
   resave: false,
   saveUninitialized: false
+}
+
+if (!dev) {
+  const redis = require('redis').createClient();
+  const RedisStore = require('connect-redis')(session)
+  sessionConfig.store = new RedisStore({client: redis})
 }
 
 const handle = app.getRequestHandler()
@@ -39,7 +45,7 @@ app.prepare().then(() => {
   server.get('/session', (req, res) => handleSessionRequest(req, res))
 
   server.get('/session/renew',
-      (req, res) => handleSessionRenewRequest(req, res))
+    (req, res) => handleSessionRenewRequest(req, res))
 
   server.get('/logout', (req, res) => req.session.destroy((error) => {
     // TODO: Handle error?
@@ -59,7 +65,7 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000')
   })
 })
-.catch((ex) => {
-  console.error(ex.stack)
-  process.exit(1)
-})
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })
