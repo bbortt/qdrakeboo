@@ -2,6 +2,7 @@
 import React from 'react'
 
 import App, {Container} from 'next/app'
+import dynamic from 'next/dynamic'
 
 import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
@@ -13,9 +14,9 @@ import configureStore from '../configureStore'
 
 // Styles
 require('./_app.scss')
-require('jquery/dist/jquery.min')
-require('what-input/dist/what-input.min')
-require('foundation-sites/dist/js/foundation.min')
+dynamic(import('jquery/dist/jquery.min'), {ssr: false})
+dynamic(import('what-input/dist/what-input.min'), {ssr: false})
+dynamic(import('foundation-sites/dist/js/foundation.min'), {ssr: false})
 
 class ReduxContextAwareApp extends App {
 
