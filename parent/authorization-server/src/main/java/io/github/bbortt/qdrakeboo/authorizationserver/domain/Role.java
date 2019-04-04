@@ -21,6 +21,8 @@ public class Role extends AbstractAuditingEntity implements GrantedAuthority {
 
   private static final long serialVersionUID = 1L;
 
+  public static final String CACHE_NAME = "roles-cache";
+
   @Id
   @Type(type = "pg-uuid")
   @GeneratedValue(generator = "role-uuid")

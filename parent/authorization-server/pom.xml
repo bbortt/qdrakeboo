@@ -15,6 +15,8 @@
     <mainClass>io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer</mainClass>
 
     <!-- Dependencies -->
+    <graphql-java-tools-version>5.2.4</graphql-java-tools-version>
+    <graphql-spring-boot-starter-version>5.0.2</graphql-spring-boot-starter-version>
     <spring-security-oauth2-version>2.3.5.RELEASE</spring-security-oauth2-version>
 
     <!-- Plugins -->
@@ -53,6 +55,28 @@
       <groupId>org.springframework.security.oauth</groupId>
       <artifactId>spring-security-oauth2</artifactId>
       <version>${spring-security-oauth2-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-starter -->
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphql-spring-boot-starter</artifactId>
+      <version>${graphql-spring-boot-starter-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools -->
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphql-java-tools</artifactId>
+      <version>${graphql-java-tools-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.graphql-java/graphiql-spring-boot-starter -->
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphiql-spring-boot-starter</artifactId>
+      <version>5.0.2</version>
+      <scope>runtime</scope>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis -->

@@ -37,7 +37,6 @@ public abstract class AbstractAuditingEntity implements Serializable {
     return created;
   }
 
-
   public Date getLastUpdated() {
     return lastUpdated;
   }

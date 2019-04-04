@@ -3,6 +3,7 @@ package io.github.bbortt.qdrakeboo.authorizationserver.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -27,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public void configure(WebSecurity web) throws Exception {
     if (environment.acceptsProfiles(Profiles.of("dev"))) {
-      web.debug(true);
+      // web.debug(true);
     }
   }
 
@@ -35,10 +36,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     // @formatter:off
     http
+        // TODO: Potentially unsecure!
+        .csrf().disable()
+
         .authorizeRequests()
-            .antMatchers("/").permitAll()
-            .antMatchers("/user", "/me").permitAll()
-            .anyRequest().authenticated()
+//            .antMatchers("/").permitAll()
+//            .antMatchers("/user", "/me").permitAll()
+//            .antMatchers("/graphiql","/graphql").permitAll()
+//            .anyRequest().authenticated()
+            .anyRequest().permitAll()
 
         .and().formLogin();
     // @formatter:on
