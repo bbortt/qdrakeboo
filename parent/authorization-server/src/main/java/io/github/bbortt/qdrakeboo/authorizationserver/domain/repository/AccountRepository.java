@@ -1,10 +1,13 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain.repository;
 
 import java.util.Optional;
-
+import java.util.UUID;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 
-public interface AccountRepository {
+@Repository
+public interface AccountRepository extends CrudRepository<Account, UUID> {
 
-  public Optional<Account> findOneByAccountname(String username);
+  public Optional<Account> findOneByAccountname(String accountname);
 }

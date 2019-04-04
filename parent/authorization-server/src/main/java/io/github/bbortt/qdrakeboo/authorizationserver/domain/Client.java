@@ -1,52 +1,96 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import io.github.bbortt.qdrakeboo.authorizationserver.util.DublicateAwareHashSet;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasauthorities.ClientHasAuthority;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasgranttypes.ClientHasGrantType;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasscopes.ClientHasScope;
 
+@Table
+@Entity
 public class Client extends AbstractAuditingEntity {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME = "client";
-  public static final String CACHE_NAME = "client";
+  @Id
+  @Type(type = "pg-uuid")
+  @GeneratedValue(generator = "client-uuid")
+  @GenericGenerator(name = "client-uuid",
+      strategy = "io.github.bbortt.qdrakeboo.authorizationserver.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+  @Column(unique = true, nullable = false, columnDefinition = "uuid")
+  private UUID uuid;
 
-  public static final String CLIENT_CREATED_RESULT_NAME = "client_created";
-  public static final String CLIENT_LAST_UPDATED_RESULT_NAME = "client_last_updated";
-
-  public static final String ID_RESULT_NAME = "id";
-  public static final String CLIENT_ID_RESULT_NAME = "client_id";
-  public static final String SECRET_RESULT_NAME = "secret";
-  public static final String RESOURCE_IDS_NAME = "resource_ids";
-  public static final String SECRET_REQUIRED_RESULT_NAME = "secret_required";
-  public static final String AUTO_APPROVE_RESULT_NAME = "auto_approve";
-  public static final String ACCESS_TOKEN_VALIDITY_SECONDS_RESULT_NAME = "access_token_validity";
-  public static final String REFRESH_TOKEN_VALIDITY_SECONDS_RESULT_NAME = "refresh_token_validity";
-  public static final String REDIRECT_URIS_RESULT_NAME = "redirect_uris";
-
-  private long id;
+  @NotEmpty
+  @Size(max = 36)
+  @Column(nullable = false, unique = true)
   private String clientId;
+
+  @Size(min = 60, max = 60)
+  @Column(nullable = false, columnDefinition = "bpchar(60)")
   private String secret;
+
+  @Size(max = 256)
+  @Column(nullable = false)
   private String resourceIds;
-  private boolean isSecretRequired = true;
-  private boolean isAutoApprove = false;
+
+  @Column(nullable = false)
+  private boolean secretRequired = true;
+
+  @Column(nullable = false)
+  private boolean autoApprove = false;
+
+  @Column(name = "access_token_validity", nullable = false)
   private int accessTokenValiditySeconds;
+
+  @Column(name = "refresh_token_validity", nullable = false)
   private int refreshTokenValiditySeconds;
+
+  @Size(max = 256)
   private String redirectUris;
-  private Set<GrantType> grantTypes = new DublicateAwareHashSet<>();
-  private Set<Authority> authorities = new DublicateAwareHashSet<>();
-  private Set<Scope> scopes = new DublicateAwareHashSet<>();
+
+  @JsonManagedReference("client_has_authorities")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
+  private Set<ClientHasAuthority> authorities = new HashSet<>();
+
+  @JsonManagedReference("client_has_grant_types")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
+  private Set<ClientHasGrantType> grantTypes = new HashSet<>();
+
+  @JsonManagedReference("client_has_scopes")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
+  private Set<ClientHasScope> scopes = new HashSet<>();
 
   public Client() {
 
   }
 
-  public long getId() {
-    return id;
+  public UUID getUuid() {
+    return uuid;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public String getClientId() {
@@ -74,19 +118,19 @@ public class Client extends AbstractAuditingEntity {
   }
 
   public boolean isSecretRequired() {
-    return isSecretRequired;
+    return secretRequired;
   }
 
   public void setSecretRequired(boolean isSecretRequired) {
-    this.isSecretRequired = isSecretRequired;
+    this.secretRequired = isSecretRequired;
   }
 
   public boolean isAutoApprove() {
-    return isAutoApprove;
+    return autoApprove;
   }
 
   public void setAutoApprove(boolean isAutoApprove) {
-    this.isAutoApprove = isAutoApprove;
+    this.autoApprove = isAutoApprove;
   }
 
   public int getAccessTokenValiditySeconds() {
@@ -113,38 +157,63 @@ public class Client extends AbstractAuditingEntity {
     this.redirectUris = redirectUrl;
   }
 
-  public Set<GrantType> getGrantTypes() {
-    return grantTypes;
-  }
-
-  public void setGrantTypes(Set<GrantType> grantTypes) {
-    this.grantTypes.clear();
-    this.grantTypes.addAll(grantTypes);
-  }
-
-  public Set<Authority> getAuthorities() {
+  public Set<ClientHasAuthority> getAuthorities() {
     return authorities;
   }
 
-  public void setAuthorities(Set<Authority> authorities) {
-    this.authorities.clear();
-    this.authorities.addAll(authorities);
+  public void setAuthorities(Set<ClientHasAuthority> authorities) {
+    this.authorities = authorities;
   }
 
-  public Set<Scope> getScopes() {
+  public Set<ClientHasGrantType> getGrantTypes() {
+    return grantTypes;
+  }
+
+  public void setGrantTypes(Set<ClientHasGrantType> grantTypes) {
+    this.grantTypes = grantTypes;
+  }
+
+  public Set<ClientHasScope> getScopes() {
     return scopes;
   }
 
-  public void setScopes(Set<Scope> scopes) {
-    this.scopes.clear();
-    this.scopes.addAll(scopes);
+  public void setScopes(Set<ClientHasScope> scopes) {
+    this.scopes = scopes;
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    if (object.getClass() != getClass()) {
+      return false;
+    }
+    Client client = (Client) object;
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, client.uuid)
+        .append(clientId, client.clientId).append(secretRequired, client.secretRequired)
+        .append(autoApprove, client.autoApprove)
+        .append(accessTokenValiditySeconds, client.accessTokenValiditySeconds)
+        .append(refreshTokenValiditySeconds, client.refreshTokenValiditySeconds)
+        .append(redirectUris, client.redirectUris).append(authorities, client.authorities)
+        .append(grantTypes, client.grantTypes).append(scopes, client.scopes).isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(clientId)
+        .append(secretRequired).append(autoApprove).append(accessTokenValiditySeconds)
+        .append(refreshTokenValiditySeconds).append(redirectUris).append(authorities)
+        .append(grantTypes).append(scopes).toHashCode();
   }
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this).append(id).append(clientId).append(isSecretRequired)
-        .append(isAutoApprove).append(accessTokenValiditySeconds)
-        .append(refreshTokenValiditySeconds).append(redirectUris).append(grantTypes)
-        .append(authorities).append(scopes).build();
+    return new ToStringBuilder(this).append(uuid).append(clientId).append(secretRequired)
+        .append(autoApprove).append(accessTokenValiditySeconds).append(refreshTokenValiditySeconds)
+        .append(redirectUris).append(authorities).append(grantTypes).append(scopes).build();
   }
 }

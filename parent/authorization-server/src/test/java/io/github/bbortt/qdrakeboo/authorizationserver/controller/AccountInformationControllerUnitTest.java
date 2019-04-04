@@ -6,7 +6,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import java.lang.reflect.Method;
 import java.security.Principal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +18,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.github.bbortt.qdrakeboo.authorizationserver.controller.AccountInformationController;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 import io.github.bbortt.qdrakeboo.authorizationserver.service.AccountService;
 
@@ -63,22 +60,18 @@ public class AccountInformationControllerUnitTest {
   public void getAccountInformationAccountInformationMap() {
     Principal principalMock = Mockito.mock(Principal.class);
 
-    Date created = new Date();
-    Date lastUpdated = new Date();
     String accountname = "this-is-an-accountname";
     String email = "this-is-an-email";
 
     Account account = new Account();
-    account.setCreated(created);
-    account.setLastUpdated(lastUpdated);
     account.setAccountname(accountname);
     account.setEmail(email);
 
     doReturn(account).when(accountServiceMock).getCurrentAccount();
 
     Map<String, Object> expectedMap = new HashMap<>();
-    expectedMap.put("created_at", created);
-    expectedMap.put("updated_at", lastUpdated);
+    expectedMap.put("created_at", null);
+    expectedMap.put("updated_at", null);
     expectedMap.put("login", accountname);
     expectedMap.put("email", email);
 

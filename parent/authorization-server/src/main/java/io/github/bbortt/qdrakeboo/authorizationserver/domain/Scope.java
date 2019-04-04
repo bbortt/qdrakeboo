@@ -1,36 +1,45 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
+@Table
+@Entity
 public class Scope extends AbstractAuditingEntity {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME = "scope";
+  @Id
+  @Type(type = "pg-uuid")
+  @GeneratedValue(generator = "scope-uuid")
+  @GenericGenerator(name = "scope-uuid",
+      strategy = "io.github.bbortt.qdrakeboo.authorizationserver.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+  @Column(nullable = false, unique = true, columnDefinition = "uuid")
+  private UUID uuid;
 
-  public static final String SCOPE_CREATED_RESULT_NAME = "scope_created";
-  public static final String SCOPE_LAST_UPDATED_RESULT_NAME = "scope_last_updated";
+  @NotEmpty
+  @Size(max = 16)
+  @Column(nullable = false, unique = true)
 
-  public static final String ID_COLUMN_NAME = "id";
-  public static final String ID_RESULT_NAME = "scope_id";
-
-  public static final String NAME_COLUMN_NAME = "name";
-  public static final String NAME_RESULT_NAME = "scope_name";
-
-  private long id;
   private String name;
 
-  public Scope() {
-
+  public UUID getUuid() {
+    return uuid;
   }
 
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public String getName() {
@@ -53,12 +62,17 @@ public class Scope extends AbstractAuditingEntity {
       return false;
     }
     Scope scope = (Scope) object;
-    return new EqualsBuilder().appendSuper(super.equals(object)).append(id, scope.id)
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, scope.uuid)
         .append(name, scope.name).isEquals();
   }
 
   @Override
+  public int hashCode() {
+    return new HashCodeBuilder().append(uuid).append(name).toHashCode();
+  }
+
+  @Override
   public String toString() {
-    return new ToStringBuilder(this).append(id).append(name).build();
+    return new ToStringBuilder(this).append(uuid).append(name).build();
   }
 }

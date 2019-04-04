@@ -1,45 +1,78 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.accounthasroles.AccountHasRole;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.util.DublicateAwareHashSet;
-
+@Table
+@Entity
 public class Account extends AbstractAuditingEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME = "account";
+  @Id
+  @Type(type = "pg-uuid")
+  @GeneratedValue(generator = "account-uuid")
+  @GenericGenerator(name = "account-uuid",
+      strategy = "io.github.bbortt.qdrakeboo.authorizationserver.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+  @Column(nullable = false, unique = true, columnDefinition = "uuid")
+  private UUID uuid;
 
-  public static final String ACCOUNT_CREATED_RESULT_NAME = "account_created";
-  public static final String ACCOUNT_LAST_UPDATED_RESULT_NAME = "account_last_updated";
-
-  public static final String ID_RESULT_NAME = "id";
-  public static final String ACCOUNTNAME_RESULT_NAME = "accountname";
-  public static final String EMAIL_RESULT_NAME = "email";
-  public static final String PASSWORD_RESULT_NAME = "password";
-  public static final String IS_ENABLED_RESULT_NAME = "is_enabled";
-  public static final String IS_BLOCKED_RESULT_NAME = "is_blocked";
-
-  private long id;
+  @Size(min = 5, max = 64)
+  @Column(nullable = false, unique = true)
   private String accountname;
+
+  @Email
+  @NotEmpty
+  @Size(max = 128)
+  @Column(nullable = false, unique = true)
   private String email;
+
+  @Size(min = 60, max = 60)
+  @Column(nullable = false, columnDefinition = "bpchar(60)")
   private String password;
-  private boolean isEnabled = false;
-  private boolean isBlocked = false;
-  private Set<Role> roles = new DublicateAwareHashSet<>();
+
+  @Column(nullable = false)
+  private boolean enabled = false;
+
+  @Column(nullable = false)
+  private boolean blocked = false;
+
+  @JsonManagedReference("account_has_roles")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
+  private Set<AccountHasRole> roles = new HashSet<>();
 
   public Account() {
 
   }
 
-  public long getId() {
-    return id;
+  public UUID getUuid() {
+    return uuid;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public String getAccountname() {
@@ -67,33 +100,56 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   }
 
   public boolean isEnabled() {
-    return isEnabled;
+    return enabled;
   }
 
   public void setEnabled(boolean isEnabled) {
-    this.isEnabled = isEnabled;
+    this.enabled = isEnabled;
   }
 
   public boolean isBlocked() {
-    return isBlocked;
+    return blocked;
   }
 
   public void setBlocked(boolean isBlocked) {
-    this.isBlocked = isBlocked;
+    this.blocked = isBlocked;
   }
 
-  public Set<Role> getRoles() {
+  public Set<AccountHasRole> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
-    this.roles.clear();
-    this.roles.addAll(roles);
+  public void setRoles(Set<AccountHasRole> roles) {
+    this.roles = roles;
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    if (object.getClass() != getClass()) {
+      return false;
+    }
+    Account account = (Account) object;
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, account.uuid)
+        .append(accountname, account.accountname).append(email, account.email)
+        .append(enabled, account.enabled).append(blocked, account.blocked)
+        .append(roles, account.roles).isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(accountname)
+        .append(email).append(enabled).append(blocked).append(roles).toHashCode();
   }
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this).append(id).append(accountname).append(email).append(isEnabled)
-        .append(isBlocked).append(roles).build();
+    return new ToStringBuilder(this).append(uuid).append(accountname).append(email)
+        .append(enabled).append(blocked).append(roles).build();
   }
 }

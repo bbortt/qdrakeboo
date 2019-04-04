@@ -1,37 +1,49 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 
+@Table
+@Entity
 public class Authority extends AbstractAuditingEntity implements GrantedAuthority {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME = "authority";
+  @Id
+  @Type(type = "pg-uuid")
+  @GeneratedValue(generator = "authority-uuid")
+  @GenericGenerator(name = "authority-uuid",
+      strategy = "io.github.bbortt.qdrakeboo.authorizationserver.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+  @Column(nullable = false, unique = true, columnDefinition = "uuid")
+  private UUID uuid;
 
-  public static final String AUTHORITY_CREATED_RESULT_NAME = "authority_created";
-  public static final String AUTHORITY_LAST_UPDATED_RESULT_NAME = "authority_last_updated";
-
-  public static final String ID_COLUMN_NAME = "id";
-  public static final String ID_RESULT_NAME = "authority_id";
-
-  public static final String NAME_COLUMN_NAME = "name";
-  public static final String NAME_RESULT_NAME = "authority_name";
-
-  private long id;
+  @NotEmpty
+  @Size(max = 16)
+  @Column(nullable = false, unique = true)
   private String name;
 
   public Authority() {
 
   }
 
-  public long getId() {
-    return id;
+  public UUID getUuid() {
+    return uuid;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public String getName() {
@@ -59,12 +71,17 @@ public class Authority extends AbstractAuditingEntity implements GrantedAuthorit
       return false;
     }
     Authority authority = (Authority) object;
-    return new EqualsBuilder().appendSuper(super.equals(object)).append(id, authority.id)
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, authority.uuid)
         .append(name, authority.name).isEquals();
   }
 
   @Override
+  public int hashCode() {
+    return new HashCodeBuilder().append(uuid).append(name).toHashCode();
+  }
+
+  @Override
   public String toString() {
-    return new ToStringBuilder(this).append(id).append(name).build();
+    return new ToStringBuilder(this).append(uuid).append(name).build();
   }
 }

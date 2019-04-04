@@ -1,36 +1,48 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
+@Table
+@Entity
 public class GrantType extends AbstractAuditingEntity {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME = "grant_type";
+  @Id
+  @Type(type = "pg-uuid")
+  @GeneratedValue(generator = "grant-type-uuid")
+  @GenericGenerator(name = "grant-type-uuid",
+      strategy = "io.github.bbortt.qdrakeboo.authorizationserver.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+  @Column(nullable = false, unique = true, columnDefinition = "uuid")
+  private UUID uuid;
 
-  public static final String GRANT_TYPE_CREATED_RESULT_NAME = "grant_type_created";
-  public static final String GRANT_TYPE_LAST_UPDATED_RESULT_NAME = "grant_type_last_updated";
-
-  public static final String ID_COLUMN_NAME = "id";
-  public static final String ID_RESULT_NAME = "grant_type_id";
-
-  public static final String NAME_COLUMN_NAME = "name";
-  public static final String NAME_RESULT_NAME = "grant_type_name";
-
-  private long id;
+  @NotEmpty
+  @Size(max = 16)
+  @Column(nullable = false, unique = true)
   private String name;
 
   public GrantType() {
 
   }
 
-  public long getId() {
-    return id;
+  public UUID getUuid() {
+    return uuid;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public String getName() {
@@ -53,12 +65,18 @@ public class GrantType extends AbstractAuditingEntity {
       return false;
     }
     GrantType grantType = (GrantType) object;
-    return new EqualsBuilder().appendSuper(super.equals(object)).append(id, grantType.id)
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, grantType.uuid)
         .append(name, grantType.name).isEquals();
   }
 
   @Override
+  public int hashCode() {
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(name)
+        .toHashCode();
+  }
+
+  @Override
   public String toString() {
-    return new ToStringBuilder(this).append(id).append(name).build();
+    return new ToStringBuilder(this).append(uuid).append(name).build();
   }
 }

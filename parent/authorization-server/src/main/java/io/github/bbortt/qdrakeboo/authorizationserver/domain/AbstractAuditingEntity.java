@@ -2,32 +2,44 @@ package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+@MappedSuperclass
+@EntityListeners({AuditingEntityListener.class})
 public abstract class AbstractAuditingEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String CREATED_COLUMN_NAME = "created";
-  public static final String LAST_UPDATED_COLUMN_NAME = "last_updated";
-
+  @CreatedDate
+  @Column(updatable = false)
+  @Temporal(TemporalType.TIMESTAMP)
+  @JsonProperty(access = Access.READ_ONLY)
   private Date created;
+
+  @CreatedDate
+  @Column(updatable = false)
+  @Temporal(TemporalType.TIMESTAMP)
+  @JsonProperty(access = Access.READ_ONLY)
   private Date lastUpdated;
 
   public Date getCreated() {
     return created;
   }
 
-  public void setCreated(Date created) {
-    this.created = created;
-  }
 
   public Date getLastUpdated() {
     return lastUpdated;
-  }
-
-  public void setLastUpdated(Date lastUpdated) {
-    this.lastUpdated = lastUpdated;
   }
 
   @Override
@@ -44,5 +56,16 @@ public abstract class AbstractAuditingEntity implements Serializable {
     AbstractAuditingEntity abstractAuditingEntity = (AbstractAuditingEntity) object;
     return new EqualsBuilder().append(created, abstractAuditingEntity.created)
         .append(lastUpdated, abstractAuditingEntity.lastUpdated).isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(created).append(lastUpdated)
+        .toHashCode();
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).append(created).append(lastUpdated).build();
   }
 }

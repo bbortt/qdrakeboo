@@ -13,8 +13,7 @@ module.exports = async (req, res) => {
     return res.redirect('/session')
   }
 
-  const apiUrl = `${serverRuntimeConfig.apiUrl}${req.originalUrl.replace('/api',
-      '')}`
+  const apiUrl = `${serverRuntimeConfig.apiUrl}${req.originalUrl.replace('/api', '')}`
 
   try {
     const response = await fetch(apiUrl, {
@@ -32,6 +31,7 @@ module.exports = async (req, res) => {
     res.setHeader('content-type', response.headers.get('content-type'))
     res.end(JSON.stringify(await response.json()))
   } catch (error) {
+    // TODO: Use a logger
     console.log(`error fetching ${apiUrl}: ${error}`)
 
     res.redirect('/error')
