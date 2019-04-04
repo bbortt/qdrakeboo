@@ -16,8 +16,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.config.WebSecurityConfig;
-
 public class WebSecurityConfigUnitTest {
 
   @Rule

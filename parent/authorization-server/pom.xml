@@ -114,6 +114,19 @@
 
   <build>
     <plugins>
+      <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin-version}</version>
+
+        <configuration>
+          <excludes>
+            <exclude>io/github/bbortt/qdrakeboo/authorizationserver/domain/**/*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
       <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -146,7 +159,7 @@
             <configuration>
               <images>
                 <image>
-                  <name>postgres:11.1-alpine</name>
+                  <name>postgres:11.2-alpine</name>
 
                   <alias>qdrakeboo-authorization-it-postgres</alias>
 
@@ -162,7 +175,7 @@
                 </image>
 
                 <image>
-                  <name>redis:5.0.3</name>
+                  <name>redis:5.0.4-alpine</name>
 
                   <alias>qdrakeboo-authorization-it-redis</alias>
 

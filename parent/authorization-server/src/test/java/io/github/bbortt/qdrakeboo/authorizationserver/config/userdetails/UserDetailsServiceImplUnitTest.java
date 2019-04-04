@@ -14,11 +14,8 @@ import org.mockito.junit.MockitoRule;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import io.github.bbortt.qdrakeboo.authorizationserver.config.userdetails.UserDetailsImpl;
-import io.github.bbortt.qdrakeboo.authorizationserver.config.userdetails.UserDetailsServiceImpl;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.AccountRepository;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.AccountCRUDRepository;
 
 public class UserDetailsServiceImplUnitTest {
 
@@ -29,13 +26,13 @@ public class UserDetailsServiceImplUnitTest {
   public ExpectedException expectedException = ExpectedException.none();
 
   @Mock
-  AccountRepository accountRepositoryMock;
+  AccountCRUDRepository accountCRUDRepositoryMock;
 
   UserDetailsServiceImpl fixture;
 
   @Before
   public void beforeTestSetup() {
-    fixture = new UserDetailsServiceImpl(accountRepositoryMock);
+    fixture = new UserDetailsServiceImpl(accountCRUDRepositoryMock);
   }
 
   @Test
@@ -50,8 +47,8 @@ public class UserDetailsServiceImplUnitTest {
 
   @Test
   public void constructorAcceptsArguments() {
-    assertThat(new UserDetailsServiceImpl(accountRepositoryMock)).isNotNull()
-        .hasFieldOrPropertyWithValue("accountRepository", accountRepositoryMock);
+    assertThat(new UserDetailsServiceImpl(accountCRUDRepositoryMock)).isNotNull()
+        .hasFieldOrPropertyWithValue("accountCRUDRepository", accountCRUDRepositoryMock);
   }
 
   @Test
@@ -59,7 +56,7 @@ public class UserDetailsServiceImplUnitTest {
     String username = "this-is-a-username";
 
     Account account = new Account();
-    doReturn(Optional.of(account)).when(accountRepositoryMock)
+    doReturn(Optional.of(account)).when(accountCRUDRepositoryMock)
         .findOneByAccountname(Mockito.eq(username));
 
     assertThat(fixture.loadUserByUsername(username)).isInstanceOf(UserDetailsImpl.class)
@@ -70,7 +67,8 @@ public class UserDetailsServiceImplUnitTest {
   public void loadUserByUsernameThrowsUsernameNotFoundException() {
     String username = "this-is-a-nonexisting-username";
 
-    doReturn(Optional.empty()).when(accountRepositoryMock).findOneByAccountname(Mockito.eq(username));
+    doReturn(Optional.empty()).when(accountCRUDRepositoryMock)
+        .findOneByAccountname(Mockito.eq(username));
 
     expectedException.expect(UsernameNotFoundException.class);
     expectedException.expectMessage("Username '" + username + "' not found!");

@@ -6,24 +6,23 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
-
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.ClientRepository;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.ClientCRUDRepository;
 
 @Service
 @Primary
 public class ClientDetailsServiceImpl implements ClientDetailsService {
 
-  private final ClientRepository clientRepository;
+  private final ClientCRUDRepository clientCRUDRepository;
 
-  public ClientDetailsServiceImpl(ClientRepository clientRepository) {
-    this.clientRepository = clientRepository;
+  public ClientDetailsServiceImpl(ClientCRUDRepository clientRepository) {
+    this.clientCRUDRepository = clientRepository;
   }
 
   @Override
   public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
     Optional<Client> client;
-    if (!(client = clientRepository.findOneByClientId(clientId)).isPresent()) {
+    if (!(client = clientCRUDRepository.findOneByClientId(clientId)).isPresent()) {
       throw new ClientRegistrationException("No client with id '" + clientId + "' registered!");
     }
 

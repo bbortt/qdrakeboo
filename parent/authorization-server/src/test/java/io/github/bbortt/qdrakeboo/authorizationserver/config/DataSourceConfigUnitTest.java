@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import com.zaxxer.hikari.HikariDataSource;
-
-import io.github.bbortt.qdrakeboo.authorizationserver.config.DataSourceConfig;
 import io.github.bbortt.qdrakeboo.authorizationserver.config.DataSourceConfig.DevDataSourceConfig;
 
 public class DataSourceConfigUnitTest {

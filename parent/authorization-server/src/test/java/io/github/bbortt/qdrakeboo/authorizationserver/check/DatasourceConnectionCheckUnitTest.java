@@ -13,8 +13,6 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.springframework.stereotype.Component;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.check.DatasourceConnectionCheck;
-
 public class DatasourceConnectionCheckUnitTest {
 
   @Rule

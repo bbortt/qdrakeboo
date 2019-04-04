@@ -28,7 +28,7 @@
     "express-session": "^1.15.6",
     "foundation-sites": "^6.5.3",
     "jquery": "^3.3.1",
-    "next": "^8.0.3",
+    "next": "^8.0.4",
     "next-redux-saga": "^4.0.0",
     "next-redux-wrapper": "3.0.0-alpha.1",
     "node-fetch": "^2.3.0",
@@ -43,7 +43,7 @@
     "what-input": "^5.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
+    "@babel/core": "^7.4.3",
     "@babel/register": "^7.4.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",

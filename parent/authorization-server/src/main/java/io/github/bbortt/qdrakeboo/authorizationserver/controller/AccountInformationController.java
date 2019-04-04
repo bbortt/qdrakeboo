@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 import io.github.bbortt.qdrakeboo.authorizationserver.service.AccountService;
 

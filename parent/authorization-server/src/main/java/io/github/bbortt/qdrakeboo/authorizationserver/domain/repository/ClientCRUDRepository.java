@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 
 @Repository
-public interface ClientRepository extends CrudRepository<Client, UUID> {
+public interface ClientCRUDRepository extends CrudRepository<Client, UUID> {
 
   public Optional<Client> findOneByClientId(String clientId);
 }

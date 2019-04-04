@@ -21,8 +21,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.config.AuthorizationServerConfig;
-
 public class AuthorizationServerConfigUnitTest {
 
   @Rule

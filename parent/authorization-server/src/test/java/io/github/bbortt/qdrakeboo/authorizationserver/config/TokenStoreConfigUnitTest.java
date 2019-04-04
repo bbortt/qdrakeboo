@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-
-import io.github.bbortt.qdrakeboo.authorizationserver.config.TokenStoreConfig;
 import io.github.bbortt.qdrakeboo.authorizationserver.config.TokenStoreConfig.DevTokenStoreConfig;
 
 public class TokenStoreConfigUnitTest {

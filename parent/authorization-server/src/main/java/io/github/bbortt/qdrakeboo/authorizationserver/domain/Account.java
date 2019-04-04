@@ -149,7 +149,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this).append(uuid).append(accountname).append(email)
-        .append(enabled).append(blocked).append(roles).build();
+    return new ToStringBuilder(this).append(uuid).append(accountname).append(email).append(enabled)
+        .append(blocked).append(roles).build();
   }
 }

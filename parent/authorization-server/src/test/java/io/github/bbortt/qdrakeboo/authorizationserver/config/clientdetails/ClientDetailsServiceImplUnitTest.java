@@ -15,11 +15,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
-
-import io.github.bbortt.qdrakeboo.authorizationserver.config.clientdetails.ClientDetailsImpl;
-import io.github.bbortt.qdrakeboo.authorizationserver.config.clientdetails.ClientDetailsServiceImpl;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.ClientRepository;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.ClientCRUDRepository;
 
 public class ClientDetailsServiceImplUnitTest {
 
@@ -30,13 +27,13 @@ public class ClientDetailsServiceImplUnitTest {
   public ExpectedException expectedException = ExpectedException.none();
 
   @Mock
-  ClientRepository clientRepositoryMock;
+  ClientCRUDRepository clientCRUDRepositoryMock;
 
   ClientDetailsServiceImpl fixture;
 
   @Before
   public void beforeTestSetup() {
-    fixture = new ClientDetailsServiceImpl(clientRepositoryMock);
+    fixture = new ClientDetailsServiceImpl(clientCRUDRepositoryMock);
   }
 
   @Test
@@ -51,8 +48,8 @@ public class ClientDetailsServiceImplUnitTest {
 
   @Test
   public void constructorAcceptsArguments() {
-    assertThat(new ClientDetailsServiceImpl(clientRepositoryMock)).isNotNull()
-        .hasFieldOrPropertyWithValue("clientRepository", clientRepositoryMock);
+    assertThat(new ClientDetailsServiceImpl(clientCRUDRepositoryMock)).isNotNull()
+        .hasFieldOrPropertyWithValue("clientCRUDRepository", clientCRUDRepositoryMock);
   }
 
   @Test
@@ -60,7 +57,7 @@ public class ClientDetailsServiceImplUnitTest {
     String clientId = "this-is-a-client-id";
 
     Client client = new Client();
-    doReturn(Optional.of(client)).when(clientRepositoryMock)
+    doReturn(Optional.of(client)).when(clientCRUDRepositoryMock)
         .findOneByClientId(Mockito.eq(clientId));
 
     assertThat(fixture.loadClientByClientId(clientId)).isInstanceOf(ClientDetailsImpl.class)
@@ -71,7 +68,8 @@ public class ClientDetailsServiceImplUnitTest {
   public void loadClientByClientIdThrowsClientRegistrationException() {
     String clientId = "this-is-a-nonexisting-client-id";
 
-    doReturn(Optional.empty()).when(clientRepositoryMock).findOneByClientId(Mockito.eq(clientId));
+    doReturn(Optional.empty()).when(clientCRUDRepositoryMock)
+        .findOneByClientId(Mockito.eq(clientId));
 
     expectedException.expect(ClientRegistrationException.class);
     expectedException.expectMessage("No client with id '" + clientId + "' registered!");

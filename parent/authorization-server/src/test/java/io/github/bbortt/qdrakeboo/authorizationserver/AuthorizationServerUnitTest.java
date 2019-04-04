@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer;
-
 public class AuthorizationServerUnitTest {
 
   @Test

@@ -3,12 +3,10 @@ package io.github.bbortt.qdrakeboo.authorizationserver.domain.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.AccountRepository;
-
-public class AccountRepositoryUnitTest {
+public class AccountCRUDRepositoryUnitTest {
 
   @Test
   public void definesMethodsForImplementation() {
-    assertThat(AccountRepository.class).hasDeclaredMethods("findOneByAccountname");
+    assertThat(AccountCRUDRepository.class).hasDeclaredMethods("findOneByAccountname");
   }
 }

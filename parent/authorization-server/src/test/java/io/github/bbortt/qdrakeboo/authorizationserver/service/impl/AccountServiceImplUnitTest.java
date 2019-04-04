@@ -18,11 +18,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.AccountRepository;
+import io.github.bbortt.qdrakeboo.authorizationserver.domain.repository.AccountCRUDRepository;
 import io.github.bbortt.qdrakeboo.authorizationserver.service.AccountService;
-import io.github.bbortt.qdrakeboo.authorizationserver.service.impl.AccountServiceImpl;
 
 public class AccountServiceImplUnitTest {
 
@@ -39,7 +37,7 @@ public class AccountServiceImplUnitTest {
   Authentication authenticationMock;
 
   @Mock
-  AccountRepository accountRepositoryMock;
+  AccountCRUDRepository accountCRUDRepositoryMock;
 
   AccountServiceImpl fixture;
 
@@ -48,7 +46,7 @@ public class AccountServiceImplUnitTest {
     doReturn(authenticationMock).when(securityContextMock).getAuthentication();
     SecurityContextHolder.setContext(securityContextMock);
 
-    fixture = new AccountServiceImpl(accountRepositoryMock);
+    fixture = new AccountServiceImpl(accountCRUDRepositoryMock);
   }
 
   @Test
@@ -63,8 +61,8 @@ public class AccountServiceImplUnitTest {
 
   @Test
   public void constructorAcceptsArguments() {
-    assertThat(new AccountServiceImpl(accountRepositoryMock))
-        .hasFieldOrPropertyWithValue("accountRepository", accountRepositoryMock);
+    assertThat(new AccountServiceImpl(accountCRUDRepositoryMock))
+        .hasFieldOrPropertyWithValue("accountCRUDRepository", accountCRUDRepositoryMock);
   }
 
   @Test
@@ -81,11 +79,11 @@ public class AccountServiceImplUnitTest {
     Account expectedAccount = new Account();
 
     doReturn(currentAccountname).when(authenticationMock).getName();
-    doReturn(Optional.of(expectedAccount)).when(accountRepositoryMock)
+    doReturn(Optional.of(expectedAccount)).when(accountCRUDRepositoryMock)
         .findOneByAccountname(Mockito.eq(currentAccountname));
 
     assertThat(fixture.getCurrentAccount()).isEqualTo(expectedAccount);
-    verify(accountRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
+    verify(accountCRUDRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
   }
 
   @Test
@@ -93,12 +91,13 @@ public class AccountServiceImplUnitTest {
     String currentAccountname = "unexisting-accountname";
     doReturn(currentAccountname).when(authenticationMock).getName();
 
-    doReturn(Optional.empty()).when(accountRepositoryMock).findOneByAccountname(Mockito.anyString());
+    doReturn(Optional.empty()).when(accountCRUDRepositoryMock)
+        .findOneByAccountname(Mockito.anyString());
 
     expectedException.expect(IllegalArgumentException.class);
     expectedException.expectMessage("Cannot find account for '" + currentAccountname + "'!");
     fixture.getCurrentAccount();
 
-    verify(accountRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
+    verify(accountCRUDRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
   }
 }

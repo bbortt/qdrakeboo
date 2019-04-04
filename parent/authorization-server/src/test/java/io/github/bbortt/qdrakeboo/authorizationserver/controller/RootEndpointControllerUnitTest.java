@@ -12,8 +12,6 @@ import org.mockito.Mockito;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.controller.RootEndpointController;
-
 public class RootEndpointControllerUnitTest {
 
   RootEndpointController fixture;

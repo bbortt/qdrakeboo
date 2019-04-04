@@ -18,8 +18,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.config.userdetails.PreAuthenticatedAuthenticationTokenUserServiceImpl;
-
 public class PreAuthenticatedAuthenticationTokenUserServiceImplUnitTest {
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();

@@ -5,8 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {AuthorizationServer.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AbstractAuthorizationServerContextAwareTest {

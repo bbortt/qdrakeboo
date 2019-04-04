@@ -19,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 
-import io.github.bbortt.qdrakeboo.authorizationserver.config.AuthenticationManagerConfig;
-
 public class AuthenticationManagerConfigUnitTest {
 
   @Rule

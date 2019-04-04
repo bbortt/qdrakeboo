@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 
 @Repository
-public interface AccountRepository extends CrudRepository<Account, UUID> {
+public interface AccountCRUDRepository extends CrudRepository<Account, UUID> {
 
   public Optional<Account> findOneByAccountname(String accountname);
 }
