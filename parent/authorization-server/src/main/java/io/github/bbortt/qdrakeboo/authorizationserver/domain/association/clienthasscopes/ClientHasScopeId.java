@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Scope;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasauthorities.ClientHasAuthorityId;
 
 public class ClientHasScopeId implements Serializable {
 
