@@ -1,0 +1,13 @@
+type Account {
+  created: String!
+  lastUpdated: String!
+  accountname: String!
+  email: String!
+  enabled: Boolean!
+  blocked: Boolean!
+  roles: [Role]!
+}
+
+extend type RootQuery {
+  allAccounts: [Account]!
+}

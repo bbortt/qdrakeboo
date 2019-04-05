@@ -24,14 +24,14 @@ public class ClientHasAuthority extends AbstractAuditingEntity {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @JoinColumn(name = "client_id")
+  @JoinColumn(name = "client_uuid")
   @JsonBackReference("client_has_authorities")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   public Client client;
 
   @Id
-  @JoinColumn(name = "authority_id")
+  @JoinColumn(name = "authority_uuid")
   @JsonBackReference("authority_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})

@@ -5,6 +5,6 @@ type Role {
   name: String!
 }
 
-type Query {
+extend type RootQuery {
   allRoles: [Role]!
 }

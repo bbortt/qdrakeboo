@@ -24,14 +24,14 @@ public class ClientHasGrantType extends AbstractAuditingEntity {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @JoinColumn(name = "client_id")
+  @JoinColumn(name = "client_uuid")
   @JsonBackReference("client_has_grant_types")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   public Client client;
 
   @Id
-  @JoinColumn(name = "grant_type_id")
+  @JoinColumn(name = "grant_type_uuid")
   @JsonBackReference("grant_type_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})

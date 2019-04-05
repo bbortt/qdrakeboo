@@ -21,14 +21,14 @@ import io.github.bbortt.qdrakeboo.authorizationserver.domain.Scope;
 public class ClientHasScope {
 
   @Id
-  @JoinColumn(name = "client_id")
+  @JoinColumn(name = "client_uuid")
   @JsonBackReference("client_has_scopes")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   public Client client;
 
   @Id
-  @JoinColumn(name = "scope_id")
+  @JoinColumn(name = "scope_uuid")
   @JsonBackReference("scope_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})

@@ -7,6 +7,6 @@ public class AccountServiceUnitTest {
 
   @Test
   public void definesMethodsForImplementation() {
-    assertThat(AccountService.class).hasDeclaredMethods("getCurrentAccount");
+    assertThat(AccountService.class).hasDeclaredMethods("getCurrentAccount", "getAccounts");
   }
 }

@@ -1,11 +1,9 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.config.userdetails;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.accounthasroles.AccountHasRole;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -19,7 +17,7 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return account.getRoles().stream().map(AccountHasRole::getRole).collect(Collectors.toList());
+    return account.getRoles();
   }
 
   @Override

@@ -2,8 +2,10 @@ package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -115,12 +117,12 @@ public class Account extends AbstractAuditingEntity implements Serializable {
     this.blocked = isBlocked;
   }
 
-  public Set<AccountHasRole> getRoles() {
-    return roles;
+  public List<Role> getRoles() {
+    return roles.stream().map(AccountHasRole::getRole).collect(Collectors.toList());
   }
 
-  public void setRoles(Set<AccountHasRole> roles) {
-    this.roles = roles;
+  public void setRoles(List<Role> roles) {
+    roles.forEach(role -> this.roles.add(new AccountHasRole(this, role)));
   }
 
   @Override
@@ -136,15 +138,13 @@ public class Account extends AbstractAuditingEntity implements Serializable {
     }
     Account account = (Account) object;
     return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, account.uuid)
-        .append(accountname, account.accountname).append(email, account.email)
-        .append(enabled, account.enabled).append(blocked, account.blocked)
-        .append(roles, account.roles).isEquals();
+        .append(accountname, account.accountname).append(email, account.email).isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(accountname)
-        .append(email).append(enabled).append(blocked).append(roles).toHashCode();
+        .append(email).toHashCode();
   }
 
   @Override

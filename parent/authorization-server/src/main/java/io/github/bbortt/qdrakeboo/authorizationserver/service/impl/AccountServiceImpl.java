@@ -1,5 +1,7 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -22,5 +24,14 @@ public class AccountServiceImpl implements AccountService {
 
     return accountCRUDRepository.findOneByAccountname(accountName).orElseThrow(
         () -> new IllegalArgumentException("Cannot find account for '" + accountName + "'!"));
+  }
+
+  @Override
+  public List<Account> getAccounts() {
+    List<Account> accounts = new ArrayList<Account>();
+
+    accountCRUDRepository.findAll().forEach(accounts::add);
+
+    return accounts;
   }
 }

@@ -24,18 +24,27 @@ public class AccountHasRole extends AbstractAuditingEntity {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @JoinColumn(name = "account_id")
+  @JoinColumn(name = "account_uuid")
   @JsonBackReference("account_has_roles")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   public Account account;
 
   @Id
-  @JoinColumn(name = "role_id")
+  @JoinColumn(name = "role_uuid")
   @JsonBackReference("role_has_accounts")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
   public Role role;
+
+  private AccountHasRole() {
+    // Used by Hibernate
+  }
+
+  public AccountHasRole(Account account, Role role) {
+    this.account = account;
+    this.role = role;
+  }
 
   public Account getAccount() {
     return account;

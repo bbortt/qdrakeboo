@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
@@ -99,5 +100,17 @@ public class AccountServiceImplUnitTest {
     fixture.getCurrentAccount();
 
     verify(accountCRUDRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
+  }
+
+  @Test
+  public void getAccountsTransformsRepositoryResult() {
+    Account account = new Account();
+    Iterable<Account> accounts = Collections.singletonList(account);
+
+    doReturn(accounts).when(accountCRUDRepositoryMock).findAll();
+
+    assertThat(fixture.getAccounts()).containsExactly(account);
+
+    verify(accountCRUDRepositoryMock).findAll();
   }
 }

@@ -194,20 +194,13 @@ public class Client extends AbstractAuditingEntity {
     }
     Client client = (Client) object;
     return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, client.uuid)
-        .append(clientId, client.clientId).append(secretRequired, client.secretRequired)
-        .append(autoApprove, client.autoApprove)
-        .append(accessTokenValiditySeconds, client.accessTokenValiditySeconds)
-        .append(refreshTokenValiditySeconds, client.refreshTokenValiditySeconds)
-        .append(redirectUris, client.redirectUris).append(authorities, client.authorities)
-        .append(grantTypes, client.grantTypes).append(scopes, client.scopes).isEquals();
+        .append(clientId, client.clientId).isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(clientId)
-        .append(secretRequired).append(autoApprove).append(accessTokenValiditySeconds)
-        .append(refreshTokenValiditySeconds).append(redirectUris).append(authorities)
-        .append(grantTypes).append(scopes).toHashCode();
+        .toHashCode();
   }
 
   @Override

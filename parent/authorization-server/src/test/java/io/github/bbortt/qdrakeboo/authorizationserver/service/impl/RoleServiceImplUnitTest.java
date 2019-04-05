@@ -48,11 +48,11 @@ public class RoleServiceImplUnitTest {
   }
 
   @Test
-  public void findAllTransformsRepositoryResult() {
+  public void getRolesTransformsRepositoryResult() {
     Role role = new Role();
-    Iterable<Role> iterable = Collections.singletonList(role);
+    Iterable<Role> roles = Collections.singletonList(role);
 
-    doReturn(iterable).when(roleCRUDRepositoryMock).findAll();
+    doReturn(roles).when(roleCRUDRepositoryMock).findAll();
 
     assertThat(fixture.getRoles()).containsExactly(role);
 
