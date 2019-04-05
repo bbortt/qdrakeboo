@@ -1,9 +1,6 @@
-interface AuditedEntity {
+type Role {
   created: String!
   lastUpdated: String!
-}
-
-type Role implements AuditedEntity {
   uuid: String!
   name: String!
 }

@@ -15,6 +15,7 @@
     <mainClass>io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer</mainClass>
 
     <!-- Dependencies -->
+    <graphiql-spring-boot-starter-version>5.0.2</graphiql-spring-boot-starter-version>
     <graphql-java-tools-version>5.2.4</graphql-java-tools-version>
     <graphql-spring-boot-starter-version>5.0.2</graphql-spring-boot-starter-version>
     <spring-security-oauth2-version>2.3.5.RELEASE</spring-security-oauth2-version>
@@ -75,7 +76,7 @@
     <dependency>
       <groupId>com.graphql-java</groupId>
       <artifactId>graphiql-spring-boot-starter</artifactId>
-      <version>5.0.2</version>
+      <version>${graphiql-spring-boot-starter-version}</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -107,12 +108,6 @@
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->

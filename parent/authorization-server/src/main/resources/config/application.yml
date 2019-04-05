@@ -1,5 +1,4 @@
-graphql:  servlet:    actuator-metrics: true
-management:
+graphiql:  mapping: /admingraphql:  servlet:    actuator-metrics: truemanagement:
   server:
     port: 8090
 spring:

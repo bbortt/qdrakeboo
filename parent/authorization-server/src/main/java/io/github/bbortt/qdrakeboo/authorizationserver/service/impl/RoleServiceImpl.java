@@ -22,9 +22,7 @@ public class RoleServiceImpl implements RoleService {
   public List<Role> getRoles() {
     List<Role> roles = new ArrayList<>();
 
-    for (Role role : roleCRUDRepository.findAll()) {
-      roles.add(role);
-    }
+    roleCRUDRepository.findAll().forEach(roles::add);
 
     return roles;
   }
