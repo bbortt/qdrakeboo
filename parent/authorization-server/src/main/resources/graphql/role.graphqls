@@ -5,6 +5,10 @@ type Role {
   name: String!
 }
 
+input RoleInput {
+  name: String!
+}
+
 extend type RootQuery {
   allRoles: [Role]!
 }

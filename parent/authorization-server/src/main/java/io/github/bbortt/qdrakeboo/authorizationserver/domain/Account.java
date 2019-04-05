@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -54,13 +55,15 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   @Column(nullable = false, columnDefinition = "bpchar(60)")
   private String password;
 
+  @Transient
+  private transient String confirmation;
+
   @Column(nullable = false)
   private boolean enabled = false;
 
   @Column(nullable = false)
   private boolean blocked = false;
 
-  @JsonManagedReference("account_has_roles")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
   private Set<AccountHasRole> roles = new HashSet<>();
@@ -101,6 +104,14 @@ public class Account extends AbstractAuditingEntity implements Serializable {
     this.password = password;
   }
 
+  public String getConfirmation() {
+    return confirmation;
+  }
+
+  public void setConfirmation(String confirmation) {
+    this.confirmation = confirmation;
+  }
+
   public boolean isEnabled() {
     return enabled;
   }
@@ -122,6 +133,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   }
 
   public void setRoles(List<Role> roles) {
+    this.roles.clear();
     roles.forEach(role -> this.roles.add(new AccountHasRole(this, role)));
   }
 

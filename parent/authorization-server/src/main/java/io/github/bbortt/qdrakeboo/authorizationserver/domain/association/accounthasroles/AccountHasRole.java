@@ -25,18 +25,17 @@ public class AccountHasRole extends AbstractAuditingEntity {
 
   @Id
   @JoinColumn(name = "account_uuid")
-  @JsonBackReference("account_has_roles")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   public Account account;
 
   @Id
   @JoinColumn(name = "role_uuid")
-  @JsonBackReference("role_has_accounts")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
   public Role role;
 
+  @SuppressWarnings("unused")
   private AccountHasRole() {
     // Used by Hibernate
   }
