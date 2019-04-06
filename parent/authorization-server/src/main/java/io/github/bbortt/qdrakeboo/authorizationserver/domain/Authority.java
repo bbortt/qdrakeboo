@@ -34,10 +34,6 @@ public class Authority extends AbstractAuditingEntity implements GrantedAuthorit
   @Column(nullable = false, unique = true)
   private String name;
 
-  public Authority() {
-
-  }
-
   public UUID getUuid() {
     return uuid;
   }

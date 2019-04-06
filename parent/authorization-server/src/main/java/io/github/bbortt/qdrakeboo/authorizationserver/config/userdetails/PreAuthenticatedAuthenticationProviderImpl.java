@@ -10,9 +10,9 @@ public class PreAuthenticatedAuthenticationProviderImpl
     extends PreAuthenticatedAuthenticationProvider {
 
   public PreAuthenticatedAuthenticationProviderImpl(
-      AuthenticationUserDetailsService<PreAuthenticatedAuthenticationToken> PreAuthenticatedAuthenticationTokenUserServiceImpl) {
+      AuthenticationUserDetailsService<PreAuthenticatedAuthenticationToken> preAuthenticatedAuthenticationTokenUserServiceImpl) {
     super();
 
-    super.setPreAuthenticatedUserDetailsService(PreAuthenticatedAuthenticationTokenUserServiceImpl);
+    super.setPreAuthenticatedUserDetailsService(preAuthenticatedAuthenticationTokenUserServiceImpl);
   }
 }

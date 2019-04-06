@@ -67,10 +67,6 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
   private Set<AccountHasRole> roles = new HashSet<>();
 
-  public Account() {
-
-  }
-
   public UUID getUuid() {
     return uuid;
   }

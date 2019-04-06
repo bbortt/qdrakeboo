@@ -57,7 +57,7 @@ public class UserDetailsServiceImplUnitTest {
 
     Account account = new Account();
     doReturn(Optional.of(account)).when(accountCRUDRepositoryMock)
-        .findOneByAccountname(Mockito.eq(username));
+        .findOneByAccountnameIgnoreCase(Mockito.eq(username));
 
     assertThat(fixture.loadUserByUsername(username)).isInstanceOf(UserDetailsImpl.class)
         .hasFieldOrPropertyWithValue("account", account);
@@ -68,7 +68,7 @@ public class UserDetailsServiceImplUnitTest {
     String username = "this-is-a-nonexisting-username";
 
     doReturn(Optional.empty()).when(accountCRUDRepositoryMock)
-        .findOneByAccountname(Mockito.eq(username));
+        .findOneByAccountnameIgnoreCase(Mockito.eq(username));
 
     expectedException.expect(UsernameNotFoundException.class);
     expectedException.expectMessage("Username '" + username + "' not found!");

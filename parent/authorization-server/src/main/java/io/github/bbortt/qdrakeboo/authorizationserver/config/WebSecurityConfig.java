@@ -4,11 +4,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final Environment environment;
@@ -18,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     this.environment = environment;
     this.authenticationManager = authenticationManager;
   }
+
 
   @Override
   protected AuthenticationManager authenticationManager() {
@@ -41,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers("/user", "/me").permitAll()
-            .antMatchers("/admin", "/graphql").permitAll()
+            .antMatchers("/admin", "/graphql").hasAuthority("SERVER_SUPPORT")
             .anyRequest().authenticated()
             .anyRequest().permitAll()
 

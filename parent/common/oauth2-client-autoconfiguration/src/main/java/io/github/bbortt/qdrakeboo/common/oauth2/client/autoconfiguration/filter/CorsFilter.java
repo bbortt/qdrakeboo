@@ -29,7 +29,11 @@ public class CorsFilter implements Filter {
     }
   }
 
-  public void init(FilterConfig filterConfig) throws ServletException {}
+  public void init(FilterConfig filterConfig) throws ServletException {
+    // No action on init
+  }
 
-  public void destroy() {}
+  public void destroy() {
+    // No action on destroy
+  }
 }

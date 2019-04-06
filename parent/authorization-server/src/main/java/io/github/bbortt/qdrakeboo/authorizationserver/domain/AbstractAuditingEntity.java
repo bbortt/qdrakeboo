@@ -59,8 +59,7 @@ public abstract class AbstractAuditingEntity implements Serializable {
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder().appendSuper(super.hashCode()).append(created).append(lastUpdated)
-        .toHashCode();
+    return new HashCodeBuilder().append(created).append(lastUpdated).toHashCode();
   }
 
   @Override

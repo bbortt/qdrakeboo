@@ -9,5 +9,5 @@ import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 @Repository
 public interface AccountCRUDRepository extends CrudRepository<Account, UUID> {
 
-  public Optional<Account> findOneByAccountname(String accountname);
+  public Optional<Account> findOneByAccountnameIgnoreCase(String accountname);
 }

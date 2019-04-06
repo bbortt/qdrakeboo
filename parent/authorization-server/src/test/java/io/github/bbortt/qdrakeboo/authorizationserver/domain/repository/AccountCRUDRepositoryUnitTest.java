@@ -7,6 +7,6 @@ public class AccountCRUDRepositoryUnitTest {
 
   @Test
   public void definesMethodsForImplementation() {
-    assertThat(AccountCRUDRepository.class).hasDeclaredMethods("findOneByAccountname");
+    assertThat(AccountCRUDRepository.class).hasDeclaredMethods("findOneByAccountnameIgnoreCase");
   }
 }

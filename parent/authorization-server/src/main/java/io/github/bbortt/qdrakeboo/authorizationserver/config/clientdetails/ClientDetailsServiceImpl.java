@@ -20,9 +20,10 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
   }
 
   @Override
-  public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-    Optional<Client> client;
-    if (!(client = clientCRUDRepository.findOneByClientId(clientId)).isPresent()) {
+  public ClientDetails loadClientByClientId(String clientId) {
+    Optional<Client> client = clientCRUDRepository.findOneByClientId(clientId);
+
+    if (!client.isPresent()) {
       throw new ClientRegistrationException("No client with id '" + clientId + "' registered!");
     }
 

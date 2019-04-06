@@ -36,10 +36,6 @@ public class Role extends AbstractAuditingEntity implements GrantedAuthority {
   @Column(nullable = false, unique = true)
   private String name;
 
-  public Role() {
-
-  }
-
   public UUID getUuid() {
     return uuid;
   }

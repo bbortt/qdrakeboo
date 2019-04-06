@@ -115,10 +115,11 @@ public class AccountServiceImplUnitTest {
 
     doReturn(currentAccountname).when(authenticationMock).getName();
     doReturn(Optional.of(expectedAccount)).when(accountCRUDRepositoryMock)
-        .findOneByAccountname(Mockito.eq(currentAccountname));
+        .findOneByAccountnameIgnoreCase(Mockito.eq(currentAccountname));
 
     assertThat(fixture.getCurrentAccount()).isEqualTo(expectedAccount);
-    verify(accountCRUDRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
+    verify(accountCRUDRepositoryMock)
+        .findOneByAccountnameIgnoreCase(Mockito.eq(currentAccountname));
   }
 
   @Test
@@ -127,13 +128,14 @@ public class AccountServiceImplUnitTest {
     doReturn(currentAccountname).when(authenticationMock).getName();
 
     doReturn(Optional.empty()).when(accountCRUDRepositoryMock)
-        .findOneByAccountname(Mockito.anyString());
+        .findOneByAccountnameIgnoreCase(Mockito.anyString());
 
     expectedException.expect(IllegalArgumentException.class);
     expectedException.expectMessage("Cannot find account for '" + currentAccountname + "'!");
     fixture.getCurrentAccount();
 
-    verify(accountCRUDRepositoryMock).findOneByAccountname(Mockito.eq(currentAccountname));
+    verify(accountCRUDRepositoryMock)
+        .findOneByAccountnameIgnoreCase(Mockito.eq(currentAccountname));
   }
 
   @Test

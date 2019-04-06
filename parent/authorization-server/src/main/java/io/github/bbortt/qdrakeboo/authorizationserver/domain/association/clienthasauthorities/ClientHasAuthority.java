@@ -37,6 +37,16 @@ public class ClientHasAuthority extends AbstractAuditingEntity {
   @LazyCollection(LazyCollectionOption.FALSE)
   private Authority authority;
 
+  @SuppressWarnings("unused")
+  private ClientHasAuthority() {
+    // Used by Hibernate
+  }
+
+  public ClientHasAuthority(Client client, Authority authority) {
+    this.client = client;
+    this.authority = authority;
+  }
+
   public Client getClient() {
     return client;
   }

@@ -37,6 +37,16 @@ public class ClientHasGrantType extends AbstractAuditingEntity {
   @LazyCollection(LazyCollectionOption.FALSE)
   private GrantType grantType;
 
+  @SuppressWarnings("unused")
+  private ClientHasGrantType() {
+    // Used by Hibernate
+  }
+
+  public ClientHasGrantType(Client client, GrantType grantType) {
+    this.client = client;
+    this.grantType = grantType;
+  }
+
   public Client getClient() {
     return client;
   }

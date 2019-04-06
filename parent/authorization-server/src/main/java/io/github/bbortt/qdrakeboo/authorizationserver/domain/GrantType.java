@@ -33,10 +33,6 @@ public class GrantType extends AbstractAuditingEntity {
   @Column(nullable = false, unique = true)
   private String name;
 
-  public GrantType() {
-
-  }
-
   public UUID getUuid() {
     return uuid;
   }

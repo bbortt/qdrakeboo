@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public List<Account> getAccounts() {
-    List<Account> accounts = new ArrayList<Account>();
+    List<Account> accounts = new ArrayList<>();
 
     accountCRUDRepository.findAll().forEach(accounts::add);
 
@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
   public Account getCurrentAccount() {
     String accountName = SecurityContextHolder.getContext().getAuthentication().getName();
 
-    return accountCRUDRepository.findOneByAccountname(accountName).orElseThrow(
+    return accountCRUDRepository.findOneByAccountnameIgnoreCase(accountName).orElseThrow(
         () -> new IllegalArgumentException("Cannot find account for '" + accountName + "'!"));
   }
 

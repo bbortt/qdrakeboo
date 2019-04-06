@@ -1,5 +1,6 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasscopes;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +19,9 @@ import io.github.bbortt.qdrakeboo.authorizationserver.domain.Scope;
 @Entity
 @IdClass(ClientHasScopeId.class)
 @Table(name = "client_has_scopes")
-public class ClientHasScope {
+public class ClientHasScope implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @Id
   @JoinColumn(name = "client_uuid")
@@ -33,6 +36,16 @@ public class ClientHasScope {
   @JsonBackReference("scope_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
   private Scope scope;
+
+  @SuppressWarnings("unused")
+  private ClientHasScope() {
+    // Used by Hibernate
+  }
+
+  public ClientHasScope(Client client, Scope scope) {
+    this.client = client;
+    this.scope = scope;
+  }
 
   public Client getClient() {
     return client;

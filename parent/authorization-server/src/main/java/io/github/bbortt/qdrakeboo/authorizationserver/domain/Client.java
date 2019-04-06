@@ -1,8 +1,10 @@
 package io.github.bbortt.qdrakeboo.authorizationserver.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -81,10 +83,6 @@ public class Client extends AbstractAuditingEntity {
   @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
   private Set<ClientHasScope> scopes = new HashSet<>();
 
-  public Client() {
-
-  }
-
   public UUID getUuid() {
     return uuid;
   }
@@ -157,28 +155,31 @@ public class Client extends AbstractAuditingEntity {
     this.redirectUris = redirectUrl;
   }
 
-  public Set<ClientHasAuthority> getAuthorities() {
-    return authorities;
+  public List<Authority> getAuthorities() {
+    return authorities.stream().map(ClientHasAuthority::getAuthority).collect(Collectors.toList());
   }
 
-  public void setAuthorities(Set<ClientHasAuthority> authorities) {
-    this.authorities = authorities;
+  public void setAuthorities(List<Authority> authorities) {
+    this.authorities = authorities.stream()
+        .map(authority -> new ClientHasAuthority(this, authority)).collect(Collectors.toSet());
   }
 
-  public Set<ClientHasGrantType> getGrantTypes() {
-    return grantTypes;
+  public List<GrantType> getGrantTypes() {
+    return grantTypes.stream().map(ClientHasGrantType::getGrantType).collect(Collectors.toList());
   }
 
-  public void setGrantTypes(Set<ClientHasGrantType> grantTypes) {
-    this.grantTypes = grantTypes;
+  public void setGrantTypes(List<GrantType> grantTypes) {
+    this.grantTypes = grantTypes.stream().map(grantType -> new ClientHasGrantType(this, grantType))
+        .collect(Collectors.toSet());
   }
 
-  public Set<ClientHasScope> getScopes() {
-    return scopes;
+  public List<Scope> getScopes() {
+    return scopes.stream().map(ClientHasScope::getScope).collect(Collectors.toList());
   }
 
-  public void setScopes(Set<ClientHasScope> scopes) {
-    this.scopes = scopes;
+  public void setScopes(List<Scope> scopes) {
+    this.scopes =
+        scopes.stream().map(scope -> new ClientHasScope(this, scope)).collect(Collectors.toSet());
   }
 
   @Override

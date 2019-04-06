@@ -13,9 +13,6 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.GrantType;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Scope;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasauthorities.ClientHasAuthority;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasgranttypes.ClientHasGrantType;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasscopes.ClientHasScope;
 
 public class ClientDetailsImpl implements ClientDetails {
 
@@ -54,25 +51,22 @@ public class ClientDetailsImpl implements ClientDetails {
 
   @Override
   public Set<String> getScope() {
-    return client.getScopes().stream().map(ClientHasScope::getScope).map(Scope::getName)
-        .collect(Collectors.toSet());
+    return client.getScopes().stream().map(Scope::getName).collect(Collectors.toSet());
   }
 
   @Override
   public Set<String> getAuthorizedGrantTypes() {
-    return client.getGrantTypes().stream().map(ClientHasGrantType::getGrantType)
-        .map(GrantType::getName).collect(Collectors.toSet());
+    return client.getGrantTypes().stream().map(GrantType::getName).collect(Collectors.toSet());
   }
 
   @Override
   public Set<String> getRegisteredRedirectUri() {
-    return new HashSet<String>(Collections.singletonList(client.getRedirectUris()));
+    return new HashSet<>(Collections.singletonList(client.getRedirectUris()));
   }
 
   @Override
   public Collection<GrantedAuthority> getAuthorities() {
-    return client.getAuthorities().stream().map(ClientHasAuthority::getAuthority)
-        .collect(Collectors.toCollection(ArrayList::new));
+    return client.getAuthorities().stream().collect(Collectors.toCollection(ArrayList::new));
   }
 
   @Override
