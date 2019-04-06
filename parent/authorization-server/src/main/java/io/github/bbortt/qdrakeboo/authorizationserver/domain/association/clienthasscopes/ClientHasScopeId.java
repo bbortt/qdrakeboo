@@ -13,22 +13,6 @@ public class ClientHasScopeId implements Serializable {
   private Client client;
   private Scope scope;
 
-  public Client getClient() {
-    return client;
-  }
-
-  public void setClient(Client client) {
-    this.client = client;
-  }
-
-  public Scope getScope() {
-    return scope;
-  }
-
-  public void setScope(Scope scope) {
-    this.scope = scope;
-  }
-
   @Override
   public boolean equals(Object object) {
     if (object == null) {

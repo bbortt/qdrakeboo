@@ -205,8 +205,9 @@ public class Client extends AbstractAuditingEntity {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this).append(uuid).append(clientId).append(secretRequired)
-        .append(autoApprove).append(accessTokenValiditySeconds).append(refreshTokenValiditySeconds)
-        .append(redirectUris).append(authorities).append(grantTypes).append(scopes).build();
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(uuid).append(clientId)
+        .append(secretRequired).append(autoApprove).append(accessTokenValiditySeconds)
+        .append(refreshTokenValiditySeconds).append(redirectUris).append(getAuthorities())
+        .append(getGrantTypes()).append(getScopes()).build();
   }
 }

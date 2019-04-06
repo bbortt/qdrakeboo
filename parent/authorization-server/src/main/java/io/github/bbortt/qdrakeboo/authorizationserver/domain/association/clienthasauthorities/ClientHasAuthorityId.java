@@ -13,22 +13,6 @@ public class ClientHasAuthorityId implements Serializable {
   private Client client;
   private Authority authority;
 
-  public Client getClient() {
-    return client;
-  }
-
-  public void setClient(Client client) {
-    this.client = client;
-  }
-
-  public Authority getAuthority() {
-    return authority;
-  }
-
-  public void setAuthority(Authority authority) {
-    this.authority = authority;
-  }
-
   @Override
   public boolean equals(Object object) {
     if (object == null) {

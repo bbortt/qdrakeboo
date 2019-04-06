@@ -13,22 +13,6 @@ public class AccountHasRoleId implements Serializable {
   private Account account;
   private Role role;
 
-  public Account getAccount() {
-    return account;
-  }
-
-  public void setAccount(Account account) {
-    this.account = account;
-  }
-
-  public Role getRole() {
-    return role;
-  }
-
-  public void setRole(Role role) {
-    this.role = role;
-  }
-
   @Override
   public boolean equals(Object object) {
     if (object == null) {
@@ -47,7 +31,6 @@ public class AccountHasRoleId implements Serializable {
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder().appendSuper(super.hashCode()).append(account).append(role)
-        .toHashCode();
+    return new HashCodeBuilder().append(account).append(role).toHashCode();
   }
 }

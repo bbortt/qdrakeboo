@@ -2,6 +2,7 @@ package io.github.bbortt.qdrakeboo.authorizationserver.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Role;
@@ -25,5 +26,17 @@ public class RoleServiceImpl implements RoleService {
     roleCRUDRepository.findAll().forEach(roles::add);
 
     return roles;
+  }
+
+  @Override
+  @Cacheable(cacheNames = {Role.CACHE_NAME}, key = "#name")
+  public Role findByName(String name) {
+    Optional<Role> optionalRole = roleCRUDRepository.findByName(name);
+
+    if (!optionalRole.isPresent()) {
+      throw new IllegalArgumentException("Role '" + name + "' does not exist!");
+    }
+
+    return optionalRole.get();
   }
 }

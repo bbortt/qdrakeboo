@@ -5,7 +5,9 @@ import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 
 public interface AccountService {
 
+  List<Account> getAccounts();
+
   Account getCurrentAccount();
 
-  List<Account> getAccounts();
+  Account saveNewAccount(Account account);
 }

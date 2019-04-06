@@ -28,14 +28,14 @@ public class ClientHasGrantType extends AbstractAuditingEntity {
   @JsonBackReference("client_has_grant_types")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
-  public Client client;
+  private Client client;
 
   @Id
+  @ManyToOne
   @JoinColumn(name = "grant_type_uuid")
   @JsonBackReference("grant_type_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
-  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-  public GrantType grantType;
+  private GrantType grantType;
 
   public Client getClient() {
     return client;

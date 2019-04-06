@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
@@ -21,9 +20,6 @@ import org.springframework.stereotype.Service;
 public class PreAuthenticatedAuthenticationTokenUserServiceImplUnitTest {
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();
-
-  @Rule
-  public ExpectedException expectedException = ExpectedException.none();
 
   @Mock
   TokenStore tokenStoreMock;

@@ -28,14 +28,14 @@ public class ClientHasAuthority extends AbstractAuditingEntity {
   @JsonBackReference("client_has_authorities")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
-  public Client client;
+  private Client client;
 
   @Id
+  @ManyToOne
   @JoinColumn(name = "authority_uuid")
   @JsonBackReference("authority_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
-  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-  public Authority authority;
+  private Authority authority;
 
   public Client getClient() {
     return client;

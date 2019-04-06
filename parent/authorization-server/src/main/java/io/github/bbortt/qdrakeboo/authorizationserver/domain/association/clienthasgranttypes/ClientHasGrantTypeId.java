@@ -13,22 +13,6 @@ public class ClientHasGrantTypeId implements Serializable {
   private Client client;
   private GrantType grantType;
 
-  public Client getClient() {
-    return client;
-  }
-
-  public void setClient(Client client) {
-    this.client = client;
-  }
-
-  public GrantType getGrantType() {
-    return grantType;
-  }
-
-  public void setGrantType(GrantType grantType) {
-    this.grantType = grantType;
-  }
-
   @Override
   public boolean equals(Object object) {
     if (object == null) {

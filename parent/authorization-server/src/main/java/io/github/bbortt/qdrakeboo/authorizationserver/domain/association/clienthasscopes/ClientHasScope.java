@@ -25,14 +25,14 @@ public class ClientHasScope {
   @JsonBackReference("client_has_scopes")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
-  public Client client;
+  private Client client;
 
   @Id
+  @ManyToOne
   @JoinColumn(name = "scope_uuid")
   @JsonBackReference("scope_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
-  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-  public Scope scope;
+  private Scope scope;
 
   public Client getClient() {
     return client;

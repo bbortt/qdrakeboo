@@ -9,9 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.AbstractAuditingEntity;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Role;
@@ -27,13 +27,13 @@ public class AccountHasRole extends AbstractAuditingEntity {
   @JoinColumn(name = "account_uuid")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
-  public Account account;
+  private Account account;
 
   @Id
   @JoinColumn(name = "role_uuid")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-  public Role role;
+  private Role role;
 
   @SuppressWarnings("unused")
   private AccountHasRole() {
@@ -81,5 +81,11 @@ public class AccountHasRole extends AbstractAuditingEntity {
   public int hashCode() {
     return new HashCodeBuilder().appendSuper(super.hashCode()).append(account).append(role)
         .toHashCode();
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(account).append(role)
+        .build();
   }
 }

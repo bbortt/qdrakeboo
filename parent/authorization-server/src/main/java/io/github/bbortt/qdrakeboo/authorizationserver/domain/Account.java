@@ -24,7 +24,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.accounthasroles.AccountHasRole;
 
 @Table
@@ -133,8 +132,8 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   }
 
   public void setRoles(List<Role> roles) {
-    this.roles.clear();
-    roles.forEach(role -> this.roles.add(new AccountHasRole(this, role)));
+    this.roles =
+        roles.stream().map(role -> new AccountHasRole(this, role)).collect(Collectors.toSet());
   }
 
   @Override
@@ -161,7 +160,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this).append(uuid).append(accountname).append(email).append(enabled)
-        .append(blocked).append(roles).build();
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(uuid).append(accountname)
+        .append(email).append(enabled).append(blocked).append(getRoles()).build();
   }
 }

@@ -6,4 +6,6 @@ import io.github.bbortt.qdrakeboo.authorizationserver.domain.Role;
 public interface RoleService {
 
   List<Role> getRoles();
+
+  Role findByName(String name);
 }

@@ -66,7 +66,6 @@ public class AccountInformationControllerUnitTest {
     Account account = new Account();
     account.setAccountname(accountname);
     account.setEmail(email);
-
     doReturn(account).when(accountServiceMock).getCurrentAccount();
 
     Map<String, Object> expectedMap = new HashMap<>();

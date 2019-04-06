@@ -1,0 +1,21 @@
+mutation {
+  newAccount(
+    accountInput: {
+      accountname: "account-with-roles",
+      email: "account-with-roles@bbortt.github.io",
+      password: "matching-password",
+      confirmation: "matching-password",
+      roles: [
+        { name: "PREMIUM_USER" }
+      ]
+    }
+  ) {
+    accountname
+    email
+    enabled
+    blocked
+    roles {
+      name
+    }
+  }
+}
