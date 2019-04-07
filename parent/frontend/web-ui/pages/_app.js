@@ -10,7 +10,7 @@ import withReduxSaga from 'next-redux-saga'
 
 import configureAxios from '../app/common/axios/configureAxios'
 
-import configureStore from '../configureStore'
+import configureStore from '../app/configureStore'
 
 // Styles
 require('./_app.scss')

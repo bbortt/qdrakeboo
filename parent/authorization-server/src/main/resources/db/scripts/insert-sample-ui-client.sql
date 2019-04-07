@@ -11,9 +11,12 @@ INSERT INTO client
     );
 
 INSERT INTO client_has_grant_types
-    (client_id, grant_type_id)
+    (client_uuid, grant_type_uuid)
   VALUES
-    (1, 1), (1, 2);
+    ((SELECT uuid AS client_uuid FROM client WHERE client_id = 'cea19e6f-fa31-407f-a05a-a20d28c4c74d'),
+      (SELECT uuid AS grant_type_uuid FROM grant_type WHERE name = 'authorization_code')),
+    ((SELECT uuid AS client_uuid FROM client WHERE client_id = 'cea19e6f-fa31-407f-a05a-a20d28c4c74d'),
+      (SELECT uuid AS grant_type_uuid FROM grant_type WHERE name = 'refresh_token'));
 
 INSERT INTO authority
     (name)
@@ -21,11 +24,13 @@ INSERT INTO authority
     ('ui');
 
 INSERT INTO client_has_authorities
-    (client_id, authority_id)
+    (client_uuid, authority_uuid)
   VALUES
-    (1, 1);
+    ((SELECT uuid AS client_uuid FROM client WHERE client_id = 'cea19e6f-fa31-407f-a05a-a20d28c4c74d'),
+      (SELECT uuid AS authority_uuid FROM authority WHERE name = 'ui'));
 
 INSERT INTO client_has_scopes
-    (client_id, scope_id)
+    (client_uuid, scope_uuid)
   VALUES
-    (1, 1);
+    ((SELECT uuid AS client_uuid FROM client WHERE client_id = 'cea19e6f-fa31-407f-a05a-a20d28c4c74d'),
+      (SELECT uuid AS scope_uuid FROM scope WHERE name = 'read'));

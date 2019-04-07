@@ -7,4 +7,4 @@ INSERT INTO account (accountname, email, password, enabled)
 
 INSERT INTO account_has_roles (account_uuid, role_uuid)
   VALUES
-    ((SELECT uuid as account_uuid FROM account WHERE accountname = 'gandalf-user'), (SELECT uuid as role_uuid FROM role WHERE name = 'GANDALF'));
+    ((SELECT uuid AS account_uuid FROM account WHERE accountname = 'gandalf-user'), (SELECT uuid as role_uuid FROM role WHERE name = 'GANDALF'));
