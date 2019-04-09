@@ -2,7 +2,6 @@ package io.github.bbortt.qdrakeboo.authorizationserver.graphql.resolver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import java.util.Collections;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.mockito.junit.MockitoRule;
 import org.springframework.stereotype.Component;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.Role;
 import io.github.bbortt.qdrakeboo.authorizationserver.service.AccountService;
 
 public class AccountMutationResolverUnitTest {
@@ -47,13 +45,8 @@ public class AccountMutationResolverUnitTest {
   }
 
   @Test
-  public void newAccountSavesRoles() {
-    String roleName = "roleName";
-
-    Role role = new Role();
-    role.setName(roleName);
+  public void newAccountSavesEntity() {
     Account account = new Account();
-    account.setRoles(Collections.singletonList(role));
 
     fixture.newAccount(account);
 

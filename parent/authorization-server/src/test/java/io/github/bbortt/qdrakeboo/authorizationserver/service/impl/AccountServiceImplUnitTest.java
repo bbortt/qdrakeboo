@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -131,11 +132,22 @@ public class AccountServiceImplUnitTest {
         .findOneByAccountnameIgnoreCase(Mockito.anyString());
 
     expectedException.expect(IllegalArgumentException.class);
-    expectedException.expectMessage("Cannot find account for '" + currentAccountname + "'!");
+    expectedException
+        .expectMessage("Cannot find account for accountname '" + currentAccountname + "'!");
     fixture.getCurrentAccount();
 
     verify(accountCRUDRepositoryMock)
         .findOneByAccountnameIgnoreCase(Mockito.eq(currentAccountname));
+  }
+
+  @Test
+  public void saveNewAccountChecksForExistingUUID() {
+    Account account = new Account();
+    account.setUuid(UUID.fromString("2ab702b6-0134-4a92-bf4d-0d57ef9a4aca"));
+
+    expectedException.expect(IllegalArgumentException.class);
+    expectedException.expectMessage("Cannot save an existing Account!");
+    fixture.saveNewAccount(account);
   }
 
   @Test
@@ -178,6 +190,8 @@ public class AccountServiceImplUnitTest {
     doReturn(parameterRole).when(roleServiceMock).findByName(roleName);
 
     Account newAccount = fixture.saveNewAccount(account);
+
+    verify(accountCRUDRepositoryMock).save(Mockito.eq(account));
 
     assertThat(newAccount.isEnabled()).isTrue();
     assertThat(newAccount.getPassword()).isNotEqualTo(password);

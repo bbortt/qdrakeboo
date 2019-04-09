@@ -19,7 +19,6 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Override
-  @Cacheable({Role.CACHE_NAME})
   public List<Role> getRoles() {
     List<Role> roles = new ArrayList<>();
 
@@ -29,7 +28,7 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Override
-  @Cacheable(cacheNames = {Role.CACHE_NAME}, key = "#name")
+  @Cacheable(cacheNames = {Role.CACHE_NAME}, key = "#result.uuid")
   public Role findByName(String name) {
     Optional<Role> optionalRole = roleCRUDRepository.findByName(name);
 

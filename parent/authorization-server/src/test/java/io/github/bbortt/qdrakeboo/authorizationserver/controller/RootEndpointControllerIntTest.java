@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import io.github.bbortt.qdrakeboo.authorizationserver.AbstractAuthorizationServerContextAwareTest;
 
+@Sql({"classpath:sql/RootEndpointControllerIntTest.sql"})
 public class RootEndpointControllerIntTest extends AbstractAuthorizationServerContextAwareTest {
 
   private static final String ROOT_ENDPOINT = "/";
@@ -33,7 +34,6 @@ public class RootEndpointControllerIntTest extends AbstractAuthorizationServerCo
 
   @Test
   @WithMockUser(username = "gandalf-user", authorities = "GANDALF")
-  @Sql({"classpath:sql/RootEndpointControllerIntTest_rootEndpointReturnsUrlsForGandalf.sql"})
   public void rootEndpointReturnsUrlsForGandalf() throws Exception {
     MvcResult mvcResult = mockMvc.perform(get(ROOT_ENDPOINT)).andDo(print())
         .andExpect(status().is(HttpStatus.OK.value())).andReturn();

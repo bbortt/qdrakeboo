@@ -7,6 +7,6 @@ public class RoleServiceUnitTest {
 
   @Test
   public void definesMethodsForImplementation() {
-    assertThat(RoleService.class).hasDeclaredMethods("getRoles");
+    assertThat(RoleService.class).hasDeclaredMethods("getRoles", "findByName");
   }
 }

@@ -13,6 +13,16 @@ public class AccountHasRoleId implements Serializable {
   private Account account;
   private Role role;
 
+  @SuppressWarnings("unused")
+  private AccountHasRoleId() {
+    // Used by Hibernate
+  }
+
+  public AccountHasRoleId(Account account, Role role) {
+    this.account = account;
+    this.role = role;
+  }
+
   @Override
   public boolean equals(Object object) {
     if (object == null) {

@@ -1,0 +1,11 @@
+mutation {
+  updateAuthority (
+    authorityUpdate: {
+      uuid: "ebe7611f-652e-4fa5-91fa-474be380488a"
+      name: "updated-name"
+    }
+  ) {
+    uuid
+    name
+  }
+}

@@ -41,13 +41,18 @@ public class AccountServiceImpl implements AccountService {
   public Account getCurrentAccount() {
     String accountName = SecurityContextHolder.getContext().getAuthentication().getName();
 
-    return accountCRUDRepository.findOneByAccountnameIgnoreCase(accountName).orElseThrow(
-        () -> new IllegalArgumentException("Cannot find account for '" + accountName + "'!"));
+    return accountCRUDRepository.findOneByAccountnameIgnoreCase(accountName)
+        .orElseThrow(() -> new IllegalArgumentException(
+            "Cannot find account for accountname '" + accountName + "'!"));
   }
 
   @Override
   @Transactional
   public Account saveNewAccount(Account account) {
+    if (account.getUuid() != null) {
+      throw new IllegalArgumentException("Cannot save an existing Account!");
+    }
+
     if (!account.getPassword().equals(account.getConfirmation())) {
       throw new IllegalArgumentException("Password and confirmation do not match!");
     }

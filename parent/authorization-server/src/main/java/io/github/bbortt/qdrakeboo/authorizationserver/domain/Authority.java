@@ -21,6 +21,8 @@ public class Authority extends AbstractAuditingEntity implements GrantedAuthorit
 
   private static final long serialVersionUID = 1L;
 
+  public static final String CACHE_NAME = "authorities-cache";
+
   @Id
   @Type(type = "pg-uuid")
   @GeneratedValue(generator = "authority-uuid")

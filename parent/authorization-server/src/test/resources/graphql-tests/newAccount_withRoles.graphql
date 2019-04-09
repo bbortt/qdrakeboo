@@ -1,5 +1,5 @@
 mutation {
-  newAccount(
+  newAccount (
     accountInput: {
       accountname: "account-with-roles",
       email: "account-with-roles@bbortt.github.io",

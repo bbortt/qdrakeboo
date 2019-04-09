@@ -15,6 +15,8 @@ public class AccountMutationResolver implements GraphQLMutationResolver {
   }
 
   public Account newAccount(Account account) {
+    // TODO: Check for id
+    
     return accountService.saveNewAccount(account);
   }
 }
