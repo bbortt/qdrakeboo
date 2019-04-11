@@ -20,6 +20,8 @@ public class Scope extends AbstractAuditingEntity {
 
   private static final long serialVersionUID = 1L;
 
+  public static final String CACHE_NAME = "scope-cache";
+
   @Id
   @Type(type = "pg-uuid")
   @GeneratedValue(generator = "scope-uuid")

@@ -1,0 +1,14 @@
+type Scope {
+  created: String!
+  lastUpdated: String!
+  uuid: String!
+  name: String!
+}
+
+input ScopeInput {
+  name: String!
+}
+
+extend type RootQuery {
+  allScopes: [Scope]!
+}
