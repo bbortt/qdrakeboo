@@ -9,19 +9,19 @@ import org.springframework.test.context.jdbc.Sql;
 import io.github.bbortt.qdrakeboo.authorizationserver.AbstractAuthorizationServerContextAwareTest;
 import io.github.bbortt.qdrakeboo.authorizationserver.graphql.GraphQLTestUtil;
 
-@Sql({"classpath:sql/ScopeQueryIntTest.sql"})
-public class ScopeQueryIntTest extends AbstractAuthorizationServerContextAwareTest {
+@Sql({"classpath:sql/GrantTypeQueryIntTest.sql"})
+public class GrantTypeQueryIntTest extends AbstractAuthorizationServerContextAwareTest {
 
   @Autowired
   GraphQLTestUtil graphQLTestUtil;
 
   @Test
-  public void getAllScopesReadsScopes() throws Exception {
-    ResponseEntity<String> response = graphQLTestUtil.post("graphql-tests/getAllScopes.graphql")
-        .withAuthentication("scope-query-user", "scope-query-password").perform();
+  public void getAllGrantTypesReadsGrantTypes() throws Exception {
+    ResponseEntity<String> response = graphQLTestUtil.post("graphql-tests/getAllGrantTypes.graphql")
+        .withAuthentication("grant-type-query-user", "grant-type-query-password").perform();
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualTo(
-        "{\"data\":{\"allScopes\":[{\"name\":\"read\"},{\"name\":\"write\"},{\"name\":\"trust\"}]}}");
+        "{\"data\":{\"allGrantTypes\":[{\"name\":\"authorization_code\"},{\"name\":\"refresh_token\"},{\"name\":\"implicit\"},{\"name\":\"password\"}]}}");
   }
 }

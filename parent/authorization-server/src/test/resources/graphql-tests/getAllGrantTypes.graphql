@@ -1,0 +1,5 @@
+query {
+  allGrantTypes {
+    name
+  }
+}

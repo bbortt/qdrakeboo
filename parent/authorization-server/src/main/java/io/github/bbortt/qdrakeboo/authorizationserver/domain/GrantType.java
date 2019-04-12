@@ -20,6 +20,8 @@ public class GrantType extends AbstractAuditingEntity {
 
   private static final long serialVersionUID = 1L;
 
+  public static final String CACHE_NAME = "grant-type-cache";
+
   @Id
   @Type(type = "pg-uuid")
   @GeneratedValue(generator = "grant-type-uuid")

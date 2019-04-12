@@ -1,0 +1,14 @@
+type GrantType {
+  created: String!
+  lastUpdated: String!
+  uuid: String!
+  name: String!
+}
+
+input GrantTypeInput {
+  name: String!
+}
+
+extend type RootQuery {
+  allGrantTypes: [GrantType]!
+}
