@@ -1,0 +1,20 @@
+query {
+  allClients {
+    clientId
+    resourceIds
+    secretRequired
+    autoApprove
+    accessTokenValiditySeconds
+    refreshTokenValiditySeconds
+    redirectUris
+    authorities {
+      name
+    }
+    grantTypes {
+      name
+    }
+    scopes {
+      name
+    }
+  }
+}

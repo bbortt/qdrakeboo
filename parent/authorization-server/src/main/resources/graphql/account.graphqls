@@ -1,6 +1,7 @@
 type Account {
   created: String!
   lastUpdated: String!
+  uuid: String!
   accountname: String!
   email: String!
   enabled: Boolean!
