@@ -4,6 +4,8 @@ import Router from 'next/router'
 
 import {connect} from 'react-redux'
 
+require('./index.scss')
+
 class Index extends React.Component<Index.propTypes> {
 
   signIn = () => {
@@ -13,9 +15,17 @@ class Index extends React.Component<Index.propTypes> {
   render() {
     return (
       <div className='Index'>
-        <h1>Welcome, stranger!</h1>
+        <div className='grid-container'>
+          <div className='grid-x'>
+            <div className='cell'>
+              <h1>Welcome, stranger!</h1>
+            </div>
 
-        <button className='button' onClick={this.signIn}>Sign In</button>
+            <div className='cell'>
+              <button className='button' onClick={this.signIn}>Sign In</button>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
