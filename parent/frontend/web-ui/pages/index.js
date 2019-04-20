@@ -3,13 +3,22 @@ import React from 'react'
 import Router from 'next/router'
 
 import {connect} from 'react-redux'
+import {requestUserInfo} from '../app/state/actions';
 
 require('./index.scss')
 
 class Index extends React.Component<Index.propTypes> {
 
-  signIn = () => {
-    Router.push('/session/renew')
+  static async getInitialProps({ctx}) {
+    const {isServer, req, res, store} = ctx
+
+    store.dispatch(requestUserInfo({isServer, req, res}))
+
+    return {}
+  }
+
+  launch = () => {
+    Router.push('/home')
   }
 
   render() {
@@ -22,7 +31,7 @@ class Index extends React.Component<Index.propTypes> {
             </div>
 
             <div className='cell'>
-              <button className='button' onClick={this.signIn}>Sign In</button>
+              <button className='button' onClick={this.launch}>{this.props.userInfo ? 'Launch' : 'Sign In'}</button>
             </div>
           </div>
         </div>

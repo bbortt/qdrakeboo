@@ -9,7 +9,7 @@ export type SessionState = {
 }
 
 export const initialSessionState: SessionState = {
-  userInfo: {}
+  userInfo: false
 }
 
 export default (state: SessionState = initialSessionState,

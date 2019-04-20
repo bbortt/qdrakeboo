@@ -1,8 +1,8 @@
 // @flow
-import Router from 'next/router'
 import getConfig from 'next/config'
+import contextAwareRedirect from '../../common/next/contextAwareRedirect'
 
-import {put, call, takeLatest} from 'redux-saga/effects'
+import {call, put, takeLatest} from 'redux-saga/effects'
 
 import axios from 'axios'
 
@@ -22,8 +22,9 @@ function* requestUserInfo(action: RequestUserInfoAction) {
 
   try {
     const response = yield call(axios.get,
-        `${publicRuntimeConfig.publicApiUrl}/microservice/principal`,
-        requestConfig)
+      `http://localhost:8081/principal`,
+      // `${publicRuntimeConfig.publicApiUrl}/microservice/principal`,
+      requestConfig)
 
     yield put(setUserInfo(response.data))
   } catch (error) {
@@ -31,10 +32,10 @@ function* requestUserInfo(action: RequestUserInfoAction) {
     if (error.response) {
       switch (error.response.status) {
         case 302:
-          if (action.nextContext.res) {
-            action.nextContext.res.redirect(error.response.headers.location)
-          } else {
-            Router.push(error.response.headers.location)
+          contextAwareRedirect(error.response.headers.location, action.nextContext)
+        case 401:
+          if (action.nextContext.req.originalUrl !== '/') {
+            contextAwareRedirect('/', action.nextContext)
           }
       }
     } else {
