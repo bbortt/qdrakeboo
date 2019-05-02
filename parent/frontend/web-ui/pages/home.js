@@ -22,15 +22,15 @@ class Home extends React.Component<Home.propTypes> {
 
   render() {
     return (
-      <div className='Home'>
-        <h1>Hi there</h1>
+        <div className='Home'>
+          <h1>Hi there</h1>
 
-        <p>
-          User-Info: {JSON.stringify(this.props.userInfo)}
-        </p>
+          <p>
+            User-Info: {JSON.stringify(this.props.userInfo)}
+          </p>
 
-        <button className='button' onClick={this.logout}>Logout</button>
-      </div>
+          <button className='button' onClick={this.logout}>Logout</button>
+        </div>
     )
   }
 }

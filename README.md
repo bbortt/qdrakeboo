@@ -26,3 +26,4 @@ The private streaming service for geeks.
 * Configure gitflow-plugin: patch package.json version (npm version patch)
 * Finish GraphQL for clients
 * AOP Logging on service level (authorization server)
+* API Access via browser.. cookie?

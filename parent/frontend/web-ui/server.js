@@ -4,10 +4,11 @@ const session = require('express-session')
 const next = require('next')
 const config = require('./next.config')
 
-const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
+const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
 const handleSessionRenewRequest = require(
   './server/handler/handleSessionRenewRequest.js')
-const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
+const handlePrincipalRequest = require('./server/handler/handlePrincipalRequest')
+const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
@@ -52,6 +53,8 @@ app.prepare().then(() => {
 
     return res.redirect(serverRuntimeConfig.logoutUri)
   }))
+
+  server.get('/api/user', async (req, res) => await handlePrincipalRequest(req, res))
 
   server.get('/api/*', async (req, res) => await handleGetApiRequest(req, res))
 
