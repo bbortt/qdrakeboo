@@ -4,9 +4,6 @@ import PropTypes from 'prop-types'
 
 import Router from 'next/router'
 
-import withAuthenticationOnly
-  from '../app/common/security/withAuthenticationOnly'
-
 require('./index.scss')
 
 class Index extends React.Component<Index.propTypes> {
@@ -16,8 +13,6 @@ class Index extends React.Component<Index.propTypes> {
   }
 
   render() {
-    console.log(this.props)
-
     return (
         <div className='Index'>
           <div className='grid-container'>
@@ -42,4 +37,4 @@ Index.propTypes = {
   isAuthenticated: PropTypes.bool
 }
 
-export default withAuthenticationOnly(Index)
+export default Index

@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 
+import contextAwareRedirect from '../next/contextAwareRedirect'
+
 export default function withAuthenticationOnly(Component: React.Component): React.Component {
   return class AuthenticatedPage extends React.Component {
     static displayName = `withAuthenticationOnly(${Component.displayName
@@ -8,6 +10,12 @@ export default function withAuthenticationOnly(Component: React.Component): Reac
     || 'AuthenticatedPage'})`
 
     static async getInitialProps({ctx}) {
+      const {isServer, req, res, query} = ctx
+
+      if (!query.isAuthenticated) {
+        contextAwareRedirect('/', {isServer, req, res})
+      }
+
       let pageProps = {}
 
       if (Component.getInitialProps) {
