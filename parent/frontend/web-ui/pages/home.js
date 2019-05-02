@@ -4,6 +4,9 @@ import Router from 'next/router'
 
 import {connect} from 'react-redux'
 
+import withAuthenticationOnly
+  from '../app/common/security/withAuthenticationOnly'
+
 import {requestUserInfo} from '../app/state/actions'
 
 class Home extends React.Component<Home.propTypes> {
@@ -35,4 +38,4 @@ class Home extends React.Component<Home.propTypes> {
   }
 }
 
-export default connect(state => state.session)(Home)
+export default connect(state => state.session)(withAuthenticationOnly(Home))

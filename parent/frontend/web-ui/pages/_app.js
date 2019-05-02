@@ -31,7 +31,7 @@ class ReduxContextAwareApp extends App {
       pageProps = await Component.getInitialProps({ctx})
     }
 
-    return {isServer, ...pageProps}
+    return {isServer, pageProps}
   }
 
   render() {

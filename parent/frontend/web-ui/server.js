@@ -4,10 +4,11 @@ const session = require('express-session')
 const next = require('next')
 const config = require('./next.config')
 
+const sessionUtils = require('./server/security/session-utils')
+
 const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
 const handleSessionRenewRequest = require(
-  './server/handler/handleSessionRenewRequest.js')
-const handlePrincipalRequest = require('./server/handler/handlePrincipalRequest')
+    './server/handler/handleSessionRenewRequest.js')
 const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -41,12 +42,14 @@ app.prepare().then(() => {
 
   server.use(session(sessionConfig))
 
-  server.get('/', (req, res) => handle(req, res))
+  server.get('/',
+      (req, res) => handle(req, res, '/',
+          sessionUtils.isAuthenticated(req, res)))
 
   server.get('/session', (req, res) => handleSessionRequest(req, res))
 
   server.get('/session/renew',
-    (req, res) => handleSessionRenewRequest(req, res))
+      (req, res) => handleSessionRenewRequest(req, res))
 
   server.get('/logout', (req, res) => req.session.destroy((error) => {
     // TODO: Handle error?
@@ -54,11 +57,10 @@ app.prepare().then(() => {
     return res.redirect(serverRuntimeConfig.logoutUri)
   }))
 
-  server.get('/api/user', async (req, res) => await handlePrincipalRequest(req, res))
-
   server.get('/api/*', async (req, res) => await handleGetApiRequest(req, res))
 
-  server.get('*', (req, res) => handle(req, res))
+  server.get('*', (req, res) => handle(req, res, req.originalUrl,
+      sessionUtils.isAuthenticated(req, res)))
 
   server.listen(3000, (err) => {
     if (err) {
@@ -68,7 +70,7 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000')
   })
 })
-  .catch((ex) => {
-    console.error(ex.stack)
-    process.exit(1)
-  })
+.catch((ex) => {
+  console.error(ex.stack)
+  process.exit(1)
+})

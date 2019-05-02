@@ -4,33 +4,20 @@ import PropTypes from 'prop-types'
 
 import Router from 'next/router'
 
-import {requestUserInfo} from '../app/common/security/sessionUtils'
-
-import type {UserInfo} from '../app/domain/session/UserInfo';
+import withAuthenticationOnly
+  from '../app/common/security/withAuthenticationOnly'
 
 require('./index.scss')
 
 class Index extends React.Component<Index.propTypes> {
-
-  constructor(props) {
-    super(props)
-
-    console.log('props: ', props)
-  }
-
-  static async getInitialProps({ctx}) {
-    const {isServer, req, res, store} = ctx
-
-    const response = await requestUserInfo({isServer, req, res})
-
-    return {userInfo: response}
-  }
 
   launch = () => {
     Router.push('/home')
   }
 
   render() {
+    console.log(this.props)
+
     return (
         <div className='Index'>
           <div className='grid-container'>
@@ -41,8 +28,8 @@ class Index extends React.Component<Index.propTypes> {
 
               <div className='cell'>
                 <button className='button'
-                        onClick={this.launch}>{this.props.userInfo ? 'Launch'
-                    : 'Sign In'}</button>
+                        onClick={this.launch}>{this.props.isAuthenticated
+                    ? 'Launch' : 'Sign In'}</button>
               </div>
             </div>
           </div>
@@ -51,4 +38,8 @@ class Index extends React.Component<Index.propTypes> {
   }
 }
 
-export default Index
+Index.propTypes = {
+  isAuthenticated: PropTypes.bool
+}
+
+export default withAuthenticationOnly(Index)

@@ -14,7 +14,7 @@ const oauth2Client = new ClientOAuth2({
   scopes: serverRuntimeConfig.scopes
 })
 
-module.exports.getTokenFromSession = (session) => {
+const getTokenFromSession = (session) => {
   if (!session.token) {
     return null
   }
@@ -22,20 +22,56 @@ module.exports.getTokenFromSession = (session) => {
   const {token} = session
 
   return oauth2Client.createToken(
-    token.accessToken,
-    token.refreshToken,
-    token.tokenType,
-    {})
+      token.accessToken,
+      token.refreshToken,
+      token.tokenType,
+      {})
 }
 
-module.exports.saveTokenToSession = (token, session) => {
+const saveTokenToSession = (token, session) => {
   session.token = {
     tokenType: token.tokenType,
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
     expires: getDateWithTimezoneOffset().getTime()
-      + (token.expires /* seconds */ * 1000)
+        + (token.expires /* seconds */ * 1000)
   }
 
   session.expires = session.token.expires
+}
+
+const isAuthenticated = async (req, res) => {
+  const token = getTokenFromSession(req.session)
+
+  if (!token) {
+    return false
+  }
+
+  const apiUrl = `${serverRuntimeConfig.apiUrl}/microservice/principal`
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `${token.tokenType} ${token.accessToken}`
+      }
+    })
+
+    if (response.status && response.status === 401) {
+      return false
+    }
+
+    return response.status === 200
+  } catch (error) {
+    // TODO: Use a logger
+    console.log(`error fetching ${apiUrl}: ${error}`)
+
+    return false
+  }
+}
+
+module.exports = {
+  getTokenFromSession,
+  saveTokenToSession,
+  isAuthenticated
 }
