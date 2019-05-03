@@ -8,8 +8,16 @@ require('./index.scss')
 
 class Index extends React.Component<Index.propTypes> {
 
+  static async getInitialProps({ctx}) {
+    const {query} = ctx;
+
+    const isAuthenticated = query.isAuthenticated
+
+    return {isAuthenticated}
+  }
+
   launch = () => {
-    Router.push('/home')
+    Router.push('/session/renew')
   }
 
   render() {
