@@ -16,6 +16,7 @@ type Client {
 
 input ClientInput {
   clientId: String!
+  secret: String!
   resourceIds: String!
   secretRequired: Boolean
   autoApprove: Boolean

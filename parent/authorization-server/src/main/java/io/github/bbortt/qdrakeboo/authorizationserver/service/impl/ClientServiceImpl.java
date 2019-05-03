@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Authority;
@@ -54,6 +55,7 @@ public class ClientServiceImpl implements ClientService {
   }
 
   @Override
+  @Transactional
   public Client saveNewClient(Client client) {
     if (client.getUuid() != null) {
       throw new IllegalArgumentException("Cannot save an existing Client!");

@@ -10,9 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Scope;
 
@@ -25,7 +25,6 @@ public class ClientHasScope implements Serializable {
 
   @Id
   @JoinColumn(name = "client_uuid")
-  @JsonBackReference("client_has_scopes")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   private Client client;
@@ -33,7 +32,6 @@ public class ClientHasScope implements Serializable {
   @Id
   @ManyToOne
   @JoinColumn(name = "scope_uuid")
-  @JsonBackReference("scope_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
   private Scope scope;
 
@@ -83,5 +81,11 @@ public class ClientHasScope implements Serializable {
   public int hashCode() {
     return new HashCodeBuilder().appendSuper(super.hashCode()).append(client).append(scope)
         .toHashCode();
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(client).append(scope)
+        .build();
   }
 }

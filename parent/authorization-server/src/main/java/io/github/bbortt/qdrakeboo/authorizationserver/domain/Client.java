@@ -21,7 +21,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasauthorities.ClientHasAuthority;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasgranttypes.ClientHasGrantType;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasscopes.ClientHasScope;
@@ -68,17 +67,14 @@ public class Client extends AbstractAuditingEntity {
   @Size(max = 256)
   private String redirectUris;
 
-  @JsonManagedReference("client_has_authorities")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
   private Set<ClientHasAuthority> authorities = new HashSet<>();
 
-  @JsonManagedReference("client_has_grant_types")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
   private Set<ClientHasGrantType> grantTypes = new HashSet<>();
 
-  @JsonManagedReference("client_has_scopes")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "client", cascade = {CascadeType.ALL})
   private Set<ClientHasScope> scopes = new HashSet<>();
