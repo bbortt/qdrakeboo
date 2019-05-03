@@ -57,15 +57,15 @@ public class AccountServiceImpl implements AccountService {
       throw new IllegalArgumentException("Password and confirmation do not match!");
     }
 
+    account.setEnabled(true);
+    account.setPassword(PASSWORD_ENCODER.encode(account.getPassword()));
+
     if (account.getRoles().isEmpty()) {
       account.setRoles(Collections.singletonList(roleService.findByName(DEFAULT_ROLE_NAME)));
     } else {
       account.setRoles(account.getRoles().stream()
           .map(role -> roleService.findByName(role.getName())).collect(Collectors.toList()));
     }
-
-    account.setEnabled(true);
-    account.setPassword(PASSWORD_ENCODER.encode(account.getPassword()));
 
     return accountCRUDRepository.save(account);
   }

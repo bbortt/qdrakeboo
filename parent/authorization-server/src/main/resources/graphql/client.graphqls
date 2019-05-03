@@ -14,6 +14,23 @@ type Client {
   scopes: [Scope]!
 }
 
+input ClientInput {
+  clientId: String!
+  resourceIds: String!
+  secretRequired: Boolean
+  autoApprove: Boolean
+  accessTokenValiditySeconds: Long!
+  refreshTokenValiditySeconds: Long!
+  redirectUris: String!
+  authorities: [AuthorityInput]!
+  grantTypes: [GrantTypeInput]!
+  scopes: [ScopeInput]!
+}
+
 extend type RootQuery {
   allClients: [Client]!
+}
+
+extend type RootMutation {
+  newClient(clientInput: ClientInput!): Client!
 }

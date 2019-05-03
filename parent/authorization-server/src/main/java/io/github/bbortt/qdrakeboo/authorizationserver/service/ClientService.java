@@ -6,4 +6,6 @@ import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 public interface ClientService {
 
   List<Client> getClients();
+
+  Client saveNewClient(Client client);
 }
