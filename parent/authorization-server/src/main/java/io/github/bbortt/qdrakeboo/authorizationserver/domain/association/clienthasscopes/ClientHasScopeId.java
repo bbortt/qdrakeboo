@@ -13,6 +13,16 @@ public class ClientHasScopeId implements Serializable {
   private Client client;
   private Scope scope;
 
+  @SuppressWarnings("unused")
+  private ClientHasScopeId() {
+    // Used by Hibernate
+  }
+
+  public ClientHasScopeId(Client client, Scope scope) {
+    this.client = client;
+    this.scope = scope;
+  }
+
   @Override
   public boolean equals(Object object) {
     if (object == null) {

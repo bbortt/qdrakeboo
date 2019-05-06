@@ -9,9 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.AbstractAuditingEntity;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.GrantType;
@@ -25,7 +25,6 @@ public class ClientHasGrantType extends AbstractAuditingEntity {
 
   @Id
   @JoinColumn(name = "client_uuid")
-  @JsonBackReference("client_has_grant_types")
   @LazyCollection(LazyCollectionOption.FALSE)
   @ManyToOne(cascade = {CascadeType.ALL})
   private Client client;
@@ -33,7 +32,6 @@ public class ClientHasGrantType extends AbstractAuditingEntity {
   @Id
   @ManyToOne
   @JoinColumn(name = "grant_type_uuid")
-  @JsonBackReference("grant_type_has_clients")
   @LazyCollection(LazyCollectionOption.FALSE)
   private GrantType grantType;
 
@@ -84,5 +82,11 @@ public class ClientHasGrantType extends AbstractAuditingEntity {
   public int hashCode() {
     return new HashCodeBuilder().appendSuper(super.hashCode()).append(client).append(grantType)
         .toHashCode();
+  }
+
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(client).append(grantType)
+        .build();
   }
 }

@@ -165,6 +165,17 @@ public class AccountServiceImplUnitTest {
   }
 
   @Test
+  public void saveNewAccountHashesPassword() {
+    String password = "password";
+
+    Account account = new Account();
+    account.setPassword(password);
+    account.setConfirmation(password);
+
+    assertThat(fixture.saveNewAccount(account).getPassword()).isNotEqualTo(password);
+  }
+
+  @Test
   public void saveNewAccountAddsDefaultRole() {
     String password = "password";
 
@@ -176,7 +187,7 @@ public class AccountServiceImplUnitTest {
   }
 
   @Test
-  public void saveNewAccountCompletesRoles() {
+  public void saveNewAccountCompletesEntity() {
     String password = "password";
     String roleName = "roleName";
 
@@ -194,7 +205,6 @@ public class AccountServiceImplUnitTest {
     verify(accountCRUDRepositoryMock).save(Mockito.eq(account));
 
     assertThat(newAccount.isEnabled()).isTrue();
-    assertThat(newAccount.getPassword()).isNotEqualTo(password);
     assertThat(newAccount.getRoles()).containsExactly(parameterRole);
   }
 }

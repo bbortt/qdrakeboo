@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 
+import isAuthenticated from './isAuthenticated'
+
 import contextAwareRedirect from '../next/contextAwareRedirect'
 
 export default function withAuthenticationOnly(Component: React.Component): React.Component {
@@ -12,7 +14,7 @@ export default function withAuthenticationOnly(Component: React.Component): Reac
     static async getInitialProps({ctx}) {
       const {isServer, req, res, query} = ctx
 
-      if (!query.isAuthenticated) {
+      if (!await isAuthenticated()) {
         contextAwareRedirect('/', {isServer, req, res})
       }
 

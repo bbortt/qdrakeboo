@@ -7,6 +7,6 @@ public class ClientServiceUnitTest {
 
   @Test
   public void definesMethodsForImplementation() {
-    assertThat(ClientService.class).hasDeclaredMethods("getClients");
+    assertThat(ClientService.class).hasDeclaredMethods("getClients", "saveNewClient");
   }
 }

@@ -13,6 +13,16 @@ public class ClientHasGrantTypeId implements Serializable {
   private Client client;
   private GrantType grantType;
 
+  @SuppressWarnings("unused")
+  private ClientHasGrantTypeId() {
+    // Used by Hibernate
+  }
+
+  public ClientHasGrantTypeId(Client client, GrantType grantType) {
+    this.client = client;
+    this.grantType = grantType;
+  }
+
   @Override
   public boolean equals(Object object) {
     if (object == null) {

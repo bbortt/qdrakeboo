@@ -13,6 +13,16 @@ public class ClientHasAuthorityId implements Serializable {
   private Client client;
   private Authority authority;
 
+  @SuppressWarnings("unused")
+  private ClientHasAuthorityId() {
+    // Used by Hibernate
+  }
+
+  public ClientHasAuthorityId(Client client, Authority authority) {
+    this.client = client;
+    this.authority = authority;
+  }
+
   @Override
   public boolean equals(Object object) {
     if (object == null) {

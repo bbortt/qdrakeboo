@@ -42,10 +42,12 @@ app.prepare().then(() => {
 
   server.use(session(sessionConfig))
 
-  server.get('/', async (req, res) => app.render(req, res, '/',
-      {isAuthenticated: await sessionUtils.isAuthenticated(req, res)}))
+  server.get('/', async (req, res) => handle(req, res))
 
   server.get('/session', (req, res) => handleSessionRequest(req, res))
+
+  server.get('/session/check',
+      async (req, res) => await sessionUtils.isAuthenticated(req, res))
 
   server.get('/session/renew',
       (req, res) => handleSessionRenewRequest(req, res))
@@ -59,15 +61,7 @@ app.prepare().then(() => {
   server.get('/api/*', async (req, res) => await handleGetApiRequest(req, res))
 
   server.get('*', async (req, res) => {
-    try {
-      return app.render(req, res, req.originalUrl,
-          {isAuthenticated: await sessionUtils.isAuthenticated(req, res)})
-    } catch (error) {
-      // TODO: Use a logger
-      console.log(`error rendering ${apiUrl}: ${error}`)
-
-      return handle(req, res)
-    }
+    return handle(req, res)
   })
 
   server.listen(3000, (err) => {

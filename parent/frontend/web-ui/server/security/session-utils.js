@@ -44,7 +44,7 @@ const isAuthenticated = async (req, res) => {
   const token = getTokenFromSession(req.session)
 
   if (!token) {
-    return false
+    return sendUnauthorized(res)
   }
 
   const apiUrl = `${serverRuntimeConfig.apiUrl}/microservice/principal`
@@ -58,16 +58,20 @@ const isAuthenticated = async (req, res) => {
     })
 
     if (response.status && response.status === 401) {
-      return false
+      return sendUnauthorized(res)
     }
 
-    return response.status === 200
+    return res.status(200)
   } catch (error) {
     // TODO: Use a logger
     console.log(`error fetching ${apiUrl}: ${error}`)
 
-    return false
+    return sendUnauthorized(res)
   }
+}
+
+const sendUnauthorized = (res) => {
+  return res.status(401)
 }
 
 module.exports = {
