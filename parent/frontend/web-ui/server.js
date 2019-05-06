@@ -8,7 +8,7 @@ const sessionUtils = require('./server/security/session-utils')
 
 const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
 const handleSessionRenewRequest = require(
-    './server/handler/handleSessionRenewRequest.js')
+  './server/handler/handleSessionRenewRequest.js')
 const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -50,7 +50,7 @@ app.prepare().then(() => {
       async (req, res) => await sessionUtils.isAuthenticated(req, res))
 
   server.get('/session/renew',
-      (req, res) => handleSessionRenewRequest(req, res))
+    (req, res) => handleSessionRenewRequest(req, res))
 
   server.get('/logout', (req, res) => req.session.destroy((error) => {
     // TODO: Handle error?
@@ -72,7 +72,7 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000')
   })
 })
-.catch((ex) => {
-  console.error(ex.stack)
-  process.exit(1)
-})
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })

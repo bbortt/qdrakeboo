@@ -22,10 +22,10 @@ const getTokenFromSession = (session) => {
   const {token} = session
 
   return oauth2Client.createToken(
-      token.accessToken,
-      token.refreshToken,
-      token.tokenType,
-      {})
+    token.accessToken,
+    token.refreshToken,
+    token.tokenType,
+    {})
 }
 
 const saveTokenToSession = (token, session) => {
@@ -34,7 +34,7 @@ const saveTokenToSession = (token, session) => {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
     expires: getDateWithTimezoneOffset().getTime()
-        + (token.expires /* seconds */ * 1000)
+      + (token.expires /* seconds */ * 1000)
   }
 
   session.expires = session.token.expires
