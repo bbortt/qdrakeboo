@@ -14,7 +14,7 @@ export default function withAuthenticationOnly(Component: React.Component): Reac
     static async getInitialProps({ctx}) {
       const {isServer, req, res, query} = ctx
 
-      if (!await isAuthenticated()) {
+      if (!await isAuthenticated({isServer, req, res})) {
         contextAwareRedirect('/', {isServer, req, res})
       }
 

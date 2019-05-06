@@ -11,7 +11,9 @@ require('./index.scss')
 class Index extends React.Component<Index.propTypes> {
 
   static async getInitialProps({ctx}) {
-    const isAuthenticated = await isAuthenticatedCall()
+    const {isServer, req, res} = ctx
+
+    const isAuthenticated = await isAuthenticatedCall({isServer, req, res})
 
     return {isAuthenticated}
   }
@@ -22,21 +24,21 @@ class Index extends React.Component<Index.propTypes> {
 
   render() {
     return (
-      <div className='Index'>
-        <div className='grid-container'>
-          <div className='grid-x'>
-            <div className='cell'>
-              <h1>Welcome, stranger!</h1>
-            </div>
+        <div className='Index'>
+          <div className='grid-container'>
+            <div className='grid-x'>
+              <div className='cell'>
+                <h1>Welcome, stranger!</h1>
+              </div>
 
-            <div className='cell'>
-              <button className='button'
-                      onClick={this.launch}>{this.props.isAuthenticated
-                ? 'Launch' : 'Sign In'}</button>
+              <div className='cell'>
+                <button className='button'
+                        onClick={this.launch}>{this.props.isAuthenticated
+                    ? 'Launch' : 'Sign In'}</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

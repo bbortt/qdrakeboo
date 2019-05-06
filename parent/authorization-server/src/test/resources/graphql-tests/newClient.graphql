@@ -6,7 +6,6 @@ mutation {
       resourceIds: "test-resource",
       accessTokenValiditySeconds: 3600,
       refreshTokenValiditySeconds: 7200,
-      redirectUris: "http://localhost/login",
       authorities: [
         { name: "client-test" }
       ],

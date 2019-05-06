@@ -14,7 +14,7 @@ module.exports = {
     apiUrl: 'http://localhost:8080'
   },
   publicRuntimeConfig: {
-    publicApiUrl: 'http://localhost:3000/api'
+    publicUrl: 'http://localhost:3000'
   },
   ...withSass()
 }

@@ -1,9 +1,22 @@
 // @flow
-import axios from 'axios';
+import getConfig from 'next/config'
 
-export default async (): boolean => {
+import axios from 'axios'
+import type {NextContext} from "../axios/NextContext";
+
+const {publicRuntimeConfig} = getConfig()
+
+export default async (nextContext: NextContext): boolean => {
+  const requestConfig = {}
+
+  if (nextContext.isServer && nextContext.req.headers.cookie) {
+    requestConfig.headers = {
+      cookie: nextContext.req.headers.cookie
+    }
+  }
   try {
-    const response = call(axios.get, `${publicRuntimeConfig.publicApiUrl}/session/check`)
+    const response = await axios.get(
+        `${publicRuntimeConfig.publicUrl}/session/check`, requestConfig)
 
     return response.status === 200
   } catch (error) {

@@ -22,7 +22,7 @@ input ClientInput {
   autoApprove: Boolean
   accessTokenValiditySeconds: Long!
   refreshTokenValiditySeconds: Long!
-  redirectUris: String!
+  redirectUris: String
   authorities: [AuthorityInput]!
   grantTypes: [GrantTypeInput]!
   scopes: [ScopeInput]!

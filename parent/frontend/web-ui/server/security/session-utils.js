@@ -1,8 +1,10 @@
 // @node js (server.js)
-const getDateWithTimezoneOffset = require('../date/getDateWithTimezoneOffset')
+const fetch = require('node-fetch')
 
 const config = require('../../next.config')
 const serverRuntimeConfig = config.serverRuntimeConfig
+
+const getDateWithTimezoneOffset = require('../date/getDateWithTimezoneOffset')
 
 const ClientOAuth2 = require('client-oauth2')
 const oauth2Client = new ClientOAuth2({
@@ -22,10 +24,10 @@ const getTokenFromSession = (session) => {
   const {token} = session
 
   return oauth2Client.createToken(
-    token.accessToken,
-    token.refreshToken,
-    token.tokenType,
-    {})
+      token.accessToken,
+      token.refreshToken,
+      token.tokenType,
+      {})
 }
 
 const saveTokenToSession = (token, session) => {
@@ -34,7 +36,7 @@ const saveTokenToSession = (token, session) => {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
     expires: getDateWithTimezoneOffset().getTime()
-      + (token.expires /* seconds */ * 1000)
+        + (token.expires /* seconds */ * 1000)
   }
 
   session.expires = session.token.expires
@@ -57,11 +59,11 @@ const isAuthenticated = async (req, res) => {
       }
     })
 
-    if (response.status && response.status === 401) {
-      return sendUnauthorized(res)
+    if (response.status && response.status === 200) {
+      return res.status(200).end()
     }
 
-    return res.status(200)
+    return sendUnauthorized(res)
   } catch (error) {
     // TODO: Use a logger
     console.log(`error fetching ${apiUrl}: ${error}`)
@@ -71,7 +73,7 @@ const isAuthenticated = async (req, res) => {
 }
 
 const sendUnauthorized = (res) => {
-  return res.status(401)
+  return res.status(401).end()
 }
 
 module.exports = {

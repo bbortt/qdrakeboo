@@ -22,9 +22,8 @@ function* requestUserInfo(action: RequestUserInfoAction) {
 
   try {
     const response = yield call(axios.get,
-      `http://localhost:8081/principal`,
-      // `${publicRuntimeConfig.publicApiUrl}/microservice/principal`,
-      requestConfig)
+        `${publicRuntimeConfig.publicUrl}/api/microservice/principal`,
+        requestConfig)
 
     yield put(setUserInfo(response.data))
   } catch (error) {
@@ -32,7 +31,8 @@ function* requestUserInfo(action: RequestUserInfoAction) {
     if (error.response) {
       switch (error.response.status) {
         case 302:
-          contextAwareRedirect(error.response.headers.location, action.nextContext)
+          contextAwareRedirect(error.response.headers.location,
+              action.nextContext)
         case 401:
           if (action.nextContext.req.originalUrl !== '/') {
             contextAwareRedirect('/', action.nextContext)
