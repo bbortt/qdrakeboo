@@ -8,7 +8,7 @@ const sessionUtils = require('./server/security/session-utils')
 
 const handleSessionRequest = require('./server/handler/handleSessionRequest.js')
 const handleSessionRenewRequest = require(
-    './server/handler/handleSessionRenewRequest.js')
+  './server/handler/handleSessionRenewRequest.js')
 const handleGetApiRequest = require('./server/handler/handleGetApiRequest')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -42,13 +42,14 @@ app.prepare().then(() => {
 
   server.use(session(sessionConfig))
 
-  server.get('/', async (req, res) => app.render(req, res, '/',
-      {isAuthenticated: await sessionUtils.isAuthenticated(req, res)}))
+  server.get('/', async (req, res) => handle(req, res))
 
   server.get('/session', (req, res) => handleSessionRequest(req, res))
 
+  server.get('/session/check', async (req, res) => await sessionUtils.isAuthenticated(req, res))
+
   server.get('/session/renew',
-      (req, res) => handleSessionRenewRequest(req, res))
+    (req, res) => handleSessionRenewRequest(req, res))
 
   server.get('/logout', (req, res) => req.session.destroy((error) => {
     // TODO: Handle error?
@@ -59,15 +60,7 @@ app.prepare().then(() => {
   server.get('/api/*', async (req, res) => await handleGetApiRequest(req, res))
 
   server.get('*', async (req, res) => {
-    try {
-      return app.render(req, res, req.originalUrl,
-          {isAuthenticated: await sessionUtils.isAuthenticated(req, res)})
-    } catch (error) {
-      // TODO: Use a logger
-      console.log(`error rendering ${apiUrl}: ${error}`)
-
-      return handle(req, res)
-    }
+    return handle(req, res)
   })
 
   server.listen(3000, (err) => {
@@ -78,7 +71,7 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000')
   })
 })
-.catch((ex) => {
-  console.error(ex.stack)
-  process.exit(1)
-})
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })
