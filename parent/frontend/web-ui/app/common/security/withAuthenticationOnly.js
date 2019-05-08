@@ -15,7 +15,7 @@ export default function withAuthenticationOnly(Component: React.Component): Reac
       const {isServer, req, res, query} = ctx
 
       if (!await isAuthenticated({isServer, req, res})) {
-        contextAwareRedirect('/', {isServer, req, res})
+        return contextAwareRedirect('/', {isServer, req, res})
       }
 
       let pageProps = {}

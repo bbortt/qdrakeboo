@@ -8,7 +8,7 @@ type Client {
   autoApprove: Boolean!
   accessTokenValiditySeconds: Long!
   refreshTokenValiditySeconds: Long!
-  redirectUris: String!
+  redirectUris: String
   authorities: [Authority]!
   grantTypes: [GrantType]!
   scopes: [Scope]!
