@@ -6,11 +6,17 @@ import Router from 'next/router'
 
 import isAuthenticatedCall from '../app/common/security/isAuthenticated'
 
+import type {InitialProps} from '../app/domain/next/InitialProps';
+
 require('./index.scss')
 
-class Index extends React.Component<Index.propTypes> {
+type IndexPropTypes = {
+  isAuthenticated: boolean
+}
 
-  static async getInitialProps({ctx}) {
+class Index extends React.Component<IndexPropTypes> {
+
+  static async getInitialProps({ctx}: InitialProps) {
     const {isServer, req, res} = ctx
 
     const isAuthenticated = await isAuthenticatedCall({isServer, req, res})
@@ -41,10 +47,6 @@ class Index extends React.Component<Index.propTypes> {
         </div>
     )
   }
-}
-
-Index.propTypes = {
-  isAuthenticated: PropTypes.bool
 }
 
 export default Index

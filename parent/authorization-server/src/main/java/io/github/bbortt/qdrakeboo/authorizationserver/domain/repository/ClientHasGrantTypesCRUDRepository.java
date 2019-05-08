@@ -3,7 +3,6 @@ package io.github.bbortt.qdrakeboo.authorizationserver.domain.repository;
 import java.util.Set;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.GrantType;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasgranttypes.ClientHasGrantType;
@@ -15,5 +14,5 @@ public interface ClientHasGrantTypesCRUDRepository
 
   public Set<GrantType> findAllByClient(Client client);
 
-  public Set<Account> findAllByGrantType(GrantType grantType);
+  public Set<Client> findAllByGrantType(GrantType grantType);
 }

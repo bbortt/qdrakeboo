@@ -9,7 +9,13 @@ import withAuthenticationOnly
 
 import {requestUserInfo} from '../app/state/actions'
 
-class Home extends React.Component<Home.propTypes> {
+import type {UserInfo} from '../app/domain/session/UserInfo';
+
+type HomePropTypes = {
+  userInfo: UserInfo
+}
+
+class Home extends React.Component<HomePropTypes> {
 
   static async getInitialProps({ctx}) {
     const {isServer, req, res, store} = ctx

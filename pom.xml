@@ -45,36 +45,16 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.github.bbortt.qdrakeboo.common</groupId>
-        <artifactId>oauth2-client-autoconfiguration</artifactId>
+        <groupId>io.github.bbortt.qdrakeboo.model</groupId>
+        <artifactId>qdrakeboo-account</artifactId>
         <version>${project.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>io.github.bbortt.qdrakeboo.dev</groupId>
-        <artifactId>spring-cloud-netflix-eureka-client-autoconfiguration</artifactId>
+        <groupId>io.github.bbortt.qdrakeboo.common</groupId>
+        <artifactId>oauth2-client-autoconfiguration</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>com.amashchenko.maven.plugin</groupId>
-        <artifactId>gitflow-maven-plugin</artifactId>
-        <version>${gitflow-maven-plugin-version}</version>
-
-        <configuration>
-          <gitFlowConfig>
-            <developmentBranch>master</developmentBranch>
-          </gitFlowConfig>
-
-          <gpgSignCommit>true</gpgSignCommit>
-          <installProject>true</installProject>
-          <preReleaseGoals>clean</preReleaseGoals>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

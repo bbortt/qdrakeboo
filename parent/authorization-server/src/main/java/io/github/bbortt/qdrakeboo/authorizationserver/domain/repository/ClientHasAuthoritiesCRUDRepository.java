@@ -3,7 +3,6 @@ package io.github.bbortt.qdrakeboo.authorizationserver.domain.repository;
 import java.util.Set;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import io.github.bbortt.qdrakeboo.authorizationserver.domain.Account;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Authority;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.Client;
 import io.github.bbortt.qdrakeboo.authorizationserver.domain.association.clienthasauthorities.ClientHasAuthority;
@@ -15,5 +14,5 @@ public interface ClientHasAuthoritiesCRUDRepository
 
   public Set<Authority> findAllByClient(Client client);
 
-  public Set<Account> findAllByAuthority(Authority authority);
+  public Set<Client> findAllByAuthority(Authority authority);
 }

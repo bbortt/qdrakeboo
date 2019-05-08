@@ -1,7 +1,7 @@
 // @flow
 import Router from 'next/router';
 
-import type {NextContext} from '../axios/NextContext';
+import type {NextContext} from '../../domain/next/NextContext';
 
 export default (url: string, nextContext: NextContext) => {
   if (nextContext.res) {

@@ -1,9 +1,0 @@
-management:
-  server:
-    port: 8090
-oauth2:
-  client:
-    clientId: ${CLIENT_ID}
-    clientSecret: ${CLIENT_SECRET}
-    checkTokenUri: ${CHECK_TOKEN_URL}
-    resourceId: qdrakeboo

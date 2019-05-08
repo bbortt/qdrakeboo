@@ -12,8 +12,18 @@
   </parent>
 
   <modules>
-    <module>microservice</module>
+    <module>qdrakeboo-graphql-api-account</module>
   </modules>
+
+  <properties>
+    <!-- Dependencies -->
+    <graphiql-spring-boot-starter-version>5.0.2</graphiql-spring-boot-starter-version>
+    <graphql-java-tools-version>5.2.4</graphql-java-tools-version>
+    <graphql-spring-boot-starter-version>5.0.2</graphql-spring-boot-starter-version>
+
+    <!-- Plugins -->
+    <docker-maven-plugin-version>0.30.0</docker-maven-plugin-version>
+  </properties>
 
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
@@ -53,12 +63,6 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>io.github.bbortt.qdrakeboo.dev</groupId>
-      <artifactId>spring-cloud-netflix-eureka-client-autoconfiguration</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -66,5 +70,90 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-starter -->
+      <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphql-spring-boot-starter</artifactId>
+        <version>${graphql-spring-boot-starter-version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools -->
+      <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphql-java-tools</artifactId>
+        <version>${graphql-java-tools-version}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.graphql-java/graphiql-spring-boot-starter -->
+      <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphiql-spring-boot-starter</artifactId>
+        <version>${graphiql-spring-boot-starter-version}</version>
+        <scope>runtime</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
+        <plugin>
+          <groupId>io.fabric8</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>${docker-maven-plugin-version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+
+      <build>
+        <plugins>
+          <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+
+            <configuration>
+              <profiles>
+                <profile>dev</profile>
+              </profiles>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>windows</id>
+
+      <activation>
+        <os>
+          <family>Windows</family>
+        </os>
+      </activation>
+
+      <build>
+        <plugins>
+          <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+
+            <configuration>
+              <dockerHost>tcp://127.0.0.1:2375</dockerHost>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
   

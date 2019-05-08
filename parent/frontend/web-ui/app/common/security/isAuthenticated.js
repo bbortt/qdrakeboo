@@ -2,11 +2,11 @@
 import getConfig from 'next/config'
 
 import axios from 'axios'
-import type {NextContext} from "../axios/NextContext";
+import type {NextContext} from "../../domain/next/NextContext";
 
 const {publicRuntimeConfig} = getConfig()
 
-export default async (nextContext: NextContext): boolean => {
+export default async (nextContext: NextContext): Promise<boolean> => {
   const requestConfig = {}
 
   if (nextContext.isServer && nextContext.req.headers.cookie) {

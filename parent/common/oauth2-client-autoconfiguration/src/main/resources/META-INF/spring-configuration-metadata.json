@@ -6,6 +6,11 @@
 			"sourceType": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties"
 		},
 		{
+			"name": "oauth2.client.autoconfiguration",
+			"type": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties.Autoconfiguration",
+			"sourceType": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties$Autoconfiguration"
+		},
+		{
 			"name": "oauth2.client.cors",
 			"type": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties.Cors",
 			"sourceType": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties$Cors"
@@ -31,6 +36,11 @@
 			"name": "oauth2.client.checkTokenUri",
 			"type": "java.lang.String",
 			"sourceType": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties"
+		},
+		{
+			"name": "oauth2.client.autoconfiguration.enabled",
+			"type": "java.lang.Boolean",
+			"sourceType": "io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.config.OAuth2ClientAutoconfigurationProperties$Autoconfiguration"
 		},
 		{
 			"name": "oauth2.client.cors.enabled",

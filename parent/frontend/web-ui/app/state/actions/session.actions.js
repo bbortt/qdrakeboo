@@ -1,6 +1,6 @@
 // @flow
 import type {UserInfo} from '../../domain/session/UserInfo'
-import type {NextContext} from '../../common/axios/NextContext'
+import type {NextContext} from '../../domain/next/NextContext'
 
 export const REQUEST_USER_INFO: string = 'Session: Request User-Info'
 export const SET_USER_INFO: string = 'Session: Set User-Info'
