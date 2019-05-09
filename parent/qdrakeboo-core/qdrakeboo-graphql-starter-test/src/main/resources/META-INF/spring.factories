@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.github.bbortt.qdrakeboo.core.graphql.starter.test.GraphQLStarterTestAutoconfiguration

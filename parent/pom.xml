@@ -12,10 +12,9 @@
   </parent>
 
   <modules>
-    <module>common</module>
-    <module>model</module>
-    <module>core</module>
-    <module>authorization-server</module>
+    <module>qdrakeboo-model</module>
+    <module>qdrakeboo-core</module>
+    <module>qdrakeboo-authorization-server</module>
     <module>frontend</module>
   </modules>
 

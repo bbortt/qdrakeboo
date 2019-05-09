@@ -1,0 +1,294 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>qdrakeboo-authorization-server</artifactId>
+
+  <parent>
+    <groupId>io.github.bbortt.qdrakeboo</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!-- General -->
+    <mainClass>io.github.bbortt.qdrakeboo.authorizationserver.AuthorizationServer</mainClass>
+
+    <!-- Dependencies -->
+    <graphiql-spring-boot-starter-version>5.0.2</graphiql-spring-boot-starter-version>
+    <graphql-java-tools-version>5.2.4</graphql-java-tools-version>
+    <graphql-spring-boot-starter-version>5.0.2</graphql-spring-boot-starter-version>
+    <spring-security-oauth2-version>2.3.5.RELEASE</spring-security-oauth2-version>
+
+    <!-- Plugins -->
+    <docker-maven-plugin-version>0.28.0</docker-maven-plugin-version>
+  </properties>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+
+      <exclusions>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat -->
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-undertow -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
+    <dependency>
+      <groupId>org.springframework.security.oauth</groupId>
+      <artifactId>spring-security-oauth2</artifactId>
+      <version>${spring-security-oauth2-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-starter -->
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphql-spring-boot-starter</artifactId>
+      <version>${graphql-spring-boot-starter-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.graphql-java/graphql-java-tools -->
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphql-java-tools</artifactId>
+      <version>${graphql-java-tools-version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.graphql-java/graphiql-spring-boot-starter -->
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphiql-spring-boot-starter</artifactId>
+      <version>${graphiql-spring-boot-starter-version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis -->
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin-version}</version>
+
+        <configuration>
+          <excludes>
+            <exclude>io/github/bbortt/qdrakeboo/authorizationserver/domain/**/*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+
+        <configuration>
+          <environmentVariables>
+            <it-redis.port>${it-redis.port}</it-redis.port>
+            <it-database.port>${it-database.port}</it-database.port>
+          </environmentVariables>
+        </configuration>
+      </plugin>
+
+      <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker-maven-plugin-version}</version>
+
+        <executions>
+          <execution>
+            <id>prepare-it-images</id>
+
+            <phase>pre-integration-test</phase>
+
+            <goals>
+              <goal>start</goal>
+            </goals>
+
+            <configuration>
+              <images>
+                <image>
+                  <name>postgres:11.2-alpine</name>
+
+                  <alias>qdrakeboo-authorization-it-postgres</alias>
+
+                  <run>
+                    <ports>
+                      <port>it-database.port:5432</port>
+                    </ports>
+
+                    <env>
+                      <POSTGRES_USER>qdrakeboo_authorization</POSTGRES_USER>
+                    </env>
+                  </run>
+                </image>
+
+                <image>
+                  <name>redis:5.0.4-alpine</name>
+
+                  <alias>qdrakeboo-authorization-it-redis</alias>
+
+                  <run>
+                    <ports>
+                      <port>it-redis.port:6379</port>
+                    </ports>
+                  </run>
+                </image>
+              </images>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>remove-it-images</id>
+
+            <phase>post-integration-test</phase>
+
+            <goals>
+              <goal>stop</goal>
+              <goal>remove</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+
+        <configuration>
+          <configuration>
+            <repository>${DOCKER_REPOSITORY}</repository>
+            <tag>${project.version}</tag>
+
+            <buildArgs>
+              <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+            </buildArgs>
+          </configuration>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+
+            <configuration>
+              <profiles>
+                <profile>dev</profile>
+              </profiles>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>windows</id>
+
+      <activation>
+        <os>
+          <family>Windows</family>
+        </os>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${docker-maven-plugin-version}</version>
+
+            <configuration>
+              <dockerHost>tcp://127.0.0.1:2375</dockerHost>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

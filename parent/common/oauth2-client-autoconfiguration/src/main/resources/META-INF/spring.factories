@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.CorsFilterAutoconfiguration,\
-io.github.bbortt.qdrakeboo.common.oauth2.client.autoconfiguration.OAuth2ClientAutoconfiguration
