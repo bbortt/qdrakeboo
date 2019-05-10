@@ -70,27 +70,19 @@ public class Role extends AbstractAuditingEntity implements GrantedAuthority {
       return false;
     }
     Role role = (Role) object;
-    return new EqualsBuilder()
-        .appendSuper(super.equals(object))
-        .append(uuid, role.uuid)
-        .append(name, role.name)
-        .isEquals();
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, role.uuid)
+        .append(name, role.name).isEquals();
   }
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder()
-        .appendSuper(super.hashCode())
-        .append(uuid).append(name)
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(name)
         .toHashCode();
   }
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this)
-        .appendSuper(super.toString())
-        .append("uuid", uuid)
-        .append("name", name)
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(uuid).append(name)
         .build();
   }
 }

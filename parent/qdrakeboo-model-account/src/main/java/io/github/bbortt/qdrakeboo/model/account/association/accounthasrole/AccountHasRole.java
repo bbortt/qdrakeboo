@@ -73,28 +73,19 @@ public class AccountHasRole extends AbstractAuditingEntity {
       return false;
     }
     AccountHasRole accountHasRole = (AccountHasRole) object;
-    return new EqualsBuilder()
-        .appendSuper(super.equals(object))
-        .append(account, accountHasRole.account)
-        .append(role, accountHasRole.role)
-        .isEquals();
+    return new EqualsBuilder().appendSuper(super.equals(object))
+        .append(account, accountHasRole.account).append(role, accountHasRole.role).isEquals();
   }
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder()
-        .appendSuper(super.hashCode())
-        .append(account)
-        .append(role)
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(account).append(role)
         .toHashCode();
   }
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this)
-        .appendSuper(super.toString())
-        .append("account", account)
-        .append("role", role)
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(account).append(role)
         .build();
   }
 }

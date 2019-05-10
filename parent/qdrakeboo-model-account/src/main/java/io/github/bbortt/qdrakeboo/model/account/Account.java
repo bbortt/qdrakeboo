@@ -145,34 +145,19 @@ public class Account extends AbstractAuditingEntity implements Serializable {
       return false;
     }
     Account account = (Account) object;
-    return new EqualsBuilder()
-        .appendSuper(super.equals(object))
-        .append(uuid, account.uuid)
-        .append(accountname, account.accountname)
-        .append(email, account.email)
-        .isEquals();
+    return new EqualsBuilder().appendSuper(super.equals(object)).append(uuid, account.uuid)
+        .append(accountname, account.accountname).append(email, account.email).isEquals();
   }
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder()
-        .appendSuper(super.hashCode())
-        .append(uuid)
-        .append(accountname)
-        .append(email)
-        .toHashCode();
+    return new HashCodeBuilder().appendSuper(super.hashCode()).append(uuid).append(accountname)
+        .append(email).toHashCode();
   }
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this)
-        .appendSuper(super.toString())
-        .append("uuid", uuid)
-        .append("accountname", accountname)
-        .append("email", email)
-        .append("enabled", enabled)
-        .append("blocked", blocked)
-        .append("roles", getRoles())
-        .build();
+    return new ToStringBuilder(this).appendSuper(super.toString()).append(uuid).append(accountname)
+        .append(email).append(enabled).append(blocked).append(getRoles()).build();
   }
 }

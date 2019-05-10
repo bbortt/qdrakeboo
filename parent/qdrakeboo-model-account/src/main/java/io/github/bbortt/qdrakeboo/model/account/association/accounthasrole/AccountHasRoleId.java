@@ -35,17 +35,12 @@ public class AccountHasRoleId implements Serializable {
       return false;
     }
     AccountHasRoleId accountHasRolesId = (AccountHasRoleId) object;
-    return new EqualsBuilder()
-        .append(account, accountHasRolesId.account)
-        .append(role, accountHasRolesId.role)
-        .isEquals();
+    return new EqualsBuilder().append(account, accountHasRolesId.account)
+        .append(role, accountHasRolesId.role).isEquals();
   }
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder().
-        append(account)
-        .append(role)
-        .toHashCode();
+    return new HashCodeBuilder().append(account).append(role).toHashCode();
   }
 }
