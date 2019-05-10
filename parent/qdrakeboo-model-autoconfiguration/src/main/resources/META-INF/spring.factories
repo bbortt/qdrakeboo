@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.bbortt.qdrakeboo.model.autoconfiguration.QdrakebooModelAutoconfiguration

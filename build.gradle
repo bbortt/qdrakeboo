@@ -1,3 +1,7 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.4.RELEASE' apply false
+}
+
 group = 'io.github.bbortt.qdrakeboo'
 
 allprojects {
@@ -9,4 +13,28 @@ allprojects {
 }
 
 subprojects {
+    pluginManager.withPlugin('java') {
+        apply plugin: 'org.springframework.boot'
+        apply plugin: 'io.spring.dependency-management'
+
+        sourceCompatibility = '11'
+    }
+
+    if (name.startsWith('qdrakeboo-model')) {
+        apply plugin: 'java'
+
+        dependencies {
+            implementation 'javax.persistence:javax.persistence-api'
+            implementation 'org.apache.commons:commons-lang3'
+            implementation 'org.hibernate:hibernate-core'
+        }
+
+        jar {
+            enabled = true
+        }
+
+        bootJar {
+            enabled = false
+        }
+    }
 }

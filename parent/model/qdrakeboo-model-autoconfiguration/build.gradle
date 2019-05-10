@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.bbortt.qdrakeboo.model'
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.data:spring-data-jpa'
+}

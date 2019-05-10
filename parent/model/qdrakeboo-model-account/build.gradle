@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.bbortt.qdrakeboo.model'
+
+dependencies {
+    implementation project(':parent:model:qdrakeboo-model-autoconfiguration')
+    implementation 'javax.validation:validation-api'
+    implementation 'org.springframework.security:spring-security-core'
+}
