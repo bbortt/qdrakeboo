@@ -1,9 +1,0 @@
-mutation {
-  newAuthority (
-    authorityInput: {
-      name: "a-new-authority"
-    }
-  ) {
-    name
-  }
-}

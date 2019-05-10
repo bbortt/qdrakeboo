@@ -1,16 +1,0 @@
-management:
-  server:
-    port: 8099
-server:
-  port: 8088
-  servlet:
-    context-path: /auth
-spring:
-  datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/qdrakeboo_authorization
-    username: qdrakeboo_authorization
-    password: qdrakeboo_authorization
-  redis:
-    host: localhost
-    port: 6379
-  session:    store-type: none

@@ -1,8 +1,0 @@
-spring:
-  datasource:
-    jdbc-url: jdbc:postgresql://localhost:${it-database.port}/qdrakeboo_authorization
-    username: qdrakeboo_authorization
-    password: qdrakeboo_authorization
-  redis:
-    host: localhost
-    port: ${it-redis.port}

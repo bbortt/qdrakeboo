@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'qdrakeboo'
+
+include 'parent:qdrakeboo-model-autoconfiguration'
+findProject(':parent:qdrakeboo-model-autoconfiguration')?.name = 'qdrakeboo-model-autoconfiguration'
+
+include 'parent:qdrakeboo-model-account'
+findProject(':parent:qdrakeboo-model-account')?.name = 'qdrakeboo-model-account'

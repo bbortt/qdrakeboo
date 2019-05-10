@@ -1,5 +1,0 @@
-tokenstore:
-  datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/${tokenstore.datasource.username}
-    username: qdrakeboo_tokenstore
-    password: ${tokenstore.datasource.username}

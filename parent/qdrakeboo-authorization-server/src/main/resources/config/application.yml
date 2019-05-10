@@ -1,18 +1,0 @@
-graphiql:  mapping: /admingraphql:  servlet:    actuator-metrics: truemanagement:
-  server:
-    port: 8090
-spring:
-  cache:    type: redis
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    jdbc-url: ${PSQL_DATASOURCE_JDBC_URL}
-    username: ${PSQL_DATASOURCE_USERNAME}
-    password: ${PSQL_DATASOURCE_PASSWORD}
-  flyway:
-    url: ${spring.datasource.jdbc-url}
-    user: ${PSQL_FLYWAY_USERNAME:${spring.datasource.username}}
-    password: ${PSQL_FLYWAY_PASSWORD:${spring.datasource.password}}
-  redis:
-    host: ${REDIS_HOST}
-    port: ${REDIS_PORT}
-  session:    store-type: redis
