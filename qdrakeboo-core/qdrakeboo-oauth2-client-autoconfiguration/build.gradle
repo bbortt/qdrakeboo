@@ -2,8 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'io.github.bbortt.qdrakeboo'
-version '1.0.0-SNAPSHOT'
+group 'io.github.bbortt.qdrakeboo.core'
 
 dependencies {
     implementation 'javax.servlet:javax.servlet-api'
@@ -13,6 +12,12 @@ dependencies {
 
 jar {
     enabled = true
+
+    from {
+        configurations.compileClasspath.filter { it.exists() }.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 bootJar {

@@ -6,12 +6,12 @@ pluginManagement {
 
 rootProject.name = 'qdrakeboo'
 
-include 'parent:model:qdrakeboo-model-autoconfiguration'
-findProject(':parent:model:qdrakeboo-model-autoconfiguration')?.name = 'qdrakeboo-model-autoconfiguration'
+include 'qdrakeboo-model:qdrakeboo-model-account'
+findProject(':qdrakeboo-model:qdrakeboo-model-account')?.name = 'qdrakeboo-model-account'
+include 'qdrakeboo-model:qdrakeboo-model-autoconfiguration'
+findProject(':qdrakeboo-model:qdrakeboo-model-autoconfiguration')?.name = 'qdrakeboo-model-autoconfiguration'
 
-include 'parent:model:qdrakeboo-model-account'
-findProject(':parent:model:qdrakeboo-model-account')?.name = 'qdrakeboo-model-account'
-
-include 'parent:core:qdrakeboo-oauth2-client-autoconfiguration'
-findProject(':parent:core:qdrakeboo-oauth2-client-autoconfiguration')?.name = 'qdrakeboo-oauth2-client-autoconfiguration'
-
+include 'qdrakeboo-core:qdrakeboo-graphql-starter-test'
+findProject(':qdrakeboo-core:qdrakeboo-graphql-starter-test')?.name = 'qdrakeboo-graphql-starter-test'
+include 'qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration'
+findProject(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')?.name = 'qdrakeboo-oauth2-client-autoconfiguration'

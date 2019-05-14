@@ -18,6 +18,10 @@ subprojects {
         apply plugin: 'io.spring.dependency-management'
 
         sourceCompatibility = '11'
+
+        dependencies {
+            testImplementation 'org.springframeworkboot:spring-boot-starter-test'
+        }
     }
 
     if (name.startsWith('qdrakeboo-model')) {
@@ -31,6 +35,12 @@ subprojects {
 
         jar {
             enabled = true
+
+            from {
+                configurations.compileClasspath.filter { it.exists() }.collect {
+                    it.isDirectory() ? it : zipTree(it)
+                }
+            }
         }
 
         bootJar {
