@@ -1,6 +1,8 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
+
+apply plugin: 'java-library'
 
 group 'io.github.bbortt.qdrakeboo.core'
 
@@ -8,18 +10,4 @@ dependencies {
     implementation 'javax.servlet:javax.servlet-api'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework.security.oauth:spring-security-oauth2:2.3.5.RELEASE'
-}
-
-jar {
-    enabled = true
-
-    from {
-        configurations.compileClasspath.filter { it.exists() }.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
-}
-
-bootJar {
-    enabled = false
 }

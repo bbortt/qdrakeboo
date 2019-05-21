@@ -1,0 +1,136 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:4.8.1'
+    }
+}
+
+apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.container.extras.DockerWaitHealthyContainer
+import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
+
+task pullPostgresImage(type: DockerPullImage) {
+    repository = 'library/postgres'
+    tag = '11.2-alpine'
+}
+
+task pullRedisImage(type: DockerPullImage) {
+    repository = 'redis'
+    tag = '5.0.4-alpine'
+}
+
+task createPostgresContainer(type: DockerCreateContainer) {
+    dependsOn pullPostgresImage
+    targetImageId { pullPostgresImage.getImageId().get() }
+    portBindings = [':5432']
+    envVars = ['POSTGRES_USER': 'otf2021']
+}
+
+task createRedisContainer(type: DockerCreateContainer) {
+    dependsOn pullRedisImage
+    targetImageId { pullRedisImage.getImageId().get() }
+    portBindings = [':6379']
+}
+
+task startPostgresContainer(type: DockerStartContainer) {
+    dependsOn createPostgresContainer
+    targetContainerId { createPostgresContainer.getContainerId().get() }
+}
+
+task startRedisContainer(type: DockerStartContainer) {
+    dependsOn createRedisContainer
+    targetContainerId { createRedisContainer.getContainerId().get() }
+}
+
+
+task startAndWaitOnHealthyPostgresContainer(type: DockerWaitHealthyContainer) {
+    dependsOn startPostgresContainer
+    targetContainerId { startPostgresContainer.getContainerId().get() }
+}
+
+task startAndWaitOnHealthyRedisContainer(type: DockerWaitHealthyContainer) {
+    dependsOn startRedisContainer
+    targetContainerId { startRedisContainer.getContainerId().get() }
+}
+
+task inspectPostgresql(type: DockerInspectContainer) {
+    dependsOn startAndWaitOnHealthyPostgresContainer
+    targetContainerId { startPostgresContainer.getContainerId().get() }
+    onNext {
+        it.networkSettings.ports.getBindings().each { exposedPort, bindingArr ->
+            if (exposedPort.port == 5432) {
+                int portBinding = bindingArr.first().hostPortSpec as int
+
+                tasks.integrationTest {
+                    systemProperty 'it-database.port', portBinding
+                }
+            }
+        }
+    }
+}
+
+task inspectRedis(type: DockerInspectContainer) {
+    dependsOn startAndWaitOnHealthyRedisContainer
+    targetContainerId { startRedisContainer.getContainerId().get() }
+    onNext {
+        it.networkSettings.ports.getBindings().each { exposedPort, bindingArr ->
+            if (exposedPort.port == 6379) {
+                int portBinding = bindingArr.first().hostPortSpec as int
+
+                tasks.integrationTest {
+                    systemProperty 'it-redis.port', portBinding
+                }
+            }
+        }
+    }
+}
+
+task stopPostgresContainer(type: DockerStopContainer) {
+    targetContainerId { startPostgresContainer.getContainerId().get() }
+}
+
+task stopRedisContainer(type: DockerStopContainer) {
+    targetContainerId { startRedisContainer.getContainerId().get() }
+}
+
+task removePostgresContainer(type: DockerRemoveContainer) {
+    dependsOn stopPostgresContainer
+    targetContainerId { startPostgresContainer.getContainerId().get() }
+}
+
+task removeRedisContainer(type: DockerRemoveContainer) {
+    dependsOn stopRedisContainer
+    targetContainerId { startRedisContainer.getContainerId().get() }
+}
+
+integrationTest {
+    dependsOn inspectPostgresql, inspectRedis
+
+    finalizedBy removePostgresContainer, removeRedisContainer
+}
+
+// build.dependsOn integrationTest

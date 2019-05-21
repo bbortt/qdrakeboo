@@ -13,7 +13,13 @@ allprojects {
 }
 
 subprojects {
-    pluginManager.withPlugin('java') {
+    configurations {
+        integrationTestCompile.extendsFrom testCompile
+        integrationTestImplementation.extendsFrom testImplementation
+        integrationTestRuntime.extendsFrom testRuntime
+    }
+
+    def globalJavaConfiguration = {
         apply plugin: 'org.springframework.boot'
         apply plugin: 'io.spring.dependency-management'
 
@@ -24,15 +30,10 @@ subprojects {
         }
     }
 
-    if (name.startsWith('qdrakeboo-model')) {
-        apply plugin: 'java'
+    pluginManager.withPlugin('java', globalJavaConfiguration)
+    pluginManager.withPlugin('java-library', globalJavaConfiguration)
 
-        dependencies {
-            implementation 'javax.persistence:javax.persistence-api'
-            implementation 'org.apache.commons:commons-lang3'
-            implementation 'org.hibernate:hibernate-core'
-        }
-
+    pluginManager.withPlugin('java-library') {
         jar {
             enabled = true
 
@@ -45,6 +46,16 @@ subprojects {
 
         bootJar {
             enabled = false
+        }
+    }
+
+    if (name.startsWith('qdrakeboo-model')) {
+        apply plugin: 'java-library'
+
+        dependencies {
+            implementation 'javax.persistence:javax.persistence-api'
+            implementation 'org.apache.commons:commons-lang3'
+            implementation 'org.hibernate:hibernate-core'
         }
     }
 }

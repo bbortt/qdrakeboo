@@ -1,0 +1,14 @@
+type Role {
+  created: String!
+  lastUpdated: String!
+  uuid: String!
+  name: String!
+}
+
+input RoleInput {
+  name: String!
+}
+
+extend type RootQuery {
+  allRoles: [Role]!
+}

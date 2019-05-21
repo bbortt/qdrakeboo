@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 group 'io.github.bbortt.qdrakeboo.core'
@@ -11,18 +11,4 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-test'
     implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
-}
-
-jar {
-    enabled = true
-
-    from {
-        configurations.compileClasspath.filter { it.exists() }.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
-}
-
-bootJar {
-    enabled = false
 }
