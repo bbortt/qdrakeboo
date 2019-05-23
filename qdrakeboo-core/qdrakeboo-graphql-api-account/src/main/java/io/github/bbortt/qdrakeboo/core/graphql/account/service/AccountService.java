@@ -1,7 +1,7 @@
 package io.github.bbortt.qdrakeboo.core.graphql.account.service;
 
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
 import java.util.List;
-import io.github.bbortt.qdrakeboo.model.account.Account;
 
 public interface AccountService {
 

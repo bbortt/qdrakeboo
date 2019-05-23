@@ -1,10 +1,10 @@
 package io.github.bbortt.qdrakeboo.core.graphql.account.repository;
 
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import io.github.bbortt.qdrakeboo.model.account.Account;
 
 @Repository
 public interface AccountCRUDRepository extends CrudRepository<Account, UUID> {

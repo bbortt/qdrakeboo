@@ -15,8 +15,8 @@ apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
 sourceSets {
     integrationTest {
         java {
-            compileClasspath += main.output + test.output
-            runtimeClasspath += main.output + test.output
+            compileClasspath += main.output
+            runtimeClasspath += main.output
             srcDir file('src/integration-test/java')
         }
         resources.srcDir file('src/integration-test/resources')
@@ -133,4 +133,4 @@ integrationTest {
     finalizedBy removePostgresContainer, removeRedisContainer
 }
 
-// build.dependsOn integrationTest
+build.dependsOn integrationTest

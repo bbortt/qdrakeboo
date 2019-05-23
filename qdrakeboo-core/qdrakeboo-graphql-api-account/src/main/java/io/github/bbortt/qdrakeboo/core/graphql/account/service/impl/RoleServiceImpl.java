@@ -1,13 +1,12 @@
 package io.github.bbortt.qdrakeboo.core.graphql.account.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Role;
 import io.github.bbortt.qdrakeboo.core.graphql.account.repository.RoleCRUDRepository;
 import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
-import io.github.bbortt.qdrakeboo.model.account.Role;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -30,12 +29,7 @@ public class RoleServiceImpl implements RoleService {
   @Override
   @Cacheable(cacheNames = {Role.CACHE_NAME}, key = "#result.uuid")
   public Role findByName(String name) {
-    Optional<Role> optionalRole = roleCRUDRepository.findByName(name);
-
-    if (!optionalRole.isPresent()) {
-      throw new IllegalArgumentException("Role '" + name + "' does not exist!");
-    }
-
-    return optionalRole.get();
+    return roleCRUDRepository.findByName(name)
+        .orElseThrow(() -> new IllegalArgumentException("Role '" + name + "' does not exist!"));
   }
 }

@@ -6,13 +6,12 @@ plugins {
 
 group 'io.github.bbortt.qdrakeboo.core'
 
-mainClassName = 'io.github.bbortt.qdrakeboo.core.graphql.account.Application'
+mainClassName = 'io.github.bbortt.qdrakeboo.core.graphql.io.github.bbortt.qdrakeboo.core.graphql.account.Application'
 
 dependencies {
     implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
     implementation project(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')
-    implementation project(':qdrakeboo-model:qdrakeboo-model-account')
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -21,9 +20,7 @@ dependencies {
         exclude module: 'spring-boot-starter-tomcat'
     }
     compile 'org.postgresql:postgresql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     integrationTestImplementation project(':qdrakeboo-core:qdrakeboo-graphql-starter-test')
-    integrationTestImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 apply from: 'src/integration-test/integration-test.gradle'

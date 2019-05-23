@@ -4,6 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
+
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Role;
+import io.github.bbortt.qdrakeboo.core.graphql.account.repository.AccountCRUDRepository;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Optional;
@@ -23,11 +29,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import io.github.bbortt.qdrakeboo.core.graphql.account.repository.AccountCRUDRepository;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
-import io.github.bbortt.qdrakeboo.model.account.Account;
-import io.github.bbortt.qdrakeboo.model.account.Role;
 
 public class AccountServiceImplUnitTest {
 
@@ -111,7 +112,7 @@ public class AccountServiceImplUnitTest {
 
   @Test
   public void getCurrentAccountReturnsEntity() {
-    String currentAccountname = "this-is-an-account-name";
+    String currentAccountname = "this-is-an-io.github.bbortt.qdrakeboo.core.graphql.account-name";
     Account expectedAccount = new Account();
 
     doReturn(currentAccountname).when(authenticationMock).getName();
@@ -133,7 +134,9 @@ public class AccountServiceImplUnitTest {
 
     expectedException.expect(IllegalArgumentException.class);
     expectedException
-        .expectMessage("Cannot find account for accountname '" + currentAccountname + "'!");
+        .expectMessage(
+            "Cannot find io.github.bbortt.qdrakeboo.core.graphql.account for accountname '"
+                + currentAccountname + "'!");
     fixture.getCurrentAccount();
 
     verify(accountCRUDRepositoryMock)

@@ -2,6 +2,10 @@ package io.github.bbortt.qdrakeboo.core.graphql.account.graphql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,9 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.stereotype.Component;
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
-import io.github.bbortt.qdrakeboo.model.account.Account;
 
 public class AccountMutationResolverUnitTest {
 

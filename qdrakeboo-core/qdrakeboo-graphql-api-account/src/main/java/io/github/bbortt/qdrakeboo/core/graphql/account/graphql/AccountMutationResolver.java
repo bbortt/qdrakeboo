@@ -1,9 +1,9 @@
 package io.github.bbortt.qdrakeboo.core.graphql.account.graphql;
 
-import org.springframework.stereotype.Component;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
 import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
-import io.github.bbortt.qdrakeboo.model.account.Account;
+import org.springframework.stereotype.Component;
 
 @Component
 public class AccountMutationResolver implements GraphQLMutationResolver {

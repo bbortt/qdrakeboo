@@ -1,10 +1,10 @@
 package io.github.bbortt.qdrakeboo.core.graphql.account.graphql;
 
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
-import io.github.bbortt.qdrakeboo.model.account.Account;
 
 @Component
 public class AccountQueryResolver implements GraphQLQueryResolver {

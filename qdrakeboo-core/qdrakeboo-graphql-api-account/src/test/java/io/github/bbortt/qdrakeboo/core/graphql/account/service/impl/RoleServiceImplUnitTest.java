@@ -3,6 +3,10 @@ package io.github.bbortt.qdrakeboo.core.graphql.account.service.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
+
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Role;
+import io.github.bbortt.qdrakeboo.core.graphql.account.repository.RoleCRUDRepository;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
 import java.util.Collections;
 import java.util.Optional;
 import org.junit.Before;
@@ -14,9 +18,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.stereotype.Service;
-import io.github.bbortt.qdrakeboo.core.graphql.account.repository.RoleCRUDRepository;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
-import io.github.bbortt.qdrakeboo.model.account.Role;
 
 public class RoleServiceImplUnitTest {
 

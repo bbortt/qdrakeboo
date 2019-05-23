@@ -26,7 +26,8 @@ subprojects {
         sourceCompatibility = '11'
 
         dependencies {
-            testImplementation 'org.springframeworkboot:spring-boot-starter-test'
+            testImplementation 'org.springframework.boot:spring-boot-starter-test'
+            integrationTestImplementation 'org.springframework.boot:spring-boot-starter-test'
         }
     }
 

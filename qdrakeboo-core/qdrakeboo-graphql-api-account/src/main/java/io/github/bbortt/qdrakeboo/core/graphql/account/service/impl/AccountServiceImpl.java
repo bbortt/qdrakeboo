@@ -1,5 +1,9 @@
 package io.github.bbortt.qdrakeboo.core.graphql.account.service.impl;
 
+import io.github.bbortt.qdrakeboo.core.graphql.account.domain.Account;
+import io.github.bbortt.qdrakeboo.core.graphql.account.repository.AccountCRUDRepository;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
+import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,10 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import io.github.bbortt.qdrakeboo.core.graphql.account.repository.AccountCRUDRepository;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.AccountService;
-import io.github.bbortt.qdrakeboo.core.graphql.account.service.RoleService;
-import io.github.bbortt.qdrakeboo.model.account.Account;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -43,7 +43,8 @@ public class AccountServiceImpl implements AccountService {
 
     return accountCRUDRepository.findOneByAccountnameIgnoreCase(accountName)
         .orElseThrow(() -> new IllegalArgumentException(
-            "Cannot find account for accountname '" + accountName + "'!"));
+            "Cannot find io.github.bbortt.qdrakeboo.core.graphql.account for accountname '"
+                + accountName + "'!"));
   }
 
   @Override
@@ -64,7 +65,8 @@ public class AccountServiceImpl implements AccountService {
       account.setRoles(Collections.singletonList(roleService.findByName(DEFAULT_ROLE_NAME)));
     } else {
       account.setRoles(account.getRoles().stream()
-          .map(role -> roleService.findByName(role.getName())).collect(Collectors.toList()));
+          .map(role -> roleService.findByName(role.getName()))
+          .collect(Collectors.toList()));
     }
 
     return accountCRUDRepository.save(account);
