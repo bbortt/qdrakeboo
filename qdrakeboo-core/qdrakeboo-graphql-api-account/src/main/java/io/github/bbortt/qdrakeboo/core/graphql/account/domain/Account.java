@@ -36,7 +36,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   @Type(type = "pg-uuid")
   @GeneratedValue(generator = "io.github.bbortt.qdrakeboo.core.graphql.account-uuid")
   @GenericGenerator(name = "io.github.bbortt.qdrakeboo.core.graphql.account-uuid",
-      strategy = "io.github.bbortt.qdrakeboo.core.graphql.io.github.bbortt.qdrakeboo.core.graphql.account.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+      strategy = "io.github.bbortt.qdrakeboo.core.graphql.account.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
   @Column(nullable = false, unique = true, columnDefinition = "uuid")
   private UUID uuid;
 
@@ -64,7 +64,7 @@ public class Account extends AbstractAuditingEntity implements Serializable {
   private boolean blocked = false;
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "io.github.bbortt.qdrakeboo.core.graphql.account", cascade = {CascadeType.ALL})
+  @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
   private Set<AccountHasRole> roles = new HashSet<>();
 
   public UUID getUuid() {

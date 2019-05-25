@@ -1,0 +1,10 @@
+management:
+  server:
+    port: 8090
+oauth2:
+  client:
+    clientId: ${CLIENT_ID}
+    clientSecret: ${CLIENT_SECRET}
+    checkTokenUri: ${CHECK_TOKEN_URL}
+    resourceId: qdrakeboo
+spring:  datasource:    driver-class-name: org.postgresql.Driver    url: ${PSQL_DATASOURCE_JDBC_URL}    username: ${PSQL_DATASOURCE_USERNAME}    password: ${PSQL_DATASOURCE_PASSWORD}  flyway:    url: ${spring.datasource.url}    user: ${PSQL_FLYWAY_USERNAME:${spring.datasource.username}}    password: ${PSQL_FLYWAY_PASSWORD:${spring.datasource.password}}  redis:    host: ${REDIS_HOST}    port: ${REDIS_PORT}

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.4.RELEASE' apply false
+    id 'org.springframework.boot' version '2.1.5.RELEASE' apply false
 }
 
 group = 'io.github.bbortt.qdrakeboo'
@@ -14,7 +14,7 @@ allprojects {
 
 subprojects {
     configurations {
-        integrationTestCompile.extendsFrom testCompile
+        integrationTestImplementation.extendsFrom testImplementation
         integrationTestImplementation.extendsFrom testImplementation
         integrationTestRuntime.extendsFrom testRuntime
     }

@@ -12,6 +12,7 @@ notifications:
 branches:
   only:
   - master
+  - feature/build-using-gradle
 
 services:
   - docker

@@ -25,7 +25,7 @@ public class Role extends AbstractAuditingEntity implements GrantedAuthority {
   @Type(type = "pg-uuid")
   @GeneratedValue(generator = "role-uuid")
   @GenericGenerator(name = "role-uuid",
-      strategy = "io.github.bbortt.qdrakeboo.core.graphql.io.github.bbortt.qdrakeboo.core.graphql.account.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
+      strategy = "io.github.bbortt.qdrakeboo.core.graphql.account.domain.postgresql.PostgreSQLUUIDGenerationStrategy")
   @Column(nullable = false, unique = true, columnDefinition = "uuid")
   private UUID uuid;
 

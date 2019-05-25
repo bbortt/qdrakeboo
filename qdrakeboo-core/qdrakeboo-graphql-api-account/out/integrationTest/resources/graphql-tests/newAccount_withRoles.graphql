@@ -1,0 +1,21 @@
+mutation {
+  newAccount (
+    accountInput: {
+      accountname: "io.github.bbortt.qdrakeboo.core.graphql.account-with-roles",
+      email: "io.github.bbortt.qdrakeboo.core.graphql.account-with-roles@bbortt.github.io",
+      password: "matching-password",
+      confirmation: "matching-password",
+      roles: [
+        { name: "PREMIUM_USER" }
+      ]
+    }
+  ) {
+    accountname
+    email
+    enabled
+    blocked
+    roles {
+      name
+    }
+  }
+}
