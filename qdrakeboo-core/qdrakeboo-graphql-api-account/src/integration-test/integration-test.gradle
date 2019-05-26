@@ -35,7 +35,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
 
 task pullPostgresImage(type: DockerPullImage) {
     repository = 'library/postgres'
-    tag = '11.2-alpine'
+    tag = '11.3-alpine'
 }
 
 task pullRedisImage(type: DockerPullImage) {
