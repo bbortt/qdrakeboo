@@ -1,0 +1,21 @@
+[ignore]
+.*/coverage/.*
+.*/deprecated/.*
+.*/public/.*
+
+[include]
+.*/components/.*
+.*/pages/.*
+.*/state/.*
+
+[libs]
+
+[lints]
+
+[options]
+module.file_ext=.js
+module.file_ext=.scss
+module.name_mapper.extension='scss' -> 'empty/object'
+module.use_strict=true
+
+[strict]

@@ -12,3 +12,6 @@ include 'qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration'
 findProject(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')?.name = 'qdrakeboo-oauth2-client-autoconfiguration'
 include 'qdrakeboo-core:qdrakeboo-graphql-api-account'
 findProject(':qdrakeboo-core:qdrakeboo-graphql-api-account')?.name = 'qdrakeboo-graphql-api-account'
+include 'qdrakeboo-frontend:qdrakeboo-web-ui'
+findProject(':qdrakeboo-frontend:qdrakeboo-web-ui')?.name = 'qdrakeboo-web-ui'
+
