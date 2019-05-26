@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import {crashReportingMiddleware, loggingMiddleware} from './state/middleware'
 
+import type {ReduxState} from './state/reducer';
 import rootReducer, {initialState} from './state/reducer'
 import rootSaga from './state/saga'
 
@@ -17,7 +18,7 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware)
 }
 
-export default (initialState = initialState) => {
+export default (initialState: ReduxState = initialState) => {
   const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(

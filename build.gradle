@@ -15,7 +15,6 @@ allprojects {
 subprojects {
     configurations {
         integrationTestImplementation.extendsFrom testImplementation
-        integrationTestImplementation.extendsFrom testImplementation
         integrationTestRuntime.extendsFrom testRuntime
     }
 
