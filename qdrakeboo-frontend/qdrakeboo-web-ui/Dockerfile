@@ -1,17 +1,23 @@
-FROM node:11-alpine
+FROM node:12.3-alpine
 MAINTAINER Timon Borter <bbortt.github.io>
 
 WORKDIR /home/node
 
-COPY package*.json .
-RUN npm install
+COPY package*.json ./
 
-COPY .next .
+COPY .babelrc .
 
 COPY server.js .
+
+#TODO: Remove this hard configuration link..
 COPY next.config.js .
-COPY server .
-RUN npm run build
+
+COPY app app
+COPY pages pages
+COPY server server
+
+RUN npm install \
+    && npm run build
 
 EXPOSE 3000
 

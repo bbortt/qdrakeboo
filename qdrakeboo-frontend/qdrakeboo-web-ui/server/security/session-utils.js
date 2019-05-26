@@ -17,7 +17,7 @@ const oauth2Client = new ClientOAuth2({
 })
 
 const getTokenFromSession = (session) => {
-  if (!session.token) {
+  if (!session || !session.token) {
     return null
   }
 
