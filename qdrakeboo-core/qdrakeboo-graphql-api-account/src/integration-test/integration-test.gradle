@@ -47,7 +47,7 @@ task createPostgresContainer(type: DockerCreateContainer) {
     dependsOn pullPostgresImage
     targetImageId { pullPostgresImage.getImageId().get() }
     portBindings = [':5432']
-    envVars = ['POSTGRES_USER': 'otf2021']
+    envVars = ['POSTGRES_USER': 'graphql_account_api']
 }
 
 task createRedisContainer(type: DockerCreateContainer) {
