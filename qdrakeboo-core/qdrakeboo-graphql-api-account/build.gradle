@@ -5,7 +5,7 @@ plugins {
 
 group 'io.github.bbortt.qdrakeboo.core'
 
-mainClassName = 'io.github.bbortt.qdrakeboo.core.graphql.io.github.bbortt.qdrakeboo.core.graphql.account.Application'
+mainClassName = 'io.github.bbortt.qdrakeboo.core.graphql.account.Application'
 
 configurations {
     compile.exclude module: 'spring-boot-starter-tomcat'
