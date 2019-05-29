@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
 }
 
-group 'io.github.bbortt.qdrakeboo.core'
+group 'io.github.bbortt.qdrakeboo.test'
 
 dependencies {
     implementation 'org.springframework:spring-core'

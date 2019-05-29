@@ -1,40 +1,47 @@
-package io.github.bbortt.qdrakeboo.core.graphql.starter.test.util;
+package io.github.bbortt.qdrakeboo.test.graphql.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StreamUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
-@Component
 public class GraphQLTestUtil {
 
-  private static final String LOGIN_ENDPOINT = "/login";
-  private static final String SESSION_COOKIE_PREFIX = "SESSION=";
+  private final String graphqlEndpoint;
+  private final TestRestTemplate testRestTemplate;
 
-  @Value("${graphql.servlet.mapping:/graphql}")
-  protected String graphqlEndpoint;
-
-  protected final TestRestTemplate testRestTemplate;
   private final ObjectMapper objectMapper;
 
-  public GraphQLTestUtil(TestRestTemplate testRestTemplate) {
+  private String loginEndpoint = "/login";
+  private String sessionCookiePrefix = "SESSION=";
+
+  public GraphQLTestUtil(String graphqlEndpoint, TestRestTemplate testRestTemplate) {
+    this.graphqlEndpoint = graphqlEndpoint;
     this.testRestTemplate = testRestTemplate;
 
     this.objectMapper = new ObjectMapper();
+  }
+
+  public GraphQLTestUtil withLoginEndpoint(String loginEndpoint) {
+    this.loginEndpoint = loginEndpoint;
+    return this;
+  }
+
+  public GraphQLTestUtil withSessionCookiePrefix(String sessionCookiePrefix) {
+    this.sessionCookiePrefix = sessionCookiePrefix;
+    return this;
   }
 
   public GraphQLPostRequest post(String resourceLocation) throws IOException {
@@ -74,7 +81,7 @@ public class GraphQLTestUtil {
       map.add("username", username);
       map.add("password", password);
 
-      ResponseEntity<String> loginResponse = testRestTemplate.postForEntity(LOGIN_ENDPOINT,
+      ResponseEntity<String> loginResponse = testRestTemplate.postForEntity(loginEndpoint,
           new HttpEntity<MultiValueMap<String, String>>(map, headers), String.class);
 
       this.session = extractSessionCookieFromLoginResponse(loginResponse);
@@ -84,7 +91,7 @@ public class GraphQLTestUtil {
 
     private String extractSessionCookieFromLoginResponse(ResponseEntity<String> loginResponse) {
       return Arrays.stream(loginResponse.getHeaders().get(HttpHeaders.SET_COOKIE).get(0).split(";"))
-          .filter(cookie -> cookie.startsWith(SESSION_COOKIE_PREFIX)).findFirst()
+          .filter(cookie -> cookie.startsWith(sessionCookiePrefix)).findFirst()
           .orElseThrow(() -> new IllegalArgumentException());
     }
 

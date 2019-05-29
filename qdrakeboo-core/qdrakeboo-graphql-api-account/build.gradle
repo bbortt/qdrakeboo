@@ -22,7 +22,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation project(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')
-    integrationTestImplementation project(':qdrakeboo-core:qdrakeboo-graphql-spring-boot-starter-test')
+    integrationTestImplementation project(':qdrakeboo-test:qdrakeboo-graphql-test-utils')
+    integrationTestImplementation project(':qdrakeboo-test:qdrakeboo-mock-authorization-server')
 }
 
 apply from: 'src/integration-test/integration-test.gradle'

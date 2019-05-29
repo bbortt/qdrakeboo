@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ConditionalOnProperty(prefix = "oauth2.client.autoconfiguration", name = "enabled",
-    havingValue = "true", matchIfMissing = true)
 @Import({GlobalMethodSecurityConfig.class, OAuth2ResourceServerConfig.class,
     RemoteTokenServiceConfig.class})
 @EnableConfigurationProperties({OAuth2ClientAutoconfigurationProperties.class})

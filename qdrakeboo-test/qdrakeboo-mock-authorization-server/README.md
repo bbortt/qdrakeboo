@@ -1,0 +1,1 @@
+Build according to: http://www.kaushikbaruah.com/posts/mock-authorization-server-spring-boot-integration-test/

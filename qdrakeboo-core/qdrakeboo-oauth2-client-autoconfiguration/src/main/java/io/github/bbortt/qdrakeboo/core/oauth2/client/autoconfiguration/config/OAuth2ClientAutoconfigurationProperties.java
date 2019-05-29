@@ -10,7 +10,6 @@ public class OAuth2ClientAutoconfigurationProperties {
   private String resourceId;
   private String checkTokenUri;
 
-  private Autoconfiguration autoconfiguration;
   private Cors cors;
 
   public String getClientId() {
@@ -45,33 +44,12 @@ public class OAuth2ClientAutoconfigurationProperties {
     this.checkTokenUri = checkTokenUri;
   }
 
-  public Autoconfiguration getAutoconfiguration() {
-    return autoconfiguration;
-  }
-
-  public void setAutoconfiguration(Autoconfiguration autoconfiguration) {
-    this.autoconfiguration = autoconfiguration;
-  }
-
   public Cors getCors() {
     return cors;
   }
 
   public void setCors(Cors cors) {
     this.cors = cors;
-  }
-
-  public static class Autoconfiguration {
-
-    private boolean enabled;
-
-    public boolean isEnabled() {
-      return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-      this.enabled = enabled;
-    }
   }
 
   public static class Cors {

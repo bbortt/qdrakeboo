@@ -6,8 +6,6 @@ pluginManagement {
 
 rootProject.name = 'qdrakeboo'
 
-include 'qdrakeboo-core:qdrakeboo-graphql-spring-boot-starter-test'
-findProject(':qdrakeboo-core:qdrakeboo-graphql-spring-boot-starter-test')?.name = 'qdrakeboo-graphql-spring-boot-starter-test'
 include 'qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration'
 findProject(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')?.name = 'qdrakeboo-oauth2-client-autoconfiguration'
 include 'qdrakeboo-core:qdrakeboo-graphql-api-account'
@@ -15,3 +13,9 @@ findProject(':qdrakeboo-core:qdrakeboo-graphql-api-account')?.name = 'qdrakeboo-
 
 include 'qdrakeboo-frontend:qdrakeboo-web-ui'
 findProject(':qdrakeboo-frontend:qdrakeboo-web-ui')?.name = 'qdrakeboo-web-ui'
+
+include 'qdrakeboo-test:qdrakeboo-graphql-test-utils'
+findProject(':qdrakeboo-test:qdrakeboo-graphql-test-utils')?.name = 'qdrakeboo-graphql-test-utils'
+include 'qdrakeboo-test:qdrakeboo-mock-authorization-server'
+findProject(':qdrakeboo-test:qdrakeboo-mock-authorization-server')?.name = 'qdrakeboo-mock-authorization-server'
+
