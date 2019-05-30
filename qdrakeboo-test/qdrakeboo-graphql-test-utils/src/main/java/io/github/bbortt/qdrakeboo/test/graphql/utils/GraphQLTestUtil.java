@@ -6,26 +6,30 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.util.StreamUtils;
 
 public class GraphQLTestUtil {
 
   private final String graphqlEndpoint;
   private final TestRestTemplate testRestTemplate;
+  private final OAuth2RestTemplate oAuth2RestTemplate; // See: https://stackoverflow.com/questions/27864295/how-to-use-oauth2resttemplate
 
   private final ObjectMapper objectMapper;
 
-  private String loginEndpoint = "/login";
-  private String sessionCookiePrefix = "SESSION=";
+  private String clientId;
+  private String clientSecret;
+  private String clientScope;
+
+  private String getTokenEndpoint = "/oauth/token";
 
   public GraphQLTestUtil(String graphqlEndpoint, TestRestTemplate testRestTemplate) {
     this.graphqlEndpoint = graphqlEndpoint;
@@ -34,13 +38,19 @@ public class GraphQLTestUtil {
     this.objectMapper = new ObjectMapper();
   }
 
-  public GraphQLTestUtil withLoginEndpoint(String loginEndpoint) {
-    this.loginEndpoint = loginEndpoint;
+  public GraphQLTestUtil withClient(String clientId, String clientSecret) {
+    return withClient(clientId, clientSecret, "test");
+  }
+
+  public GraphQLTestUtil withClient(String clientId, String clientSecret, String clientScope) {
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
+    this.clientScope = clientScope;
     return this;
   }
 
-  public GraphQLTestUtil withSessionCookiePrefix(String sessionCookiePrefix) {
-    this.sessionCookiePrefix = sessionCookiePrefix;
+  public GraphQLTestUtil withGetTokenEndpoint(String getTokenEndpoint) {
+    this.getTokenEndpoint = getTokenEndpoint;
     return this;
   }
 
@@ -63,10 +73,10 @@ public class GraphQLTestUtil {
 
   public class GraphQLPostRequest {
 
+    private String authorizationToken;
+
     private final String payload;
     private final ObjectNode variables;
-
-    private String session;
 
     protected GraphQLPostRequest(String payload, ObjectNode variables) {
       this.payload = payload;
@@ -74,25 +84,28 @@ public class GraphQLTestUtil {
     }
 
     public GraphQLPostRequest withAuthentication(String username, String password) {
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+      Map<String, String> params = new HashMap<>();
+      params.put("grant_type", "password");
+      params.put("username", username);
+      params.put("password", password);
+      params.put("scope", clientScope);
 
-      MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-      map.add("username", username);
-      map.add("password", password);
+      ResponseEntity<String> authorizationResponse = testRestTemplate
+          .postForEntity(getTokenEndpoint, createAuthorizationRequest(username, password),
+              String.class, params);
 
-      ResponseEntity<String> loginResponse = testRestTemplate.postForEntity(loginEndpoint,
-          new HttpEntity<MultiValueMap<String, String>>(map, headers), String.class);
-
-      this.session = extractSessionCookieFromLoginResponse(loginResponse);
+      this.authorizationToken = authorizationResponse.getBody();
+      System.out.println("Authorization-Token: " + authorizationToken);
 
       return this;
     }
 
-    private String extractSessionCookieFromLoginResponse(ResponseEntity<String> loginResponse) {
-      return Arrays.stream(loginResponse.getHeaders().get(HttpHeaders.SET_COOKIE).get(0).split(";"))
-          .filter(cookie -> cookie.startsWith(sessionCookiePrefix)).findFirst()
-          .orElseThrow(() -> new IllegalArgumentException());
+    private HttpEntity<Object> createAuthorizationRequest(String username, String password) {
+      HttpHeaders httpHeaders = new HttpHeaders();
+      httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+      httpHeaders.setBasicAuth(clientId, clientSecret);
+
+      return new HttpEntity<>(httpHeaders);
     }
 
     public ResponseEntity<String> perform() {
@@ -107,12 +120,12 @@ public class GraphQLTestUtil {
       HttpHeaders httpHeaders = new HttpHeaders();
       httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-      if (session != null) {
-        httpHeaders.set(HttpHeaders.COOKIE, session);
+      if (authorizationToken != null) {
+        httpHeaders.setBearerAuth(authorizationToken);
       }
 
       try {
-        return new HttpEntity<Object>(objectMapper.writeValueAsString(objectNode), httpHeaders);
+        return new HttpEntity<>(objectMapper.writeValueAsString(objectNode), httpHeaders);
       } catch (JsonProcessingException e) {
         throw new IllegalArgumentException(e);
       }

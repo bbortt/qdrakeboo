@@ -21,22 +21,19 @@ public class MockAuthorizationServerConfiguration extends AuthorizationServerCon
   @Override
   public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
     oauthServer.checkTokenAccess("permitAll()");
-    oauthServer.allowFormAuthenticationForClients();
   }
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    super.configure(clients);
     clients.inMemory()
-        .withClient("user")
-        .secret("password")
+        .withClient("testclient")
+        .secret("{noop}testsecret")
         .authorizedGrantTypes("password")
-        .scopes("openid");
+        .scopes("test");
   }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    super.configure(endpoints);
     endpoints.authenticationManager(this.authenticationManager);
   }
 }

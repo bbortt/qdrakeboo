@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.bbortt.qdrakeboo.core.graphql.api.account.AbstractApplicationContextAwareTest;
 import io.github.bbortt.qdrakeboo.test.graphql.utils.GraphQLTestUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,17 @@ public class AccountQueryIntTest extends AbstractApplicationContextAwareTest {
   @Autowired
   GraphQLTestUtil graphQLTestUtil;
 
+  @Before
+  public void beforeTestSetup() {
+    graphQLTestUtil.withClient("testclient", "testsecret");
+  }
+
   @Test
   public void getAllAccountsReadsAccounts() throws Exception {
     ResponseEntity<String> response =
-        graphQLTestUtil.post("graphql-tests/getAllAccounts.graphql").perform();
+        graphQLTestUtil.post("graphql-tests/getAllAccounts.graphql")
+            .withAuthentication("server_support", "server_support")
+            .perform();
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualTo(

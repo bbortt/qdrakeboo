@@ -12,6 +12,10 @@ configurations {
 }
 
 dependencies {
+    annotationProcessor  'org.springframework.boot:spring-boot-configuration-processor'
+    compile('javax.xml.bind:jaxb-api')
+    compile('javax.activation:activation')
+    compile('org.glassfish.jaxb:jaxb-runtime')
     implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
     implementation 'org.flywaydb:flyway-core'
@@ -24,7 +28,6 @@ dependencies {
     implementation project(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')
     integrationTestImplementation project(':qdrakeboo-test:qdrakeboo-graphql-test-utils')
     integrationTestImplementation project(':qdrakeboo-test:qdrakeboo-mock-authorization-server')
-    annotationProcessor  'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 apply from: 'src/integration-test/integration-test.gradle'

@@ -11,6 +11,7 @@ import io.github.bbortt.qdrakeboo.core.graphql.api.account.repository.AccountHas
 import io.github.bbortt.qdrakeboo.core.graphql.api.account.repository.RoleCRUDRepository;
 import io.github.bbortt.qdrakeboo.test.graphql.utils.GraphQLTestUtil;
 import java.io.IOException;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,10 +33,17 @@ public class AccountMutationIntTest extends AbstractApplicationContextAwareTest 
   @Autowired
   GraphQLTestUtil graphQLTestUtil;
 
+  @Before
+  public void beforeTestSetup() {
+    graphQLTestUtil.withClient("testclient", "testsecret");
+  }
+
   @Test
   public void newAccountSavesAccountWithoutRoles() throws Exception {
     ResponseEntity<String> response =
-        graphQLTestUtil.post("graphql-tests/newAccount_withoutRoles.graphql").perform();
+        graphQLTestUtil.post("graphql-tests/newAccount_withoutRoles.graphql")
+            .withAuthentication("server_support", "server_support")
+            .perform();
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualTo(
@@ -56,7 +64,9 @@ public class AccountMutationIntTest extends AbstractApplicationContextAwareTest 
   @Test
   public void newAccountSavesAccountWithRoles() throws IOException {
     ResponseEntity<String> response =
-        graphQLTestUtil.post("graphql-tests/newAccount_withRoles.graphql").perform();
+        graphQLTestUtil.post("graphql-tests/newAccount_withRoles.graphql")
+            .withAuthentication("server_support", "server_support")
+            .perform();
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualTo(
