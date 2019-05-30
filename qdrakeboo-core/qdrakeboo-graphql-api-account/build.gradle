@@ -24,6 +24,7 @@ dependencies {
     implementation project(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')
     integrationTestImplementation project(':qdrakeboo-test:qdrakeboo-graphql-test-utils')
     integrationTestImplementation project(':qdrakeboo-test:qdrakeboo-mock-authorization-server')
+    annotationProcessor  'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 apply from: 'src/integration-test/integration-test.gradle'

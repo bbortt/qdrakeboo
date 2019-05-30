@@ -32,6 +32,12 @@ subprojects {
     pluginManager.withPlugin('java', globalJavaConfiguration)
     pluginManager.withPlugin('java-library', globalJavaConfiguration)
 
+    pluginManager.withPlugin('java') {
+        dependencies {
+            'org.springframework.boot:spring-boot-starter-actuator'
+        }
+    }
+
     pluginManager.withPlugin('java-library') {
         jar {
             enabled = true
