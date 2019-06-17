@@ -5,17 +5,6 @@ pluginManagement {
 }
 
 rootProject.name = 'qdrakeboo'
-
-include 'qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration'
-findProject(':qdrakeboo-core:qdrakeboo-oauth2-client-autoconfiguration')?.name = 'qdrakeboo-oauth2-client-autoconfiguration'
-include 'qdrakeboo-core:qdrakeboo-graphql-api-account'
-findProject(':qdrakeboo-core:qdrakeboo-graphql-api-account')?.name = 'qdrakeboo-graphql-api-account'
-
-include 'qdrakeboo-frontend:qdrakeboo-web-ui'
-findProject(':qdrakeboo-frontend:qdrakeboo-web-ui')?.name = 'qdrakeboo-web-ui'
-
-include 'qdrakeboo-test:qdrakeboo-graphql-test-utils'
-findProject(':qdrakeboo-test:qdrakeboo-graphql-test-utils')?.name = 'qdrakeboo-graphql-test-utils'
-include 'qdrakeboo-test:qdrakeboo-mock-authorization-server'
-findProject(':qdrakeboo-test:qdrakeboo-mock-authorization-server')?.name = 'qdrakeboo-mock-authorization-server'
+include 'source:federation:apollo-federation-express-gateway'
+findProject(':source:federation:apollo-federation-express-gateway')?.name = 'apollo-federation-express-gateway'
 

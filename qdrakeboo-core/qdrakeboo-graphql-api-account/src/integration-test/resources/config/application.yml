@@ -1,8 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:${it-database.port}/graphql_account_api
-    username: graphql_account_api
-    password: graphql_account_api
-  redis:
-    host: localhost
-    port: ${it-redis.port}

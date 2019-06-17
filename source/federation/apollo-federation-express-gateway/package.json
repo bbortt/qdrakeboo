@@ -1,0 +1,27 @@
+{
+  "name": "apollo-federation-express-gateway",
+  "version": "1.0.0",
+  "description": "Express Graphql Federation gateway based on Apollo.",
+  "main": "gateway.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node gateway.js",
+    "dev": "nodemon gateway.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/gateway": "^0.6.6",
+    "apollo-server": "^2.6.3",
+    "apollo-server-express": "^2.6.3",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "express-jwt-authz": "^2.3.1",
+    "graphql": "^14.3.1",
+    "jwks-rsa": "^1.5.1"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.19.1"
+  }
+}
