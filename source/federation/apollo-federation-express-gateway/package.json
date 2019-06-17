@@ -4,8 +4,9 @@
   "description": "Express Graphql Federation gateway based on Apollo.",
   "main": "gateway.js",
   "scripts": {
+    "dev": "nodemon gateway.js",
     "start": "cross-env NODE_ENV=production node gateway.js",
-    "dev": "nodemon gateway.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
