@@ -8,18 +8,21 @@
     "start": "cross-env NODE_ENV=production node gateway.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Timon Borter",
   "license": "MIT",
   "dependencies": {
     "@apollo/gateway": "^0.6.6",
     "apollo-server": "^2.6.3",
     "apollo-server-express": "^2.6.3",
+    "continuation-local-storage": "^3.2.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-jwt": "^5.3.1",
     "express-jwt-authz": "^2.3.1",
     "graphql": "^14.3.1",
-    "jwks-rsa": "^1.5.1"
+    "jwks-rsa": "^1.5.1",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

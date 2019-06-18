@@ -10,11 +10,11 @@ node {
     download = true
 }
 
-task bundle(type: NpmTask, dependsOn: npmInstall) {
+task flow(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'flow']
 }
 
-task bundle(type: NpmTask, dependsOn: npmInstall) {
+task test(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'test']
 }
 
@@ -22,4 +22,6 @@ task bundle(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'build']
 }
 
+assemble.dependsOn flow
+assemble.dependsOn test
 assemble.dependsOn bundle

@@ -1,8 +1,6 @@
 {
   "presets": [
-    "next/babel"
-  ],
-  "plugins": [
-    "transform-flow-strip-types"
+    "next/babel",
+    "@babel/preset-flow"
   ]
 }

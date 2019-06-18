@@ -1,0 +1,26 @@
+{
+  "name": "contextful-winston-logger",
+  "version": "1.0.0",
+  "description": "Winston logging combined with 'continuation-local-storage'.",
+  "main": "public/bundle.js",
+  "scripts": {
+    "build": "webpack ",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timon Borter",
+  "license": "MIT",
+  "dependencies": {
+    "continuation-local-storage": "^3.2.1",
+    "dotenv": "^8.0.0",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
