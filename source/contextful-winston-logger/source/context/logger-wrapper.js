@@ -1,4 +1,3 @@
-// @flow
 import appendContextInformation from './append-context-information';
 
 const loggingWrapper = (winstonLogger) => {

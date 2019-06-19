@@ -1,17 +1,13 @@
-// @flow
 import {createLogger, format, transports} from 'winston';
 
 import loggerWrapper from './logger-wrapper';
 
-const {combine, timestamp} = format;
+const {combine, label, timestamp} = format;
 
-import dotenv from 'dotenv';
-dotenv.config();
-
-const configureLogger = (loggingFormat, label = {}) => {
+const configureLogger = (loggingFormat, labelTarget = {}) => {
   const winstonLogger = createLogger({
     format: combine(
-        label(label),
+        label(labelTarget),
         timestamp(),
         loggingFormat
     ),

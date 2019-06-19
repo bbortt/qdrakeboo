@@ -1,4 +1,3 @@
-// @flow
 import {getNamespace} from 'continuation-local-storage';
 
 import {LOGGING_CONTEXT, UUID_PARAMETER} from '../constants';

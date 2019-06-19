@@ -1,4 +1,3 @@
-// @flow
 import uuidv1 from 'uuid/v1';
 
 import {createNamespace} from 'continuation-local-storage';

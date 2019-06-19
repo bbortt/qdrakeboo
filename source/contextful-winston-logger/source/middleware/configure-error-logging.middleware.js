@@ -1,4 +1,3 @@
-// @flow
 const configureErrorLoggingMiddleware = (logger) => {
   return (err, req, res, next) => {
     if (err) {

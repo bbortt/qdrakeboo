@@ -9,7 +9,9 @@ var config = {
   entry: './index.js',
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    library: 'contextfulWinstonLogger',
+    libraryTarget: 'umd'
   },
   target: 'node',
   module: {
@@ -26,6 +28,26 @@ var config = {
         }
       }
     ]
+  },
+  externals: {
+    'continuation-local-storage': {
+      commonjs: 'continuation-local-storage',
+      commonjs2: 'continuation-local-storage',
+      amd: 'continuation-local-storage',
+      root: '_'
+    },
+    'uuid': {
+      commonjs: 'uuid',
+      commonjs2: 'uuid',
+      amd: 'uuid',
+      root: '_'
+    },
+    'winston': {
+      commonjs: 'winston',
+      commonjs2: 'winston',
+      amd: 'winston',
+      root: '_'
+    }
   }
 };
 

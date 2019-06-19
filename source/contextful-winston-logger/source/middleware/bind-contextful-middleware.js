@@ -1,4 +1,3 @@
-// @flow
 import contextCreatingMiddleware from './context-creating.middleware';
 import configureInboundLoggingMiddleware
   from './configure-inbound-logging.middleware';

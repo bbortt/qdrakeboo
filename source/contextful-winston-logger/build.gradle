@@ -10,8 +10,4 @@ node {
     download = true
 }
 
-task bundle(type: NpmTask, dependsOn: npmInstall) {
-    args = ['run', 'build']
-}
-
-assemble.dependsOn bundle
+assemble.dependsOn npmInstall

@@ -4,7 +4,8 @@ const {ApolloServer} = require('apollo-server-express');
 const {ApolloGateway} = require('@apollo/gateway');
 
 const logger = require('./server/logging/logger');
-const middleware = require('./server/middleware');
+const jwtMiddleware = require('./server/middleware/jwt.middleware');
+const {bindContextfulMiddleware} = require('contextful-winston-logger');
 
 // TODO: Check for scopes
 // const jwtAuthz = require('express-jwt-authz');
@@ -24,7 +25,7 @@ logger.info(`Starting ${applicationName}..`);
   const server = new ApolloServer({schema, executor});
 
   const app = express();
-  app.use(middleware);
+  app.use(bindContextfulMiddleware(logger, jwtMiddleware));
 
   server.applyMiddleware({app});
 
