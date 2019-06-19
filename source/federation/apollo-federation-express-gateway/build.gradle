@@ -14,10 +14,5 @@ node {
     download = true
 }
 
-//task bundle(type: NpmTask, dependsOn: npmInstall) {
-//    args = ['run', 'test']
-//}
-
 npmInstall.dependsOn ':source:contextful-winston-logger:assemble'
 assemble.dependsOn npmInstall
-//assemble.dependsOn bundle

@@ -16,6 +16,7 @@
     "prettier:fix": "prettier --write \"pages/**\"",
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "cross-env NODE_ENV=test mocha",
+    "test:watch": "npm run test -- --watch",
     "upgrade-interactive": "npm-check --update"
   },
   "author": "Timon Borter",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-flow": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",

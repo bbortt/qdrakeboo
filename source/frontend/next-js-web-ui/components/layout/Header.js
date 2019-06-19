@@ -1,7 +1,9 @@
 // @flow
 import React from 'react'
 
-class Header extends React.Component {
+type HeaderProps = {}
+
+class Header extends React.Component<HeaderProps> {
   render() {
     return (
         <header>
@@ -18,8 +20,8 @@ class Header extends React.Component {
           <div class="top-bar hide-for-small-only">
             <div class="top-bar-left">
               <ul class="horizontal menu" data-responsive-menu="dropdown">
-                <!-- TODO: Check router-link-->
-                <li routerLinkActive="is-active">
+                /* TODO: Check router-link */
+                <li /* routerLinkActive="is-active" */>
                   <a href="/">One</a>
                   <ul class="menu vertical">
                     <li><a href="#">One</a></li>
@@ -37,8 +39,8 @@ class Header extends React.Component {
               data-animate="slide-in-down slide-out-up"
               data-responsive-menu="drilldown medium-dropdown"
               id="main-menu-animated">
-            <!-- TODO: Check router-link-->
-            <li routerLinkActive="is-active">
+            /* TODO: Check router-link */
+            <li /* routerLinkActive="is-active" */>
               <a href="/">One</a>
               <ul class="menu vertical">
                 <li><a href="#">One</a></li>

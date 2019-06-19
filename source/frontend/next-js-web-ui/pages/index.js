@@ -3,7 +3,9 @@ import React from 'react'
 
 import Header from '../components/layout/Header'
 
-class Index extends React.Component {
+type IndexProps = {}
+
+class Index extends React.Component<IndexProps> {
   render() {
     return (
         <div className='index'>

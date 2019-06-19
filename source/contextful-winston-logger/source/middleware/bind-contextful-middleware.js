@@ -10,7 +10,7 @@ const bindContextfulMiddleware = (logger, middleware = []) => {
   return [
     contextCreatingMiddleware,
     configureInboundLoggingMiddleware(logger),
-    middleware,
+    ...middleware,
     configureErrorLoggingMiddleware(logger),
     configureOutboundLoggingMiddleware(logger)
   ];
