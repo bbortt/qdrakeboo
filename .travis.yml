@@ -24,7 +24,7 @@ addons:
       secure: "eMLHXnF9EDtRAnT4xsemKsEjSQb9ruW1MfBBii/F8kNSPH1iwL5lnfryYwvVTZZdPvrM8UxS9CqbWpDvodTheNq979Kan2awYWUH7HA1Hbtkk1tVmS2FguavAQyvldY51bXZAosN8wDgxOEu8CXzb2ZASsnubgvGQGggO3pqUuw/88PgZ6LiRGgM18Ytkr03Ax//FTnxnjgEzZgaSnfkQChGmNc9g8FKE/KFXakrZNcb34Fc4sWjrZ1JxehzSBJzsyyUww9pbzMNJFwkPANEExcvihE+6b5xuvIn02935U+9MBI1rzbj9r7dDT9Kd456QzCDKHsC7yTRT5VWP/yGQJFn5kfPLohB18WN5Rpx/ovvyAO+25D/E67BzHeMDL4plK/7G9lFX2rBO0NIhrRJhgl/9ZPCmDhbEV+MdZbvqnTUHjn9LFQMX/ZW8hWaMCXnVZuc9SJKpP0PFfK7mb74v/xLTkLOq0d4J7kVQKsJgwjFkeqmMjPqGKT1fWPj3nojPNnxVrK249DgbUlJsypg4oXJbN4cVubaUviX4HTw8CNKKF97uC+66mkebrshJypVLdA1bR5AjdOgFatisl9s+byJYb4SuXpX/MIegGrZ0uuFWLm3Z482p1B9Qzx17BtTyfWMyAiHT4QuHEzNxa6l5f16sEvCOv1Rds+R32rpMHE="
 
 script:
-  - gradle build --no-daemon -i
+  - ./gradlew build --no-daemon -i
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
