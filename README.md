@@ -4,8 +4,7 @@ Qdrakeboo
 The private streaming service for geeks.
 
 [![Build Status](https://travis-ci.org/bbortt/qdrakeboo.svg?branch=master)](https://travis-ci.org/bbortt/qdrakeboo)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=io.github.bbortt.qdrakeboo:bom&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.bbortt.qdrakeboo%3Abom)
-
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # What this is about?
 
 * Performance > Frameworks
@@ -20,3 +19,7 @@ The private streaming service for geeks.
 * Add a propper logging framework for node
 * How to package server? Current implementation is uggly!
 * API Access via browser.. cookie?
+
+# License
+
+This project is licensed under the terms of the [MIT license](https://github.com/bbortt/qdrakeboo/blob/master/LICENSE).
