@@ -4,11 +4,9 @@ const {ApolloServer} = require('apollo-server-express');
 const {ApolloGateway} = require('@apollo/gateway');
 
 const logger = require('./server/logging/logger');
-const jwtMiddleware = require('./server/middleware/jwt.middleware');
 const {bindContextfulMiddleware} = require('contextful-winston-logger');
 
-// TODO: Check for scopes
-// const jwtAuthz = require('express-jwt-authz');
+const jwtAuthz = require('express-jwt-authz');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -25,14 +23,11 @@ logger.info(`Starting ${applicationName}..`);
   const server = new ApolloServer({schema, executor});
 
   const app = express();
-  app.use(bindContextfulMiddleware(logger, jwtMiddleware));
+  app.use(bindContextfulMiddleware(logger,jwtAuthz(['graphql:query'])));
 
   server.applyMiddleware({app});
 
   const port = process.env.PORT || 4000;
-
-  // const graphqlScopes = jwtAuthz(['graphql:query'])
-  // app.get('*', graphqlScopes, (req, res) => 'hello world');
 
   app.listen({port: port}, () => logger.info(
       `🚀 ${applicationName} ready at http://localhost:${port}${server.graphqlPath}`))
