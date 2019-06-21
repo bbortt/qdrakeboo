@@ -5,10 +5,16 @@ plugins {
 
 group 'io.github.bbortt.qdrakeboo.federation'
 
+dependencies {
+    project(':source:contextful-winston-logger')
+}
+
 node {
     version = '10.15.3'
     download = true
 }
+
+npmInstall.dependsOn ':source:contextful-winston-logger:assemble'
 
 task bundle(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'build']
