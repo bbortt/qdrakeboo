@@ -23,7 +23,7 @@ logger.info(`Starting ${applicationName}..`);
   const server = new ApolloServer({schema, executor});
 
   const app = express();
-  app.use(bindContextfulMiddleware(logger,jwtAuthz(['graphql:query'])));
+  app.use(bindContextfulMiddleware(logger, jwtAuthz(['graphql:query'])));
 
   server.applyMiddleware({app});
 
