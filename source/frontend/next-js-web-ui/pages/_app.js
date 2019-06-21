@@ -15,7 +15,7 @@ dynamic(import('foundation-sites/dist/js/foundation.min'), {ssr: false})
 class ReduxContextAwareApp extends App {
 
   static async getInitialProps({Component, ctx}) {
-    const {isServer} = ctx
+    const {isServer, query} = ctx
 
     let pageProps = {}
 
@@ -23,17 +23,22 @@ class ReduxContextAwareApp extends App {
       pageProps = await Component.getInitialProps({ctx})
     }
 
-    return {isServer, pageProps}
+    return {account: query.account, isServer, pageProps}
   }
 
   render() {
-    const {Component, pageProps} = this.props
+    const {account, Component, pageProps} = this.props;
+
+    const props = {
+      ...pageProps,
+      account
+    };
 
     return (
         <div className='app'>
           <Header/>
 
-          <Component {...pageProps} />
+          <Component {...props} />
         </div>
     )
   }

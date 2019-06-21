@@ -1,13 +1,19 @@
 // @flow
 import React from 'react'
 
-type HomeProps = {}
+import type {Account} from '../app/domain/Account.type'
+
+type HomeProps = {
+  account: Account
+}
 
 class Home extends React.Component<HomeProps> {
   render() {
+    const {account} = this.props;
+
     return (
         <div className='home'>
-          <h1>Hello there *wave*</h1>
+          <h1>Hello {account.displayName}</h1>
         </div>
     )
   }

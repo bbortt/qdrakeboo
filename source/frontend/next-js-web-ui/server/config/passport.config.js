@@ -14,7 +14,10 @@ const configurePassport = () => {
             process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
       },
       (accessToken, refreshToken, extraParams, profile, done) => {
-        return done(null, profile);
+        return done(null, {
+          accessToken: accessToken,
+          idToken: extraParams.id_token
+        }, profile);
       }
   );
 

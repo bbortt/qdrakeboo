@@ -15,22 +15,24 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 router.get('/login', passport.authenticate('auth0', {
-  scope: 'openid graphql:query profile:read'
+  scope: 'openid profile graphql:query'
 }), (req, res) => {
   res.redirect('/');
 });
 
 router.get('/callback', (req, res, next) => {
-  passport.authenticate('auth0', (err, user, info) => {
+  passport.authenticate('auth0', (err, authentication, info) => {
     if (err) {
       return next(err);
     }
 
-    if (!user) {
+    if (!authentication) {
       return res.redirect('/login');
     }
 
-    req.logIn(user, (err) => {
+    req.session.authentication = authentication;
+
+    req.logIn(info, (err) => {
       if (err) {
         return next(err);
       }

@@ -61,7 +61,10 @@ app.prepare().then(() => {
   server.get('/_next/*', (req, res) => handle(req, res));
   server.get('/favicon.ico', (req, res) => handle(req, res));
 
-  server.get('*', secured(), (req, res) => handle(req, res));
+  server.get('*', secured(), (req, res) => {
+    const {_raw, _json, ...userProfile} = req.user;
+    return app.render(req, res, req.path, {account: userProfile})
+  });
 
   server.listen({port: port}, (err) => {
     if (err) {
