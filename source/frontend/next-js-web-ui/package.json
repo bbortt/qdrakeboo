@@ -1,7 +1,13 @@
 {
+  "private": true,
   "name": "next-js-web-ui",
-  "version": "1.0.0",
   "description": "Webapplication built on Next.js.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bbortt/qdrakeboo.git"
+  },
   "main": "server.js",
   "scripts": {
     "build": "next build",
@@ -20,8 +26,6 @@
     "test:watch": "npm run test -- --watch",
     "upgrade-interactive": "npm-check --update"
   },
-  "author": "Timon Borter",
-  "license": "MIT",
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "contextful-winston-logger": "file:../../contextful-winston-logger",

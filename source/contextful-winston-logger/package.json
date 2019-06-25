@@ -1,15 +1,19 @@
 {
+  "private": true,
   "name": "contextful-winston-logger",
-  "version": "1.0.0",
   "description": "Winston logging combined with 'continuation-local-storage'.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bbortt/qdrakeboo.git"
+  },
   "main": "public/bundle.js",
   "scripts": {
     "build": "webpack",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Timon Borter",
-  "license": "MIT",
   "dependencies": {
     "continuation-local-storage": "^3.2.1",
     "uuid": "^3.3.2",

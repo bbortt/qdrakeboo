@@ -1,0 +1,17 @@
+# Javascript related local sources
+**/.next/
+**/node_modules/
+**/.env
+
+# Gradle build information
+gradle/
+**/*.gradle
+
+# IDE specific information
+**/.idea/
+**/*.classpath
+**/*.project
+**/*.settings
+
+# Obsolete docker information
+**/Dockerfile

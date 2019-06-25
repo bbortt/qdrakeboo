@@ -1,15 +1,19 @@
 {
+  "private": true,
   "name": "apollo-federation-express-gateway",
-  "version": "1.0.0",
   "description": "Express Graphql Federation gateway based on Apollo.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bbortt/qdrakeboo.git"
+  },
   "main": "gateway.js",
   "scripts": {
     "dev": "nodemon gateway.js",
     "start": "cross-env NODE_ENV=production node gateway.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Timon Borter",
-  "license": "MIT",
   "dependencies": {
     "@apollo/gateway": "^0.6.6",
     "apollo-server": "^2.6.3",
