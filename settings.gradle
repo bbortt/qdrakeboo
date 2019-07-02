@@ -11,6 +11,8 @@ findProject(':source:contextful-winston-logger')?.name = 'contextful-winston-log
 
 include 'source:federation:apollo-federation-express-gateway'
 findProject(':source:federation:apollo-federation-express-gateway')?.name = 'apollo-federation-express-gateway'
+include 'source:federation:user-api'
+findProject(':source:federation:user-api')?.name = 'user-api'
 
 include 'source:frontend:next-js-web-ui'
 findProject(':source:frontend:next-js-web-ui')?.name = 'next-js-web-ui'

@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.bbortt.qdrakeboo.federation'
+
+repositories {
+    mavenCentral()
+}

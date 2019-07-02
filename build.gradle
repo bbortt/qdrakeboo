@@ -1,6 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.5.RELEASE' apply false
-    id 'com.bmuschko.docker-remote-api' version '4.10.0' apply false
+    id 'org.springframework.boot' version '2.1.6.RELEASE' apply false
 }
 
 group = 'io.github.bbortt.qdrakeboo'
@@ -14,12 +13,18 @@ allprojects {
 }
 
 subprojects {
-    pluginManager.withPlugin('com.bmuschko.docker-remote-api') {
-        docker {
-            if (System.env.containsKey('DOCKER_HOST') && System.env.containsKey('DOCKER_CERT_PATH')) {
-                url = System.env.DOCKER_HOST.replace("tcp", "https")
-                certPath = new File(System.env.DOCKER_CERT_PATH)
-            }
+    def globalJavaConfiguration = {
+        apply plugin: 'org.springframework.boot'
+        apply plugin: 'io.spring.dependency-management'
+
+        sourceCompatibility = '11'
+
+        dependencies {
+            implementation 'org.springframework.boot:spring-boot-starter'
+            implementation 'org.springframework.boot:spring-boot-starter-actuator'
+            testImplementation 'org.springframework.boot:spring-boot-starter-test'
         }
     }
+
+    pluginManager.withPlugin('java', globalJavaConfiguration)
 }
