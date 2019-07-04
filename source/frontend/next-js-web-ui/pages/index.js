@@ -1,15 +1,15 @@
 // @flow
 import React from 'react'
 
-import Router from 'next/router';
+import Router from 'next/router'
 
 type IndexProps = {}
 
-require('./index.scss');
+require('./index.scss')
 
 class Index extends React.Component<IndexProps> {
   signIn() {
-    Router.push('/login');
+    Router.push('/login')
   }
 
   render() {

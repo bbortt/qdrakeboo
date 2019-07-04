@@ -21,10 +21,14 @@ subprojects {
 
         dependencies {
             implementation 'org.springframework.boot:spring-boot-starter'
-            implementation 'org.springframework.boot:spring-boot-starter-actuator'
             testImplementation 'org.springframework.boot:spring-boot-starter-test'
         }
     }
 
     pluginManager.withPlugin('java', globalJavaConfiguration)
+    pluginManager.withPlugin('java', {
+        dependencies {
+            implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        }
+    })
 }

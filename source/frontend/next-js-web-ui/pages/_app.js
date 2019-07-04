@@ -4,7 +4,10 @@ import React from 'react'
 import App from 'next/app'
 import dynamic from 'next/dynamic'
 
-import Header from '../app/components/layout/Header';
+import type {Page} from '../_next/Page.flow'
+import type {Context} from '../_next/Context.flow'
+
+import Header from '../app/components/layout/Header'
 
 // Styles
 require('./_app.scss')
@@ -14,7 +17,7 @@ dynamic(import('foundation-sites/dist/js/foundation.min'), {ssr: false})
 
 class ReduxContextAwareApp extends App {
 
-  static async getInitialProps({Component, ctx}) {
+  static async getInitialProps({Component, ctx}: { Component: Page<any>, ctx: Context }) {
     const {isServer, query} = ctx
 
     let pageProps = {}
@@ -27,12 +30,12 @@ class ReduxContextAwareApp extends App {
   }
 
   render() {
-    const {account, Component, pageProps} = this.props;
+    const {account, Component, pageProps} = this.props
 
     const props = {
       ...pageProps,
       account
-    };
+    }
 
     return (
         <div className='app'>

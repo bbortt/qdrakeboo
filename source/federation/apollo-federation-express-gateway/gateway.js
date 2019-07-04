@@ -6,8 +6,6 @@ const {ApolloGateway} = require('@apollo/gateway');
 const logger = require('./server/logging/logger');
 const {bindContextfulMiddleware} = require('contextful-winston-logger');
 
-const jwtAuthz = require('express-jwt-authz');
-
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -23,7 +21,7 @@ logger.info(`Starting ${applicationName}..`);
   const server = new ApolloServer({schema, executor});
 
   const app = express();
-  app.use(bindContextfulMiddleware(logger, jwtAuthz(['graphql:query'])));
+  app.use(bindContextfulMiddleware(logger));
 
   server.applyMiddleware({app});
 

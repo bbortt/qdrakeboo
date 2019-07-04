@@ -1,5 +1,5 @@
 // @flow
-type Account = {
+export type Account = {
   displayName: String,
   id: String,
   userId: String,
@@ -10,5 +10,3 @@ type Account = {
   picture: String,
   nickname: String
 }
-
-export default Account;

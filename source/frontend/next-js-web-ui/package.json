@@ -59,17 +59,17 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "5.0.0",
     "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
-    "flow-bin": "^0.102.0-rc",
+    "flow-bin": "^0.102.0",
     "mocha": "^6.1.4",
     "nodemon": "^1.19.1",
     "npm-check": "^5.9.0",
     "prettier": "1.18.2",
-    "webpack": "^4.34.0"
+    "webpack": "^4.35.2"
   }
 }

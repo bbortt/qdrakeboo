@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import React from 'react'
 
-type GoodByeProps = {};
+type GoodByeProps = {}
 
 class Goodbye extends React.Component<GoodByeProps> {
   render() {
@@ -9,8 +9,8 @@ class Goodbye extends React.Component<GoodByeProps> {
         <div className='logout'>
           <p>was a pleasure to meet you..</p>
         </div>
-    );
+    )
   }
 }
 
-export default Goodbye;
+export default Goodbye
