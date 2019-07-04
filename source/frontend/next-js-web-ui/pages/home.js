@@ -4,16 +4,14 @@ import React from 'react'
 import type {Account} from '../app/domain/Account.type'
 
 type HomeProps = {
-  account: Account
 }
 
 class Home extends React.Component<HomeProps> {
-  render() {
-    const {account} = this.props;
 
+  render() {
     return (
         <div className='home'>
-          <h1>Hello {account.displayName}</h1>
+          <h1>Welcome to Qdrakeboo</h1>
         </div>
     )
   }

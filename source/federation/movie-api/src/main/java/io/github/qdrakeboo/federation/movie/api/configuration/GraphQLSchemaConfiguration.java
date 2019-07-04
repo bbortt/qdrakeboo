@@ -1,4 +1,4 @@
-package io.github.qdrakeboo.federation.movie.api;
+package io.github.qdrakeboo.federation.movie.api.configuration;
 
 import com.apollographql.federation.graphqljava.Federation;
 import com.apollographql.federation.graphqljava.FederationDirectives;
@@ -24,16 +24,15 @@ public class GraphQLSchemaConfiguration {
   @Bean
   GraphQLSchema schema(@Value("classpath:schema.graphql") Resource sdl) throws IOException {
     // Load our schema definition from resources
-    TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(
-        new String(Files.readAllBytes(sdl.getFile().toPath())));
+    TypeDefinitionRegistry typeRegistry = new SchemaParser()
+        .parse(new String(Files.readAllBytes(sdl.getFile().toPath())));
 
     // Declare Apollo Federation directives (we use @key)
     typeRegistry.addAll(FederationDirectives.allDefinitions);
 
     // Build the base schema, which includes directives like @base and @extends
     final GraphQLSchema baseSchema = new SchemaGenerator()
-        .makeExecutableSchema(typeRegistry, RuntimeWiring.newRuntimeWiring()
-            .build());
+        .makeExecutableSchema(typeRegistry, RuntimeWiring.newRuntimeWiring().build());
 
     if (logger.isDebugEnabled()) {
       logger.debug("Base schema: {}", baseSchema);
@@ -42,11 +41,10 @@ public class GraphQLSchemaConfiguration {
     // Transform the schema to add federation support.
     // It exposes the IDL of the base schema in `query{_service{idl}}`
     // and adds entity support.
-    final GraphQLSchema federatedSchema =
-        Federation.transform(baseSchema)
-            .fetchEntities(env -> null)
-            .resolveEntityType(env -> null)
-            .build();
+    final GraphQLSchema federatedSchema = Federation.transform(baseSchema)
+        .fetchEntities(env -> null)
+        .resolveEntityType(env -> null)
+        .build();
 
     if (logger.isDebugEnabled()) {
       logger.debug("Federated schema: {}", federatedSchema);

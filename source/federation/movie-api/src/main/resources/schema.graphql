@@ -2,7 +2,7 @@ schema {
   query: Query
 }
 
-extend type Query {
+type Query {
   movie(uuid: String!): Movie
   allMovies(first: Int = 10, after: String): [Movie]
 }
