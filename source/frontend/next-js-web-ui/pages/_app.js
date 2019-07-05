@@ -3,18 +3,21 @@ import React from 'react'
 
 import App from 'next/app'
 
-import type {Page} from '../_next/Page.flow'
-import type {Context} from '../_next/Context.flow'
+import axios from 'axios'
 
 import Header from '../app/components/layout/Header'
 
-// Styles
+import type {Page} from '../_next/Page.flow'
+import type {Context} from '../_next/Context.flow'
+
 require('./_app.scss')
 
 class ReduxContextAwareApp extends App {
 
   static async getInitialProps({Component, ctx}: { Component: Page<any>, ctx: Context }) {
-    const {query} = ctx
+    const {req, query} = ctx
+
+    const isServer = !!req
 
     let pageProps = {}
 
@@ -22,7 +25,12 @@ class ReduxContextAwareApp extends App {
       pageProps = await Component.getInitialProps({ctx})
     }
 
-    return {account: query.account, pageProps}
+    if (isServer) {
+      return {account: query.account, pageProps}
+    } else {
+      const res = await axios.get('/user-info')
+      return {account: res.data, pageProps}
+    }
   }
 
   componentDidMount() {

@@ -1,13 +1,13 @@
-header {
-    @include breakpoint(small only) {
-      .top-bar {
-        display: none;
-      }
-    }
+@import '../../../assets/scss/foundation/settings.scss';
 
-    @include breakpoint(medium) {
-      .title-bar {
-        display: none;
-      }
+header {
+  .menu-text a {
+    display: inline;
+    color: $black;
+  }
+
+  a.is-active {
+    color: $menu-item-color-active;
+    background-color: $menu-item-background-active;
   }
 }

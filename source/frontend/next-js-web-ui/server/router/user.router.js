@@ -2,7 +2,7 @@ const express = require('express');
 const secured = require('../middleware/secured.middleware');
 const router = express.Router();
 
-router.get('/user', secured(), (req, res, next) => {
+router.get('/user-info', secured(), (req, res, next) => {
   const {_raw, _json, ...userProfile} = req.user;
 
   res.setHeader('Content-Type', 'application/json');
