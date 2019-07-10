@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import type {AccountType}  from '../app/domain/Account.type'
+import type {Account as AccountType} from '../app/domain/Account.type'
 
 type AccountProps = {
   account: AccountType

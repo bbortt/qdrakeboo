@@ -35,6 +35,7 @@ class ReduxContextAwareApp extends App {
 
   componentDidMount() {
     const foundation = require('foundation-sites');
+    // $FlowFixMe
     $(document).foundation();
   }
 

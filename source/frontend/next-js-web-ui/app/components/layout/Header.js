@@ -11,26 +11,7 @@ type HeaderProps = {
 
 require('./header.scss')
 
-const HIDE_DROPDOWN_EVENT = 'hide.zf.dropdownmenu';
-
 class Header extends React.Component<HeaderProps> {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      counter: null
-    }
-  }
-
-  componentDidMount() {
-    $(window).on(HIDE_DROPDOWN_EVENT,
-        () => setTimeout(() => this.setState({counter: new Date()}), 2000))
-  }
-
-  componentWillUnmount() {
-    $(window).off(HIDE_DROPDOWN_EVENT)
-  }
 
   render() {
     const {account} = this.props;
@@ -38,8 +19,6 @@ class Header extends React.Component<HeaderProps> {
     if (!account) {
       return null
     }
-
-    console.log(this.state.counter)
 
     return (
         <header>

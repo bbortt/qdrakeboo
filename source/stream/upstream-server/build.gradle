@@ -4,6 +4,8 @@ plugins {
 
 group 'io.github.bbortt.qdrakeboo.stream'
 
+apply from: "$rootDir/gradle/integration-test.gradle"
+
 ext {
     set('springCloudVersion', "Greenwich.SR1")
 }
