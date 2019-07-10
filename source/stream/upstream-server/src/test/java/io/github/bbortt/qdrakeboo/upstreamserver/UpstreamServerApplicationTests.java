@@ -1,4 +1,4 @@
-package io.github.qdrakeboo.federation.movie.api;
+package io.github.bbortt.qdrakeboo.upstreamserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,10 +7,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MovieApiApplicationTests {
+public class UpstreamServerApplicationTests {
 
-  @Test
-  public void contextLoads() {
-  }
+	@Test
+	public void contextLoads() {
+	}
 
 }
