@@ -18,7 +18,7 @@ class Index extends React.Component<IndexProps> {
     return (
         <div className='index'>
           <Head>
-            <title>My page title</title>
+            <title>Qdrakeboo</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
 
