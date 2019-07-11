@@ -4,6 +4,11 @@ plugins {
 
 group = 'io.github.bbortt.qdrakeboo'
 
+ext {
+    set('springBootVersion', "2.1.6.RELEASE")
+    set('springCloudVersion', "Greenwich.SR1")
+}
+
 allprojects {
     version = '1.0.0-SNAPSHOT'
 
@@ -18,6 +23,18 @@ subprojects {
         apply plugin: 'io.spring.dependency-management'
 
         sourceCompatibility = '11'
+
+        buildscript {
+            dependencies {
+                classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+            }
+        }
+
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+        }
 
         dependencies {
             implementation 'org.springframework.boot:spring-boot-starter'
@@ -35,7 +52,6 @@ subprojects {
         }
 
         dependencies {
-            implementation 'org.springframework.boot:spring-boot-starter-web'
             developmentOnly 'org.springframework.boot:spring-boot-devtools'
             implementation 'org.springframework.boot:spring-boot-starter-actuator'
         }

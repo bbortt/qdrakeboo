@@ -17,4 +17,6 @@ findProject(':source:frontend:next-js-web-ui')?.name = 'next-js-web-ui'
 
 include 'source:stream:upstream-server'
 findProject(':source:stream:upstream-server')?.name = 'upstream-server'
+include 'source:edge-gateway'
+findProject(':source:edge-gateway')?.name = 'edge-gateway'
 
