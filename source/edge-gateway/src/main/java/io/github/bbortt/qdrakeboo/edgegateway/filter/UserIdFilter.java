@@ -1,5 +1,6 @@
 package io.github.bbortt.qdrakeboo.edgegateway.filter;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class UserIdFilter implements WebFilter {
 
-  public static final String USER_ID_HEADER_NAME = "qdrakeboo-user-id";
-
   public static final String USER_ID_CLAIM_NAME = "user_id";
+  public static final String USER_ID_HEADER_NAME = "qdrakeboo-user-id";
 
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -33,13 +33,14 @@ public class UserIdFilter implements WebFilter {
 
   private void firewall(ServerWebExchange exchange) {
     if (exchange.getRequest().getHeaders().containsKey(USER_ID_HEADER_NAME)) {
-      throw new IllegalStateException("Malicious Client is trying to submit user-id header");
+      throw new IllegalStateException(
+          String.format("Malicious client is trying to submit %s header", USER_ID_HEADER_NAME));
     }
   }
 
   private ServerWebExchange withUserId(ServerWebExchange exchange, String userId) {
     return exchange.mutate()
-        .request(r -> r.header(USER_ID_HEADER_NAME, userId))
+        .request(request -> request.header(USER_ID_HEADER_NAME, userId))
         .build();
   }
 }

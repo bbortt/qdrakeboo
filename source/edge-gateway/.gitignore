@@ -30,6 +30,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-### Auth0 Configuration ###
-**/auth0*.properties
