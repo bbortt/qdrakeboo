@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "auth0.audience",
+      "type": "java.lang.String",
+      "description": "Auth0 audience required to access this API."
+    }
+  ]
+}

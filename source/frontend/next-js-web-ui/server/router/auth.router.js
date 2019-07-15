@@ -15,7 +15,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 router.get('/login', passport.authenticate('auth0', {
-  scope: 'openid profile graphql:query'
+  scope: 'openid profile email graphql:query',
+  audience: 'https://api.qdrakeboo.tv'
 }), (req, res) => {
   res.redirect('/');
 });

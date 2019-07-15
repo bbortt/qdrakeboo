@@ -7,6 +7,7 @@ const configurePassport = require(
     './server/config/passport.config').configurePassport;
 const passport = configurePassport();
 
+const apiRouter = require('./server/router/api.router');
 const authRouter = require('./server/router/auth.router');
 const userRouter = require('./server/router/user.router');
 
@@ -45,6 +46,7 @@ app.prepare().then(() => {
   server.use(passport.session());
   server.use(bindContextfulMiddleware(logger));
 
+  server.use('/', apiRouter);
   server.use('/', authRouter);
   server.use('/', userRouter);
 

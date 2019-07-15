@@ -1,6 +1,5 @@
 package io.github.bbortt.qdrakeboo.edgegateway.filter;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class UserIdFilter implements WebFilter {
 
-  public static final String USER_ID_CLAIM_NAME = "user_id";
+  public static final String USER_ID_CLAIM_NAME = "sub";
   public static final String USER_ID_HEADER_NAME = "qdrakeboo-user-id";
 
   @Override
