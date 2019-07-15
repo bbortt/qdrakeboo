@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@Profile("!dev")
+@Profile({"!dev & !test"})
 @PropertySource({"config/route.properties"})
 public class RouteConfiguration {
 
