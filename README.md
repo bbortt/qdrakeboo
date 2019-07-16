@@ -3,8 +3,10 @@ Qdrakeboo
 
 The private streaming service for geeks.
 
-[![Build Status](https://travis-ci.org/bbortt/qdrakeboo.svg?branch=master)](https://travis-ci.org/bbortt/qdrakeboo)
- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Travis CI](https://travis-ci.org/bbortt/qdrakeboo.svg?branch=master)](https://travis-ci.org/bbortt/qdrakeboo)
+[![CircleCI](https://circleci.com/gh/bbortt/qdrakeboo.svg?style=svg)](https://circleci.com/gh/bbortt/qdrakeboo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # What this is about?
 
 * Performance > Frameworks
@@ -16,9 +18,8 @@ The private streaming service for geeks.
 
 * Global error handling (concept/implementation) in frontend
 * How to monitor express server (actuator?)
-* Add a propper logging framework for node
 * How to package server? Current implementation is uggly!
-* API Access via browser.. cookie?
+* Express server redis session store
 
 # License
 
