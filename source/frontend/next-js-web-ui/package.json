@@ -35,10 +35,10 @@
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "foundation-sites": "^6.5.3",
+    "http-proxy": "^1.17.0",
     "jquery": "^3.4.1",
     "motion-ui": "^2.0.3",
     "next": "^8.1.0",
-    "node-fetch": "^2.6.0",
     "node-sass": "^4.12.0",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
@@ -46,13 +46,13 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "url": "^0.11.0",
-    "util": "^0.12.0",
+    "util": "^0.12.1",
     "what-input": "^5.2.3",
     "winston": "^3.2.1",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.4",
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.2",
@@ -73,6 +73,6 @@
     "nodemon": "^1.19.1",
     "npm-check": "^5.9.0",
     "prettier": "1.18.2",
-    "webpack": "^4.35.2"
+    "webpack": "^4.35.3"
   }
 }
