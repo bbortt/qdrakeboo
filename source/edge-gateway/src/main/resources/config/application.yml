@@ -11,3 +11,5 @@ spring:
           issuer-uri: ${JWT_ISSUER_URI}
 auth0:
   audience: ${JWT_AUDIENCE}
+routes:
+  path: ${ROUTES_CONFIG_PATH}

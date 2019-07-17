@@ -1,8 +1,2 @@
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: headers
-          uri: http://localhost:9080/headers
-          predicates:
-            - Path=/headers
+routes:
+  path: 'classpath:config/routes-dev.properties'
