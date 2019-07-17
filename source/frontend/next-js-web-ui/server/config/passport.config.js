@@ -16,6 +16,7 @@ const configurePassport = () => {
       (accessToken, refreshToken, extraParams, profile, done) => {
         return done(null, {
           accessToken: accessToken,
+          refreshToken: refreshToken,
           idToken: extraParams.id_token
         }, profile);
       }

@@ -1,7 +1,13 @@
 // @flow
 import React from 'react'
+import {withRouter} from 'next/router';
 
-import App from 'next/app'
+import App, {Container} from 'next/app'
+
+import {Provider} from 'react-redux'
+import withRedux from 'next-redux-wrapper'
+import withReduxSaga from 'next-redux-saga'
+import configureStore from '../app/configureStore'
 
 import axios from 'axios'
 
@@ -26,10 +32,10 @@ class ReduxContextAwareApp extends App {
     }
 
     if (isServer) {
-      return {account: query.account, pageProps}
+      return {account: query.account, isServer, pageProps}
     } else {
       const res = await axios.get('/user-info')
-      return {account: res.data, pageProps}
+      return {account: res.data, isServer, pageProps}
     }
   }
 
@@ -40,7 +46,7 @@ class ReduxContextAwareApp extends App {
   }
 
   render() {
-    const {account, Component, pageProps} = this.props
+    const {account, Component, pageProps, store} = this.props
 
     const props = {
       ...pageProps,
@@ -48,13 +54,16 @@ class ReduxContextAwareApp extends App {
     }
 
     return (
-        <div className='app'>
-          <Header account={account}/>
+        <Container>
+          <Provider store={store}>
+            <Header account={account}/>
 
-          <Component {...props} />
-        </div>
+            <Component {...props} />
+          </Provider>
+        </Container>
     )
   }
 }
 
-export default ReduxContextAwareApp
+export default withRedux(configureStore)(
+    withReduxSaga(withRouter(ReduxContextAwareApp)))

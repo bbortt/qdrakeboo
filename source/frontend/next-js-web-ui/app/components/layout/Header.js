@@ -35,8 +35,8 @@ class Header extends React.Component<HeaderProps> {
             <div className='top-bar-left'>
               <ul className='menu'>
                 <li className='menu-text'>
-                  <Link href='/home' id='link-qdrakeboo'>
-                    Qdrakeboo
+                  <Link href='/home'>
+                    <a>Qdrakeboo</a>
                   </Link>
                 </li>
 
@@ -54,7 +54,7 @@ class Header extends React.Component<HeaderProps> {
                   <ul className='menu vertical'>
                     <li>
                       <ActiveMenuItem
-                          href='/account'><a>Settings</a></ActiveMenuItem>
+                          href='/account/settings'><a>Settings</a></ActiveMenuItem>
                     </li>
                     <li>
                       <ActiveMenuItem

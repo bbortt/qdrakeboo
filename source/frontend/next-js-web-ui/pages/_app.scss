@@ -1,13 +1,13 @@
 @import '../assets/scss/foundation/settings';
 @import '~foundation-sites/scss/foundation';
-
 @import '~motion-ui/src/motion-ui';
+
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
 @include foundation-everything;
 
-html, body, #__next, .app {
+html, body, #__next {
   height: 100vh;
   width: 100vw;
 }

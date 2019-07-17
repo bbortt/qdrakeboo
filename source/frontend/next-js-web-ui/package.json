@@ -39,12 +39,18 @@
     "jquery": "^3.4.1",
     "motion-ui": "^2.0.3",
     "next": "^8.1.0",
+    "next-redux-saga": "^4.0.2",
+    "next-redux-wrapper": "^3.0.0-alpha.3",
     "node-sass": "^4.12.0",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
     "querystring": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.5",
     "url": "^0.11.0",
     "util": "^0.12.1",
     "what-input": "^5.2.3",
@@ -73,6 +79,7 @@
     "nodemon": "^1.19.1",
     "npm-check": "^5.9.0",
     "prettier": "1.18.2",
+    "redux-devtools-extension": "^2.13.8",
     "webpack": "^4.35.3"
   }
 }
