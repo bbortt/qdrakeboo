@@ -5,6 +5,11 @@ plugins {
 
 group 'io.github.bbortt.qdrakeboo.federation'
 
+clean {
+    delete 'node_modules'
+    delete 'public'
+}
+
 node {
     version = '10.15.3'
     download = true

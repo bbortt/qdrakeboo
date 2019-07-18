@@ -12,7 +12,8 @@
   "scripts": {
     "build": "webpack",
     "prepare": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
     "continuation-local-storage": "^3.2.1",
@@ -20,10 +21,11 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
-    "webpack": "^4.34.0",
-    "webpack-cli": "^3.3.4"
+    "npm-check": "^5.9.0",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
   }
 }

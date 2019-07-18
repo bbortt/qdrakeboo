@@ -1,4 +1,3 @@
-// @flow
 export const crashReportingMiddleware = (store) => (next) => (action) => {
   try {
     return next(action)

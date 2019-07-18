@@ -14,4 +14,3 @@ EXPOSE 8090
 
 USER upstream
 WORKDIR /home/upstream
-acc

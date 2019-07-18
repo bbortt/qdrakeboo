@@ -9,12 +9,17 @@ dependencies {
     project(':source:contextful-winston-logger')
 }
 
+clean {
+    delete '.next'
+    delete 'node_modules'
+}
+
 node {
     version = '10.15.3'
     download = true
 }
 
-npmInstall.dependsOn ':source:contextful-winston-logger:assemble'
+npmInstall.dependsOn ':source:contextful-winston-logger:build'
 
 task bundle(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'build']
