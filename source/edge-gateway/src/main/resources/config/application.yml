@@ -1,6 +1,10 @@
+auth0:
+  audience: ${JWT_AUDIENCE}
 management:
   server:
     port: ${MANAGEMENT_SERVER_PORT:8090}
+routes:
+  path: ${ROUTES_CONFIG_PATH}
 server:
   port: ${SERVER_PORT:8080}
 spring:
@@ -9,7 +13,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: ${JWT_ISSUER_URI}
-auth0:
-  audience: ${JWT_AUDIENCE}
-routes:
-  path: ${ROUTES_CONFIG_PATH}
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
