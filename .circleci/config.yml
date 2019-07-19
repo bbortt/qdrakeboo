@@ -9,10 +9,10 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
-      - run: ./gradlew assemble --no-daemon -i
+      - run: ./gradlew --no-daemon -i assemble
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      - run: ./gradlew check --no-daemon -i
+      - run: ./gradlew -Pproject.version=$CIRCLE_BUILD_NUM --no-daemon -i check
     working_directory: ~/repo

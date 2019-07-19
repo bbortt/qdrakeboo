@@ -12,7 +12,9 @@ notifications:
 branches:
   only:
   - master
-  - feature/build-using-gradle
+  - feature/*
+  - bugfix/*
+  - hotfix/*
 
 services:
   - docker
@@ -21,11 +23,27 @@ addons:
   sonarcloud:
     organization: "bbortt-github"
     token:
-      secure: "eMLHXnF9EDtRAnT4xsemKsEjSQb9ruW1MfBBii/F8kNSPH1iwL5lnfryYwvVTZZdPvrM8UxS9CqbWpDvodTheNq979Kan2awYWUH7HA1Hbtkk1tVmS2FguavAQyvldY51bXZAosN8wDgxOEu8CXzb2ZASsnubgvGQGggO3pqUuw/88PgZ6LiRGgM18Ytkr03Ax//FTnxnjgEzZgaSnfkQChGmNc9g8FKE/KFXakrZNcb34Fc4sWjrZ1JxehzSBJzsyyUww9pbzMNJFwkPANEExcvihE+6b5xuvIn02935U+9MBI1rzbj9r7dDT9Kd456QzCDKHsC7yTRT5VWP/yGQJFn5kfPLohB18WN5Rpx/ovvyAO+25D/E67BzHeMDL4plK/7G9lFX2rBO0NIhrRJhgl/9ZPCmDhbEV+MdZbvqnTUHjn9LFQMX/ZW8hWaMCXnVZuc9SJKpP0PFfK7mb74v/xLTkLOq0d4J7kVQKsJgwjFkeqmMjPqGKT1fWPj3nojPNnxVrK249DgbUlJsypg4oXJbN4cVubaUviX4HTw8CNKKF97uC+66mkebrshJypVLdA1bR5AjdOgFatisl9s+byJYb4SuXpX/MIegGrZ0uuFWLm3Z482p1B9Qzx17BtTyfWMyAiHT4QuHEzNxa6l5f16sEvCOv1Rds+R32rpMHE="
+      secure: "PRvvKTHDm6DDqo+IgrgSPGWDFuTfp3ZMygSZC2iAGjkKhsdLEkwd0AF2bUp8TcSwwaRqXGGVQ/H4BjxFbB9CgFp1IwLeYM6nvMGp9V6FCg61PGeh584uxb9QDz68K8/HdLkOyA7LwnBzn6TYlxd9mTdrQ+/COWrXX+t9pRlSgBY8XI3Z4mdE9U63dZ+6dnKycnBmnAQGhcz+FW5PncSLevMLoqgtU8N6IBq3wJ2r1jUksiKGpyXzhTRLG0Uhk+n13bvHhGS10JWPHndjOSCrB5LYnokq0THqaUQX5JM2o+8Ym0jnTzeXAO3tQzN4/rDJjK/CEmDuh8NWgLZD/hnHaUaXQpfC2EJfJ9NfuQVLWdtheBNrd4mtd/vQ9n42dSnNCunJsKl6f1QvbgpDa9c8fZWu160U4Eu4TM58gd/QAap1xSFpfEggf/BwU8eadYqjJuLghIYkD+yGdRYuFYrmeqdfXAr+YhGwZAqqaubhpTszw8Y4G4rK5g9hf8IZ1SmbIEWH1F3HoGBhghBsBSnX5XCHh+YcOdPDBg70BiajP0cElDUSXMLfPZeXxvw5wzT2KdoL83+Ghv5uofVeS2bTP0wWbe73M+rvPDAyRMHegMT8HB6friJi8JT3oaJQVspck/GP3lsgg+tc0hBa3CT0k608zvwWF718TtgyG2qZYp0="
+
+env:
+  global:
+    - secure: "MBB//Kjdma2Jobg7iKALEu1T6ln4MSh0zS6KFhvrkZ4+tiN9VQzJ+0LmEG9tfQnTDOZzMxzQtidh1oAc24cvQi9Ngm7QNnBY74lXPNknyy5bItj+yuTkuoEiwmG75e6R53V7f6g4QozKQ82WLmjKLqZTpMFD7Iqo7wAnEckwGwZGn30hLI7xthPO8FCmJE3Ko6iRCj/Cl8TwFjYuiKLhQC6Rv4LjP4jwxEJ04ARY3pvIdSS6Ur8NPZJj0yUkB4xaluh2rfbgygsRJYIJ1tO0uPLykd7tIp0C27rw97u5nM11I0Z5FgMU2+XFL+NUpj2LqPlaRl3Cw3Gk2mHhMOQWuyVD6yfTP3mgFsC5c5IIsgflJ0u4R90o1tJtnMejrlxwDrIo8u5uhep4DpzfhSg0CfTATycrl6ls+qK2JOCBaTD2icnXGOFYqASWjpsrJ9UQIeY5ICUpI+u6oGwXTsAPCEB7t8aSBTG9Mxt3Ij0zw9JNqrcRFSJe3nhfSwfeIwVxkROJ32V4RHFTVHg0/92/cAFJiPU5zIfRWblahUAMuXLAcDpelom7A5l6GBIRV2HFn6YKcbP0rWvRYpVMyiRV6c90nVp89Sf/i+0hpGWO9pTE4VsLXqUbapim5+PZMPB4v3RMjQA9judHh1Isk6KugxKkif7NM5cBvCxpiyX9Qgc="
+    # ^^ DOCKER_USERNAME
+    - secure: "eSYNjL7vxNdN6gEzeIzbGy45gQPBzESm/X6CGUCNjEeO3IVR97erQdiOuxtAI98n2NmZ7Be0+NKe0RFmGbsW0Dw2qBCquZGu9PGf2isShK8LLKtMVBIc9+7lKE2KAVDBtxwSY2cpQsXD6SSwRJ7jqtsiW/TkCaECG3owjDaV9wb/9XPOKo7eQO4vJ5ltuPfxao5dOU0L4spz8zu6cOhCsz+PGBYZbxRxwDsEctyHSs2jweG7x6UVlg2K8zCHLK8bL6eiexIo3WOtDZ4mlwN03thzeoz2EGNgX8FmoDnbd8JOBkV/pXsd2rBBZNTMidrOVlChDX7uYRgk5J6sj3puFaB5OuFjtSZHK8rmIlju3T7QDv55iNrAag+HYWqe1nOFUNjkueJft5nKYYwVBtHnJRiDO5mTDlS3u6+EfMeYpikA42UZnGXwp3G0jUpEh/m+fyljIyGit+dtNu9wFibI03Nfyhz3g6pXpia7K1SgZY2QLPepyjTs5jkfihUGz6j2HKTT2T6UfHWZN6NSeSYu5s+41eyM+sYibsyfSAnRR0F6L1K/RsBtejk1Hu3k+dFu6xUJJu+a66pJTkqGuBTzcDo3IbhT7Y8OFQgWuHXK42/9coJgk/5BgKywQ9DxzyemZ+bPSHad5smXnPQNyAvcY9PZOtN5vKfU1LNXu/AhfVw="
+    # ^^ DOCKER_PASSWORD
+
+before_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - ./gradlew -Pproject.version=$TRAVIS_BUILD_NUMBER --no-daemon -i check
+  - ./gradlew -Pproject.version=$TRAVIS_BUILD_NUMBER --no-daemon -i check sonarqube
   - ./scripts/docker_build_all.sh $TRAVIS_BUILD_NUMBER
+
+deploy:
+  - provider: script
+    script: ./scripts/deploy.sh $TRAVIS_BUILD_NUMBER
+    on:
+      branch: master
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
