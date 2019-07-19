@@ -9,13 +9,6 @@ install: true
 notifications:
   email: false
 
-branches:
-  only:
-  - master
-  - feature/*
-  - bugfix/*
-  - hotfix/*
-
 services:
   - docker
 
