@@ -21,8 +21,7 @@ The private streaming service for geeks.
 * Global error handling (concept/implementation) in frontend
 * How to monitor express server (actuator?)
 * How to package server? Current implementation is uggly!
-* Express server redis session store
 
-# License
+# License0
 
 This project is licensed under the terms of the [MIT license](https://github.com/bbortt/qdrakeboo/blob/master/LICENSE).
