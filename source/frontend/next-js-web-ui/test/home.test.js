@@ -4,7 +4,7 @@ import {shallow} from 'enzyme'
 import React from 'react'
 import {expect} from 'chai'
 
-import Home from '../pages/home.js'
+import Home from '../pages/home'
 
 describe('Home', () => {
   const home = shallow(<Home/>);

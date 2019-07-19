@@ -1,7 +1,7 @@
 // @flow
 import {Component} from 'react'
 
-import type {Context} from './Context.flow'
+import type {Context} from './Context.type'
 
 export type Page<Props, State = {}> = Component<Props, State> & {
   getInitialProps: ({ ...Context }) => Promise<any>;

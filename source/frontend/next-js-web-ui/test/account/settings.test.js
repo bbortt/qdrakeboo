@@ -18,6 +18,7 @@ describe('Settings', () => {
   });
 
   it('is personalized', () => {
-    expect(settings.find('h1').text()).to.equal(`Hi ${settingsProps.displayName}`)
+    expect(settings.find('h1').text()).to.equal(
+        `Hi ${settingsProps.displayName}`)
   })
 });

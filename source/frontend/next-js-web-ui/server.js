@@ -67,12 +67,13 @@ app.prepare().then(() => {
 
   server.get('/', unsecuredRequest);
   server.get('/goodbye', unsecuredRequest);
+
   server.get('/_next/*', (req, res) => handle(req, res));
   server.get('/favicon.ico', (req, res) => handle(req, res));
 
   server.get('*', secured(), (req, res) => {
     const {_raw, _json, ...userProfile} = req.user;
-    return app.render(req, res, req.path, {account: userProfile})
+    return app.render(req, res, req.path, {userInfo: userProfile})
   });
 
   server.listen({port: port}, (err) => {

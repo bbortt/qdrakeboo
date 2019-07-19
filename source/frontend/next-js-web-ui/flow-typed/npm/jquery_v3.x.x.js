@@ -216,12 +216,12 @@ declare class JQueryXHR {
    * Incorporates the functionality of the .done() and .fail() methods, allowing (as of jQuery 1.8) the underlying Promise to be manipulated. Refer to deferred.then() for implementation details.
    */
   then<R>(
-    doneCallback: (data: any, textStatus: string, jqXHR: JQueryXHR) => R,
-    failCallback?: (
-      jqXHR: JQueryXHR,
-      textStatus: string,
-      errorThrown: any
-    ) => void
+      doneCallback: (data: any, textStatus: string, jqXHR: JQueryXHR) => R,
+      failCallback?: (
+          jqXHR: JQueryXHR,
+          textStatus: string,
+          errorThrown: any
+      ) => void
   ): JQueryPromise<R>;
   /**
    * Property containing the parsed response if the response Content-Type is json
@@ -243,14 +243,14 @@ declare class JQueryXHR {
    */
   error(xhr: JQueryXHR, textStatus: string, errorThrown: string): void;
   done<R>(
-    doneCallback: (data: any, textStatus: string, xhr: JQueryXHR) => R
+      doneCallback: (data: any, textStatus: string, xhr: JQueryXHR) => R
   ): JQueryPromise<R>;
   fail<R>(
-    failCallback: (
-      xhr: JQueryXHR,
-      textStatus: string,
-      errorThrown: string
-    ) => void
+      failCallback: (
+          xhr: JQueryXHR,
+          textStatus: string,
+          errorThrown: string
+      ) => void
   ): void;
 }
 
@@ -348,9 +348,9 @@ declare class JQueryGenericPromise<T> {
    * @param failFilter An optional function that is called when the Deferred is rejected.
    */
   then<U>(
-    doneFilter: (value?: T, ...values: any[]) => U | JQueryPromise<U>,
-    failFilter?: (...reasons: any[]) => any,
-    progressFilter?: (...progression: any[]) => any
+      doneFilter: (value?: T, ...values: any[]) => U | JQueryPromise<U>,
+      failFilter?: (...reasons: any[]) => any,
+      progressFilter?: (...progression: any[]) => any
   ): JQueryPromise<U>;
 
   /**
@@ -360,9 +360,9 @@ declare class JQueryGenericPromise<T> {
    * @param failFilter An optional function that is called when the Deferred is rejected.
    */
   then(
-    doneFilter: (value?: T, ...values: any[]) => void,
-    failFilter?: (...reasons: any[]) => any,
-    progressFilter?: (...progression: any[]) => any
+      doneFilter: (value?: T, ...values: any[]) => void,
+      failFilter?: (...reasons: any[]) => any,
+      progressFilter?: (...progression: any[]) => any
   ): JQueryPromise<void>;
 
   /**
@@ -382,10 +382,8 @@ declare interface JQueryPromiseCallback<T> {
 
 declare class JQueryPromiseOperator<T, U> {
   (
-    callback1: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[],
-    ...callbacksN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      callback1: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[],
+      ...callbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryPromise<U>;
 }
 
@@ -404,10 +402,8 @@ declare class JQueryPromise<T> extends JQueryGenericPromise<T> {
    * @param alwaysCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved or rejected.
    */
   always(
-    alwaysCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
-    ...alwaysCallbacksN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      alwaysCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
+      ...alwaysCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryPromise<T>;
   /**
    * Add handlers to be called when the Deferred object is resolved.
@@ -416,10 +412,8 @@ declare class JQueryPromise<T> extends JQueryGenericPromise<T> {
    * @param doneCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved.
    */
   done(
-    doneCallback1?: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[],
-    ...doneCallbackN: Array<
-      JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[]
-    >
+      doneCallback1?: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[],
+      ...doneCallbackN: Array<JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[]>
   ): JQueryPromise<T>;
   /**
    * Add handlers to be called when the Deferred object is rejected.
@@ -428,10 +422,8 @@ declare class JQueryPromise<T> extends JQueryGenericPromise<T> {
    * @param failCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is rejected.
    */
   fail(
-    failCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
-    ...failCallbacksN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      failCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
+      ...failCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryPromise<T>;
   /**
    * Add handlers to be called when the Deferred object generates progress notifications.
@@ -439,18 +431,16 @@ declare class JQueryPromise<T> extends JQueryGenericPromise<T> {
    * @param progressCallbacks A function, or array of functions, to be called when the Deferred generates progress notifications.
    */
   progress(
-    progressCallback1?: | JQueryPromiseCallback<any>
-    | JQueryPromiseCallback<any>[],
-    ...progressCallbackN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      progressCallback1?: | JQueryPromiseCallback<any>
+          | JQueryPromiseCallback<any>[],
+      ...progressCallbackN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryPromise<T>;
 
   // Deprecated - given no typings
   pipe(
-    doneFilter?: (x: any) => any,
-    failFilter?: (x: any) => any,
-    progressFilter?: (x: any) => any
+      doneFilter?: (x: any) => any,
+      failFilter?: (x: any) => any,
+      progressFilter?: (x: any) => any
   ): JQueryPromise<any>;
 }
 
@@ -469,10 +459,8 @@ declare class JQueryDeferred<T> extends JQueryGenericPromise<T> {
    * @param alwaysCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved or rejected.
    */
   always(
-    alwaysCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
-    ...alwaysCallbacksN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      alwaysCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
+      ...alwaysCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryDeferred<T>;
   /**
    * Add handlers to be called when the Deferred object is resolved.
@@ -481,10 +469,8 @@ declare class JQueryDeferred<T> extends JQueryGenericPromise<T> {
    * @param doneCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is resolved.
    */
   done(
-    doneCallback1?: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[],
-    ...doneCallbackN: Array<
-      JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[]
-    >
+      doneCallback1?: JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[],
+      ...doneCallbackN: Array<JQueryPromiseCallback<T> | JQueryPromiseCallback<T>[]>
   ): JQueryDeferred<T>;
   /**
    * Add handlers to be called when the Deferred object is rejected.
@@ -493,10 +479,8 @@ declare class JQueryDeferred<T> extends JQueryGenericPromise<T> {
    * @param failCallbacks2 Optional additional functions, or arrays of functions, that are called when the Deferred is rejected.
    */
   fail(
-    failCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
-    ...failCallbacksN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      failCallback1?: JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[],
+      ...failCallbacksN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryDeferred<T>;
   /**
    * Add handlers to be called when the Deferred object generates progress notifications.
@@ -504,11 +488,9 @@ declare class JQueryDeferred<T> extends JQueryGenericPromise<T> {
    * @param progressCallbacks A function, or array of functions, to be called when the Deferred generates progress notifications.
    */
   progress(
-    progressCallback1?: | JQueryPromiseCallback<any>
-    | JQueryPromiseCallback<any>[],
-    ...progressCallbackN: Array<
-      JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]
-    >
+      progressCallback1?: | JQueryPromiseCallback<any>
+          | JQueryPromiseCallback<any>[],
+      ...progressCallbackN: Array<JQueryPromiseCallback<any> | JQueryPromiseCallback<any>[]>
   ): JQueryDeferred<T>;
 
   /**
@@ -565,9 +547,9 @@ declare class JQueryDeferred<T> extends JQueryGenericPromise<T> {
 
   // Deprecated - given no typings
   pipe(
-    doneFilter?: (x: any) => any,
-    failFilter?: (x: any) => any,
-    progressFilter?: (x: any) => any
+      doneFilter?: (x: any) => any,
+      failFilter?: (x: any) => any,
+      progressFilter?: (x: any) => any
   ): JQueryPromise<any>;
 }
 
@@ -620,7 +602,8 @@ declare class JQueryKeyEventObject extends JQueryInputEventObject {
   keyCode: number;
 }
 
-declare class JQueryEventObject extends BaseJQueryEventObject {}
+declare class JQueryEventObject extends BaseJQueryEventObject {
+}
 
 /*
   Collection of properties of the current browser
@@ -713,9 +696,9 @@ declare interface JQueryAnimationOptions {
    * A function to be called after each step of the animation, only once per animated element regardless of the number of animated properties. (version added: 1.8)
    */
   progress?: (
-    animation: JQueryPromise<any>,
-    progress: number,
-    remainingMs: number
+      animation: JQueryPromise<any>,
+      progress: number,
+      remainingMs: number
   ) => any;
   /**
    * A function to call when the animation begins. (version added: 1.8)
@@ -748,7 +731,8 @@ declare class JQueryEasingFunction {
 }
 
 declare class JQueryEasingFunctions {
-  [name: string]: JQueryEasingFunction;
+[name: string]: JQueryEasingFunction;
+
   linear: JQueryEasingFunction;
   swing: JQueryEasingFunction;
 }
@@ -778,12 +762,12 @@ declare class JQueryStatic {
    * @param handler A handler to set default values for future Ajax requests.
    */
   ajaxPrefilter(
-    dataTypes: string,
-    handler: (
-      opts: any,
-      originalOpts: JQueryAjaxSettings,
-      jqXHR: JQueryXHR
-    ) => any
+      dataTypes: string,
+      handler: (
+          opts: any,
+          originalOpts: JQueryAjaxSettings,
+          jqXHR: JQueryXHR
+      ) => any
   ): void;
   /**
    * Handle custom Ajax options or modify existing options before each request is sent and before they are processed by $.ajax().
@@ -791,11 +775,11 @@ declare class JQueryStatic {
    * @param handler A handler to set default values for future Ajax requests.
    */
   ajaxPrefilter(
-    handler: (
-      opts: any,
-      originalOpts: JQueryAjaxSettings,
-      jqXHR: JQueryXHR
-    ) => any
+      handler: (
+          opts: any,
+          originalOpts: JQueryAjaxSettings,
+          jqXHR: JQueryXHR
+      ) => any
   ): void;
 
   ajaxSettings: JQueryAjaxSettings;
@@ -815,9 +799,9 @@ declare class JQueryStatic {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, or html).
    */
   get(
-    url: string,
-    success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
-    dataType?: string
+      url: string,
+      success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
+      dataType?: string
   ): JQueryXHR;
   /**
    * Load data from the server using a HTTP GET request.
@@ -828,10 +812,10 @@ declare class JQueryStatic {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, or html).
    */
   get(
-    url: string,
-    data?: {} | string,
-    success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
-    dataType?: string
+      url: string,
+      data?: {} | string,
+      success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
+      dataType?: string
   ): JQueryXHR;
   /**
    * Load JSON-encoded data from the server using a GET HTTP request.
@@ -840,8 +824,8 @@ declare class JQueryStatic {
    * @param success A callback function that is executed if the request succeeds.
    */
   getJSON(
-    url: string,
-    success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any
+      url: string,
+      success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any
   ): JQueryXHR;
   /**
    * Load JSON-encoded data from the server using a GET HTTP request.
@@ -851,9 +835,9 @@ declare class JQueryStatic {
    * @param success A callback function that is executed if the request succeeds.
    */
   getJSON(
-    url: string,
-    data?: {} | string,
-    success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any
+      url: string,
+      data?: {} | string,
+      success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any
   ): JQueryXHR;
   /**
    * Load a JavaScript file from the server using a GET HTTP request, then execute it.
@@ -862,8 +846,8 @@ declare class JQueryStatic {
    * @param success A callback function that is executed if the request succeeds.
    */
   getScript(
-    url: string,
-    success?: (script: string, textStatus: string, jqXHR: JQueryXHR) => any
+      url: string,
+      success?: (script: string, textStatus: string, jqXHR: JQueryXHR) => any
   ): JQueryXHR;
 
   /**
@@ -879,9 +863,9 @@ declare class JQueryStatic {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html: any).
    */
   post(
-    url: string,
-    success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
-    dataType?: string
+      url: string,
+      success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
+      dataType?: string
   ): JQueryXHR;
   /**
    * Load data from the server using a HTTP POST request.
@@ -892,10 +876,10 @@ declare class JQueryStatic {
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html: any).
    */
   post(
-    url: string,
-    data?: {} | string,
-    success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
-    dataType?: string
+      url: string,
+      data?: {} | string,
+      success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
+      dataType?: string
   ): JQueryXHR;
 
   /**
@@ -989,7 +973,7 @@ declare class JQueryStatic {
    * @param deferreds One or more Deferred objects, or plain JavaScript objects.
    */
   when<T>(
-    ...deferreds: Array<T | JQueryPromise<T> /* as JQueryDeferred<T> */>
+      ...deferreds: Array<T | JQueryPromise<T> /* as JQueryDeferred<T> */>
   ): JQueryPromise<T>;
 
   /**
@@ -1075,7 +1059,7 @@ declare class JQueryStatic {
    * @param beforeStart A function that is called just before the constructor returns.
    */
   Deferred<T>(
-    beforeStart?: (deferred: JQueryDeferred<T>) => any
+      beforeStart?: (deferred: JQueryDeferred<T>) => any
   ): JQueryDeferred<T>;
 
   /**
@@ -1110,9 +1094,9 @@ declare class JQueryStatic {
    * @param additionalArguments Any number of arguments to be passed to the function referenced in the function argument.
    */
   proxy(
-    fnction: (...args: any[]) => any,
-    context: Object,
-    ...additionalArguments: any[]
+      fnction: (...args: any[]) => any,
+      context: Object,
+      ...additionalArguments: any[]
   ): any;
   /**
    * Takes a function and returns a new one that will always have a particular context.
@@ -1155,8 +1139,8 @@ declare class JQueryStatic {
    * @param callback The function that will be executed on every object.
    */
   each<T>(
-    collection: T[],
-    callback: (indexInArray: number, valueOfElement: T) => any
+      collection: T[],
+      callback: (indexInArray: number, valueOfElement: T) => any
   ): any;
 
   /**
@@ -1166,8 +1150,8 @@ declare class JQueryStatic {
    * @param callback The function that will be executed on every object.
    */
   each(
-    collection: any,
-    callback: (indexInArray: any, valueOfElement: any) => any
+      collection: any,
+      callback: (indexInArray: any, valueOfElement: any) => any
   ): any;
 
   /**
@@ -1203,9 +1187,9 @@ declare class JQueryStatic {
    * @param invert If "invert" is false, or not provided, then the function returns an array consisting of all elements for which "callback" returns true. If "invert" is true, then the function returns an array consisting of all elements for which "callback" returns false.
    */
   grep<T>(
-    array: T[],
-    func: (elementOfArray: T, indexInArray: number) => boolean,
-    invert?: boolean
+      array: T[],
+      func: (elementOfArray: T, indexInArray: number) => boolean,
+      invert?: boolean
   ): T[];
 
   /**
@@ -1274,8 +1258,8 @@ declare class JQueryStatic {
    * @param callback The function to process each item against. The first argument to the function is the array item, the second argument is the index in array The function can return any value. Within the function, this refers to the global (window: any) object.
    */
   map<T, U>(
-    array: T[],
-    callback: (elementOfArray: T, indexInArray: number) => U
+      array: T[],
+      callback: (elementOfArray: T, indexInArray: number) => U
   ): U[];
   /**
    * Translate all items in an array or object to new array of items.
@@ -1367,11 +1351,11 @@ declare class JQuery {
    * @param handler The function to be invoked.
    */
   ajaxComplete(
-    handler: (
-      event: JQueryEventObject,
-      XMLHttpRequest: XMLHttpRequest,
-      ajaxOptions: any
-    ) => any
+      handler: (
+          event: JQueryEventObject,
+          XMLHttpRequest: XMLHttpRequest,
+          ajaxOptions: any
+      ) => any
   ): JQuery;
   /**
    * Register a handler to be called when Ajax requests complete with an error. This is an Ajax Event.
@@ -1379,12 +1363,12 @@ declare class JQuery {
    * @param handler The function to be invoked.
    */
   ajaxError(
-    handler: (
-      event: JQueryEventObject,
-      jqXHR: JQueryXHR,
-      ajaxSettings: JQueryAjaxSettings,
-      thrownError: any
-    ) => any
+      handler: (
+          event: JQueryEventObject,
+          jqXHR: JQueryXHR,
+          ajaxSettings: JQueryAjaxSettings,
+          thrownError: any
+      ) => any
   ): JQuery;
   /**
    * Attach a function to be executed before an Ajax request is sent. This is an Ajax Event.
@@ -1392,11 +1376,11 @@ declare class JQuery {
    * @param handler The function to be invoked.
    */
   ajaxSend(
-    handler: (
-      event: JQueryEventObject,
-      jqXHR: JQueryXHR,
-      ajaxOptions: JQueryAjaxSettings
-    ) => any
+      handler: (
+          event: JQueryEventObject,
+          jqXHR: JQueryXHR,
+          ajaxOptions: JQueryAjaxSettings
+      ) => any
   ): JQuery;
   /**
    * Register a handler to be called when the first Ajax request begins. This is an Ajax Event.
@@ -1416,11 +1400,11 @@ declare class JQuery {
    * @param handler The function to be invoked.
    */
   ajaxSuccess(
-    handler: (
-      event: JQueryEventObject,
-      XMLHttpRequest: XMLHttpRequest,
-      ajaxOptions: JQueryAjaxSettings
-    ) => any
+      handler: (
+          event: JQueryEventObject,
+          XMLHttpRequest: XMLHttpRequest,
+          ajaxOptions: JQueryAjaxSettings
+      ) => any
   ): JQuery;
 
   /**
@@ -1431,13 +1415,13 @@ declare class JQuery {
    * @param complete A callback function that is executed when the request completes.
    */
   load(
-    url: string,
-    data?: string | {},
-    complete?: (
-      responseText: string,
-      textStatus: string,
-      XMLHttpRequest: XMLHttpRequest
-    ) => any
+      url: string,
+      data?: string | {},
+      complete?: (
+          responseText: string,
+          textStatus: string,
+          XMLHttpRequest: XMLHttpRequest
+      ) => any
   ): JQuery;
 
   /**
@@ -1474,8 +1458,8 @@ declare class JQuery {
    * @param func A function returning the value to set. this is the current element. Receives the index position of the element in the set and the old attribute value as arguments.
    */
   attr(
-    attributeName: string,
-    func: (index: number, attr: string) => string | number
+      attributeName: string,
+      func: (index: number, attr: string) => string | number
   ): JQuery;
   /**
    * Set one or more attributes for the set of matched elements.
@@ -1547,8 +1531,8 @@ declare class JQuery {
    * @param func A function returning the value to set. Receives the index position of the element in the set and the old property value as arguments. Within the function, the keyword this refers to the current element.
    */
   prop(
-    propertyName: string,
-    func: (index: number, oldPropertyValue: any) => any
+      propertyName: string,
+      func: (index: number, oldPropertyValue: any) => any
   ): JQuery;
 
   /**
@@ -1598,8 +1582,8 @@ declare class JQuery {
    * @param swtch A boolean value to determine whether the class should be added or removed.
    */
   toggleClass(
-    func: (index: number, className: string, swtch: boolean) => string,
-    swtch?: boolean
+      func: (index: number, className: string, swtch: boolean) => string,
+      swtch?: boolean
   ): JQuery;
 
   /**
@@ -1626,8 +1610,8 @@ declare class JQuery {
    * @param value A function returning the value to set. this is the current element. Receives the index position of the element in the set and the old value as arguments.
    */
   css(
-    propertyName: string,
-    value: (index: number, value: string) => string | number
+      propertyName: string,
+      value: (index: number, value: string) => string | number
   ): JQuery;
   /**
    * Set one or more CSS properties for the set of matched elements.
@@ -1706,7 +1690,7 @@ declare class JQuery {
    * @param func A function to return the coordinates to set. Receives the index of the element in the collection as the first argument and the current coordinates as the second argument. The function should return an object with the new top and left properties.
    */
   offset(
-    func: (index: number, coords: JQueryCoordinates) => JQueryCoordinates
+      func: (index: number, coords: JQueryCoordinates) => JQueryCoordinates
   ): JQuery;
 
   /**
@@ -1854,9 +1838,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   animate(
-    properties: {},
-    duration?: string | number,
-    complete?: Function
+      properties: {},
+      duration?: string | number,
+      complete?: Function
   ): JQuery;
   /**
    * Perform a custom animation of a set of CSS properties.
@@ -1867,10 +1851,10 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   animate(
-    properties: {},
-    duration?: string | number,
-    easing?: string,
-    complete?: Function
+      properties: {},
+      duration?: string | number,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Perform a custom animation of a set of CSS properties.
@@ -1903,9 +1887,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   fadeIn(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Display the matched elements by fading them to opaque.
@@ -1929,9 +1913,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   fadeOut(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Hide the matched elements by fading them to transparent.
@@ -1948,9 +1932,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   fadeTo(
-    duration: string | number,
-    opacity: number,
-    complete?: Function
+      duration: string | number,
+      opacity: number,
+      complete?: Function
   ): JQuery;
   /**
    * Adjust the opacity of the matched elements.
@@ -1961,10 +1945,10 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   fadeTo(
-    duration: string | number,
-    opacity: number,
-    easing?: string,
-    complete?: Function
+      duration: string | number,
+      opacity: number,
+      easing?: string,
+      complete?: Function
   ): JQuery;
 
   /**
@@ -1982,9 +1966,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   fadeToggle(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Display or hide the matched elements by animating their opacity.
@@ -2015,9 +1999,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   hide(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Hide the matched elements.
@@ -2041,9 +2025,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   show(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Display the matched elements.
@@ -2067,9 +2051,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   slideDown(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Display the matched elements with a sliding motion.
@@ -2093,9 +2077,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   slideToggle(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Display or hide the matched elements with a sliding motion.
@@ -2119,9 +2103,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   slideUp(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Hide the matched elements with a sliding motion.
@@ -2161,9 +2145,9 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   toggle(
-    duration?: number | string,
-    easing?: string,
-    complete?: Function
+      duration?: number | string,
+      easing?: string,
+      complete?: Function
   ): JQuery;
   /**
    * Display or hide the matched elements.
@@ -2186,9 +2170,9 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   bind(
-    eventType: string,
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventType: string,
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Attach a handler to an event for the elements.
@@ -2197,8 +2181,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   bind(
-    eventType: string,
-    handler: (eventObject: JQueryEventObject) => any
+      eventType: string,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Attach a handler to an event for the elements.
@@ -2239,8 +2223,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   blur(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2260,8 +2244,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   change(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2281,8 +2265,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   click(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2302,20 +2286,20 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   dblclick(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   delegate(
-    selector: any,
-    eventType: string,
-    handler: (eventObject: JQueryEventObject) => any
+      selector: any,
+      eventType: string,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
   delegate(
-    selector: any,
-    eventType: string,
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      selector: any,
+      eventType: string,
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2335,8 +2319,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   focus(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2356,8 +2340,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   focusin(
-    eventData: Object,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2377,8 +2361,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   focusout(
-    eventData: Object,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2388,8 +2372,8 @@ declare class JQuery {
    * @param handlerOut A function to execute when the mouse pointer leaves the element.
    */
   hover(
-    handlerIn: (eventObject: JQueryEventObject) => any,
-    handlerOut: (eventObject: JQueryEventObject) => any
+      handlerIn: (eventObject: JQueryEventObject) => any,
+      handlerOut: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Bind a single handler to the matched elements, to be executed when the mouse pointer enters or leaves the elements.
@@ -2415,8 +2399,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   keydown(
-    eventData: any,
-    handler: (eventObject: JQueryKeyEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryKeyEventObject) => any
   ): JQuery;
 
   /**
@@ -2436,8 +2420,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   keypress(
-    eventData: any,
-    handler: (eventObject: JQueryKeyEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryKeyEventObject) => any
   ): JQuery;
 
   /**
@@ -2457,8 +2441,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   keyup(
-    eventData: any,
-    handler: (eventObject: JQueryKeyEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryKeyEventObject) => any
   ): JQuery;
 
   /**
@@ -2474,8 +2458,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   load(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2495,8 +2479,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mousedown(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2516,8 +2500,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mouseenter(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2537,8 +2521,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mouseleave(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2558,8 +2542,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mousemove(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2579,8 +2563,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mouseout(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2600,8 +2584,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mouseover(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2621,8 +2605,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   mouseup(
-    eventData: Object,
-    handler: (eventObject: JQueryMouseEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryMouseEventObject) => any
   ): JQuery;
 
   /**
@@ -2643,9 +2627,9 @@ declare class JQuery {
    * @param handler A handler function previous: anyly attached for the event(s), or the special value false.
    */
   off(
-    events: string,
-    selector: string,
-    handler: (eventObject: JQueryEventObject) => any
+      events: string,
+      selector: string,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Remove an event handler.
@@ -2654,8 +2638,8 @@ declare class JQuery {
    * @param selector A selector which should match the one originally passed to .on() when attaching event handlers.
    */
   off(
-    events: string,
-    selector: string
+      events: string,
+      selector: string
   ): JQuery;
   /**
    * Remove an event handler.
@@ -2664,8 +2648,8 @@ declare class JQuery {
    * @param handler A handler function previous: anyly attached for the event(s), or the special value false. Takes handler with extra args that can be attached with on().
    */
   off(
-    events: string,
-    handler: (eventObject: JQueryEventObject, ...args: any[]) => any
+      events: string,
+      handler: (eventObject: JQueryEventObject, ...args: any[]) => any
   ): JQuery;
   /**
    * Remove an event handler.
@@ -2674,10 +2658,10 @@ declare class JQuery {
    * @param selector A selector which should match the one originally passed to .on() when attaching event handlers.
    */
   off(
-    events: {
-      [key: string]: any
-    },
-    selector?: string
+      events: {
+        [key: string]: any
+      },
+      selector?: string
   ): JQuery;
 
   /**
@@ -2687,8 +2671,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false. Rest parameter args is for optional parameters passed to jQuery.trigger(). Note that the actual parameters on the event handler function must be marked as optional (? syntax).
    */
   on(
-    events: string,
-    handler: (eventObject: JQueryEventObject, ...args: any[]) => any
+      events: string,
+      handler: (eventObject: JQueryEventObject, ...args: any[]) => any
   ): JQuery;
   /**
    * Attach an event handler function for one or more events to the selected elements.
@@ -2698,9 +2682,9 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.
    */
   on(
-    events: string,
-    data: any,
-    handler: (eventObject: JQueryEventObject, ...args: any[]) => any
+      events: string,
+      data: any,
+      handler: (eventObject: JQueryEventObject, ...args: any[]) => any
   ): JQuery;
   /**
    * Attach an event handler function for one or more events to the selected elements.
@@ -2710,9 +2694,9 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.
    */
   on(
-    events: string,
-    selector: string,
-    handler: (eventObject: JQueryEventObject, ...eventData: any[]) => any
+      events: string,
+      selector: string,
+      handler: (eventObject: JQueryEventObject, ...eventData: any[]) => any
   ): JQuery;
   /**
    * Attach an event handler function for one or more events to the selected elements.
@@ -2723,10 +2707,10 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.
    */
   on(
-    events: string,
-    selector: string,
-    data: any,
-    handler: (eventObject: JQueryEventObject, ...eventData: any[]) => any
+      events: string,
+      selector: string,
+      data: any,
+      handler: (eventObject: JQueryEventObject, ...eventData: any[]) => any
   ): JQuery;
   /**
    * Attach an event handler function for one or more events to the selected elements.
@@ -2736,11 +2720,11 @@ declare class JQuery {
    * @param data Data to be passed to the handler in event.data when an event occurs.
    */
   on(
-    events: {
-      [key: string]: any
-    },
-    selector?: string,
-    data?: any
+      events: {
+        [key: string]: any
+      },
+      selector?: string,
+      data?: any
   ): JQuery;
   /**
    * Attach an event handler function for one or more events to the selected elements.
@@ -2749,10 +2733,10 @@ declare class JQuery {
    * @param data Data to be passed to the handler in event.data when an event occurs.
    */
   on(
-    events: {
-      [key: string]: any
-    },
-    data?: any
+      events: {
+        [key: string]: any
+      },
+      data?: any
   ): JQuery;
 
   /**
@@ -2770,9 +2754,9 @@ declare class JQuery {
    * @param handler A function to execute at the time the event is triggered.
    */
   one(
-    events: string,
-    data: Object,
-    handler: (eventObject: JQueryEventObject) => any
+      events: string,
+      data: Object,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2783,9 +2767,9 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.
    */
   one(
-    events: string,
-    selector: string,
-    handler: (eventObject: JQueryEventObject) => any
+      events: string,
+      selector: string,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
@@ -2796,10 +2780,10 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.
    */
   one(
-    events: string,
-    selector: string,
-    data: any,
-    handler: (eventObject: JQueryEventObject) => any
+      events: string,
+      selector: string,
+      data: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2810,11 +2794,11 @@ declare class JQuery {
    * @param data Data to be passed to the handler in event.data when an event occurs.
    */
   one(
-    events: {
-      [key: string]: any
-    },
-    selector?: string,
-    data?: any
+      events: {
+        [key: string]: any
+      },
+      selector?: string,
+      data?: any
   ): JQuery;
 
   /**
@@ -2824,10 +2808,10 @@ declare class JQuery {
    * @param data Data to be passed to the handler in event.data when an event occurs.
    */
   one(
-    events: {
-      [key: string]: any
-    },
-    data?: any
+      events: {
+        [key: string]: any
+      },
+      data?: any
   ): JQuery;
 
   /**
@@ -2854,8 +2838,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   resize(
-    eventData: Object,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2875,8 +2859,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   scroll(
-    eventData: Object,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2896,8 +2880,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   select(
-    eventData: Object,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: Object,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2917,8 +2901,8 @@ declare class JQuery {
    * @param handler A function to execute each time the event is triggered.
    */
   submit(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -2959,8 +2943,8 @@ declare class JQuery {
    * @param handler The function that is to be no longer executed.
    */
   unbind(
-    eventType?: string,
-    handler?: (eventObject: JQueryEventObject) => any
+      eventType?: string,
+      handler?: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Remove a previously-attached event handler from the elements.
@@ -2988,9 +2972,9 @@ declare class JQuery {
    * @param handler A function to execute at the time the event is triggered.
    */
   undelegate(
-    selector: string,
-    eventType: string,
-    handler?: (eventObject: JQueryEventObject) => any
+      selector: string,
+      eventType: string,
+      handler?: (eventObject: JQueryEventObject) => any
   ): JQuery;
   /**
    * Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.
@@ -3019,8 +3003,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   unload(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -3043,8 +3027,8 @@ declare class JQuery {
    * @param handler A function to execute when the event is triggered.
    */
   error(
-    eventData: any,
-    handler: (eventObject: JQueryEventObject) => any
+      eventData: any,
+      handler: (eventObject: JQueryEventObject) => any
   ): JQuery;
 
   /**
@@ -3069,8 +3053,8 @@ declare class JQuery {
    * param content2 One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert after each element in the set of matched elements.
    */
   after(
-    content1: JQuery | any[] | Element | Text | string,
-    ...content2: any[]
+      content1: JQuery | any[] | Element | Text | string,
+      ...content2: any[]
   ): JQuery;
   /**
    * Insert content, specified by the parameter, after each element in the set of matched elements.
@@ -3078,7 +3062,7 @@ declare class JQuery {
    * param func A function that returns: any an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position of the element in the set as an argument. Within the function, this refers to the current element in the set.
    */
   after(
-    func: (index: number, html: string) => string | Element | JQuery
+      func: (index: number, html: string) => string | Element | JQuery
   ): JQuery;
 
   /**
@@ -3088,8 +3072,8 @@ declare class JQuery {
    * param content2 One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert at the end of each element in the set of matched elements.
    */
   append(
-    content1: JQuery | any[] | Element | Text | string,
-    ...content2: any[]
+      content1: JQuery | any[] | Element | Text | string,
+      ...content2: any[]
   ): JQuery;
   /**
    * Insert content, specified by the parameter, to the end of each element in the set of matched elements.
@@ -3097,7 +3081,7 @@ declare class JQuery {
    * param func A function that returns: any an HTML string, DOM element(s), or jQuery object to insert at the end of each element in the set of matched elements. Receives the index position of the element in the set and the old HTML value of the element as arguments. Within the function, this refers to the current element in the set.
    */
   append(
-    func: (index: number, html: string) => string | Element | JQuery
+      func: (index: number, html: string) => string | Element | JQuery
   ): JQuery;
 
   /**
@@ -3114,8 +3098,8 @@ declare class JQuery {
    * param content2 One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert before each element in the set of matched elements.
    */
   before(
-    content1: JQuery | any[] | Element | Text | string,
-    ...content2: any[]
+      content1: JQuery | any[] | Element | Text | string,
+      ...content2: any[]
   ): JQuery;
   /**
    * Insert content, specified by the parameter, before each element in the set of matched elements.
@@ -3123,7 +3107,7 @@ declare class JQuery {
    * param func A function that returns: any an HTML string, DOM element(s), or jQuery object to insert before each element in the set of matched elements. Receives the index position of the element in the set as an argument. Within the function, this refers to the current element in the set.
    */
   before(
-    func: (index: number, html: string) => string | Element | JQuery
+      func: (index: number, html: string) => string | Element | JQuery
   ): JQuery;
 
   /**
@@ -3167,8 +3151,8 @@ declare class JQuery {
    * param content2 One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert at the beginning of each element in the set of matched elements.
    */
   prepend(
-    content1: JQuery | any[] | Element | Text | string,
-    ...content2: any[]
+      content1: JQuery | any[] | Element | Text | string,
+      ...content2: any[]
   ): JQuery;
   /**
    * Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.
@@ -3176,7 +3160,7 @@ declare class JQuery {
    * param func A function that returns: any an HTML string, DOM element(s), or jQuery object to insert at the beginning of each element in the set of matched elements. Receives the index position of the element in the set and the old HTML value of the element as arguments. Within the function, this refers to the current element in the set.
    */
   prepend(
-    func: (index: number, html: string) => string | Element | JQuery
+      func: (index: number, html: string) => string | Element | JQuery
   ): JQuery;
 
   /**
@@ -3313,7 +3297,7 @@ declare class JQuery {
    */
   selector: string;
 
-  [index: number]: HTMLElement;
+[index: number]: HTMLElement;
 
   /**
    * Add elements to the set of matched elements.
@@ -3687,7 +3671,8 @@ declare class JQuery {
 }
 
 declare module "jquery" {
-  declare module.exports: JQueryStatic;
+  declare module .exports: JQueryStatic
+;
 }
 declare var jQuery: JQueryStatic;
 declare var $: JQueryStatic;

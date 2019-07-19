@@ -1,5 +1,5 @@
 // @flow
-export type Account = {
+export type UserInfo = {
   displayName: String,
   id: String,
   userId: String,

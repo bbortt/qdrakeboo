@@ -4,7 +4,7 @@ import {shallow} from 'enzyme'
 import React from 'react'
 import {expect} from 'chai'
 
-import Index from '../pages/index.js'
+import Index from '../pages/index'
 
 describe('Index', () => {
   const index = shallow(<Index/>);

@@ -7,7 +7,8 @@ dotenv.config();
 module.exports = {
   serverRuntimeConfig: {},
   publicRuntimeConfig: {
-    apiUrl: process.env.API_URL || 'http://localhost:8080'
+    apiUrl: process.env.API_URL || 'http://localhost:8080',
+    publicUrl: process.env.PUBLIC_URL || 'http://localhost:3000'
   },
   ...withSass({
     webpack(config, options) {

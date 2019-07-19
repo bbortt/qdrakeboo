@@ -1,22 +1,27 @@
 // @flow
 import React from 'react'
 
-import type { Account as AccountType } from '../../app/domain/Account.type'
+import {connect} from 'react-redux';
+
+import AccountContainer from '../../app/components/account/AccountContainer'
+import type {UserInfo} from '../../app/domain/UserInfo.type'
 
 type SettingsProps = {
-  account: AccountType,
+  userInfo: UserInfo,
 }
 
 class Settings extends React.Component<SettingsProps> {
   render() {
-    const { account } = this.props
+    const {userInfo} = this.props
 
     return (
-      <div className="settings">
-        <h1>Hi {account.displayName}</h1>
-      </div>
+        <AccountContainer>
+          <div className='settings'>
+            <h2>Hi {userInfo.displayName}</h2>
+          </div>
+        </AccountContainer>
     )
   }
 }
 
-export default Settings
+export default connect(({userInfo}) => userInfo)(Settings);

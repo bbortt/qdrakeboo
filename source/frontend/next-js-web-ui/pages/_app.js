@@ -1,47 +1,37 @@
 // @flow
 import React from 'react'
-import { withRouter } from 'next/router'
+import {withRouter} from 'next/router'
 
-import App, { Container } from 'next/app'
+import App, {Container} from 'next/app'
 
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import configureStore from '../app/configureStore'
 
-import axios from 'axios'
-
 import Header from '../app/components/layout/Header'
 
-import type { Page } from '../_next/Page.flow'
-import type { Context } from '../_next/Context.flow'
+import {completeUserInfo} from '../app/state/action'
+
+import type {Page} from '../app/domain/Page.type'
+import type {Context} from '../app/domain/Context.type'
 
 require('./_app.scss')
 
 class ReduxContextAwareApp extends App {
-  static async getInitialProps({
-    Component,
-    ctx,
-  }: {
-    Component: Page<any>,
-    ctx: Context,
-  }) {
-    const { req, query } = ctx
 
-    const isServer = !!req
+  static async getInitialProps({Component, ctx,}: { Component: Page<any>, ctx: Context, }) {
+    const {isServer, req, store, query} = ctx
 
     let pageProps = {}
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({ ctx })
+      pageProps = await Component.getInitialProps({ctx})
     }
 
-    if (isServer) {
-      return { account: query.account, isServer, pageProps }
-    } else {
-      const res = await axios.get('/user-info')
-      return { account: res.data, isServer, pageProps }
-    }
+    store.dispatch(completeUserInfo(ctx))
+
+    return {isServer, pageProps}
   }
 
   componentDidMount() {
@@ -51,25 +41,21 @@ class ReduxContextAwareApp extends App {
   }
 
   render() {
-    const { account, Component, pageProps, store } = this.props
+    const {Component, pageProps, store} = this.props
 
-    const props = {
-      ...pageProps,
-      account,
-    }
+    const userInfo = store.getState().userInfo;
 
     return (
-      <Container>
-        <Provider store={store}>
-          <Header account={account} />
+        <Container>
+          <Provider store={store}>
+            <Header userInfo={userInfo}/>
 
-          <Component {...props} />
-        </Provider>
-      </Container>
+            <Component {...pageProps} />
+          </Provider>
+        </Container>
     )
   }
 }
 
 export default withRedux(configureStore)(
-  withReduxSaga(withRouter(ReduxContextAwareApp))
-)
+    withReduxSaga(withRouter(ReduxContextAwareApp)))

@@ -1,7 +1,11 @@
-import {all} from 'redux-saga/effects'
+// @flow
+import {all, fork} from 'redux-saga/effects'
 
-export default function* rootSaga() {
+import {completeUserInfoSaga, requestPermissionsSaga} from './user-info.saga'
+
+export default function* rootSaga(): Iterable<any> {
   yield all([
-    // fork(saga)
+    fork(completeUserInfoSaga),
+    fork(requestPermissionsSaga)
   ])
 }

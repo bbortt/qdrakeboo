@@ -3,10 +3,10 @@ import React from 'react'
 
 import Link from 'next/link'
 import ActiveMenuItem from './ActiveMenuItem'
-import type {Account} from '../../domain/Account.type'
+import type {UserInfo} from '../../domain/UserInfo.type'
 
 type HeaderProps = {
-  account: Account
+  userInfo: UserInfo
 }
 
 require('./header.scss')
@@ -14,9 +14,9 @@ require('./header.scss')
 class Header extends React.Component<HeaderProps> {
 
   render() {
-    const {account} = this.props;
+    const {userInfo} = this.props;
 
-    if (!account) {
+    if (!userInfo) {
       return null
     }
 
