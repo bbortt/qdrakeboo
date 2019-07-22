@@ -22,6 +22,6 @@ The private streaming service for geeks.
 * How to monitor express server (actuator?)
 * How to package server? Current implementation is uggly!
 
-# License0
+# License
 
 This project is licensed under the terms of the [MIT license](https://github.com/bbortt/qdrakeboo/blob/master/LICENSE).
