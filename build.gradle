@@ -10,13 +10,9 @@ ext {
     set('springCloudVersion', "Greenwich.SR1")
 }
 
-sonarqube {
-    properties {
-        property 'sonar.projectKey', 'bbortt_qdrakeboo'
-    }
-}
-
 allprojects {
+    version "${version}"
+
     repositories {
         mavenCentral()
     }

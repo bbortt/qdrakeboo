@@ -2,12 +2,12 @@
 # Builds all Docker images. Caution: Depends on `./gradlew build`!
 # Must be started from within the root directory!
 #
-# Usage: `./docker_build_all.sh <build-version>`
+# Usage: `./docker_build_all.sh <tag-name>`
 
 if [[ -z $1 ]] ; then
-  echo -e "Usage: \`$ ./docker_build_all.sh <build-version>\`
+  echo -e "Usage: \`$ ./docker_build_all.sh <tag-name>\`
 
-  \t<build-version>\tThe build output version."
+  \t<tag-name>\tThe image version tags."
   exit 1
 fi
 

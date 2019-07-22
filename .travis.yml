@@ -1,7 +1,6 @@
 language: java
 dist: trusty
-jdk:
-  - openjdk11
+jdk: openjdk11
 
 sudo: false
 install: true
@@ -25,13 +24,16 @@ env:
     - secure: "hZ0+KC8Ih6HUTl6A1yVTlXDQd5CfAIqfVLhQa1M0U/yKSg6hDiapRUMm/CvXAeWkT842i/Ja0UuopXz+BRIqoWU4QbCDDO5hvwQZ7lQUeW4z5AgDZMYeEhahbUiHbsa0G7vg6Bfs2iUud1GSZmMDYVPJdiBJx8SuQBnrIc8teKoroYSpBCbxBi1HuNBGYv9MYs3mESv3PAyZlcBJE2q6m2fMElsgKI92XTJfl+LMVd7ldruBfGO86N4dmFdyFeOuofkHtMnLjB10W3FujRCNQ+CcVrEYmHCzICFSUWeSpI8ItD6f0ZDw+IOxcdBGEOAJqp5qZn7V3y/LjWSX9Umo74P32ncoErjz4GID6YiWyo5mvG75peT3zfcGvYuf9DU/3NTl/Gp9bEoJYbaT9epGS04aEdGtpxTiHCh2DoqIWcpzxdzOler0BtERvpHcpeAdYY7+ID5b+tyuOT1DUVO2epb/2q5OtGcIFF8fAvprYGeAPhM3lcKbiXaNfNZZ+8usFBJ4GlyvLGiMKF5rZ6F/OCxcIYLJRiBGhLgcREMcYUTNKJITi4a0btgZyHLNWVsrXlG5cEgYZkFdvCqDVqiiWDp/Zzy/wyeoqGJksOC8MfKcSWW9CmUKmvUg2xDhrGtdYUuxuMnmJ7l5TgQl7bNYlvede7liQYIFKtw/Yi8X9NE="
     # ^^ DOCKER_PASSWORD
 
+before_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 script:
-  - ./gradlew -Pproject.version=$TRAVIS_BUILD_NUMBER --no-daemon -i check sonarqube
+  - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i check sonarqube
   - ./scripts/docker_build_all.sh $TRAVIS_BUILD_NUMBER
 
 deploy:
   - provider: script
-    script: ./scripts/deploy.sh $TRAVIS_BUILD_NUMBER $DOCKER_USERNAME $DOCKER_PASSWORD
+    script: ./scripts/deploy.sh $TRAVIS_BUILD_NUMBER
     on:
       branch: master
 
@@ -41,6 +43,6 @@ before_cache:
 
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/.sonar/cache
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.sonar/cache
