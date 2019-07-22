@@ -25,16 +25,13 @@ env:
     - secure: "eSYNjL7vxNdN6gEzeIzbGy45gQPBzESm/X6CGUCNjEeO3IVR97erQdiOuxtAI98n2NmZ7Be0+NKe0RFmGbsW0Dw2qBCquZGu9PGf2isShK8LLKtMVBIc9+7lKE2KAVDBtxwSY2cpQsXD6SSwRJ7jqtsiW/TkCaECG3owjDaV9wb/9XPOKo7eQO4vJ5ltuPfxao5dOU0L4spz8zu6cOhCsz+PGBYZbxRxwDsEctyHSs2jweG7x6UVlg2K8zCHLK8bL6eiexIo3WOtDZ4mlwN03thzeoz2EGNgX8FmoDnbd8JOBkV/pXsd2rBBZNTMidrOVlChDX7uYRgk5J6sj3puFaB5OuFjtSZHK8rmIlju3T7QDv55iNrAag+HYWqe1nOFUNjkueJft5nKYYwVBtHnJRiDO5mTDlS3u6+EfMeYpikA42UZnGXwp3G0jUpEh/m+fyljIyGit+dtNu9wFibI03Nfyhz3g6pXpia7K1SgZY2QLPepyjTs5jkfihUGz6j2HKTT2T6UfHWZN6NSeSYu5s+41eyM+sYibsyfSAnRR0F6L1K/RsBtejk1Hu3k+dFu6xUJJu+a66pJTkqGuBTzcDo3IbhT7Y8OFQgWuHXK42/9coJgk/5BgKywQ9DxzyemZ+bPSHad5smXnPQNyAvcY9PZOtN5vKfU1LNXu/AhfVw="
     # ^^ DOCKER_PASSWORD
 
-before_script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
 script:
   - ./gradlew -Pproject.version=$TRAVIS_BUILD_NUMBER --no-daemon -i check sonarqube
   - ./scripts/docker_build_all.sh $TRAVIS_BUILD_NUMBER
 
 deploy:
   - provider: script
-    script: ./scripts/deploy.sh $TRAVIS_BUILD_NUMBER
+    script: ./scripts/deploy.sh $TRAVIS_BUILD_NUMBER $DOCKER_USERNAME $DOCKER_PASSWORD
     on:
       branch: master
 
