@@ -29,6 +29,8 @@ before_script:
 
 script:
   - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i check sonarqube
+
+after_success:
   - ./scripts/docker_build_all.sh $TRAVIS_BUILD_NUMBER
 
 deploy:
