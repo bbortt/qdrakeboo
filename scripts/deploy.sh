@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
-# Deployment scripts for Travis-CI.
+# Deployment script for Travis CI.
 #
-# Usage: `./deploy.sh <build-version>`
+# Usage: `./deploy.sh <build-version> <dockerhub-username> <dockerhub-password>`
 
 if [[ -z $1 ]] ; then
-  echo -e "Usage: \`$ ./deploy.sh <build-version>\`
+  echo -e "Usage: \`$ ./deploy.sh <build-version> <dockerhub-username> <dockerhub-password>\`
 
-  \t<build-version>\tThe build output version."
+  \t<build-version>\tThe build output version.
+  \t<dockerhub-username>\tThe username used to authenticate against Docker Hub.
+  \t<dockerhub-password>\tThe password used to authenticate against Docker Hub."
   exit 1
 fi
+
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 docker push qdrakeboo/edge-gateway:$1
 docker push qdrakeboo/upstream-server:$1
