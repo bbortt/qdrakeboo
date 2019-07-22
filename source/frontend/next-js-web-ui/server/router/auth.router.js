@@ -16,7 +16,7 @@ dotenv.config();
 
 router.get('/login', passport.authenticate('auth0', {
   scope: 'openid profile email',
-  audience: 'https://api.qdrakeboo.tv'
+  audience: process.env.API_AUDIENCE
 }), (req, res) => {
   res.redirect('/');
 });

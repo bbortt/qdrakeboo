@@ -35,13 +35,13 @@ export function* completeUserInfoSaga(): Iterable<any> {
 function* requestPermissions(action: RequestPermissionsAction) {
   const requestConfig = {}
 
-  requestConfig.headers = {}
-
   const audience = process.env.AUTH0_DOMAIN
   if (!audience) {
     yield put(requestPermissionsFailed('No audience present!'))
     return
   }
+
+  requestConfig.headers = {}
   requestConfig.headers[API_FORWARD_TO_HEADER_NAME] = `https://${audience}/userinfo`
 
   if (action.nextContext.req && action.nextContext.req.headers.cookie) {
@@ -55,8 +55,6 @@ function* requestPermissions(action: RequestPermissionsAction) {
 
     yield put(setPermissions(response.data.credentials.claims.permissions))
   } catch (error) {
-    console.log('saga error: ', error)
-
     yield put(requestPermissionsFailed(error))
   }
 }

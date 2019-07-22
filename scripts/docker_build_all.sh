@@ -28,3 +28,7 @@ docker build \
 docker build \
   -t qdrakeboo/next-js-web-ui:$1 \
   -f source/frontend/next-js-web-ui/Dockerfile .
+
+docker build \
+  -t qdrakeboo/user-management-api:$1 \
+  -f source/user-management-api/Dockerfile .
