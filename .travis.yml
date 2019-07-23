@@ -32,6 +32,7 @@ script:
 
 after_success:
   - ./scripts/docker_build_all.sh $TRAVIS_BUILD_NUMBER
+  - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   - provider: script

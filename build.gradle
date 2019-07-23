@@ -10,6 +10,7 @@ ext {
     set('springCloudVersion', "Greenwich.SR1")
 }
 
+
 sonarqube {
     properties {
         property 'sonar.projectKey', 'bbortt_qdrakeboo'
@@ -28,6 +29,7 @@ subprojects {
     def globalJavaConfiguration = {
         apply plugin: 'org.springframework.boot'
         apply plugin: 'io.spring.dependency-management'
+        apply plugin: 'jacoco'
 
         sourceCompatibility = '11'
         targetCompatibility = '11'
@@ -48,6 +50,8 @@ subprojects {
             implementation 'org.springframework.boot:spring-boot-starter'
             testImplementation 'org.springframework.boot:spring-boot-starter-test'
         }
+
+        check.dependsOn jacocoTestReport
     }
 
     pluginManager.withPlugin('java', globalJavaConfiguration)

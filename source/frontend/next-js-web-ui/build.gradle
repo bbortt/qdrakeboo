@@ -30,7 +30,7 @@ task flow(type: NpmTask, dependsOn: npmInstall) {
 }
 
 task test(type: NpmTask, dependsOn: flow) {
-    args = ['run', 'test']
+    args = ['run', 'coverage:report']
 }
 
 assemble.dependsOn bundle
