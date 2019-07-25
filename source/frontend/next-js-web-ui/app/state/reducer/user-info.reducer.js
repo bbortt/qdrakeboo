@@ -9,11 +9,13 @@ import type {
 import {SET_PERMISSIONS, SET_USER_INFO} from '../action'
 
 export type UserInfoState = {
+  +isAuthenticated: boolean,
   +userInfo: UserInfo,
   +permissions: string[]
 }
 
 export const initialUserInfoState: UserInfoState = {
+  isAuthenticated: false,
   userInfo: {},
   permissions: []
 }
@@ -33,6 +35,7 @@ export default (state: UserInfoState = initialUserInfoState,
 
       return {
         ...state,
+        isAuthenticated: true,
         permissions: setPermissionsAction.permissions,
       }
     default:

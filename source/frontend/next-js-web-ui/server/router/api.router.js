@@ -34,7 +34,7 @@ router.use('/api', secured(), (req, res) => {
 
   logger.info(`Proxying request to '${requestUrl}'`);
 
-  proxy.web(req, res, {target: 'http://localhost:8080/principal'}, (error) => {
+  proxy.web(req, res, {target: requestUrl}, (error) => {
     logger.error(`Error while fetching '${requestUrl}': ${error.toString()}`)
     res.status(500).end(JSON.stringify({message: error.toString()}));
   });

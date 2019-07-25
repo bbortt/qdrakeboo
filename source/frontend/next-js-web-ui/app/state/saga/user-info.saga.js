@@ -22,7 +22,7 @@ const {publicRuntimeConfig} = getConfig()
 function* completeUserInfo(action: CompleteUserInfoAction) {
   const {nextContext} = action;
 
-  if (nextContext.isServer) {
+  if (nextContext.isServer && nextContext.query.userInfo) {
     yield put(setUserInfo(nextContext.query.userInfo))
     yield put(requestPermissionsAction(nextContext))
   }

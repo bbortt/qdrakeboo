@@ -43,12 +43,12 @@ class ReduxContextAwareApp extends App {
   render() {
     const {Component, pageProps, store} = this.props
 
-    const userInfo = store.getState().userInfo;
+    const {isAuthenticated} = store.getState().userInfo;
 
     return (
         <Container>
           <Provider store={store}>
-            <Header userInfo={userInfo}/>
+            <Header isAuthenticated={isAuthenticated}/>
 
             <Component {...pageProps} />
           </Provider>

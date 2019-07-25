@@ -3,10 +3,9 @@ import React from 'react'
 
 import Link from 'next/link'
 import ActiveMenuItem from './ActiveMenuItem'
-import type {UserInfo} from '../../domain/UserInfo.type'
 
 type HeaderProps = {
-  userInfo: UserInfo
+  +isAuthenticated: boolean
 }
 
 require('./header.scss')
@@ -14,9 +13,9 @@ require('./header.scss')
 class Header extends React.Component<HeaderProps> {
 
   render() {
-    const {userInfo} = this.props;
+    const {isAuthenticated} = this.props;
 
-    if (!userInfo) {
+    if (!isAuthenticated) {
       return null
     }
 
