@@ -23,7 +23,6 @@ export const initialUserInfoState: UserInfoState = {
 const isAuthenticated = (userInfo: UserInfo,
     permissions: string[]): boolean => {
   return Object.entries(userInfo).length !== 0
-      && userInfo.constructor === Object
       && permissions !== [];
 }
 

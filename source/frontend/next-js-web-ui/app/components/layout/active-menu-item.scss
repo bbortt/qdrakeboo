@@ -1,0 +1,6 @@
+@import '../../../assets/scss/foundation/settings.scss';
+
+a.is-active {
+  color: $menu-item-color-active;
+  background-color: $menu-item-background-active;
+}

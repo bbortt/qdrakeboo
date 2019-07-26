@@ -10,7 +10,7 @@ class ResetPassword extends React.Component<ResetPasswordProps> {
     return (
         <AccountContainer>
           <div className='reset-password'>
-
+            <h2>Reset Password</h2>
           </div>
         </AccountContainer>
     )

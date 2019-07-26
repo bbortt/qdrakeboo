@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 
-import Link from 'next/link'
+import ActiveMenuItem from '../layout/ActiveMenuItem'
 
 type AccountContainerProps = {
   children?: React.Node
@@ -16,20 +16,22 @@ class AccountContainer extends React.Component<AccountContainerProps> {
               <h1>Account</h1>
             </div>
 
-            <div className='cell small-3'>
+            <div className='cell small-2'>
               <ul className="vertical menu">
                 <li>
-                  <Link href="settings">
+                  <ActiveMenuItem href="profile">
                     <a>Profile</a>
-                  </Link>
+                  </ActiveMenuItem>
                 </li>
                 <li>
-                  <Link href="reset-password">
+                  <ActiveMenuItem href="reset-password">
                     <a>Reset Password</a>
-                  </Link>
+                  </ActiveMenuItem>
                 </li>
               </ul>
             </div>
+
+            <div className='cell small-1'/>
 
             <div className='cell small-9'>
               {this.props.children}

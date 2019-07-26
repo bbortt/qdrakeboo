@@ -18,7 +18,7 @@ describe('Profile', () => {
   });
 
   it('is personalized', () => {
-    expect(profile.find('h1').text()).to.equal(
+    expect(profile.find('h2').text()).to.equal(
         `Hi ${settingsProps.displayName}`)
   })
 });
