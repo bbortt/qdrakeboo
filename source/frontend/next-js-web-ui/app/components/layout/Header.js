@@ -53,7 +53,7 @@ class Header extends React.Component<HeaderProps> {
                   <ul className='menu vertical'>
                     <li>
                       <ActiveMenuItem
-                          href='/account/settings'><a>Settings</a></ActiveMenuItem>
+                          href='/account'><a>Settings</a></ActiveMenuItem>
                     </li>
                     <li>
                       <ActiveMenuItem

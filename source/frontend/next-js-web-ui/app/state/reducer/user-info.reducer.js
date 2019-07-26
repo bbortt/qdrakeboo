@@ -18,26 +18,36 @@ export const initialUserInfoState: UserInfoState = {
   isAuthenticated: false,
   userInfo: {},
   permissions: []
+};
+
+const isAuthenticated = (userInfo: UserInfo,
+    permissions: string[]): boolean => {
+  return Object.entries(userInfo).length !== 0
+      && userInfo.constructor === Object
+      && permissions !== [];
 }
 
 export default (state: UserInfoState = initialUserInfoState,
     action: UserInfoAction): UserInfoState => {
   switch (action.type) {
     case SET_USER_INFO:
-      const setUserInfoAction = ((action: any): SetUserInfoAction)
+      const setUserInfoAction = ((action: any): SetUserInfoAction);
+      const {userInfo} = setUserInfoAction;
 
       return {
         ...state,
-        userInfo: setUserInfoAction.userInfo,
-      }
+        isAuthenticated: isAuthenticated(userInfo, state.permissions),
+        userInfo: userInfo,
+      };
     case SET_PERMISSIONS:
-      const setPermissionsAction = ((action: any): SetPermissionsAction)
+      const setPermissionsAction = ((action: any): SetPermissionsAction);
+      const {permissions} = setPermissionsAction;
 
       return {
         ...state,
-        isAuthenticated: true,
-        permissions: setPermissionsAction.permissions,
-      }
+        isAuthenticated: isAuthenticated(state.userInfo, permissions),
+        permissions: permissions,
+      };
     default:
       return state
   }

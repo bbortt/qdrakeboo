@@ -6,17 +6,17 @@ import {connect} from 'react-redux';
 import AccountContainer from '../../app/components/account/AccountContainer'
 import type {UserInfo} from '../../app/domain/UserInfo.type'
 
-type SettingsProps = {
+type ProfileProps = {
   userInfo: UserInfo,
 }
 
-class Settings extends React.Component<SettingsProps> {
+class Profile extends React.Component<ProfileProps> {
   render() {
     const {userInfo} = this.props
 
     return (
         <AccountContainer>
-          <div className='settings'>
+          <div className='profile'>
             <h2>Hi {userInfo.displayName}</h2>
           </div>
         </AccountContainer>
@@ -24,4 +24,4 @@ class Settings extends React.Component<SettingsProps> {
   }
 }
 
-export default connect(({userInfo}) => userInfo)(Settings);
+export default connect(({userInfo}) => userInfo)(Profile);

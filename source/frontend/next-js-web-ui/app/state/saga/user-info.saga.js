@@ -35,14 +35,8 @@ export function* completeUserInfoSaga(): Iterable<any> {
 function* requestPermissions(action: RequestPermissionsAction) {
   const requestConfig = {}
 
-  const audience = process.env.AUTH0_DOMAIN
-  if (!audience) {
-    yield put(requestPermissionsFailed('No audience present!'))
-    return
-  }
-
   requestConfig.headers = {}
-  requestConfig.headers[API_FORWARD_TO_HEADER_NAME] = `https://${audience}/userinfo`
+  requestConfig.headers[API_FORWARD_TO_HEADER_NAME] = `${publicRuntimeConfig.apiUrl}/userinfo`
 
   if (action.nextContext.req && action.nextContext.req.headers.cookie) {
     requestConfig.headers.cookie = action.nextContext.req.headers.cookie
