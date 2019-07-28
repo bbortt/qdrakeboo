@@ -5,7 +5,7 @@ import AccountContainer from '../../app/components/account/AccountContainer'
 
 type ResetPasswordProps = {}
 
-class ResetPassword extends React.Component<ResetPasswordProps> {
+export class ResetPassword extends React.Component<ResetPasswordProps> {
   render() {
     return (
         <AccountContainer>

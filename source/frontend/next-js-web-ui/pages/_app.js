@@ -18,7 +18,7 @@ import type {Context} from '../app/domain/Context.type'
 
 require('./_app.scss')
 
-class ReduxContextAwareApp extends App {
+export class ReduxContextAwareApp extends App {
 
   static async getInitialProps({Component, ctx,}: { Component: Page<any>, ctx: Context, }) {
     const {isServer, req, store, query} = ctx

@@ -7,7 +7,7 @@ type AccountContainerProps = {
   children?: React.Node
 }
 
-class AccountContainer extends React.Component<AccountContainerProps> {
+export class AccountContainer extends React.Component<AccountContainerProps> {
   render() {
     return (
         <div className='account grid-container'>

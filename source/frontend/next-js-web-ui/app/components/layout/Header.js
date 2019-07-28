@@ -10,7 +10,7 @@ type HeaderProps = {
 
 require('./header.scss')
 
-class Header extends React.Component<HeaderProps> {
+export class Header extends React.Component<HeaderProps> {
 
   render() {
     const {isAuthenticated} = this.props;
