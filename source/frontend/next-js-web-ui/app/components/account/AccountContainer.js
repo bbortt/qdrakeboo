@@ -12,11 +12,11 @@ export class AccountContainer extends React.Component<AccountContainerProps> {
     return (
         <div className='account grid-container'>
           <div className='grid-x'>
-            <div className='cell small-9 small-offset-3'>
+            <div className='cell medium-9 medium-offset-3'>
               <h1>Account</h1>
             </div>
 
-            <div className='cell small-2'>
+            <div className='cell medium-2'>
               <ul className="vertical menu">
                 <li>
                   <ActiveMenuItem href="profile">
@@ -31,9 +31,9 @@ export class AccountContainer extends React.Component<AccountContainerProps> {
               </ul>
             </div>
 
-            <div className='cell small-1'/>
+            <div className='cell medium-1'/>
 
-            <div className='cell small-9'>
+            <div className='cell medium-9'>
               {this.props.children}
             </div>
           </div>

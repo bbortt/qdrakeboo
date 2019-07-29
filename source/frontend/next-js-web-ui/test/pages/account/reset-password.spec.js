@@ -4,7 +4,7 @@ import {shallow} from 'enzyme'
 import React from 'react'
 import {expect} from 'chai'
 
-import {ResetPassword} from '../../pages/account/reset-password'
+import {ResetPassword} from '../../../pages/account/reset-password'
 
 describe('ResetPassword', () => {
   const resetPassword = shallow(<ResetPassword/>);

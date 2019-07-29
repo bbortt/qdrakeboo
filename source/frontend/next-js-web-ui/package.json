@@ -41,6 +41,7 @@
     "foundation-sites": "^6.5.3",
     "http-proxy": "^1.17.0",
     "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
     "motion-ui": "^2.0.3",
     "next": "^9.0.2",
     "next-redux-saga": "^4.0.2",

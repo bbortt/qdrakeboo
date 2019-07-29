@@ -4,7 +4,7 @@ import {shallow} from 'enzyme'
 import React from 'react'
 import {expect} from 'chai'
 
-import {Profile} from '../../pages/account/profile'
+import {Profile} from '../../../pages/account/profile'
 
 const userInfo = {
   displayName: 'test-user'
