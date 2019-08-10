@@ -42,4 +42,8 @@ const validatePassword = (password, confirmation) => {
   }
 };
 
-module.exports = updatePassword;
+const userResolver = {
+  updatePassword: updatePassword
+};
+
+module.exports = userResolver;
