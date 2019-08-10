@@ -38,6 +38,7 @@ deploy:
   - provider: script
     script: ./scripts/deploy.sh $TRAVIS_BUILD_NUMBER
     on:
+      repo: bbortt/qdrakeboo
       branch: master
 
 before_cache:
