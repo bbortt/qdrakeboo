@@ -13,5 +13,5 @@ fi
 docker push qdrakeboo/edge-gateway:$1
 docker push qdrakeboo/upstream-server:$1
 docker push qdrakeboo/apollo-federation-express-gateway:$1
+docker push qdrakeboo/federated-user-management:$1
 docker push qdrakeboo/next-js-web-ui:$1
-docker push qdrakeboo/user-management-api:$1

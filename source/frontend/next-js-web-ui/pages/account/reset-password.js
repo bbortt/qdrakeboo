@@ -7,10 +7,8 @@ import AccountContainer from '../../app/components/account/AccountContainer'
 
 require('./reset-password.scss');
 
-type
-ResetPasswordProps = {}
-type
-ResetPasswordState = {
+type ResetPasswordProps = {}
+type ResetPasswordState = {
   password: string,
   confirmation: string,
   formErrors: Array < string >,

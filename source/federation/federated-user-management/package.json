@@ -1,7 +1,7 @@
 {
   "private": "true",
-  "name": "user-management-api",
-  "description": "Auth0 user management API.",
+  "name": "federated-user-management",
+  "description": "Federated Auth0 user management.",
   "version": "1.0.0",
   "license": "MIT",
   "repository": {
@@ -16,11 +16,13 @@
     "upgrade-interactive": "npm-check --upgrade"
   },
   "dependencies": {
+    "@apollo/federation": "^0.8.0",
+    "apollo-server-express": "^2.8.1",
     "auth0": "^2.18.0",
-    "body-parser": "^1.19.0",
-    "contextful-winston-logger": "file:../contextful-winston-logger",
+    "contextful-winston-logger": "file:../../contextful-winston-logger",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "graphql": "^14.4.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {

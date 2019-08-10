@@ -26,9 +26,9 @@ docker build \
   -f source/federation/apollo-federation-express-gateway/Dockerfile .
 
 docker build \
-  -t qdrakeboo/next-js-web-ui:$1 \
-  -f source/frontend/next-js-web-ui/Dockerfile .
+  -t qdrakeboo/federated-user-management:$1 \
+  -f source/federation/federated-user-management/Dockerfile .
 
 docker build \
-  -t qdrakeboo/user-management-api:$1 \
-  -f source/user-management-api/Dockerfile .
+  -t qdrakeboo/next-js-web-ui:$1 \
+  -f source/frontend/next-js-web-ui/Dockerfile .
