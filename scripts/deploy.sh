@@ -3,6 +3,8 @@
 #
 # Usage: `./deploy.sh <tag-name>`
 
+set -e
+
 if [[ -z $1 ]] ; then
   echo -e "Usage: \`$ ./deploy.sh <tag-name>\`
 

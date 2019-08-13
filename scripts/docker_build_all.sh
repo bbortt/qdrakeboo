@@ -4,6 +4,8 @@
 #
 # Usage: `./docker_build_all.sh <tag-name>`
 
+set -e
+
 if [[ -z $1 ]] ; then
   echo -e "Usage: \`$ ./docker_build_all.sh <tag-name>\`
 

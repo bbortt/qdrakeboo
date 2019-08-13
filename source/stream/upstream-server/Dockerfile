@@ -1,3 +1,5 @@
+# Attention: You will have to build the container in [PROJECT ROOT]/
+# `$ docker build -f source/edge-gateway/Dockerfile .`
 FROM openjdk:11-slim
 MAINTAINER Timon Borter <bbortt.github.io>
 
