@@ -43,15 +43,15 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "motion-ui": "^2.0.3",
-    "next": "^9.0.2",
+    "next": "^9.0.3",
     "next-redux-saga": "^4.0.2",
     "next-redux-wrapper": "^3.0.0-alpha.3",
     "node-sass": "^4.12.0",
     "passport": "^0.4.0",
-    "passport-auth0": "^1.1.0",
+    "passport-auth0": "^1.2.1",
     "querystring": "^0.2.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "redis": "^2.8.0",
@@ -91,6 +91,6 @@
     "nyc": "^14.1.1",
     "prettier": "1.18.2",
     "redux-devtools-extension": "^2.13.8",
-    "webpack": "^4.38.0"
+    "webpack": "^4.39.2"
   }
 }
