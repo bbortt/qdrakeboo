@@ -28,7 +28,7 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i check sonarqube
+  - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i build sonarqube
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
