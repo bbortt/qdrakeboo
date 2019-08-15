@@ -29,7 +29,11 @@ task flow(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'flow']
 }
 
-task test(type: NpmTask, dependsOn: flow) {
+task lint(type: NpmTask, dependsOn: flow) {
+    args = ['run', 'prettier:check']
+}
+
+task test(type: NpmTask, dependsOn: lint) {
     args = ['run', 'coverage:report']
 }
 

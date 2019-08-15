@@ -1,11 +1,11 @@
 module.exports = () => {
   return (req, res, next) => {
     if (req.user) {
-      return next();
+      return next()
     }
 
-    req.session.returnTo = req.originalUrl;
+    req.session.returnTo = req.originalUrl
 
-    res.redirect('/login');
-  };
-};
+    res.redirect('/login')
+  }
+}

@@ -1,5 +1,5 @@
 // @flow
-import type {ReduxState} from '../state/reducer'
+import type { ReduxState } from '../state/reducer'
 
 export type Context = {
   isServer: boolean,
@@ -10,6 +10,6 @@ export type Context = {
   err?: any,
   store: {
     dispatch: (action: any) => void,
-    getState: () => ReduxState
-  }
+    getState: () => ReduxState,
+  },
 }

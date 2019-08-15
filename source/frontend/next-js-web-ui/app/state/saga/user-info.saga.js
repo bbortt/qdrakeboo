@@ -1,26 +1,29 @@
 // @flow
 import getConfig from 'next/config'
 
-import {call, put, takeLatest} from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 
 import axios from 'axios'
 
-import {API_FORWARD_TO_HEADER_NAME} from '../../../shared/const'
+import { API_FORWARD_TO_HEADER_NAME } from '../../../shared/const'
 
-import type {CompleteUserInfoAction, RequestPermissionsAction} from '../action'
+import type {
+  CompleteUserInfoAction,
+  RequestPermissionsAction,
+} from '../action'
 import {
   COMPLETE_USER_INFO,
   REQUEST_PERMISSIONS,
   requestPermissions as requestPermissionsAction,
   requestPermissionsFailed,
   setPermissions,
-  setUserInfo
+  setUserInfo,
 } from '../action'
 
-const {publicRuntimeConfig} = getConfig()
+const { publicRuntimeConfig } = getConfig()
 
 function* completeUserInfo(action: CompleteUserInfoAction) {
-  const {nextContext} = action;
+  const { nextContext } = action
 
   if (nextContext.isServer && nextContext.query.userInfo) {
     yield put(setUserInfo(nextContext.query.userInfo))
@@ -36,16 +39,20 @@ function* requestPermissions(action: RequestPermissionsAction) {
   const requestConfig = {}
 
   requestConfig.headers = {}
-  requestConfig.headers[API_FORWARD_TO_HEADER_NAME] = `${publicRuntimeConfig.apiUrl}/userinfo`
+  requestConfig.headers[
+    API_FORWARD_TO_HEADER_NAME
+  ] = `${publicRuntimeConfig.apiUrl}/userinfo`
 
   if (action.nextContext.req && action.nextContext.req.headers.cookie) {
     requestConfig.headers.cookie = action.nextContext.req.headers.cookie
   }
 
   try {
-    const response = yield call(axios.get,
-        `${publicRuntimeConfig.publicUrl}/api`,
-        requestConfig)
+    const response = yield call(
+      axios.get,
+      `${publicRuntimeConfig.publicUrl}/api`,
+      requestConfig
+    )
 
     yield put(setPermissions(response.data.credentials.claims.permissions))
   } catch (error) {

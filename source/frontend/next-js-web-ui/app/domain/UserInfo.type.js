@@ -5,8 +5,8 @@ export type UserInfo = {
   userId: String,
   name: {
     familyName: String,
-    givenName: String
+    givenName: String,
   },
   picture: String,
-  nickname: String
+  nickname: String,
 }
