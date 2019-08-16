@@ -1,6 +1,6 @@
 const configureInboundMiddleware = (logger) => {
   return (req, res, next) => {
-    logger.info(`Inbound: ${JSON.stringify({"url": req.url})}`);
+    logger.info(`Inbound: ${JSON.stringify({'url': req.url})}`);
     next();
   };
 };

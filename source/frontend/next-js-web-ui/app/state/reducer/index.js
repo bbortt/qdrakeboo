@@ -8,7 +8,7 @@ export type ReduxState = {
   +userInfo: UserInfoState,
 }
 
-export const initialState: ReduxState = {
+export const reduxState: ReduxState = {
   userInfo: initialUserInfoState,
 }
 

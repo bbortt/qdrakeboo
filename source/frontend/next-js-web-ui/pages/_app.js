@@ -26,7 +26,9 @@ export class ReduxContextAwareApp extends App {
     Component: Page<any>,
     ctx: Context,
   }) {
-    const { isServer, req, store, query } = ctx
+    const { isServer, store } = ctx
+
+    store.dispatch(completeUserInfo(ctx))
 
     let pageProps = {}
 
@@ -34,13 +36,13 @@ export class ReduxContextAwareApp extends App {
       pageProps = await Component.getInitialProps({ ctx })
     }
 
-    store.dispatch(completeUserInfo(ctx))
+    pageProps = { store, ...pageProps }
 
     return { isServer, pageProps }
   }
 
   componentDidMount() {
-    const foundation = require('foundation-sites')
+    require('foundation-sites')
     // $FlowFixMe
     $(document).foundation()
   }

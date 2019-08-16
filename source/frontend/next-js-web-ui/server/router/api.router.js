@@ -29,13 +29,11 @@ router.use('/api', secured(), (req, res) => {
       `Received API request without header '${API_FORWARD_TO_HEADER_NAME}'`
     )
 
-    return res
-      .status(400)
-      .end(
-        JSON.stringify({
-          message: `missing header '${API_FORWARD_TO_HEADER_NAME}'`,
-        })
-      )
+    return res.status(400).end(
+      JSON.stringify({
+        message: `missing header '${API_FORWARD_TO_HEADER_NAME}'`,
+      })
+    )
   }
 
   logger.info(`Proxying request to '${requestUrl}'`)

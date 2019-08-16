@@ -18,6 +18,7 @@
         "trailingComma": "all"
       }
     ],
+    "react/jsx-filename-extension": "off",
     "react/jsx-closing-bracket-location": "off",
     "react/jsx-closing-tag-location": "off",
     "react/jsx-curly-spacing": "off",
