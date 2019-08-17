@@ -13,9 +13,10 @@ require('./reset-password.scss')
 
 type ResetPasswordProps = {
   store: {
-    dispatch: () => void,
+    dispatch: (action: any) => void,
   },
 }
+
 type ResetPasswordState = {
   password: string,
   confirmation: string,

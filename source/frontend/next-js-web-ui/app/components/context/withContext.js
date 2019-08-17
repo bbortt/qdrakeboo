@@ -1,10 +1,10 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 
 import { ReactReduxContext } from 'react-redux'
 
-export default Component => {
-  return props => {
+export default (Component: React.ComponentType<any>) => {
+  return (props: any) => {
     return (
       <ReactReduxContext.Consumer>
         {({ store }) => {

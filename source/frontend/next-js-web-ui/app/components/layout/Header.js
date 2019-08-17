@@ -1,6 +1,8 @@
 // @flow
 import React from 'react'
 
+import { connect } from 'react-redux'
+
 import Link from 'next/link'
 import ActiveMenuItem from './ActiveMenuItem'
 
@@ -84,4 +86,6 @@ export class Header extends React.Component<HeaderProps> {
   }
 }
 
-export default Header
+export default connect(({ userInfo }) => {
+  return { isAuthenticated: userInfo.isAuthenticated }
+})(Header)

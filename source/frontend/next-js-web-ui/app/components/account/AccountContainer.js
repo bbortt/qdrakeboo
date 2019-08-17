@@ -4,11 +4,13 @@ import * as React from 'react'
 import ActiveMenuItem from '../layout/ActiveMenuItem'
 
 type AccountContainerProps = {
-  children?: React.Node,
+  children?: React.Element<any>,
 }
 
 export class AccountContainer extends React.Component<AccountContainerProps> {
   render() {
+    const { children } = this.props
+
     return (
       <div className="account grid-container">
         <div className="grid-x">
@@ -33,7 +35,7 @@ export class AccountContainer extends React.Component<AccountContainerProps> {
 
           <div className="cell medium-1" />
 
-          <div className="cell medium-9">{this.props.children}</div>
+          <div className="cell medium-9">{children}</div>
         </div>
       </div>
     )

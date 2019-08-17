@@ -4,6 +4,7 @@
     "@babel/preset-flow"
   ],
   "plugins": [
-    "istanbul"
+    "istanbul",
+    "@babel/plugin-proposal-export-default-from"
   ]
 }

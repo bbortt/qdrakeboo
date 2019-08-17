@@ -1,2 +1,2 @@
-export * from './crashreporting.middleware'
-export * from './logging.middleware'
+export crashReportingMiddleware from './crashreporting.middleware'
+export loggingMiddleware from './logging.middleware'

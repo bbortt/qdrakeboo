@@ -24,7 +24,7 @@ const isAuthenticated = (
   userInfo: UserInfo,
   permissions: string[]
 ): boolean => {
-  return Object.entries(userInfo).length !== 0 && permissions !== []
+  return Object.entries(userInfo).length !== 0 && permissions.length !== 0
 }
 
 export default (
