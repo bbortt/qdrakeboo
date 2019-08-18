@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const {ApolloServer} = require('apollo-server-express');
 const {buildFederatedSchema} = require('@apollo/federation');
 
@@ -8,9 +11,6 @@ const express = require('express');
 
 const logger = require('./server/logging/logger');
 const {bindContextfulMiddleware} = require('contextful-winston-logger');
-
-const dotenv = require('dotenv');
-dotenv.config();
 
 const applicationName = process.env.APP_NAME || 'Federated User Management';
 logger.info(`Starting ${applicationName}..`);

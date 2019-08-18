@@ -11,6 +11,7 @@
     "react"
   ],
   "rules": {
+    "global-require": 0,
     "prettier/prettier": [
       "error",
       {

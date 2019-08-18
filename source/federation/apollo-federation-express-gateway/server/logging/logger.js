@@ -1,9 +1,6 @@
 const winston = require('winston');
 const {format} = require('winston');
 
-const dotenv = require('dotenv');
-dotenv.config();
-
 const {printf} = format;
 
 const loggingFormat = printf(({level, message, label, timestamp}) => {

@@ -9,11 +9,12 @@ import nodeSassPackageImporter from 'node-sass-package-importer'
 
 cssModulesRequireHook({
   extensions: ['.scss'],
-  preprocessCss: (data, filepath) => sass.renderSync({
-    data,
-    includePaths: [path.resolve(filepath, '..')],
-    importer: nodeSassPackageImporter()
-  }).css
-});
+  preprocessCss: (data, filepath) =>
+    sass.renderSync({
+      data,
+      includePaths: [path.resolve(filepath, '..')],
+      importer: nodeSassPackageImporter(),
+    }).css,
+})
 
-Enzyme.configure({adapter: new Adapter()});
+Enzyme.configure({ adapter: new Adapter() })

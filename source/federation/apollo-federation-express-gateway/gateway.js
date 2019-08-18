@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 
 const {ApolloServer} = require('apollo-server-express');
@@ -5,9 +8,6 @@ const {ApolloGateway} = require('@apollo/gateway');
 
 const logger = require('./server/logging/logger');
 const {bindContextfulMiddleware} = require('contextful-winston-logger');
-
-const dotenv = require('dotenv');
-dotenv.config();
 
 const federationClients = require('./federation-clients');
 const gateway = new ApolloGateway(federationClients);

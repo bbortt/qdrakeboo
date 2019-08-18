@@ -1,8 +1,5 @@
 const ManagementClient = require('auth0').ManagementClient;
 
-const dotenv = require('dotenv');
-dotenv.config();
-
 const managementClient = new ManagementClient({
   domain: process.env.AUTH0_DOMAIN,
   clientId: process.env.AUTH0_CLIENT_ID,

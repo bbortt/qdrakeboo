@@ -11,9 +11,6 @@ const secured = require('../middleware/secured.middleware')
 
 const logger = require('../logging/logger')
 
-const dotenv = require('dotenv')
-dotenv.config()
-
 router.get(
   '/login',
   passport.authenticate('auth0', {

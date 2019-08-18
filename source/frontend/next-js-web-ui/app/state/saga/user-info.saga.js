@@ -1,16 +1,13 @@
 // @flow
-import getConfig from 'next/config'
-
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 import axios from 'axios'
-
-import { API_FORWARD_TO_HEADER_NAME } from '../../../shared/const'
 
 import type {
   CompleteUserInfoAction,
   RequestPermissionsAction,
 } from '../action'
+
 import {
   COMPLETE_USER_INFO,
   REQUEST_PERMISSIONS,
@@ -20,7 +17,7 @@ import {
   setUserInfo,
 } from '../action'
 
-const { publicRuntimeConfig } = getConfig()
+const { API_FORWARD_TO_HEADER_NAME, API_URL, PUBLIC_URL } = process.env
 
 function* completeUserInfo(action: CompleteUserInfoAction) {
   const { nextContext } = action
@@ -38,21 +35,27 @@ export function* completeUserInfoSaga(): Iterable<any> {
 function* requestPermissions(action: RequestPermissionsAction) {
   const requestConfig = {}
 
+  if (!API_FORWARD_TO_HEADER_NAME) {
+    throw new Error('process.env.API_FORWARD_TO_HEADER_NAME not defined!')
+  }
+
+  if (!API_URL) {
+    throw new Error('process.env.API_URL not defined!')
+  }
+
   requestConfig.headers = {}
-  requestConfig.headers[
-    API_FORWARD_TO_HEADER_NAME
-  ] = `${publicRuntimeConfig.apiUrl}/userinfo`
+  requestConfig.headers[API_FORWARD_TO_HEADER_NAME] = `${API_URL}/userinfo`
 
   if (action.nextContext.req && action.nextContext.req.headers.cookie) {
     requestConfig.headers.cookie = action.nextContext.req.headers.cookie
   }
 
+  if (!PUBLIC_URL) {
+    throw new Error('process.env.PUBLIC_URL not defined!')
+  }
+
   try {
-    const response = yield call(
-      axios.get,
-      `${publicRuntimeConfig.publicUrl}/api`,
-      requestConfig
-    )
+    const response = yield call(axios.get, `${PUBLIC_URL}/api`, requestConfig)
 
     yield put(setPermissions(response.data.credentials.claims.permissions))
   } catch (error) {
