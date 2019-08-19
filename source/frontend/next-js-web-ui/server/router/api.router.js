@@ -4,7 +4,9 @@ const secured = require('../middleware/secured.middleware')
 
 const logger = require('../logging/logger')
 
-const { API_FORWARD_TO_HEADER_NAME } = process.env
+const {
+  apiForwardToHeaderName,
+} = require('../../next.config').publicRuntimeConfig
 
 const proxy = httpProxy.createProxyServer()
 const router = express.Router()
@@ -16,21 +18,21 @@ proxy.on('proxyReq', (proxyReq, req) => {
 
 proxy.on('proxyRes', proxyRes => {
   logger.debug(
-    `Response from API: ${JSON.stringify({ status: proxyRes.statusCode })}`,
+    `Response from API: ${JSON.stringify({ status: proxyRes.statusCode })}`
   )
 })
 
 router.use('/api', secured(), (req, res) => {
-  const requestUrl = req.get(API_FORWARD_TO_HEADER_NAME)
+  const requestUrl = req.get(apiForwardToHeaderName)
   if (!requestUrl) {
     logger.warn(
-      `Received API request without header '${API_FORWARD_TO_HEADER_NAME}'`,
+      `Received API request without header '${apiForwardToHeaderName}'`
     )
 
     return res.status(400).end(
       JSON.stringify({
-        message: `missing header '${API_FORWARD_TO_HEADER_NAME}'`,
-      }),
+        message: `missing header '${apiForwardToHeaderName}'`,
+      })
     )
   }
 

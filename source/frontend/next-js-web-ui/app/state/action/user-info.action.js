@@ -13,7 +13,7 @@ export type CompleteUserInfoAction = { type: string, nextContext: Context }
 export type SetUserInfoAction = { type: string, userInfo: UserInfo }
 export type RequestPermissionsAction = { type: string, nextContext: Context }
 export type SetPermissionsAction = { type: string, permissions: string[] }
-export type RequestPermissionsFailedAction = { type: string, error: any }
+export type RequestPermissionsFailedAction = { type: string, error: string }
 
 export type UserInfoAction =
   | CompleteUserInfoAction
@@ -23,23 +23,23 @@ export type UserInfoAction =
   | RequestPermissionsFailedAction
 
 export const completeUserInfo = (nextContext: Context) => {
-  return { type: COMPLETE_USER_INFO, nextContext: nextContext }
+  return { type: COMPLETE_USER_INFO, nextContext }
 }
 
 export const setUserInfo = (userInfo: UserInfo): SetUserInfoAction => {
-  return { type: SET_USER_INFO, userInfo: userInfo }
+  return { type: SET_USER_INFO, userInfo }
 }
 
 export const requestPermissions = (nextContext: Context) => {
-  return { type: REQUEST_PERMISSIONS, nextContext: nextContext }
+  return { type: REQUEST_PERMISSIONS, nextContext }
 }
 
 export const setPermissions = (permissions: string[]): SetPermissionsAction => {
-  return { type: SET_PERMISSIONS, permissions: permissions }
+  return { type: SET_PERMISSIONS, permissions }
 }
 
 export const requestPermissionsFailed = (
   error: any
 ): RequestPermissionsFailedAction => {
-  return { type: REQUEST_PERMISSIONS_FAILED, error: error }
+  return { type: REQUEST_PERMISSIONS_FAILED, error }
 }

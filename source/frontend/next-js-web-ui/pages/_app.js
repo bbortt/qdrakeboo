@@ -36,7 +36,7 @@ export class ReduxContextAwareApp extends App {
       pageProps = await Component.getInitialProps({ ctx })
     }
 
-    pageProps = { store, ...pageProps }
+    pageProps = { ...pageProps }
 
     return { isServer, pageProps }
   }
