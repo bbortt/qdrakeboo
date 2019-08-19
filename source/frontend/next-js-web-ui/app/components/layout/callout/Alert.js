@@ -9,7 +9,7 @@ export type AlertProps = {
   message: string,
 }
 
-export class Alert extends React.Component<AlertProps> {
+export class AlertClass extends React.Component<AlertProps> {
   render() {
     const { id, type, title, message } = this.props
 
@@ -22,4 +22,4 @@ export class Alert extends React.Component<AlertProps> {
   }
 }
 
-export default Alert
+export default AlertClass

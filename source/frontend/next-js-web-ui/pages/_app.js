@@ -9,7 +9,7 @@ import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import configureStore from '../app/configureStore'
 
-import AlertList from '../app/components/layout/callout/AlertList';
+import AlertList from '../app/components/layout/callout/AlertList'
 import Header from '../app/components/layout/header/Header'
 
 import { completeUserInfo } from '../app/state/action'
@@ -19,7 +19,7 @@ import type { Context } from '../app/domain/Context.type'
 
 require('./_app.scss')
 
-export class ReduxContextAwareApp extends App {
+export class ReduxContextAwareAppClass extends App {
   static async getInitialProps({
     Component,
     ctx,
@@ -65,5 +65,5 @@ export class ReduxContextAwareApp extends App {
 }
 
 export default withRedux(configureStore)(
-  withReduxSaga(withRouter(ReduxContextAwareApp))
+  withReduxSaga(withRouter(ReduxContextAwareAppClass))
 )

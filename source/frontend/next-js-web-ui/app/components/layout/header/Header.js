@@ -12,7 +12,7 @@ type HeaderProps = {
 
 require('./header.scss')
 
-export class Header extends React.Component<HeaderProps> {
+export class HeaderClass extends React.Component<HeaderProps> {
   render() {
     const { isAuthenticated } = this.props
 
@@ -88,4 +88,4 @@ export class Header extends React.Component<HeaderProps> {
 
 export default connect(({ userInfo }) => {
   return { isAuthenticated: userInfo.isAuthenticated }
-})(Header)
+})(HeaderClass)

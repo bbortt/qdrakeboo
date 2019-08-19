@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 
 import Alert from '../../../domain/alert.class'
 
-import { Alert as AlertComponent } from './alert'
+import AlertComponent from './alert'
 
 export type AlertListProps = {
   alerts: Alert[],
 }
 
-export class AlertList extends React.Component<AlertListProps> {
+export class AlertListClass extends React.Component<AlertListProps> {
   render() {
     const { alerts } = this.props
 
@@ -31,4 +31,4 @@ export class AlertList extends React.Component<AlertListProps> {
 
 export default connect(({ alert }) => {
   return { alerts: alert.alerts }
-})(AlertList)
+})(AlertListClass)

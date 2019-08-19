@@ -8,7 +8,7 @@ type GoodByeProps = {}
 
 require('./goodbye.scss')
 
-export class Goodbye extends React.Component<GoodByeProps> {
+export class GoodbyeClass extends React.Component<GoodByeProps> {
   backToHome() {
     Router.push('/')
   }
@@ -35,4 +35,4 @@ export class Goodbye extends React.Component<GoodByeProps> {
   }
 }
 
-export default Goodbye
+export default GoodbyeClass

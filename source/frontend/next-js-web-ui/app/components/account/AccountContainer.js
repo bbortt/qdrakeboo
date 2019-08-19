@@ -7,7 +7,7 @@ type AccountContainerProps = {
   children?: React.Element<any>,
 }
 
-export class AccountContainer extends React.Component<AccountContainerProps> {
+export class AccountContainerClass extends React.Component<AccountContainerProps> {
   render() {
     const { children } = this.props
 
@@ -42,4 +42,4 @@ export class AccountContainer extends React.Component<AccountContainerProps> {
   }
 }
 
-export default AccountContainer
+export default AccountContainerClass

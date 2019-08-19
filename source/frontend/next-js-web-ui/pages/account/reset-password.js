@@ -24,7 +24,7 @@ type ResetPasswordState = {
   submitDisabled: boolean,
 }
 
-export class ResetPassword extends React.Component<
+export class ResetPasswordClass extends React.Component<
   ResetPasswordProps,
   ResetPasswordState
 > {
@@ -147,4 +147,4 @@ export class ResetPassword extends React.Component<
   }
 }
 
-export default withContext(ResetPassword)
+export default withContext(ResetPasswordClass)

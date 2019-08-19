@@ -4,10 +4,10 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import { expect } from 'chai'
 
-import { Goodbye } from '../../pages/goodbye'
+import { GoodbyeClass } from '../../pages/goodbye'
 
 describe('Goodbye', () => {
-  const goodbye = shallow(<Goodbye />)
+  const goodbye = shallow(<GoodbyeClass />)
 
   it('is DIVided', () => {
     expect(goodbye.find('.goodbye')).to.be.an('object')

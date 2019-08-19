@@ -52,7 +52,7 @@ function* requestPermissions(action: RequestPermissionsAction) {
     const response = yield call(
       axios.get,
       `${publicRuntimeConfig.publicUrl}/api`,
-      requestConfig,
+      requestConfig
     )
 
     console.log('response: ', response)
@@ -66,8 +66,8 @@ function* requestPermissions(action: RequestPermissionsAction) {
     yield put(
       addErrorAlert(
         `Failed to load the account information: ${response.statusText}! Please refresh the page to retry.`,
-        'Fatal error!',
-      ),
+        'Fatal error!'
+      )
     )
   }
 }

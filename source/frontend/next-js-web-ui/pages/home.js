@@ -3,7 +3,7 @@ import React from 'react'
 
 type HomeProps = {}
 
-export class Home extends React.Component<HomeProps> {
+export class HomeClass extends React.Component<HomeProps> {
   render() {
     return (
       <div className="home">
@@ -13,4 +13,4 @@ export class Home extends React.Component<HomeProps> {
   }
 }
 
-export default Home
+export default HomeClass

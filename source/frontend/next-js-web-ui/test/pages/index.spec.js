@@ -4,10 +4,10 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import { expect } from 'chai'
 
-import { Index } from '../../pages'
+import { IndexClass } from '../../pages'
 
 describe('Index', () => {
-  const index = shallow(<Index />)
+  const index = shallow(<IndexClass />)
 
   it('is DIVided', () => {
     expect(index.find('.index')).to.be.an('object')

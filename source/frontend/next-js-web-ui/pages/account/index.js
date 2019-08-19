@@ -9,7 +9,7 @@ const AUTOMATIC_REDIRECT = 'profile'
 
 type AccountProps = {}
 
-class Account extends React.Component<AccountProps> {
+class AccountClass extends React.Component<AccountProps> {
   static async getInitialProps({ ctx }: { ctx: Context }) {
     const { pathname, res } = ctx
 
@@ -18,7 +18,9 @@ class Account extends React.Component<AccountProps> {
     }
 
     Router.push(`${pathname}/${AUTOMATIC_REDIRECT}`)
+
+    return {}
   }
 }
 
-export default Account
+export default AccountClass

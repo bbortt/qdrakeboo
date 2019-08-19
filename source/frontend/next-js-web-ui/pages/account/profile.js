@@ -10,7 +10,7 @@ type ProfileProps = {
   userInfo: UserInfo,
 }
 
-export class Profile extends React.Component<ProfileProps> {
+export class ProfileClass extends React.Component<ProfileProps> {
   render() {
     const { userInfo } = this.props
 
@@ -24,4 +24,4 @@ export class Profile extends React.Component<ProfileProps> {
   }
 }
 
-export default connect(({ userInfo }) => userInfo)(Profile)
+export default connect(({ userInfo }) => userInfo)(ProfileClass)

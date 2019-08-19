@@ -4,14 +4,14 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import { expect } from 'chai'
 
-import { Profile } from '../../../pages/account/profile'
+import { ProfileClass } from '../../../pages/account/profile'
 
 const userInfo = {
   displayName: 'test-user',
 }
 
 describe('Profile', () => {
-  const profile = shallow(<Profile userInfo={userInfo} />)
+  const profile = shallow(<ProfileClass userInfo={userInfo} />)
 
   it('is DIVided', () => {
     expect(profile.find('.profile')).to.be.an('object')

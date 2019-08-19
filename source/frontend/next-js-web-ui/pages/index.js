@@ -8,7 +8,7 @@ type IndexProps = {}
 
 require('./index.scss')
 
-export class Index extends React.Component<IndexProps> {
+export class IndexClass extends React.Component<IndexProps> {
   signIn() {
     Router.push('/login')
   }
@@ -35,4 +35,4 @@ export class Index extends React.Component<IndexProps> {
   }
 }
 
-export default Index
+export default IndexClass
