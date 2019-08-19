@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 
 import alertReducer, { initialAlertState } from './alert.reducer'
 import type { AlertState } from './alert.reducer'
+
 import userInfoReducer, { initialUserInfoState } from './user-info.reducer'
 import type { UserInfoState } from './user-info.reducer'
 

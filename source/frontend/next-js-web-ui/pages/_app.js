@@ -9,7 +9,8 @@ import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import configureStore from '../app/configureStore'
 
-import Header from '../app/components/layout/Header'
+import AlertList from '../app/components/layout/callout/AlertList';
+import Header from '../app/components/layout/header/Header'
 
 import { completeUserInfo } from '../app/state/action'
 
@@ -53,6 +54,7 @@ export class ReduxContextAwareApp extends App {
     return (
       <Container>
         <Provider store={store}>
+          <AlertList />
           <Header />
 
           <Component {...pageProps} />

@@ -14,5 +14,5 @@ export const addErrorAlert = (
   message: string,
   title: ?string
 ): AddAlertAction => {
-  return { type: ADD_ALERT, alert: new Alert('ERROR', title, message) }
+  return { type: ADD_ALERT, alert: new Alert('ALERT', title, message) }
 }

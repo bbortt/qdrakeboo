@@ -15,8 +15,8 @@ const bindMiddleware = middleware => {
       applyMiddleware(
         crashReportingMiddleware,
         loggingMiddleware,
-        ...middleware
-      )
+        ...middleware,
+      ),
     )
   }
 
@@ -29,7 +29,7 @@ const configureStore = (initialState: ReduxState = reduxState) => {
   const store = createStore(
     rootReducer,
     initialState,
-    bindMiddleware([sagaMiddleware])
+    bindMiddleware([sagaMiddleware]),
   )
 
   store.sagaTask = sagaMiddleware.run(rootSaga)

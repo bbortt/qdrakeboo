@@ -60,9 +60,12 @@ function* requestPermissions(action: RequestPermissionsAction) {
     yield put(setPermissions(response.data.credentials.claims.permissions))
   } catch (error) {
     yield put(requestPermissionsFailedAction(error))
+
+    const { response } = error
+
     yield put(
       addErrorAlert(
-        `Failed to load the account information: ${action.error}\nPlease refresh the page to retry.`,
+        `Failed to load the account information: ${response.statusText}! Please refresh the page to retry.`,
         'Fatal error!',
       ),
     )

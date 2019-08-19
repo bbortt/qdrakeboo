@@ -1,15 +1,22 @@
 // @flow
-export type AlertType = 'ERROR' | 'WARN' | 'INFO'
+export type AlertType = 'ERROR' | 'WARN' | 'INFO' | 'SUCCESS'
+
+const cssTypes = {
+  ERROR: 'alert',
+  WARN: 'warning',
+  INFO: 'primary',
+  SUCCESS: 'success',
+}
 
 export default class Alert {
-  type: AlertType
+  type: string
 
   title: ?string
 
   message: string
 
   constructor(type: AlertType, title: ?string, message: string) {
-    this.type = type
+    this.type = cssTypes[type]
     this.title = title
     this.message = message
   }

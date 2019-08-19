@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 
-import ActiveMenuItem from '../layout/ActiveMenuItem'
+import ActiveMenuItem from '../layout/header/ActiveMenuItem'
 
 type AccountContainerProps = {
   children?: React.Element<any>,
