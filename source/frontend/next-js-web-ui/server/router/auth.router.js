@@ -67,7 +67,7 @@ router.get('/logout', secured(), (req, res) => {
       )
 
       logoutUrl.search = querystring.stringify({
-        client_id: auth0.clientId,
+        client_id: auth0.clientID,
         returnTo: logoutRedirect,
       })
 

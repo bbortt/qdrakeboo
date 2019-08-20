@@ -1,0 +1,13 @@
+.alert-list {
+  position: absolute;
+  display: block;
+  right: 0;
+  max-width: 30vw;
+  margin-right: 2vw;
+  overflow-y: auto;
+  overflow-x:hidden;
+
+  .alert {
+    margin-top: 2vh;
+  }
+}

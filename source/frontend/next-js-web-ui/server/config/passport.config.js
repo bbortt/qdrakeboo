@@ -7,11 +7,9 @@ const configurePassport = () => {
   const passportStrategy = new Auth0Strategy(
     {
       domain: serverRuntimeConfig.auth0.domain,
-      clientID: serverRuntimeConfig.auth0.clientId,
+      clientID: serverRuntimeConfig.auth0.clientID,
       clientSecret: serverRuntimeConfig.auth0.clientSecret,
-      callbackURL:
-        serverRuntimeConfig.auth0.callbackURL ||
-        'http://localhost:3000/callback',
+      callbackURL: serverRuntimeConfig.auth0.callbackURL,
     },
     (accessToken, refreshToken, extraParams, profile, done) => {
       return done(

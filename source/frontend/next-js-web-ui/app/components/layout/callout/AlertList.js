@@ -11,18 +11,18 @@ export type AlertListProps = {
   alerts: Alert[],
 }
 
+require('./alert-list.scss')
+
 export class AlertListClass extends React.Component<AlertListProps> {
   render() {
     const { alerts } = this.props
 
     return (
       <div className="alert-list">
-        {alerts.map((alert: Alert) => (
-          <AlertComponent
-            type={alert.type}
-            title={alert.title}
-            message={alert.message}
-          />
+        {alerts.map((alert: Alert, index: number) => (
+          <React.Fragment key={`alert-list-item-${index}`}>
+            <AlertComponent alert={alert} />
+          </React.Fragment>
         ))}
       </div>
     )

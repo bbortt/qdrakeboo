@@ -1,6 +1,7 @@
 // @flow
-import type { AddAlertAction, AlertAction } from '../action'
-import { ADD_ALERT } from '../action'
+import type { AddAlertAction, AlertAction, CloseAlertAction } from '../action'
+import { ADD_ALERT, CLOSE_ALERT } from '../action'
+
 import Alert from '../../domain/alert.class'
 
 export type AlertState = {
@@ -22,7 +23,21 @@ export default (
 
       state.alerts.push(alert)
 
-      return state
+      return {
+        ...state,
+      }
+    case CLOSE_ALERT:
+      const closeAlertAction = ((action: any): CloseAlertAction)
+      const { id } = closeAlertAction
+
+      const newAlerts = state.alerts.filter(
+        (existingAlert: Alert) => existingAlert.id !== id
+      )
+
+      return {
+        ...state,
+        alerts: newAlerts,
+      }
     default:
       return state
   }
