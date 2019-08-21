@@ -8,13 +8,14 @@ import ActiveMenuItem from './ActiveMenuItem'
 
 type HeaderProps = {
   +isAuthenticated: boolean,
+  +permissions: string[],
 }
 
 require('./header.scss')
 
 export class HeaderClass extends React.Component<HeaderProps> {
   render() {
-    const { isAuthenticated } = this.props
+    const { isAuthenticated, permissions } = this.props
 
     if (!isAuthenticated) {
       return null
@@ -32,7 +33,7 @@ export class HeaderClass extends React.Component<HeaderProps> {
             className="menu-icon"
             type="button"
             data-toggle="qdrakeboo-main-menu"
-          ></button>
+          />
           <div className="title-bar-title">Menu</div>
         </div>
 
@@ -45,7 +46,7 @@ export class HeaderClass extends React.Component<HeaderProps> {
           <div className="top-bar-left">
             <ul className="menu">
               <li className="menu-text">
-                <Link href="/home">
+                <Link href="/app">
                   <a>Qdrakeboo</a>
                 </Link>
               </li>
@@ -67,7 +68,7 @@ export class HeaderClass extends React.Component<HeaderProps> {
                 <a>Account</a>
                 <ul className="menu vertical">
                   <li>
-                    <ActiveMenuItem href="/account">
+                    <ActiveMenuItem href="app/account">
                       <a>Settings</a>
                     </ActiveMenuItem>
                   </li>
@@ -87,5 +88,8 @@ export class HeaderClass extends React.Component<HeaderProps> {
 }
 
 export default connect(({ userInfo }) => {
-  return { isAuthenticated: userInfo.isAuthenticated }
+  return {
+    isAuthenticated: userInfo.isAuthenticated,
+    permissions: userInfo.permissions,
+  }
 })(HeaderClass)

@@ -3,11 +3,11 @@ import React from 'react'
 
 import { debounce } from 'lodash'
 
-import withContext from '../../app/components/context/withContext'
+import withContext from '../../../app/components/context/withContext'
 
-import { resetPassword } from '../../app/state/action'
+import { resetPassword } from '../../../app/state/action'
 
-import AccountContainer from '../../app/components/account/AccountContainer'
+import AccountContainer from '../../../app/components/account/AccountContainer'
 
 require('./reset-password.scss')
 

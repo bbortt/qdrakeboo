@@ -10,7 +10,7 @@ require('./index.scss')
 
 export class IndexClass extends React.Component<IndexProps> {
   signIn() {
-    Router.push('/login')
+    Router.push('/app')
   }
 
   render() {

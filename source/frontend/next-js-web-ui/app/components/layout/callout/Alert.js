@@ -14,13 +14,13 @@ export type AlertProps = {
 }
 
 export class AlertClass extends React.Component<AlertProps> {
-  constructor(props) {
+  constructor(props: AlertProps) {
     super(props)
 
     this.handleClose = this.handleClose.bind(this)
   }
 
-  handleClose(event: SyntheticInputEvent<HTMLButtonElement>) {
+  handleClose = (event: SyntheticInputEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     const { alert, store } = this.props

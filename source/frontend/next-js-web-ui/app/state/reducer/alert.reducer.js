@@ -1,6 +1,6 @@
 // @flow
-import type { AddAlertAction, AlertAction, CloseAlertAction } from '../action'
 import { ADD_ALERT, CLOSE_ALERT } from '../action'
+import type { AddAlertAction, AlertAction, CloseAlertAction } from '../action'
 
 import Alert from '../../domain/alert.class'
 

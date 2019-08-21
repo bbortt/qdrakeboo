@@ -48,7 +48,7 @@ router.get('/callback', (req, res, next) => {
       const { returnTo } = req.session
       delete req.session.returnTo
 
-      return res.redirect(returnTo || '/home')
+      return res.redirect(returnTo || '/app')
     })
   })(req, res, next)
 })

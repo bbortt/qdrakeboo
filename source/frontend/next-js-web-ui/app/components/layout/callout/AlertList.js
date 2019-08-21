@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import Alert from '../../../domain/alert.class'
 
-import AlertComponent from './alert'
+import AlertComponent from './Alert'
 
 export type AlertListProps = {
   alerts: Alert[],

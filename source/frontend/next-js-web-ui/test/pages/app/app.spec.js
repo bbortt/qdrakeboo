@@ -4,10 +4,10 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import { expect } from 'chai'
 
-import { HomeClass } from '../../pages/home'
+import { AppClass } from '../../../pages/app'
 
-describe('Home', () => {
-  const home = shallow(<HomeClass />)
+describe('App', () => {
+  const home = shallow(<AppClass />)
 
   it('is DIVided', () => {
     expect(home.find('.home')).to.be.an('object')

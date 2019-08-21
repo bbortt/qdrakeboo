@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import { expect } from 'chai'
 
-import { ProfileClass } from '../../../pages/account/profile'
+import { ProfileClass } from '../../../../pages/app/account/profile'
 
 const userInfo = {
   displayName: 'test-user',

@@ -1,12 +1,11 @@
 // @flow
+import { SET_PERMISSIONS, SET_USER_INFO } from '../action'
 import type { UserInfo } from '../../domain/UserInfo.type'
-
 import type {
   SetPermissionsAction,
   SetUserInfoAction,
   UserInfoAction,
 } from '../action'
-import { SET_PERMISSIONS, SET_USER_INFO } from '../action'
 
 export type UserInfoState = {
   +isAuthenticated: boolean,

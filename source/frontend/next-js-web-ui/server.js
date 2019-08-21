@@ -6,6 +6,7 @@ const next = require('next')
 const { configurePassport } = require('./server/config/passport.config')
 
 const secured = require('./server/middleware/secured.middleware')
+const unsecured = require('./server/middleware/unsecured.middleware')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -54,16 +55,8 @@ app.prepare().then(() => {
   server.use('/', authRouter)
   server.use('/', userRouter)
 
-  const unsecuredRequest = (req, res) => {
-    if (req.user) {
-      return res.redirect('/home')
-    }
-
-    handle(req, res)
-  }
-
-  server.get('/', unsecuredRequest)
-  server.get('/goodbye', unsecuredRequest)
+  server.get('/', unsecured(handle))
+  server.get('/goodbye', unsecured(handle))
 
   server.get('/_next/*', (req, res) => handle(req, res))
   server.get('/favicon.ico', (req, res) => handle(req, res))

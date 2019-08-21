@@ -3,8 +3,8 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import AccountContainer from '../../app/components/account/AccountContainer'
-import type { UserInfo } from '../../app/domain/UserInfo.type'
+import AccountContainer from '../../../app/components/account/AccountContainer'
+import type { UserInfo } from '../../../app/domain/UserInfo.type'
 
 type ProfileProps = {
   userInfo: UserInfo,

@@ -1,5 +1,6 @@
 const express = require('express')
 const httpProxy = require('http-proxy')
+
 const secured = require('../middleware/secured.middleware')
 
 const logger = require('../logging/logger')
