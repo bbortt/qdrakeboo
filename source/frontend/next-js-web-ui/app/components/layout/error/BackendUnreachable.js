@@ -19,7 +19,8 @@ export class BackendUnreachableClass extends React.Component<BackendUnreachableP
     return (
       <div className="backend-unreachable">
         <div className="container">
-          <p>We cannot reach the internet..</p>
+          <h4>We&#39;re having trouble reaching our servers..</h4>
+          <p>Please check your internet connection and try again.</p>
         </div>
       </div>
     )

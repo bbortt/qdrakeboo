@@ -8,6 +8,7 @@ import ActiveMenuItem from './ActiveMenuItem'
 
 type HeaderProps = {
   +isAuthenticated: boolean,
+  +online: boolean,
   +permissions: string[],
 }
 
@@ -15,9 +16,9 @@ require('./header.scss')
 
 export class HeaderClass extends React.Component<HeaderProps> {
   render() {
-    const { isAuthenticated, permissions } = this.props
+    const { isAuthenticated, online, permissions } = this.props
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated && online) {
       return null
     }
 
@@ -87,9 +88,10 @@ export class HeaderClass extends React.Component<HeaderProps> {
   }
 }
 
-export default connect(({ userInfo }) => {
+export default connect(({ health, userInfo }) => {
   return {
     isAuthenticated: userInfo.isAuthenticated,
+    online: health.online,
     permissions: userInfo.permissions,
   }
 })(HeaderClass)

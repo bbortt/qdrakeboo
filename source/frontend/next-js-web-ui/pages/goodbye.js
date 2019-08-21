@@ -26,6 +26,7 @@ export class GoodbyeClass extends React.Component<GoodByeProps> {
 
         <div className="container">
           <h1>We hope to see you again soon..</h1>
+          <br />
           <button type="button" className="button" onClick={this.backToHome}>
             Back to Qdrakeboo
           </button>
