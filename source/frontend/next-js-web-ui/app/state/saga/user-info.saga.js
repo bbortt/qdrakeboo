@@ -7,8 +7,10 @@ import { COMPLETE_USER_INFO, setPermissions, setUserInfo } from '../action'
 function* completeUserInfo(action: CompleteUserInfoAction) {
   const { userInfo, permissions } = action
 
-  yield put(setUserInfo(userInfo))
-  yield put(setPermissions(permissions))
+  if (userInfo) {
+    yield put(setUserInfo(userInfo))
+    yield put(setPermissions(permissions))
+  }
 }
 
 function* completeUserInfoSaga(): Iterable<any> {
