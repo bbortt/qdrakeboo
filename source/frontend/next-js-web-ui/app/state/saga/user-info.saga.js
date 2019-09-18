@@ -1,4 +1,5 @@
 // @flow
+import { SagaIterator } from 'redux-saga'
 import { all, put, takeLatest } from 'redux-saga/effects'
 
 import type { CompleteUserInfoAction } from '../action'
@@ -13,10 +14,10 @@ function* completeUserInfo(action: CompleteUserInfoAction) {
   }
 }
 
-function* completeUserInfoSaga(): Iterable<any> {
+function* completeUserInfoSaga(): SagaIterator {
   yield takeLatest(COMPLETE_USER_INFO, completeUserInfo)
 }
 
-export default function* userInfoSaga(): Iterable<any> {
+export default function* userInfoSaga(): SagaIterator {
   yield all([completeUserInfoSaga()])
 }

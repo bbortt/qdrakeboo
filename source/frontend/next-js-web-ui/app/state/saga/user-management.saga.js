@@ -3,6 +3,7 @@ import getConfig from 'next/config'
 
 import axios from 'axios'
 
+import { SagaIterator } from 'redux-saga'
 import { all, call, takeLatest } from 'redux-saga/effects'
 
 import type { ResetPasswordAction } from '../action'
@@ -37,10 +38,10 @@ function* resetPassword(action: ResetPasswordAction) {
   }
 }
 
-function* resetPasswordSaga(): Iterable<any> {
+function* resetPasswordSaga(): SagaIterator {
   yield takeLatest(RESET_PASSWORD, resetPassword)
 }
 
-export default function* userManagementSaga(): Iterable<any> {
+export default function* userManagementSaga(): SagaIterator {
   yield all([resetPasswordSaga()])
 }
