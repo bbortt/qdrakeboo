@@ -1,19 +1,17 @@
+const {UserInputError} = require('apollo-server')
+
 const managementClient = require('../config/management-client.config');
 
 const logger = require('../logging/logger');
 
 const updatePassword = async (userId, password, confirmation) => {
   if (!userId) {
-    // TODO: How?
-    // return res.status(400).end(
-    // JSON.stringify({message: `missing header '${USER_ID_HEADER_NAME}'`}));
-    return false
+    throw new UserInputError('Cannot reset password without UserId!')
   }
 
   const feedback = validatePassword(password, confirmation);
   if (feedback) {
-    // TODO: How?
-    // return res.status(500).end(JSON.stringify({message: feedback}));
+    throw new UserInputError(feedback)
   }
 
    await managementClient.changePassword(

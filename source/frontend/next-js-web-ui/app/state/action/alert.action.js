@@ -23,6 +23,13 @@ export const addErrorAlert = (
   return { type: ADD_ALERT, alert: new Alert('ERROR', title, message) }
 }
 
+export const addSuccessAlert = (
+  message: string,
+  title: ?string
+): AddAlertAction => {
+  return { type: ADD_ALERT, alert: new Alert('SUCCESS', title, message) }
+}
+
 export const closeAlert = (id: string): CloseAlertAction => {
   return { type: CLOSE_ALERT, id }
 }

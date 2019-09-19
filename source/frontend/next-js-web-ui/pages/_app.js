@@ -51,7 +51,7 @@ export class ReduxContextAwareAppClass extends App {
     return { isServer, pageProps }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     require('foundation-sites')
     // $FlowFixMe
     $(document).foundation()

@@ -6,10 +6,17 @@ import gql from 'graphql-tag'
 import getApolloClient from '../../apollo/getApolloClient'
 
 import type { ResetPasswordAction } from '../action'
-import { addErrorAlert, RESET_PASSWORD, resetPasswordSucceed } from '../action'
+import {
+  addErrorAlert,
+  addSuccessAlert,
+  RESET_PASSWORD,
+  RESET_PASSWORD_SUCCEED,
+  resetPasswordFailed,
+  resetPasswordSucceed as resetPasswordSucceedAction,
+} from '../action'
 
 const mutation = gql`
-  mutation {
+  mutation UpdatePassword($password: String!, $confirmation: String!) {
     updatePassword(password: $password, confirmation: $confirmation)
   }
 `
@@ -19,18 +26,21 @@ function* resetPassword(action: ResetPasswordAction) {
   const variables = { password, confirmation }
 
   try {
-    const response = yield getApolloClient().mutate({ mutation, variables })
+    yield getApolloClient().mutate({ mutation, variables })
 
-    if (response.data && response.data.updatePassword) {
-      yield put(resetPasswordSucceed())
-    } else {
-      // TODO: Failure
-    }
+    yield put(resetPasswordSucceedAction())
   } catch (error) {
-    if (error.networkError.statusCode) {
-      yield put(addErrorAlert('GRAPHQL_ERROR'))
+    const errorCode = error.graphQLErrors[0].extensions.code
+
+    if (errorCode === 'BAD_USER_INPUT') {
+      const message =
+        error.message.indexOf(':') !== 0
+          ? error.message.split(':')[1].trim()
+          : error.message
+
+      yield put(resetPasswordFailed(message))
     } else {
-      yield put(addErrorAlert('BACKEND_NOT_REACHABLE'))
+      yield put(addErrorAlert(errorCode))
     }
   }
 }
@@ -39,6 +49,14 @@ function* resetPasswordSaga(): SagaIterator {
   yield takeLatest(RESET_PASSWORD, resetPassword)
 }
 
+function* resetPasswordSucceed() {
+  yield put(addSuccessAlert('RESET_PASSWORD_SUCCEED'))
+}
+
+function* resetPasswordSucceedSaga(): SagaIterator {
+  yield takeLatest(RESET_PASSWORD_SUCCEED, resetPasswordSucceed)
+}
+
 export default function* userManagementSaga(): SagaIterator {
-  yield all([resetPasswordSaga()])
+  yield all([resetPasswordSaga(), resetPasswordSucceedSaga()])
 }

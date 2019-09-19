@@ -1,19 +1,26 @@
 // @flow
 import React from 'react'
 
+import { Store, Unsubscribe } from 'redux'
 import { debounce } from 'lodash'
+import subscribeToReduxStore from '../../../app/util/subscribeToReduxStore'
 
 import withReduxContext from '../../../app/util/hoc/withReduxContext'
 
 import { resetPassword } from '../../../app/state/action'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
+import type { ReduxState } from '../../../app/state/reducer'
 
 require('./reset-password.scss')
 
 type ResetPasswordProps = {
   store: {
     dispatch: (action: any) => void,
+  },
+  remote: {
+    loading: boolean,
+    error: string,
   },
 }
 
@@ -22,6 +29,7 @@ type ResetPasswordState = {
   confirmation: string,
   formErrors: Array<string>,
   submitDisabled: boolean,
+  unsubscribe: Unsubscribe,
 }
 
 export class ResetPasswordClass extends React.Component<
@@ -31,16 +39,55 @@ export class ResetPasswordClass extends React.Component<
   constructor(props: ResetPasswordProps) {
     super(props)
 
+    const { store } = props
+
     this.state = {
       password: '',
       confirmation: '',
       formErrors: [],
       submitDisabled: true,
+      unsubscribe: this.subscribe(store),
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.checkFormErrors = debounce(this.checkFormErrors.bind(this), 500)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillUnmount = () => {
+    const { unsubscribe } = this.state
+    unsubscribe()
+  }
+
+  subscribe = (store: Store<ReduxState>) => {
+    return subscribeToReduxStore(
+      store,
+      reduxState => reduxState.userManagement.resetPassword,
+      this.handleStateChange(this)
+    )
+  }
+
+  handleStateChange = (reference: ResetPasswordClass) => {
+    return (resetPasswordState: { loading: boolean, error: string }) => {
+      const { loading, error } = resetPasswordState
+
+      if (!loading) {
+        if (error) {
+          const { formErrors } = reference.state
+          formErrors.push(error)
+          reference.setState({ formErrors })
+        } else {
+          reference.setState({
+            password: '',
+            confirmation: '',
+            formErrors: [],
+            submitDisabled: true,
+          })
+        }
+
+        reference.checkFormErrors()
+      }
+    }
   }
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
@@ -49,8 +96,7 @@ export class ResetPasswordClass extends React.Component<
   }
 
   checkFormErrors = () => {
-    const { password, confirmation } = this.state
-    const formErrors = []
+    const { password, confirmation, formErrors } = this.state
 
     if (password !== '' && password.length < 8) {
       formErrors.push('Password must be at least 8 characters in length!')
@@ -60,8 +106,7 @@ export class ResetPasswordClass extends React.Component<
       formErrors.push('Password and confirmation do not match!')
     }
 
-    const submitDisabled =
-      password === '' || confirmation === '' || formErrors.length !== 0
+    const submitDisabled = password === '' || formErrors.length !== 0
 
     this.setState({ formErrors, submitDisabled })
   }
@@ -79,8 +124,9 @@ export class ResetPasswordClass extends React.Component<
     store.dispatch(resetPassword(password, confirmation))
   }
 
-  hasErrors() {
-    return this.state.formErrors.length !== 0
+  hasErrors = () => {
+    const { formErrors } = this.state
+    return formErrors.length !== 0
   }
 
   render() {
