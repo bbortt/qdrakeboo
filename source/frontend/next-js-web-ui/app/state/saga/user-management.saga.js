@@ -1,40 +1,35 @@
 // @flow
-import getConfig from 'next/config'
-
-import axios from 'axios'
-
 import { SagaIterator } from 'redux-saga'
-import { all, call, takeLatest } from 'redux-saga/effects'
+import { all, takeLatest } from 'redux-saga/effects'
+
+import gql from 'graphql-tag'
+import getApolloClient from '../../apollo/getApolloClient'
 
 import type { ResetPasswordAction } from '../action'
 import { RESET_PASSWORD } from '../action'
 
-const { publicRuntimeConfig } = getConfig()
+const query = gql`
+  query {
+    getAllMovies {
+      name
+    }
+  }
+`
 
 // TODO: Graphql?
 function* resetPassword(action: ResetPasswordAction) {
   const { password, confirmation } = action
 
-  const requestConfig = { headers: {} }
-
-  requestConfig.headers[
-    publicRuntimeConfig.apiForwardToHeaderName
-  ] = `${publicRuntimeConfig.apiUrl}/graphql`
-
   try {
-    const response = yield call(
-      axios.get,
-      `${publicRuntimeConfig.publicUrl}/api`,
-      requestConfig
-    )
+    const response = yield getApolloClient().query({ query })
 
-    if (response.status === 200) {
-      console.log('response: ', response)
-    }
+    console.log('apollo res: ', response)
 
     // TODO: Dispatch error
   } catch (error) {
     // TODO: Dispatch error
+
+    console.log('error: ', error)
   }
 }
 

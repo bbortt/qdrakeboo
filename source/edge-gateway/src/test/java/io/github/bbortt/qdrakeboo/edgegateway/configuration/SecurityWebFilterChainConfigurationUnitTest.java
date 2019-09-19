@@ -5,15 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.context.annotation.Configuration;
 
-public class WebSecurityConfigurationUnitTest {
+public class SecurityWebFilterChainConfigurationUnitTest {
 
   @Test
   public void isAnnotated() {
-    assertThat(WebSecurityConfiguration.class).hasAnnotation(Configuration.class);
+    assertThat(SecurityWebFilterChainConfiguration.class).hasAnnotation(Configuration.class);
   }
 
   @Test
   public void hasPublicConstructor() {
-    assertThat(new WebSecurityConfiguration()).isNotNull();
+    assertThat(new SecurityWebFilterChainConfiguration()).isNotNull();
   }
 }

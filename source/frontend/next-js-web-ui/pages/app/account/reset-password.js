@@ -3,7 +3,7 @@ import React from 'react'
 
 import { debounce } from 'lodash'
 
-import withContext from '../../../app/components/context/withContext'
+import withReduxContext from '../../../app/util/hoc/withReduxContext'
 
 import { resetPassword } from '../../../app/state/action'
 
@@ -147,4 +147,4 @@ export class ResetPasswordClass extends React.Component<
   }
 }
 
-export default withContext(ResetPasswordClass)
+export default withReduxContext(ResetPasswordClass)

@@ -21,6 +21,7 @@ The private streaming service for geeks.
 * Global error handling (concept/implementation) in frontend
 * How to monitor express server (actuator?)
 * How to package server? Current implementation is uggly!
+* Actuator endpoints of edge-gateway are secured.. does this make sense?
 
 # License
 

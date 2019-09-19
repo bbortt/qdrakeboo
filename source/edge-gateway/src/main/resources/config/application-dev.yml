@@ -1,2 +1,8 @@
-routes:
-  path: 'classpath:config/routes-dev.properties'
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: graphql-federation
+          uri: http://localhost:4000/graphql
+          predicates:
+            - Path=/graphql

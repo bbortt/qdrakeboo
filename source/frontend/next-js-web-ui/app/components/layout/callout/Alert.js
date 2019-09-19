@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import withContext from '../../context/withContext'
+import withReduxContext from '../../../util/hoc/withReduxContext'
 import { closeAlert } from '../../../state/action'
 
 import Alert from '../../../domain/alert.class'
@@ -49,4 +49,4 @@ export class AlertClass extends React.Component<AlertProps> {
   }
 }
 
-export default withContext(AlertClass)
+export default withReduxContext(AlertClass)

@@ -1,7 +1,7 @@
 // @flow
 import getConfig from 'next/config'
 
-import axios from 'axios'
+import fetch from 'isomorphic-unfetch'
 
 import type { Context } from '../../domain/Context.type'
 
@@ -19,13 +19,14 @@ export default async (nextContext: Context): Promise<string[] | string> => {
   }
 
   try {
-    const response = await axios.get(
+    const response = await fetch(
       `${publicRuntimeConfig.publicUrl}/api`,
       requestConfig
     )
 
     if (response.status === 200) {
-      return response.data.credentials.claims.permissions
+      const data = await response.json()
+      return data.credentials.claims.permissions || {}
     }
 
     return response.status

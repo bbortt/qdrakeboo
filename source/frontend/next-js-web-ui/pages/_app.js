@@ -1,11 +1,10 @@
 // @flow
 import React from 'react'
 
-import App, { Container } from 'next/app'
-import { withRouter } from 'next/router'
+import App from 'next/app'
 import Head from 'next/head'
 
-import { connect, Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import configureStore from '../app/configureStore'
@@ -44,11 +43,9 @@ export class ReduxContextAwareAppClass extends App {
     }
 
     let pageProps = {}
-
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps({ ctx })
     }
-
     pageProps = { ...pageProps }
 
     return { isServer, pageProps }
@@ -64,7 +61,7 @@ export class ReduxContextAwareAppClass extends App {
     const { Component, pageProps, store } = this.props
 
     return (
-      <Container>
+      <div className="app">
         <Head>
           <title>Qdrakeboo</title>
           <meta
@@ -80,17 +77,11 @@ export class ReduxContextAwareAppClass extends App {
 
           <Component {...pageProps} />
         </Provider>
-      </Container>
+      </div>
     )
   }
 }
 
 export default withRedux(configureStore)(
-  withReduxSaga(
-    withRouter(
-      connect(({ health }) => {
-        return { online: health.online }
-      })(ReduxContextAwareAppClass)
-    )
-  )
+  withReduxSaga(ReduxContextAwareAppClass)
 )
