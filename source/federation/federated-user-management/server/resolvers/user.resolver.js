@@ -7,6 +7,7 @@ const updatePassword = async (userId, password, confirmation) => {
     // TODO: How?
     // return res.status(400).end(
     // JSON.stringify({message: `missing header '${USER_ID_HEADER_NAME}'`}));
+    return false
   }
 
   const feedback = validatePassword(password, confirmation);
@@ -15,7 +16,7 @@ const updatePassword = async (userId, password, confirmation) => {
     // return res.status(500).end(JSON.stringify({message: feedback}));
   }
 
-  return await managementClient.changePassword(
+   await managementClient.changePassword(
       {id: userId},
       {password: password},
       (error, user) => {
@@ -42,8 +43,6 @@ const validatePassword = (password, confirmation) => {
   }
 };
 
-const userResolver = {
+module.exports = {
   updatePassword: updatePassword
 };
-
-module.exports = userResolver;

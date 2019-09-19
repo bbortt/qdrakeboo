@@ -23,7 +23,7 @@ const create = () => {
     uri: isBrowser
       ? `${publicRuntimeConfig.publicUrl}/api`
       : `${publicRuntimeConfig.apiUrl}/graphql`,
-    credentials: 'same-origin', // TODO: Additional fetch() options like `credentials` or `headers`
+    // credentials: 'same-origin', // TODO: Additional fetch() options like `credentials` or `headers`
     headers: {},
   }
 
