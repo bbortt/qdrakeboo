@@ -26,9 +26,10 @@ const server = new ApolloServer({
 
 (async () => {
   const app = express();
-  server.applyMiddleware({app})
 
   app.use(bindContextfulMiddleware(logger));
+
+  server.applyMiddleware({app})
 
   const port = process.env.PORT || 4011;
 

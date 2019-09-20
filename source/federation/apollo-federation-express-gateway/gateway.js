@@ -8,6 +8,8 @@ const {ApolloGateway} = require('@apollo/gateway');
 
 const logger = require('./server/logging/logger');
 const {bindContextfulMiddleware} = require('contextful-winston-logger');
+const userIdAppendingMiddleware = require(
+    './server/middleware/user-id-appending.middleware');
 
 const federationClients = require('./federation-clients');
 const gateway = new ApolloGateway(federationClients);
@@ -21,7 +23,7 @@ logger.info(`Starting ${applicationName}..`);
   const server = new ApolloServer({schema, executor});
 
   const app = express();
-  app.use(bindContextfulMiddleware(logger));
+  app.use(bindContextfulMiddleware(logger, [userIdAppendingMiddleware]));
 
   server.applyMiddleware({app});
 
