@@ -20,7 +20,11 @@ logger.info(`Starting ${applicationName}..`);
 (async () => {
   const {schema, executor} = await gateway.load();
 
-  const server = new ApolloServer({schema, executor});
+  const subscriptions = {
+    path: '/'
+  }
+
+  const server = new ApolloServer({schema, executor, subscriptions});
 
   const app = express();
   app.use(bindContextfulMiddleware(logger, [userIdAppendingMiddleware]));

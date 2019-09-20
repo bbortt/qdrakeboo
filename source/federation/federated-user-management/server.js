@@ -21,7 +21,13 @@ const server = new ApolloServer({
       typeDefs,
       resolvers
     }
-  ])
+  ]),
+  context: ({ req }) => ({
+    userId: req.headers['qdrakeboo-user-id']
+  }),
+  subscriptions: {
+    path: '/'
+  }
 });
 
 (async () => {

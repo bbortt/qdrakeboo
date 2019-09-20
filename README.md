@@ -23,6 +23,7 @@ The private streaming service for geeks.
 * How to package server? Current implementation is uggly!
 * Actuator endpoints of edge-gateway are secured.. does this make sense?
 * Read user-id in federated-user-management
+* Check jwt scopes in edge-gateway
 
 # License
 

@@ -2,11 +2,11 @@
   "serviceList": [
     {
       "name": "user-management",
-      "url": "http://localhost:4010/graphql"
+      "url": "http://localhost:4010/"
     },
     {
       "name": "movie-api",
-      "url": "http://localhost:4011/graphql"
+      "url": "http://localhost:4011/"
     }
   ]
 }
