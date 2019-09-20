@@ -1,12 +1,13 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.6.RELEASE' apply false
+    id 'org.springframework.boot' version '2.1.8.RELEASE' apply false
     id 'org.sonarqube' version '2.7.1'
+    id 'com.github.ben-manes.versions' version '0.25.0'
 }
 
 group = 'io.github.bbortt.qdrakeboo'
 
 ext {
-    set('springBootVersion', "2.1.6.RELEASE")
+    set('springBootVersion', "2.1.8.RELEASE")
     set('springCloudVersion', "Greenwich.SR1")
 }
 
