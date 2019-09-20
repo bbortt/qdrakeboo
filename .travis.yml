@@ -28,6 +28,7 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
+  - ./gradlew dependencyUpdates
   - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i build sonarqube
 
 after_success:
