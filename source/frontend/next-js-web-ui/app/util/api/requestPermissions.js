@@ -7,8 +7,8 @@ import type { Context } from '../../domain/Context.type'
 
 const { publicRuntimeConfig } = getConfig()
 
-export default async (nextContext: Context): Promise<string[] | string> => {
-  const requestConfig = { maxRedirects: 0, headers: {} }
+export default async (nextContext: Context): Promise<string[] | number> => {
+  const requestConfig = { redirect: 'manual', headers: {} }
 
   requestConfig.headers[
     publicRuntimeConfig.apiForwardToHeaderName
@@ -26,11 +26,15 @@ export default async (nextContext: Context): Promise<string[] | string> => {
 
     if (response.status === 200) {
       const data = await response.json()
-      return data.credentials.claims.permissions || {}
+      return data.credentials.claims.permissions
     }
 
     return response.status
   } catch (error) {
+    if (error.response) {
+      return error.response.status
+    }
+
     return error.message
   }
 }
