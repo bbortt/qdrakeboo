@@ -21,10 +21,7 @@ const server = new ApolloServer({
       typeDefs,
       resolvers
     }
-  ]),
-  subscriptions: {
-    path: '/'
-  }
+  ])
 });
 
 (async () => {
@@ -32,10 +29,10 @@ const server = new ApolloServer({
 
   app.use(bindContextfulMiddleware(logger));
 
-  server.applyMiddleware({app})
+  server.applyMiddleware({app, path: '/'});
 
   const port = process.env.PORT || 4011;
 
   app.listen({port: port}, () => logger.info(
-      `🚀 ${applicationName} ready at http://localhost:${port}`))
+      `🚀 ${applicationName} ready at http://localhost:${port}${server.graphqlPath}`))
 })();

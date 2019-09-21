@@ -24,10 +24,7 @@ const server = new ApolloServer({
   ]),
   context: ({ req }) => ({
     userId: req.headers['qdrakeboo-user-id']
-  }),
-  subscriptions: {
-    path: '/'
-  }
+  })
 });
 
 (async () => {
@@ -35,10 +32,10 @@ const server = new ApolloServer({
 
   app.use(bindContextfulMiddleware(logger));
 
-  server.applyMiddleware({app})
+  server.applyMiddleware({app, path: '/'});
 
   const port = process.env.PORT || 4010;
 
   app.listen({port: port}, () => logger.info(
-      `🚀 ${applicationName} ready at http://localhost:${port}`))
+      `🚀 ${applicationName} ready at http://localhost:${port}${server.graphqlPath}`))
 })();

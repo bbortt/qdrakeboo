@@ -31,6 +31,6 @@ export default async (nextContext: Context): Promise<string[] | string> => {
 
     return response.status
   } catch (error) {
-    return error.response.status
+    return error.message
   }
 }

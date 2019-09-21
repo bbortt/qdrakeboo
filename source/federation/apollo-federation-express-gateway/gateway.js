@@ -20,16 +20,12 @@ logger.info(`Starting ${applicationName}..`);
 (async () => {
   const {schema, executor} = await gateway.load();
 
-  const subscriptions = {
-    path: '/'
-  }
-
-  const server = new ApolloServer({schema, executor, subscriptions});
+  const server = new ApolloServer({schema, executor});
 
   const app = express();
   app.use(bindContextfulMiddleware(logger, [userIdAppendingMiddleware]));
 
-  server.applyMiddleware({app});
+  server.applyMiddleware({app, path: '/'});
 
   const port = process.env.PORT || 4000;
 
