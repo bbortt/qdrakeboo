@@ -57,7 +57,11 @@ export class HeaderClass extends React.Component<HeaderProps> {
                 <input type="search" placeholder="Search" />
               </li>
               <li>
-                <button type="button" className="button" aria-label="Search movies">
+                <button
+                  type="button"
+                  className="button"
+                  aria-label="Search movies"
+                >
                   Search
                 </button>
               </li>
