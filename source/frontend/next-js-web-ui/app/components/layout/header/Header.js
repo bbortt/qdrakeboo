@@ -31,8 +31,9 @@ export class HeaderClass extends React.Component<HeaderProps> {
           style={{ display: 'none' }}
         >
           <button
-            className="menu-icon"
             type="button"
+            className="menu-icon"
+            aria-label="Open menu"
             data-toggle="qdrakeboo-main-menu"
           />
           <div className="title-bar-title">Menu</div>
@@ -56,7 +57,7 @@ export class HeaderClass extends React.Component<HeaderProps> {
                 <input type="search" placeholder="Search" />
               </li>
               <li>
-                <button type="button" className="button">
+                <button type="button" className="button" aria-label="Search movies">
                   Search
                 </button>
               </li>

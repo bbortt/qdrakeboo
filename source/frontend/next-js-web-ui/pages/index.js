@@ -27,7 +27,7 @@ export class IndexClass extends React.Component<IndexProps> {
         <div className="container">
           <h1>Welcome to Qdrakeboo</h1>
           <br />
-          <button type="button" className="button" onClick={this.signIn}>
+          <button type="button" className="button" aria-label="Sign in" onClick={this.signIn}>
             Sign In
           </button>
         </div>

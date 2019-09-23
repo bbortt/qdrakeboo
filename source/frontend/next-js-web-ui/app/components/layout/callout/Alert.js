@@ -37,9 +37,9 @@ export class AlertClass extends React.Component<AlertProps> {
         <h5>{title || type}</h5>
         <p>{message}</p>
         <button
+          type="button"
           className="close-button"
           aria-label="Dismiss alert"
-          type="button"
           onClick={this.handleClose}
         >
           <span aria-hidden="true">&times;</span>
