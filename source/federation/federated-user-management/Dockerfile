@@ -11,4 +11,4 @@ EXPOSE 5000
 COPY source/federation/federated-user-management/dist/federated-user-management.js ./
 
 USER node
-CMD [ "node", "federated-user-management.js" ]
+CMD [ "node", "federated-user-management" ]
