@@ -8,16 +8,13 @@ docker:
   - scripts/*
   - ./**/DOCKERFILE
 edge-gateway: source/edge-gateway/**
-federation:
-  gateway: source/federation/apollo-federation-express-gateway/**
-  movie-api: source/federation/federated-movie-api/**
-  user-management: source/federation/federated-user-management/**
-frontend:
-  web-ui: source/frontend/next-js-web-ui/**
+federation: source/federation/**
+frontend: source/frontend/**
+gateway: source/federation/apollo-federation-express-gateway/**
 java: source/**/*.java
 javascript: source/**/*.js
-stream:
-  upstream: source/stream/upstream-server/**
+movie-api: source/federation/federated-movie-api/**
+stream: source/stream/**
 tooling:
   - ./**/.idea/*
   - ./**/.gitignore
@@ -25,3 +22,6 @@ tooling:
   - gradle*
   - ./**/*.gradle
   - source/**/package*.json
+upstream: source/stream/upstream-server/**
+user-management: source/federation/federated-user-management/**
+web-ui: source/frontend/next-js-web-ui/**
