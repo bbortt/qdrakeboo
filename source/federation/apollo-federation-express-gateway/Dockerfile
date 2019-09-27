@@ -4,11 +4,11 @@
 FROM node:12.3-alpine
 MAINTAINER Timon Borter <bbortt.github.io>
 
-WORKDIR /home/node
+CMD [ "node", "apollo-federation-express-gateway" ]
 
 EXPOSE 4000
 
-COPY source/federation/apollo-federation-express-gateway/dist/apollo-federation-express-gateway.js ./
-
 USER node
-CMD [ "node", "apollo-federation-express-gateway" ]
+WORKDIR /home/node
+
+COPY source/federation/apollo-federation-express-gateway/dist/apollo-federation-express-gateway.js ./
