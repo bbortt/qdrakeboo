@@ -3,7 +3,7 @@
 FROM openjdk:11-slim
 MAINTAINER Timon Borter <bbortt.github.io>
 
-ENTRYPOINT ["/usr/bin/java", "-jar", "/home/upstream/upstream-server.jar"]
+CMD ["java", "-jar", "upstream-server.jar"]
 
 RUN useradd -ms /bin/bash upstream
 
@@ -14,4 +14,4 @@ USER upstream
 WORKDIR /home/upstream
 
 ARG JAR_FILE
-ADD source/stream/upstream-server/build/libs/${JAR_FILE} /home/upstream/upstream-server.jar
+ADD source/stream/upstream-server/build/libs/${JAR_FILE} ./upstream-server.jar

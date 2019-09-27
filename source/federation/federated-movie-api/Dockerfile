@@ -4,11 +4,11 @@
 FROM node:12.3-alpine
 MAINTAINER Timon Borter <bbortt.github.io>
 
-WORKDIR /home/node
+CMD [ "node", "federated-movie-api" ]
 
 EXPOSE 5000
 
-COPY source/federation/federated-movie-api/dist/federated-movie-api.js ./
-
 USER node
-CMD [ "node", "federated-movie-api" ]
+WORKDIR /home/node
+
+COPY source/federation/federated-movie-api/dist/federated-movie-api.js ./

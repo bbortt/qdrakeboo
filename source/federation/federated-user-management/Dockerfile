@@ -4,11 +4,11 @@
 FROM node:12.3-alpine
 MAINTAINER Timon Borter <bbortt.github.io>
 
-WORKDIR /home/node
+CMD [ "node", "federated-user-management" ]
 
 EXPOSE 5000
 
-COPY source/federation/federated-user-management/dist/federated-user-management.js ./
-
 USER node
-CMD [ "node", "federated-user-management" ]
+WORKDIR /home/node
+
+COPY source/federation/federated-user-management/dist/federated-user-management.js ./
