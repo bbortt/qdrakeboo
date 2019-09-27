@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: edge-gateway
+  cloud:
+    kubernetes:
+      config:
+        name: edge-gateway
+        sources:
+          - name: application.yaml

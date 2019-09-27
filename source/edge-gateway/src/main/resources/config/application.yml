@@ -10,8 +10,6 @@ management:
 server:
   port: ${SERVER_PORT:8080}
 spring:
-  application:
-    name: edge-gateway
   security:
     oauth2:
       resourceserver:
