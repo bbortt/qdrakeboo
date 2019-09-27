@@ -17,12 +17,12 @@
     "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
-    "@apollo/gateway": "^0.10.4",
-    "apollo-server-express": "^2.9.3",
+    "@apollo/gateway": "^0.10.5",
+    "apollo-server-express": "^2.9.4",
     "contextful-winston-logger": "file:../../contextful-winston-logger",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "graphql": "^14.5.6",
+    "graphql": "^14.5.8",
     "winston": "^3.2.1"
   },
   "devDependencies": {

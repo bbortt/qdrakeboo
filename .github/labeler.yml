@@ -1,0 +1,27 @@
+ci/cd:
+  - .github/*
+  - scripts/*
+  - .travis.yml
+doc: ./**/README.md
+docker:
+  - .dockerignore
+  - scripts/*
+  - ./**/DOCKERFILE
+edge-gateway: source/edge-gateway/**
+federation: source/federation/**
+frontend: source/frontend/**
+gateway: source/federation/apollo-federation-express-gateway/**
+java: source/**/*.java
+javascript: source/**/*.js
+movie-api: source/federation/federated-movie-api/**
+stream: source/stream/**
+tooling:
+  - ./**/.idea/*
+  - ./**/.gitignore
+  - gradle/*
+  - gradle*
+  - ./**/*.gradle
+  - source/**/package*.json
+upstream: source/stream/upstream-server/**
+user-management: source/federation/federated-user-management/**
+web-ui: source/frontend/next-js-web-ui/**

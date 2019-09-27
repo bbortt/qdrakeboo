@@ -11,4 +11,4 @@ EXPOSE 4000
 COPY source/federation/apollo-federation-express-gateway/dist/apollo-federation-express-gateway.js ./
 
 USER node
-CMD [ "node", "apollo-federation-express-gateway.js" ]
+CMD [ "node", "apollo-federation-express-gateway" ]

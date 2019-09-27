@@ -11,7 +11,9 @@ const {bindContextfulMiddleware} = require('contextful-winston-logger');
 const userIdAppendingMiddleware = require(
     './server/middleware/user-id-appending.middleware');
 
-const federationClients = require('./federation-clients');
+const fs = require('fs');
+const federationClients = JSON.parse(
+    fs.readFileSync('./federation-clients.json'));
 const gateway = new ApolloGateway(federationClients);
 
 const applicationName = process.env.APP_NAME || 'Apollo Federation Gateway';

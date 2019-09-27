@@ -8,12 +8,7 @@ WORKDIR /home/node
 
 EXPOSE 5000
 
-COPY source/contextful-winston-logger contextful-winston-logger
-COPY source/federation/federated-user-management/package*.json ./
-RUN sed -i -e 's/file:..\/..\/contextful-winston-logger/file:contextful-winston-logger/g' package*.json \
-    && npm install
-
-COPY source/federation/federated-user-management ./
+COPY source/federation/federated-user-management/dist/federated-user-management.js ./
 
 USER node
-CMD [ "npm", "start" ]
+CMD [ "node", "federated-user-management" ]
