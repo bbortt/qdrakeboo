@@ -10,6 +10,7 @@ dependencies {
 }
 
 clean {
+    delete 'dist'
     delete 'node_modules'
 }
 
@@ -18,5 +19,9 @@ node {
     download = true
 }
 
+task bundle(type: NpmTask, dependsOn: npmInstall) {
+    args = ['run', 'build']
+}
+
 npmInstall.dependsOn ':source:contextful-winston-logger:build'
-assemble.dependsOn npmInstall
+assemble.dependsOn bundle

@@ -8,12 +8,7 @@ WORKDIR /home/node
 
 EXPOSE 4000
 
-COPY source/contextful-winston-logger contextful-winston-logger
-COPY source/federation/apollo-federation-express-gateway/package*.json ./
-RUN sed -i -e 's/file:..\/..\/contextful-winston-logger/file:contextful-winston-logger/g' package*.json \
-    && npm install
-
-COPY source/federation/apollo-federation-express-gateway ./
+COPY source/federation/apollo-federation-express-gateway/dist/apollo-federation-express-gateway.js ./
 
 USER node
-CMD [ "npm", "start" ]
+CMD [ "node", "apollo-federation-express-gateway.js" ]
