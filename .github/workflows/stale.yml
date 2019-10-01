@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/stale@v1
+    - name: Mark issues and pull-requests
+      uses: actions/stale@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         stale-issue-message: 'Because of recent inactivity this issue will be marked as stale!'
