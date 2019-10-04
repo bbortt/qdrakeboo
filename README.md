@@ -20,7 +20,6 @@ The private streaming service for geeks.
 
 * Global error handling (concept/implementation) in frontend
 * How to monitor express server (actuator?)
-* Actuator endpoints of edge-gateway are secured.. does this make sense?
 * Read user-id in federated-user-management
 * Check jwt scopes in edge-gateway
 
