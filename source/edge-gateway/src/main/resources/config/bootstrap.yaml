@@ -2,6 +2,8 @@ spring:
   application:
     name: edge-gateway
   cloud:
+    config:
+      enabled: false
     kubernetes:
       config:
         name: edge-gateway

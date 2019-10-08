@@ -2,20 +2,23 @@ package io.github.bbortt.qdrakeboo.edgegateway.configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.github.bbortt.qdrakeboo.edgegateway.configuration.PropertyPlaceholderConfiguration.Auth0;
+import io.github.bbortt.qdrakeboo.edgegateway.configuration.PropertyPlaceholderConfiguration.Jwt;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.Configuration;
 
 public class JwtDecoderConfigurationUnitTest {
 
-  static final String TEST_AUDIENCE = "test-audience";
-  static final String TEST_ISSUER_URI = "http://test.issuer.uri";
+  final Auth0 auth0 = new Auth0();
+  final Jwt jwt = new Jwt();
 
   JwtDecoderConfiguration fixture;
 
   @Before
   public void beforeTest() {
-    fixture = new JwtDecoderConfiguration(TEST_AUDIENCE, TEST_ISSUER_URI);
+
+    fixture = new JwtDecoderConfiguration(auth0, jwt);
   }
 
   @Test
@@ -25,7 +28,7 @@ public class JwtDecoderConfigurationUnitTest {
 
   @Test
   public void constructorInstantiatesClass() {
-    assertThat(fixture).hasFieldOrPropertyWithValue("audience", TEST_AUDIENCE)
-        .hasFieldOrPropertyWithValue("issuerUri", TEST_ISSUER_URI);
+    assertThat(fixture).hasFieldOrPropertyWithValue("auth0", auth0)
+        .hasFieldOrPropertyWithValue("jwt", jwt);
   }
 }

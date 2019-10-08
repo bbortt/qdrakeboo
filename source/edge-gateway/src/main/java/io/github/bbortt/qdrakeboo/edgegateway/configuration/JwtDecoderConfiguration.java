@@ -1,7 +1,7 @@
 package io.github.bbortt.qdrakeboo.edgegateway.configuration;
 
 import io.github.bbortt.qdrakeboo.edgegateway.auth0.validator.AudienceValidator;
-import org.springframework.beans.factory.annotation.Value;
+import io.github.bbortt.qdrakeboo.edgegateway.configuration.PropertyPlaceholderConfiguration.Auth0;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
@@ -15,22 +15,22 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoderJwkSupport;
 @Configuration
 public class JwtDecoderConfiguration {
 
-  private String audience;
-  private String issuerUri;
+  private Auth0 auth0;
+  private PropertyPlaceholderConfiguration.Jwt jwt;
 
-  public JwtDecoderConfiguration(@Value("${auth0.audience}") String audience,
-      @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}") String issuerUri) {
-    this.audience = audience;
-    this.issuerUri = issuerUri;
+  public JwtDecoderConfiguration(Auth0 auth0, PropertyPlaceholderConfiguration.Jwt jwt) {
+    this.auth0 = auth0;
+    this.jwt = jwt;
   }
 
   @Bean
   JwtDecoder jwtDecoder() {
     NimbusJwtDecoderJwkSupport jwtDecoder = (NimbusJwtDecoderJwkSupport) JwtDecoders
-        .fromOidcIssuerLocation(issuerUri);
+        .fromOidcIssuerLocation(jwt.getIssuerUri());
 
-    OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);
-    OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
+    OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(auth0.getAudience());
+    OAuth2TokenValidator<Jwt> withIssuer = JwtValidators
+        .createDefaultWithIssuer(jwt.getIssuerUri());
     OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer,
         audienceValidator);
 
