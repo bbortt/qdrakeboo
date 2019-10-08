@@ -22,6 +22,7 @@ The private streaming service for geeks.
 * How to monitor express server (actuator?)
 * Read user-id in federated-user-management
 * Check jwt scopes in edge-gateway
+* Is `contextful-winston-logger` useful? can it be published?
 
 # License
 

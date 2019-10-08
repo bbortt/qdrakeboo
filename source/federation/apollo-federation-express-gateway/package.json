@@ -17,8 +17,8 @@
     "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
-    "@apollo/gateway": "^0.10.5",
-    "apollo-server-express": "^2.9.4",
+    "@apollo/gateway": "^0.10.6",
+    "apollo-server-express": "^2.9.5",
     "contextful-winston-logger": "file:../../contextful-winston-logger",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
@@ -26,8 +26,8 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "cross-env": "^5.2.1",
-    "nodemon": "^1.19.2",
+    "cross-env": "^6.0.3",
+    "nodemon": "^1.19.3",
     "npm-check": "^5.9.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
