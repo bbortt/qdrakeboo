@@ -34,7 +34,7 @@ task lint(type: NpmTask, dependsOn: flow) {
 }
 
 task test(type: NpmTask, dependsOn: lint) {
-    args = ['run', 'coverage:report']
+    args = ['run', 'test']
 }
 
 assemble.dependsOn bundle

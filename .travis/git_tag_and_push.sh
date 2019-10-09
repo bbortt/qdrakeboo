@@ -14,5 +14,5 @@ git config --local user.email $GITHUB_EMAIL
 
 git tag $TRAVIS_BUILD_NUMBER
 
-git remote add origin https://${GITHUB_TOKEN}@github.com/bbortt/qdrakeboo.git > /dev/null 2>&1
+git remote add origin https://$GITHUB_TOKEN@github.com/bbortt/qdrakeboo.git > /dev/null 2>&1
 git push --tags --quiet -u origin master
