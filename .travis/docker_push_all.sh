@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Deployment script for Travis CI.
 #
-# Usage: `./deploy.sh <tag-name>`
+# Usage: `./docker_push_all.sh <tag-name>`
 
 set -e
 

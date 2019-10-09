@@ -15,10 +15,10 @@ public class SecurityWebFilterChainConfiguration {
     // @formatter:off
     http
         .authorizeExchange()
-        .pathMatchers("/actuator/**")
-          .permitAll()
-        .anyExchange()
+        .pathMatchers("/graphql/**")
           .authenticated()
+        .anyExchange()
+          .permitAll()
         .and()
           .oauth2ResourceServer()
             .jwt();
