@@ -4,18 +4,14 @@
 # Usage: `./tag_and_push`
 #
 # Requires the following environment variables:
-#   $GITHUB_USERNAME      The username used to tag the commit
-#   $GITHUB_NAME          The username used to tag the commit
-#   $GITHUB_EMAIL         The email used to tag the commit
 #   $GITHUB_TOKEN         The GitHub authentication token.
 #   $TRAVIS_BUILD_NUMBER  The build number of
 
 set -ex
 
-git config --local user.name "$GITHUB_NAME"
-git config --local user.email "$GITHUB_EMAIL"
+git config --local user.name "Travis CI"
+git config --local user.email "builds@travis-ci.org"
 
 git tag $TRAVIS_BUILD_NUMBER
 
-git remote add origin https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/bbortt/qdrakeboo.git > /dev/null 2>&1
-git push --tags --quiet -u origin master
+git push --quiet https://${GITHUB_TOKEN}@github.com/bbortt/qdrakeboo.git $TRAVIS_BUILD_NUMBER
