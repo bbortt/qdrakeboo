@@ -1,12 +1,27 @@
 package io.github.bbortt.qdrakeboo.edgegateway.configuration;
 
+import java.io.IOException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@PropertySource(value = {"${AUTH0_PROPERTIES_PLACEHOLDER}"}, ignoreResourceNotFound = true)
 public class PropertyPlaceholderConfiguration {
+
+  @Bean
+  @ConditionalOnProperty(name = "${AUTH0_PROPERTIES_PLACEHOLDER}")
+  public PropertySourcesPlaceholderConfigurer placeHolderConfigurer(
+      @Value("${AUTH0_PROPERTIES_PLACEHOLDER}") String auth0PropertiesPlaceholder)
+      throws IOException {
+    PropertySourcesPlaceholderConfigurer propertyConfigurer = new PropertySourcesPlaceholderConfigurer();
+    propertyConfigurer.setLocations(
+        new PathMatchingResourcePatternResolver().getResources(auth0PropertiesPlaceholder));
+    return propertyConfigurer;
+  }
 
   @Configuration
   @ConfigurationProperties("auth0")
