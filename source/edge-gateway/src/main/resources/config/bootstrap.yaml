@@ -1,3 +1,8 @@
 spring:
   application:
     name: edge-gateway
+  cloud:
+    kubernetes:
+      config:
+        paths:
+          - /home/gateway/config
