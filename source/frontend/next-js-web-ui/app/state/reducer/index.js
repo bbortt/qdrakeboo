@@ -9,6 +9,9 @@ import healthManagementReducer, {
   initialHealthManagementState,
 } from './health-management.reducer'
 
+import type { SagaState } from './saga.reducer'
+import sagaReducer, { initialSagaState } from './saga.reducer'
+
 import type { UserInfoState } from './user-info.reducer'
 import userInfoReducer, { initialUserInfoState } from './user-info.reducer'
 
@@ -20,6 +23,7 @@ import userManagementReducer, {
 export type ReduxState = {
   +alert: AlertState,
   +health: HealthManagementState,
+  +saga: SagaState,
   +userInfo: UserInfoState,
   +userManagement: UserManagementState,
 }
@@ -27,6 +31,7 @@ export type ReduxState = {
 export const reduxState: ReduxState = {
   alert: initialAlertState,
   health: initialHealthManagementState,
+  saga: initialSagaState,
   userInfo: initialUserInfoState,
   userManagement: initialUserManagementState,
 }
@@ -34,6 +39,7 @@ export const reduxState: ReduxState = {
 export default combineReducers({
   alert: alertReducer,
   health: healthManagementReducer,
+  saga: sagaReducer,
   userInfo: userInfoReducer,
   userManagement: userManagementReducer,
 })

@@ -6,7 +6,9 @@ import { crashReportingMiddleware, loggingMiddleware } from './state/middleware'
 
 import type { ReduxState } from './state/reducer'
 import rootReducer, { reduxState } from './state/reducer'
+
 import rootSaga from './state/saga'
+import { sagaStarted } from './state/action'
 
 export type StoreWithSaga = Store<ReduxState> & {
   sagaTask: Task,
@@ -36,7 +38,10 @@ export default (initialState: ReduxState = reduxState): StoreWithSaga => {
     bindMiddleware([sagaMiddleware])
   )
 
-  store.sagaTask = sagaMiddleware.run(rootSaga)
+  if (!(store.getState(): ReduxState).saga.ran) {
+    store.dispatch(sagaStarted())
+    store.sagaTask = sagaMiddleware.run(rootSaga)
+  }
 
   return store
 }
