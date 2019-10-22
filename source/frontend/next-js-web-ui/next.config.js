@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config(process.env.DOTENV_FOLDER)
 
 const webpack = require('webpack')
 const withSass = require('@zeit/next-sass')
