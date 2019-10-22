@@ -1,5 +1,4 @@
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config(process.env.DOTENV_FOLDER);
 
 const {ApolloServer} = require('apollo-server-express');
 const {buildFederatedSchema} = require('@apollo/federation');
