@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const express = require('express');
+const actuator = require('express-actuator')
 
 const {ApolloServer} = require('apollo-server-express');
 const {ApolloGateway} = require('@apollo/gateway');
@@ -19,12 +20,22 @@ const gateway = new ApolloGateway(federationClients);
 const applicationName = process.env.APP_NAME || 'Apollo Federation Gateway';
 logger.info(`Starting ${applicationName}..`);
 
+const actuatorConfig = {
+  basePath: '/actuator',
+  infoGitMode: 'simple',
+}
+
+if (process.env.NODE_ENV !== 'production'){
+  actuatorConfig.infoGitMode='full'
+}
+
 (async () => {
   const {schema, executor} = await gateway.load();
 
   const server = new ApolloServer({schema, executor});
 
   const app = express();
+  app.use(actuator(actuatorConfig))
   app.use(bindContextfulMiddleware(logger, [userIdAppendingMiddleware]));
 
   server.applyMiddleware({app, path: '/'});

@@ -1,5 +1,6 @@
 const express = require('express')
 const session = require('express-session')
+const actuator = require('express-actuator')
 
 const next = require('next')
 
@@ -18,6 +19,11 @@ const sessionConfig = {
   saveUninitialized: true,
 }
 
+const actuatorConfig = {
+  basePath: '/actuator',
+  infoGitMode: 'simple',
+}
+
 if (!dev) {
   sessionConfig.cookie.secure = true
 
@@ -27,6 +33,8 @@ if (!dev) {
   })
   const RedisStore = require('connect-redis')(session)
   sessionConfig.store = new RedisStore({ client: redis })
+
+  actuatorConfig.infoGitMode = 'full'
 }
 
 const applicationName = process.env.APP_NAME || 'Next.js Webapplication'
@@ -46,6 +54,7 @@ app.prepare().then(() => {
   server.use(passport.initialize())
   server.use(passport.session())
   server.use(bindContextfulMiddleware(logger))
+  server.use(actuator(actuatorConfig))
 
   const apiRouter = require('./server/router/api.router')
   const authRouter = require('./server/router/auth.router')
@@ -56,6 +65,7 @@ app.prepare().then(() => {
   server.use('/', userRouter)
 
   server.get('/', unsecured(handle))
+  server.get('/actuator', unsecured(handle))
   server.get('/goodbye', unsecured(handle))
 
   server.get('/_next/*', (req, res) => handle(req, res))

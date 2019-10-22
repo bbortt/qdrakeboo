@@ -5,17 +5,14 @@ FROM node:12.3-alpine
 MAINTAINER Timon Borter <bbortt.github.io>
 
 WORKDIR /home/node
+CMD [ "npm", "start" ]
 
 EXPOSE 3000
 
 COPY source/contextful-winston-logger contextful-winston-logger
-COPY source/frontend/next-js-web-ui/package*.json ./
-RUN sed -i -e 's/file:..\/..\/contextful-winston-logger/file:contextful-winston-logger/g' package*.json \
-    && npm install
-
 COPY source/frontend/next-js-web-ui ./
-
-RUN npm run build
+RUN sed -i -e 's/file:..\/..\/contextful-winston-logger/file:contextful-winston-logger/g' package*.json && \
+    npm install && \
+    npm run build
 
 USER node
-CMD [ "npm", "start" ]
