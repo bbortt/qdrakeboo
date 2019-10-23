@@ -28,9 +28,7 @@ if (!dev) {
   sessionConfig.cookie.secure = true
 
   const redis = require('redis').createClient({
-    host: process.env.REDIS_HOST || '127.0.0.1',
-    port: process.env.REDIS_PORT || 6379,
-    password: process.env.REDIS_PASSWORD,
+    url: `redis://${process.env.REDIS_USER}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
   })
   const RedisStore = require('connect-redis')(session)
   sessionConfig.store = new RedisStore({ client: redis })
