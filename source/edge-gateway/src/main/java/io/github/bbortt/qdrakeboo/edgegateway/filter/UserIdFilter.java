@@ -39,7 +39,7 @@ public class UserIdFilter implements WebFilter {
 
   private ServerWebExchange withUserId(ServerWebExchange exchange, String userId) {
     return exchange.mutate()
-        .request(request -> request.header(USER_ID_HEADER_NAME, userId))
+        .request(request -> request.header(USER_ID_HEADER_NAME, new String[]{userId}))
         .build();
   }
 }
