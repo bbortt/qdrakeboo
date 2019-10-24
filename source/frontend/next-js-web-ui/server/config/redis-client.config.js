@@ -21,5 +21,5 @@ const configureRedisClient = () => {
 }
 
 module.exports = {
-  configureRedis: configureRedisClient,
+  configureRedisClient,
 }
