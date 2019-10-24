@@ -1,44 +1,16 @@
 const express = require('express')
-const session = require('express-session')
-const actuator = require('express-actuator')
 
 const next = require('next')
 
+const { configureActuator } = require('./server/config/actuator.config')
 const { configurePassport } = require('./server/config/passport.config')
+const { configureSession } = require('./server/config/session.config')
 
 const secured = require('./server/middleware/secured.middleware')
 const unsecured = require('./server/middleware/unsecured.middleware')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-
-const sessionConfig = {
-  secret: process.env.COOKIE_SECRET || 'random-secret *laughs*',
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
-}
-
-const actuatorConfig = {
-  basePath: '/actuator',
-  infoGitMode: 'simple',
-}
-
-if (!dev) {
-  sessionConfig.cookie.secure = true
-
-  const redis = require('redis').createClient({
-    url: `${process.env.REDIS_PROTOCOL || 'redis'}://${
-      process.env.REDIS_USER
-    }:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${
-      process.env.REDIS_PORT
-    }/${process.env.REDIS_DB || ''}`,
-  })
-  const RedisStore = require('connect-redis')(session)
-  sessionConfig.store = new RedisStore({ client: redis })
-
-  actuatorConfig.infoGitMode = 'full'
-}
 
 const applicationName = process.env.APP_NAME || 'Next.js Webapplication'
 
@@ -53,11 +25,11 @@ app.prepare().then(() => {
 
   const passport = configurePassport()
 
-  server.use(session(sessionConfig))
+  server.use(configureSession(dev))
   server.use(passport.initialize())
   server.use(passport.session())
   server.use(bindContextfulMiddleware(logger))
-  server.use(actuator(actuatorConfig))
+  server.use(configureActuator())
 
   const apiRouter = require('./server/router/api.router')
   const authRouter = require('./server/router/auth.router')
