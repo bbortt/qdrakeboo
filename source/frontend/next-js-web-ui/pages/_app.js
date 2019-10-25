@@ -1,87 +1,65 @@
-// @flow
-import React from 'react'
+import React from 'react';
 
-import App from 'next/app'
-import Head from 'next/head'
+import App from 'next/app';
+import config from 'next/config'
+import Router from 'next/router';
 
-import { Provider } from 'react-redux'
-import withRedux from 'next-redux-wrapper'
-import withReduxSaga from 'next-redux-saga'
-import configureStore from '../app/configureStore'
+import {Auth0Provider} from 'use-auth0-hooks';
 
-import requestPermissions from '../app/util/api/requestPermissions'
+import fetch from 'isomorphic-unfetch'
 
-import { completeUserInfo, backendUnreachable } from '../app/state/action'
-
-import type { Page } from '../app/domain/Page.type'
-import type { Context } from '../app/domain/Context.type'
-
-import BackendUnreachable from '../app/components/layout/error/BackendUnreachable'
-import AlertList from '../app/components/layout/callout/AlertList'
-import Header from '../app/components/layout/header/Header'
-
-require('./_app.scss')
-
-export class ReduxContextAwareAppClass extends App {
-  static async getInitialProps({
-    Component,
-    ctx,
-  }: {
-    Component: Page<any>,
-    ctx: Context,
-  }) {
-    const { isServer, query, store } = ctx
-
-    const permissions = await requestPermissions(ctx)
-    if (!Array.isArray(permissions)) {
-      if (permissions === 500) {
-        store.dispatch(backendUnreachable())
-        return { isServer }
-      }
-    } else {
-      store.dispatch(completeUserInfo(query.userInfo, permissions))
-    }
-
-    let pageProps = {}
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({ ctx })
-    }
-    pageProps = { ...pageProps }
-
-    return { isServer, pageProps }
+const onRedirectCallback = appState => {
+  if (appState && appState.returnTo) {
+    Router.push({
+      pathname: appState.returnTo.pathname,
+      query: appState.returnTo.query
+    })
   }
+};
 
-  componentDidMount = () => {
-    require('foundation-sites')
-    // $FlowFixMe
-    $(document).foundation()
-  }
+const onAccessTokenError = (err, options) => {
+  console.error('Failed to retrieve access token: ', err);
+};
 
+const onLoginError = (err) => {
+  Router.push({
+    pathname: '/oops.html',
+    query: {
+      message: err.error_description || err.message
+    }
+  })
+};
+
+const onRedirecting = () => {
+  return (
+      <div>
+        <h1>Signing you in</h1>
+        <p>
+          In order to access this page you will need to sign in.
+          Please wait while we redirect you to the login page...
+        </p>
+      </div>
+  );
+};
+
+export class RootClass extends App {
   render() {
-    const { Component, pageProps, store } = this.props
+    const {Component, pageProps} = this.props;
+    const {publicRuntimeConfig} = config();
 
     return (
-      <div className="app">
-        <Head>
-          <title>Qdrakeboo</title>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-        </Head>
-
-        <Provider store={store}>
-          <BackendUnreachable />
-          <AlertList />
-          <Header />
-
+        <Auth0Provider
+            domain={publicRuntimeConfig.auth0.domain}
+            clientId={publicRuntimeConfig.auth0.clientId}
+            redirectUri={publicRuntimeConfig.auth0.callbackUrl}
+            onLoginError={onLoginError}
+            onAccessTokenError={onAccessTokenError}
+            onRedirecting={onRedirecting}
+            onRedirectCallback={onRedirectCallback}>
           <Component {...pageProps} />
-        </Provider>
-      </div>
-    )
+        </Auth0Provider>
+    );
   }
 }
 
-export default withRedux(configureStore)(
-  withReduxSaga(ReduxContextAwareAppClass)
-)
+export default RootClass

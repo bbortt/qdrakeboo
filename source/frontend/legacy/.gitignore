@@ -90,6 +90,3 @@ server-runtime.config.js
 
 # DynamoDB Local files
 .dynamodb/
-
-# Well known data
-public/.well-known.json

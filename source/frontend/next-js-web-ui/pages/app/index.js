@@ -1,16 +1,18 @@
-// @flow
-import React from 'react'
+import React from 'react';
 
-type AppProps = {}
+import {withAuth, withLoginRequired} from 'use-auth0-hooks';
 
-export class AppClass extends React.Component<AppProps> {
-  render() {
-    return (
-      <div className="app">
-        <h1>Welcome to Qdrakeboo</h1>
+const AppClass = ({auth}) => {
+  const {user} = auth;
+  return (
+      <div>
+        <h1>Profile</h1>
+        <p>This is the profile page.</p>
+        <pre>{JSON.stringify(user || {}, null, 2)}</pre>
       </div>
-    )
-  }
+  );
 }
 
-export default AppClass
+export default withLoginRequired(
+    withAuth(AppClass)
+);
