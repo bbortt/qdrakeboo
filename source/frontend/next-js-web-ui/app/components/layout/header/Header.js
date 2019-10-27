@@ -1,87 +1,86 @@
+// @flow
 import React from 'react'
 
-import Link from "next/link";
+import Link from 'next/link'
 
-import {useAuth, withAuth} from "use-auth0-hooks";
+import { useAuth, withAuth } from 'use-auth0-hooks'
 
-import ActiveMenuItem from "./ActiveMenuItem";
+import ActiveMenuItem from './ActiveMenuItem'
 
 require('./header.scss')
 
-export const HeaderClass = ({auth}) => {
+export const HeaderClass = ({ auth }) => {
   if (!auth.isAuthenticated) {
-    return null;
+    return null
   }
 
-  const {logout} = useAuth()
+  const { logout } = useAuth()
 
   return (
-      <header>
-        <div
-            className="title-bar"
-            data-responsive-toggle="qdrakeboo-main-menu"
-            data-hide-for="medium"
-            style={{display: 'none'}}
-        >
-          <button
-              type="button"
-              className="menu-icon"
-              aria-label="Open menu"
-              data-toggle="qdrakeboo-main-menu"
-          />
-          <div className="title-bar-title">Menu</div>
+    <header>
+      <div
+        className="title-bar"
+        data-responsive-toggle="qdrakeboo-main-menu"
+        data-hide-for="medium"
+        style={{ display: 'none' }}
+      >
+        <button
+          type="button"
+          className="menu-icon"
+          aria-label="Open menu"
+          data-toggle="qdrakeboo-main-menu"
+        />
+        <div className="title-bar-title">Menu</div>
+      </div>
+
+      <div
+        className="top-bar"
+        id="qdrakeboo-main-menu"
+        data-animate="fade-in fade-out"
+        style={{ display: 'none' }}
+      >
+        <div className="top-bar-left">
+          <ul className="menu">
+            <li className="menu-text">
+              <Link href="/app">
+                <a>Qdrakeboo</a>
+              </Link>
+            </li>
+
+            <li>
+              <input type="search" placeholder="Search" />
+            </li>
+            <li>
+              <button
+                type="button"
+                className="button"
+                aria-label="Search movies"
+              >
+                Search
+              </button>
+            </li>
+          </ul>
         </div>
 
-        <div
-            className="top-bar"
-            id="qdrakeboo-main-menu"
-            data-animate="fade-in fade-out"
-            style={{display: 'none'}}
-        >
-          <div className="top-bar-left">
-            <ul className="menu">
-              <li className="menu-text">
-                <Link href="/app">
-                  <a>Qdrakeboo</a>
-                </Link>
-              </li>
-
-              <li>
-                <input type="search" placeholder="Search"/>
-              </li>
-              <li>
-                <button
-                    type="button"
-                    className="button"
-                    aria-label="Search movies"
-                >
-                  Search
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          <div className="top-bar-right">
-            <ul className="dropdown menu" data-dropdown-menu>
-              <li>
-                <a>Account</a>
-                <ul className="menu vertical">
-                  <li>
-                    <ActiveMenuItem href="app/account">
-                      <a>Settings</a>
-                    </ActiveMenuItem>
-                  </li>
-                  <li>
-                    <button onClick={logout}>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div className="top-bar-right">
+          <ul className="dropdown menu" data-dropdown-menu>
+            <li>
+              <a>Account</a>
+              <ul className="menu vertical">
+                <li>
+                  <ActiveMenuItem href="app/account">
+                    <a>Settings</a>
+                  </ActiveMenuItem>
+                </li>
+                <li>
+                  <button onClick={logout}>Logout</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </header>
+      </div>
+    </header>
   )
 }
 

@@ -6,12 +6,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development next",
     "build": "next build",
     "export": "next export",
+    "dev": "cross-env NODE_ENV=development next",
+    "lint:check": "eslint --print-config .eslintrc | eslint-config-prettier-check",
+    "flow": "flow check",
+    "flow:coverage": "flow coverage",
+    "flow:start": "flow",
+    "flow:status": "flow status",
+    "flow:stop": "flow stop",
+    "prettier": "prettier \"{app,pages,server,shared,test}/**/*.js\"",
+    "prettier:check": "npm run prettier -- --check",
+    "prettier:fix": "npm run prettier -- --write ",
     "preview": "ws -d out -p 3000 --static.extensions html -o",
-    "start": "next start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "upgrade-interactive": "npm-check --update"
   },
   "repository": {
     "type": "git",
@@ -36,7 +45,24 @@
     "webpack": "^4.41.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/register": "^7.6.2",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^5.2.0",
     "cross-env": "^6.0.3",
-    "local-web-server": "^3.0.7"
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "flow-bin": "^0.110.1",
+    "local-web-server": "^3.0.7",
+    "npm-check": "^5.9.0",
+    "prettier": "^1.18.2"
   }
 }

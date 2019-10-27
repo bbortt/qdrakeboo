@@ -1,0 +1,10 @@
+{
+  "presets": [
+    "next/babel",
+    "@babel/preset-flow"
+  ],
+  "plugins": [
+    "istanbul",
+    "@babel/plugin-proposal-export-default-from"
+  ]
+}
