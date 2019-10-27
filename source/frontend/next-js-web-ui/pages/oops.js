@@ -8,15 +8,18 @@ export const OopsClass = () => {
 
   return (
       <div>
-        <h1>Oops</h1>
-        <p>
-          An error occured when signing in!
-        </p>
-        <pre>
+        <div className="container">
+          <h1>Oops</h1>
+          <br/>
+          <p>
+            An error occured when signing in!
+          </p>
+          <pre>
         {message || 'Unknown Error'}
       </pre>
+        </div>
       </div>
   );
-}
+};
 
 export default OopsClass

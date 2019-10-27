@@ -1,19 +1,11 @@
 import React from 'react';
 
-import {withAuth, withLoginRequired} from 'use-auth0-hooks';
+import {withLoginRequired} from 'use-auth0-hooks';
 
-const AppClass = ({auth}) => {
-  const {user} = auth;
+const AppClass = () => (
+    <div className='app'>
+      <h1>Welcome to Qdrakeboo</h1>
+    </div>
+)
 
-  return (
-      <div>
-        <h1>Profile</h1>
-        <p>This is the profile page.</p>
-        <pre>{JSON.stringify(user || {}, null, 2)}</pre>
-      </div>
-  );
-}
-
-export default withLoginRequired(
-    withAuth(AppClass)
-);
+export default withLoginRequired(AppClass)

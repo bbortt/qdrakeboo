@@ -7,6 +7,8 @@ import axios from 'axios'
 
 import {Auth0Provider} from 'use-auth0-hooks';
 
+import Header from "../app/components/layout/header/Header";
+
 const onRedirectCallback = appState => {
   if (appState && appState.returnTo) {
     Router.push({
@@ -41,21 +43,25 @@ const onRedirecting = () => {
   );
 };
 
+require('./_app.scss')
+
 export class RootClass extends App {
   static async getInitialProps({ctx}) {
-    if (ctx.req) {
+    if (process.env.NODE_ENV === 'development') {
       return {wellKnown: require('../public/.well-known.json')}
     }
 
-    const res = await axios.get('/.well-known-json');
-    console.log('fetch: ', res);
-    return {wellKnown: res}
+    return {wellKnown: await axios.get('/.well-known-json')}
+  }
+
+  componentDidMount = () => {
+    require('foundation-sites')
+    // $FlowFixMe
+    $(document).foundation()
   }
 
   render() {
     const {Component, pageProps, wellKnown} = this.props;
-
-    console.log('wellKnown: ', wellKnown);
 
     return (
         <Auth0Provider
@@ -66,7 +72,11 @@ export class RootClass extends App {
             onAccessTokenError={onAccessTokenError}
             onRedirecting={onRedirecting}
             onRedirectCallback={onRedirectCallback}>
-          <Component {...pageProps} />
+          <Header/>
+
+          <div className="root">
+            <Component {...pageProps} />
+          </div>
         </Auth0Provider>
     );
   }
