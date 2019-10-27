@@ -4,6 +4,7 @@ import {withAuth, withLoginRequired} from 'use-auth0-hooks';
 
 const AppClass = ({auth}) => {
   const {user} = auth;
+
   return (
       <div>
         <h1>Profile</h1>

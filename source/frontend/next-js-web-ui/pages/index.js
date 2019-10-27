@@ -17,21 +17,14 @@ export const IndexClass = () => {
         <div className="container">
           <h1>Welcome to Qdrakeboo</h1>
           <br/>
-          {isAuthenticated ? (<button
+          <button
               type="button"
               className="button"
               aria-label="Sign in"
               onClick={() => login()}
           >
-            Sign In
-          </button>) : (<button
-              type="button"
-              className="button"
-              aria-label="Sign in"
-              onClick={startApp}
-          >
-            Start
-          </button>)}
+            {isAuthenticated ? 'Start' : 'Sign In'}
+          </button>
         </div>
       </div>
   )

@@ -1,12 +1,11 @@
 import React from 'react';
 
 import App from 'next/app';
-import config from 'next/config'
 import Router from 'next/router';
 
-import {Auth0Provider} from 'use-auth0-hooks';
+import axios from 'axios'
 
-import fetch from 'isomorphic-unfetch'
+import {Auth0Provider} from 'use-auth0-hooks';
 
 const onRedirectCallback = appState => {
   if (appState && appState.returnTo) {
@@ -43,15 +42,26 @@ const onRedirecting = () => {
 };
 
 export class RootClass extends App {
+  static async getInitialProps({ctx}) {
+    if (ctx.req) {
+      return {wellKnown: require('../public/.well-known.json')}
+    }
+
+    const res = await axios.get('/.well-known-json');
+    console.log('fetch: ', res);
+    return {wellKnown: res}
+  }
+
   render() {
-    const {Component, pageProps} = this.props;
-    const {publicRuntimeConfig} = config();
+    const {Component, pageProps, wellKnown} = this.props;
+
+    console.log('wellKnown: ', wellKnown);
 
     return (
         <Auth0Provider
-            domain={publicRuntimeConfig.auth0.domain}
-            clientId={publicRuntimeConfig.auth0.clientId}
-            redirectUri={publicRuntimeConfig.auth0.callbackUrl}
+            domain={wellKnown.auth0.domain}
+            clientId={wellKnown.auth0.clientId}
+            redirectUri={wellKnown.auth0.callbackUrl}
             onLoginError={onLoginError}
             onAccessTokenError={onAccessTokenError}
             onRedirecting={onRedirecting}
