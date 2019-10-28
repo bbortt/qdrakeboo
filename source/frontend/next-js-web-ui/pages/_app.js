@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import { Auth0Provider } from 'use-auth0-hooks'
 
+import Foundation from '../app/components/layout/foundation'
 import Header from '../app/components/layout/header/Header'
 
 const onRedirectCallback = appState => {
@@ -56,12 +57,6 @@ export class RootClass extends App {
     return { wellKnown: await axios.get('/.well-known-json') }
   }
 
-  componentDidMount = () => {
-    require('foundation-sites')
-    // $FlowFixMe
-    $(document).foundation()
-  }
-
   render() {
     const { Component, pageProps, wellKnown } = this.props
 
@@ -75,6 +70,7 @@ export class RootClass extends App {
         onRedirecting={onRedirecting}
         onRedirectCallback={onRedirectCallback}
       >
+        <Foundation />
         <Header />
 
         <div className="root">
