@@ -4,9 +4,9 @@ import React from 'react'
 import App from 'next/app'
 import Router from 'next/router'
 
-import axios from 'axios'
-
 import { Auth0Provider } from 'use-auth0-hooks'
+
+import loadWellKnown from '../app/util/load-well-known'
 
 import Foundation from '../app/components/layout/foundation'
 import Header from '../app/components/layout/header/Header'
@@ -36,11 +36,7 @@ const onLoginError = err => {
 const onRedirecting = () => {
   return (
     <div>
-      <h1>Signing you in</h1>
-      <p>
-        In order to access this page you will need to sign in. Please wait while
-        we redirect you to the login page...
-      </p>
+      <p>Signing you in..</p>
     </div>
   )
 }
@@ -48,17 +44,23 @@ const onRedirecting = () => {
 require('./_app.scss')
 
 export class RootClass extends App {
-  // TODO: This does not work with export
-  static async getInitialProps({ ctx }) {
-    if (process.env.NODE_ENV === 'development') {
-      return { wellKnown: require('../public/.well-known.json') }
-    }
+  constructor(props) {
+    super(props)
 
-    return { wellKnown: await axios.get('/.well-known-json') }
+    this.state = { wellKnown: false }
+
+    loadWellKnown().then(response =>
+      this.setState({ wellKnown: response.data })
+    )
   }
 
   render() {
-    const { Component, pageProps, wellKnown } = this.props
+    const { Component, pageProps } = this.props
+    const { wellKnown } = this.state
+
+    if (!wellKnown) {
+      return <p>loading..</p>
+    }
 
     return (
       <Auth0Provider

@@ -8,6 +8,7 @@
   "scripts": {
     "build": "next build",
     "export": "next export",
+    "fullbuild": "npm run build && npm run export",
     "dev": "cross-env NODE_ENV=development next",
     "lint:check": "eslint --print-config .eslintrc | eslint-config-prettier-check",
     "flow": "flow check",
