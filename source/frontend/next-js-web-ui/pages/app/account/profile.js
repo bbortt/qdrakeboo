@@ -3,9 +3,11 @@ import React from 'react'
 
 import { withAuth } from 'use-auth0-hooks'
 
+import type { AuthType } from '../../../app/domain/Auth.type'
+
 import AccountContainer from '../../../app/components/account/AccountContainer'
 
-export const ProfileClass = ({ auth }) => {
+export const ProfileClass = ({ auth }: { auth: AuthType }) => {
   const { user } = auth
   const { name } = user
 

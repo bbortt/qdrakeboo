@@ -16,6 +16,7 @@ const stub = {
 
 export default () => {
   if (process.env.NODE_ENV === 'development') {
+    // $FlowFixMe
     return Promise.resolve({ data: require('../../public/.well-known.json') })
   }
 

@@ -1,9 +1,12 @@
 // @flow
 import React from 'react'
+import type { Node } from 'react'
 
 import Router from 'next/router'
 
 import { Auth0Provider } from 'use-auth0-hooks'
+
+import type { WellKnownType } from '../../domain/WellKnown.type'
 
 import loadWellKnown from '../../util/loadWellKnown'
 
@@ -37,11 +40,18 @@ const onRedirecting = () => {
   )
 }
 
-class ContextfuldAuth0Provider extends React.Component {
-  constructor(props) {
+type ContextfuldAuth0ProviderProps = {
+  children: Node,
+}
+
+class ContextfuldAuth0Provider extends React.Component<
+  ContextfuldAuth0ProviderProps,
+  { wellKnown: WellKnownType }
+> {
+  constructor(props: ContextfuldAuth0ProviderProps) {
     super(props)
 
-    this.state = { wellKnown: false }
+    this.state = { wellKnown: {} }
 
     loadWellKnown().then(response =>
       this.setState({ wellKnown: response.data })
@@ -52,7 +62,7 @@ class ContextfuldAuth0Provider extends React.Component {
     const { children } = this.props
     const { wellKnown } = this.state
 
-    if (!wellKnown) {
+    if (Object.keys(wellKnown).length === 0) {
       return <p>loading..</p>
     }
 

@@ -2,11 +2,11 @@
 .*/coverage/.*
 .*/deprecated/.*
 .*/.gradle/.*
-.*/public/.*
 
 [include]
 .*/components/.*
 .*/pages/.*
+.*/public/*.
 
 [libs]
 

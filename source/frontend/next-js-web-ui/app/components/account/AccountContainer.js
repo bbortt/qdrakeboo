@@ -1,9 +1,10 @@
 // @flow
-import * as React from 'react'
+import React from 'react'
+import type { Node } from 'react'
 
 import AccountNavigation from './AccountNavigation'
 
-export const AccountContainerClass = ({ children }) => (
+export const AccountContainerClass = ({ children }: { children: Node }) => (
   <div className="account grid-container">
     <div className="grid-x">
       <div className="cell medium-9 medium-offset-3">
