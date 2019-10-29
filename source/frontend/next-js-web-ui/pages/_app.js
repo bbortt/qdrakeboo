@@ -7,8 +7,8 @@ import Router from 'next/router'
 import { Auth0Provider } from 'use-auth0-hooks'
 
 import loadWellKnown from '../app/util/load-well-known'
+import updateFoundation from '../app/util/update-foundation'
 
-import Foundation from '../app/components/layout/foundation'
 import Header from '../app/components/layout/header/Header'
 
 const onRedirectCallback = appState => {
@@ -20,15 +20,15 @@ const onRedirectCallback = appState => {
   }
 }
 
-const onAccessTokenError = (err, options) => {
-  console.error('Failed to retrieve access token: ', err)
+const onAccessTokenError = error => {
+  console.error('Failed to retrieve access token: ', error)
 }
 
-const onLoginError = err => {
+const onLoginError = error => {
   Router.push({
     pathname: '/oops.html',
     query: {
-      message: err.error_description || err.message,
+      message: error.error_description || error.message,
     },
   })
 }
@@ -54,6 +54,10 @@ export class RootClass extends App {
     )
   }
 
+  componentDidMount() {
+    updateFoundation()
+  }
+
   render() {
     const { Component, pageProps } = this.props
     const { wellKnown } = this.state
@@ -72,7 +76,6 @@ export class RootClass extends App {
         onRedirecting={onRedirecting}
         onRedirectCallback={onRedirectCallback}
       >
-        <Foundation />
         <Header />
 
         <div className="root">
