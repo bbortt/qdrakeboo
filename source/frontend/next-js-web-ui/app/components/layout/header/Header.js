@@ -6,7 +6,7 @@ import { withRouter } from 'next/router'
 
 import { withAuth } from 'use-auth0-hooks'
 
-import updateFoundation from '../../../util/update-foundation'
+import updateFoundation from '../../../util/updateFoundation'
 
 import ActiveMenuItem from './ActiveMenuItem'
 
