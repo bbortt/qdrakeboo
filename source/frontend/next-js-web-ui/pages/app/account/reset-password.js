@@ -11,7 +11,7 @@ import { resetPassword } from '../../../app/state/action'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
 import type { ReduxState } from '../../../app/state/reducer'
-import updateFoundation from "../../../app/util/updateFoundation";
+import updateFoundation from '../../../app/util/updateFoundation'
 
 require('./reset-password.scss')
 
