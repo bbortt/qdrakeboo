@@ -63,6 +63,7 @@ class ContextfuldAuth0Provider extends React.Component<
     const { wellKnown } = this.state
 
     if (Object.keys(wellKnown).length === 0) {
+      // TODO: Loading animation
       return <p>loading..</p>
     }
 

@@ -11,6 +11,7 @@ import { resetPassword } from '../../../app/state/action'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
 import type { ReduxState } from '../../../app/state/reducer'
+import updateFoundation from "../../../app/util/updateFoundation";
 
 require('./reset-password.scss')
 
@@ -104,7 +105,6 @@ export class ResetPasswordClass extends React.Component<
     }
 
     if (confirmation !== '' && password !== confirmation) {
-      console.log('no match')
       formErrors.push('Password and confirmation do not match!')
     }
 

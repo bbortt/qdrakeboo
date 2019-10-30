@@ -4,8 +4,6 @@ import React from 'react'
 import App from 'next/app'
 
 import { Provider } from 'react-redux'
-import withRedux from 'next-redux-wrapper'
-import withReduxSaga from 'next-redux-saga'
 import configureStore from '../app/configureStore'
 
 import updateFoundation from '../app/util/updateFoundation'
@@ -15,13 +13,15 @@ import Header from '../app/components/layout/header/Header'
 
 require('./_app.scss')
 
+const store = configureStore()
+
 export class RootClass extends App {
   componentDidMount() {
     updateFoundation()
   }
 
   render() {
-    const { Component, pageProps, store } = this.props
+    const { Component, pageProps } = this.props
 
     return (
       <ContextfuldAuth0Provider>
@@ -37,4 +37,4 @@ export class RootClass extends App {
   }
 }
 
-export default withRedux(configureStore)(withReduxSaga(RootClass))
+export default RootClass
