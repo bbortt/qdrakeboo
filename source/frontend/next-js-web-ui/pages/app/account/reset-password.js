@@ -2,15 +2,16 @@
 import React from 'react'
 
 import { Store, Unsubscribe } from 'redux'
-import { debounce } from 'lodash'
-import subscribeToReduxStore from '../../../app/util/subscribeToReduxStore'
+import debounce from 'lodash/debounce'
+import subscribeToReduxStore from '../../../app/util/redux/subscribeToReduxStore'
 
-import withReduxContext from '../../../app/util/hoc/withReduxContext'
+import withReduxContext from '../../../app/util/redux/withReduxContext'
 
 import { resetPassword } from '../../../app/state/action'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
 import type { ReduxState } from '../../../app/state/reducer'
+import updateFoundation from '../../../app/util/updateFoundation'
 
 require('./reset-password.scss')
 
@@ -96,7 +97,8 @@ export class ResetPasswordClass extends React.Component<
   }
 
   checkFormErrors = () => {
-    const { password, confirmation, formErrors } = this.state
+    const { password, confirmation } = this.state
+    const formErrors = []
 
     if (password !== '' && password.length < 8) {
       formErrors.push('Password must be at least 8 characters in length!')
@@ -106,7 +108,8 @@ export class ResetPasswordClass extends React.Component<
       formErrors.push('Password and confirmation do not match!')
     }
 
-    const submitDisabled = password === '' || formErrors.length !== 0
+    const submitDisabled =
+      password === '' || confirmation === '' || formErrors.length !== 0
 
     this.setState({ formErrors, submitDisabled })
   }

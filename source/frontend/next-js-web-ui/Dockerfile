@@ -1,18 +1,17 @@
-# Attention: Because of the local npm dependency (contextful-winston-logger)
-# you will have to build the container in [PROJECT ROOT]/
+# Attention: Because of local dependencies we build all
+# projects from the [PROJECT ROOT]/
 # `$ docker build -f source/frontend/next-js-web-ui/Dockerfile .`
-FROM node:12.3-alpine
+FROM nginx:1.17.5-alpine
 MAINTAINER Timon Borter <bbortt.github.io>
 
-WORKDIR /home/node
-CMD [ "npm", "start" ]
+EXPOSE 4000
 
-EXPOSE 3000
+COPY source/frontend/next-js-web-ui/out /usr/share/nginx/html
+COPY source/frontend/next-js-web-ui/.docker/nginx.conf /etc/nginx/nginx.conf
+COPY source/frontend/next-js-web-ui/.docker/site.conf /etc/nginx/conf.d/default.conf
 
-COPY source/contextful-winston-logger contextful-winston-logger
-COPY source/frontend/next-js-web-ui ./
-RUN sed -i -e 's/file:..\/..\/contextful-winston-logger/file:contextful-winston-logger/g' package*.json && \
-    npm install && \
-    npm run build
+RUN touch /var/run/nginx.pid && \
+  chown -R nginx:nginx /var/run/nginx.pid && \
+  chown -R nginx:nginx /var/cache/nginx
 
-USER node
+USER nginx

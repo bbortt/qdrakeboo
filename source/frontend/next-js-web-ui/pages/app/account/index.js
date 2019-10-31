@@ -1,24 +1,20 @@
 // @flow
 import React from 'react'
 
-import contextfulRedirect from '../../../app/util/contextfulRedirect'
+import Router, { withRouter } from 'next/router'
 
-import type { Context } from '../../../app/domain/Context.type'
+import type { RouterType } from '../../../app/domain/Router.type'
 
 const AUTOMATIC_REDIRECT = 'profile'
 
-type AccountProps = {}
+export const AccountClass = ({ router }: { router: RouterType }) => {
+  const { pathname } = router
 
-class AccountClass extends React.Component<AccountProps> {
-  static async getInitialProps({ ctx }: { ctx: Context }) {
-    const { pathname } = ctx
-
-    return contextfulRedirect(ctx, `${pathname}/${AUTOMATIC_REDIRECT}`)
+  if (typeof window !== 'undefined') {
+    Router.push(`${pathname}/${AUTOMATIC_REDIRECT}`)
   }
 
-  render() {
-    return null
-  }
+  return null
 }
 
-export default AccountClass
+export default withRouter(AccountClass)

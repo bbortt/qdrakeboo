@@ -1,44 +1,32 @@
 // @flow
 import React from 'react'
 
-import Head from 'next/head'
-import Router from 'next/router'
-
-type IndexProps = {}
+import { useAuth } from 'use-auth0-hooks'
 
 require('./index.scss')
 
-export class IndexClass extends React.Component<IndexProps> {
-  signIn() {
-    Router.push('/login')
-  }
+export const IndexClass = () => {
+  const { isAuthenticated, login } = useAuth()
 
-  render() {
-    return (
-      <div className="index">
-        <Head>
-          <title>Qdrakeboo</title>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-        </Head>
-
-        <div className="container">
-          <h1>Welcome to Qdrakeboo</h1>
-          <br />
-          <button
-            type="button"
-            className="button"
-            aria-label="Sign in"
-            onClick={this.signIn}
-          >
-            Sign In
-          </button>
-        </div>
+  return (
+    <div className="index">
+      <div className="container">
+        <h1>Qdrakeboo</h1>
+        <h4>
+          <small>The streaming service for geeks!</small>
+        </h4>
+        <br />
+        <button
+          type="button"
+          className="button"
+          aria-label="Sign in"
+          onClick={login}
+        >
+          {isAuthenticated ? 'Start' : 'Sign In'}
+        </button>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default IndexClass

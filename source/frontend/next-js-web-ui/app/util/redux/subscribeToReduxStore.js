@@ -1,6 +1,6 @@
 // @flow
 import { Store, Unsubscribe } from 'redux'
-import type { ReduxState } from '../state/reducer'
+import type { ReduxState } from '../../state/reducer'
 
 export default (
   store: Store<ReduxState>,
