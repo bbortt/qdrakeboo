@@ -1,27 +1,23 @@
 // @flow
 import React from 'react'
 
-import { connect } from 'react-redux'
+import { withAuth } from 'use-auth0-hooks'
+
+import type { AuthType } from '../../../app/domain/Auth.type'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
-import type { UserInfo } from '../../../app/domain/UserInfo.type'
 
-type ProfileProps = {
-  userInfo: UserInfo,
+export const ProfileClass = ({ auth }: { auth: AuthType }) => {
+  const { user } = auth
+  const { name } = user
+
+  return (
+    <AccountContainer>
+      <div className="profile">
+        <h2>Hi {name}</h2>
+      </div>
+    </AccountContainer>
+  )
 }
 
-export class ProfileClass extends React.Component<ProfileProps> {
-  render() {
-    const { userInfo } = this.props
-
-    return (
-      <AccountContainer>
-        <div className="profile">
-          <h2>Hi {userInfo.displayName}</h2>
-        </div>
-      </AccountContainer>
-    )
-  }
-}
-
-export default connect(({ userInfo }) => userInfo)(ProfileClass)
+export default withAuth(ProfileClass)

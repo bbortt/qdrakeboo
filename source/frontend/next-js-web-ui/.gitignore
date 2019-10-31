@@ -90,3 +90,9 @@ server-runtime.config.js
 
 # DynamoDB Local files
 .dynamodb/
+
+# Exported static pages
+out/
+
+# Well known data
+public/.well-known.json

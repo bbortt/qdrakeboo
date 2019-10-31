@@ -5,13 +5,10 @@ plugins {
 
 group 'io.github.bbortt.qdrakeboo.federation'
 
-dependencies {
-    project(':source:contextful-winston-logger')
-}
-
 clean {
     delete '.next'
     delete 'node_modules'
+    delete 'out'
 }
 
 node {
@@ -19,10 +16,16 @@ node {
     download = true
 }
 
-npmInstall.dependsOn ':source:contextful-winston-logger:build'
+task test(type: NpmTask, dependsOn: npmInstall) {
+    args = ['run', 'coverage']
+}
 
-task bundle(type: NpmTask, dependsOn: npmInstall) {
-    args = ['run', 'build']
+task bundle(type: NpmTask, dependsOn: test) {
+    args = ['run', 'fullbuild']
+}
+
+task export(type: NpmTask, dependsOn: bundle) {
+    args = ['run', 'export']
 }
 
 task flow(type: NpmTask, dependsOn: npmInstall) {
@@ -33,9 +36,5 @@ task lint(type: NpmTask, dependsOn: flow) {
     args = ['run', 'prettier:check']
 }
 
-task test(type: NpmTask, dependsOn: lint) {
-    args = ['run', 'coverage']
-}
-
-assemble.dependsOn bundle
-check.dependsOn test
+assemble.dependsOn export
+check.dependsOn lint
