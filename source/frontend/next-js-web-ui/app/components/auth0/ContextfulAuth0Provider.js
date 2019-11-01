@@ -13,13 +13,14 @@ import loadWellKnown from '../../util/loadWellKnown'
 const onRedirectCallback = appState => {
   if (appState && appState.returnTo) {
     Router.push({
-      pathname: appState.returnTo.pathname,
+      pathname: ,
       query: appState.returnTo.query,
     })
   }
 }
 
 const onAccessTokenError = error => {
+  // TODO: Dispatch alert?
   console.error('Failed to retrieve access token: ', error)
 }
 

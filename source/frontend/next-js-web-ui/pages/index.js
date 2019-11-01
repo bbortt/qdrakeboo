@@ -6,7 +6,7 @@ import { useAuth } from 'use-auth0-hooks'
 require('./index.scss')
 
 export const IndexClass = () => {
-  const { isAuthenticated, login } = useAuth()
+  const { isAuthenticated, isLoading, login } = useAuth()
 
   return (
     <div className="index">
@@ -20,7 +20,7 @@ export const IndexClass = () => {
           type="button"
           className="button"
           aria-label="Sign in"
-          onClick={login}
+          onClick={isLoading ? () => {} : login}
         >
           {isAuthenticated ? 'Start' : 'Sign In'}
         </button>

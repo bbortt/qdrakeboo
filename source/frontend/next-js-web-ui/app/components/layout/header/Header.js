@@ -23,11 +23,13 @@ export const HeaderClass = ({
   router: RouterType,
 }) => {
   const { pathname } = router
-  const { isAuthenticated, logout } = auth
+  const { logout } = auth
 
-  if (pathname !== '/' && isAuthenticated) {
-    updateFoundation()
+  if (pathname === '/') {
+    return null
   }
+
+  updateFoundation()
 
   return (
     <header>

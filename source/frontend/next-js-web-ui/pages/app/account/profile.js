@@ -8,7 +8,12 @@ import type { AuthType } from '../../../app/domain/Auth.type'
 import AccountContainer from '../../../app/components/account/AccountContainer'
 
 export const ProfileClass = ({ auth }: { auth: AuthType }) => {
-  const { user } = auth
+  const { isAuthenticated, user } = auth
+
+  if (!isAuthenticated) {
+    return null
+  }
+
   const { name } = user
 
   return (
