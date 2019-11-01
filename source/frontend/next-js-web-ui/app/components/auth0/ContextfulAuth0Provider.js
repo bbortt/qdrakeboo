@@ -13,7 +13,7 @@ import loadWellKnown from '../../util/loadWellKnown'
 const onRedirectCallback = appState => {
   if (appState && appState.returnTo) {
     Router.push({
-      pathname: ,
+      pathname: appState.returnTo.pathname,
       query: appState.returnTo.query,
     })
   }
