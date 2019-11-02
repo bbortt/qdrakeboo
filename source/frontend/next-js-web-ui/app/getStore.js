@@ -28,7 +28,9 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware)
 }
 
-export default (initialState: ReduxState = reduxState): StoreWithSaga => {
+const configureStore = (
+  initialState: ReduxState = reduxState
+): StoreWithSaga => {
   const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(
@@ -39,6 +41,16 @@ export default (initialState: ReduxState = reduxState): StoreWithSaga => {
 
   if (typeof window !== 'undefined') {
     store.sagaTask = sagaMiddleware.run(rootSaga)
+  }
+
+  return store
+}
+
+let store
+
+export default (): StoreWithSaga => {
+  if (!store) {
+    store = configureStore()
   }
 
   return store

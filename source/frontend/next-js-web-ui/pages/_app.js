@@ -4,7 +4,7 @@ import React from 'react'
 import App from 'next/app'
 
 import { Provider } from 'react-redux'
-import configureStore from '../app/configureStore'
+import getStore from '../app/getStore'
 
 import updateFoundation from '../app/util/updateFoundation'
 
@@ -12,8 +12,6 @@ import ContextfuldAuth0Provider from '../app/components/auth0/ContextfulAuth0Pro
 import Header from '../app/components/layout/header/Header'
 
 require('./_app.scss')
-
-const store = configureStore()
 
 export class RootClass extends App {
   componentDidMount() {
@@ -25,7 +23,7 @@ export class RootClass extends App {
 
     return (
       <ContextfuldAuth0Provider>
-        <Provider store={store}>
+        <Provider store={getStore()}>
           <Header />
 
           <div className="root">

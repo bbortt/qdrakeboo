@@ -40,7 +40,7 @@ function* resetPassword(action: ResetPasswordAction) {
 
       yield put(resetPasswordFailed(message))
     } else {
-      yield put(addErrorAlert(errorCode))
+      yield put(addErrorAlert(errorCode /* TODO: i18n code title */))
     }
   }
 }

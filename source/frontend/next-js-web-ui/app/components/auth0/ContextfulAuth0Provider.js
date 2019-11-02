@@ -2,7 +2,10 @@
 import React from 'react'
 import type { Node } from 'react'
 
-import Router from 'next/router'
+import Router, { withRouter } from 'next/router'
+
+import getStore from '../../getStore'
+import { addErrorAlert } from '../../state/action'
 
 import { Auth0Provider } from 'use-auth0-hooks'
 
@@ -20,8 +23,7 @@ const onRedirectCallback = appState => {
 }
 
 const onAccessTokenError = error => {
-  // TODO: Dispatch alert?
-  console.error('Failed to retrieve access token: ', error)
+  getStore().dispatch(addErrorAlert(error /* TODO: i18n code title */))
 }
 
 const onLoginError = error => {
@@ -43,6 +45,7 @@ const onRedirecting = () => {
 
 type ContextfuldAuth0ProviderProps = {
   children: Node,
+  pathname: string,
 }
 
 class ContextfuldAuth0Provider extends React.Component<
@@ -60,11 +63,15 @@ class ContextfuldAuth0Provider extends React.Component<
   }
 
   render() {
-    const { children } = this.props
+    const { children, pathname } = this.props
     const { wellKnown } = this.state
 
     if (Object.keys(wellKnown).length === 0) {
-      return children
+      if (pathname === '/') {
+        return children
+      }
+
+      return null
     }
 
     return (
@@ -83,4 +90,4 @@ class ContextfuldAuth0Provider extends React.Component<
   }
 }
 
-export default ContextfuldAuth0Provider
+export default withRouter(ContextfuldAuth0Provider)
