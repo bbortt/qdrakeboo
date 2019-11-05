@@ -3,16 +3,18 @@ import React from 'react'
 
 import { Store, Unsubscribe } from 'redux'
 import debounce from 'lodash/debounce'
+
+import { withLoginRequired } from 'use-auth0-hooks'
+
 import subscribeToReduxStore from '../../../app/util/redux/subscribeToReduxStore'
 import withReduxContext from '../../../app/util/redux/withReduxContext'
 
 import { resetPassword } from '../../../app/state/action'
 
-import { withLoginRequired } from 'use-auth0-hooks'
+import updateFoundation from '../../../app/util/updateFoundation'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
 import type { ReduxState } from '../../../app/state/reducer'
-import updateFoundation from "../../../app/util/updateFoundation";
 
 require('./reset-password.scss')
 
@@ -56,7 +58,7 @@ export class ResetPasswordClass extends React.Component<
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount=()=> {
+  componentDidMount = () => {
     updateFoundation('#reset-password')
   }
 

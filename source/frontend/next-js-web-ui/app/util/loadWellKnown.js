@@ -1,7 +1,9 @@
 // @flow
-import type { WellKnownType } from '../domain/WellKnown.type'
+import Router from 'next/router'
 
 import axios from 'axios'
+
+import type { WellKnownType } from '../domain/WellKnown.type'
 
 const stub = {
   auth0: {
@@ -18,7 +20,18 @@ const stub = {
 
 let wellKnown: WellKnownType = stub
 
-export const syncWellKnown = (): WellKnownType => wellKnown
+export const syncWellKnown = (): WellKnownType => {
+  if (wellKnown === stub) {
+    Router.push({
+      pathname: '/oops.html',
+      query: {
+        message: 'Something real bad happened!', // TODO: I18n error code
+      },
+    })
+  }
+
+  return wellKnown
+}
 
 export default async (): Promise<{ data: WellKnownType }> => {
   if (process.env.NODE_ENV === 'development') {

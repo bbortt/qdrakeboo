@@ -2,10 +2,11 @@
 let loaded = false
 const initialized = []
 
-export default (selector: string | null) => {
+export default (selector: ?string) => {
   if (typeof window !== 'undefined') {
     if (!loaded) {
       require('foundation-sites')
+      // $FlowFixMe
       $(document).foundation()
       loaded = !loaded
     }

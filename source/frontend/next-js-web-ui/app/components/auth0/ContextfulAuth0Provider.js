@@ -4,10 +4,10 @@ import type { Node } from 'react'
 
 import Router, { withRouter } from 'next/router'
 
+import { Auth0Provider } from 'use-auth0-hooks'
+
 import getStore from '../../getStore'
 import { addErrorAlert } from '../../state/action'
-
-import { Auth0Provider } from 'use-auth0-hooks'
 
 import type { WellKnownType } from '../../domain/WellKnown.type'
 
