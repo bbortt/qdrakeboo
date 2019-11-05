@@ -4,14 +4,15 @@ import React from 'react'
 import { Store, Unsubscribe } from 'redux'
 import debounce from 'lodash/debounce'
 import subscribeToReduxStore from '../../../app/util/redux/subscribeToReduxStore'
-
 import withReduxContext from '../../../app/util/redux/withReduxContext'
 
 import { resetPassword } from '../../../app/state/action'
 
+import { withLoginRequired } from 'use-auth0-hooks'
+
 import AccountContainer from '../../../app/components/account/AccountContainer'
 import type { ReduxState } from '../../../app/state/reducer'
-import updateFoundation from '../../../app/util/updateFoundation'
+import updateFoundation from "../../../app/util/updateFoundation";
 
 require('./reset-password.scss')
 
@@ -53,6 +54,10 @@ export class ResetPasswordClass extends React.Component<
     this.handleChange = this.handleChange.bind(this)
     this.checkFormErrors = debounce(this.checkFormErrors.bind(this), 500)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount=()=> {
+    updateFoundation('#reset-password')
   }
 
   componentWillUnmount = () => {
@@ -137,7 +142,7 @@ export class ResetPasswordClass extends React.Component<
 
     return (
       <AccountContainer>
-        <div className="reset-password">
+        <div id="reset-password">
           <h2>Reset Password</h2>
 
           <form onSubmit={this.handleSubmit}>
@@ -196,4 +201,4 @@ export class ResetPasswordClass extends React.Component<
   }
 }
 
-export default withReduxContext(ResetPasswordClass)
+export default withLoginRequired(withReduxContext(ResetPasswordClass))

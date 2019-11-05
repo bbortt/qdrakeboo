@@ -1,34 +1,22 @@
 // @flow
-import getConfig from 'next/config'
-
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
-const { publicRuntimeConfig } = getConfig()
+import { syncWellKnown } from '../util/loadWellKnown'
 
-let apolloClient = null
-
-const create = () => {
-  const isBrowser = typeof window !== 'undefined'
-
+const create = (): ApolloClient => {
   const httpLinkConfig = {
-    uri: isBrowser
-      ? `${publicRuntimeConfig.publicUrl}/api`
-      : `${publicRuntimeConfig.apiUrl}/graphql`,
+    uri: syncWellKnown().api.url,
     // credentials: 'same-origin', // TODO: Additional fetch() options like `credentials` or `headers`
     headers: {},
   }
 
-  if (isBrowser) {
-    httpLinkConfig.headers[
-      publicRuntimeConfig.apiForwardToHeaderName
-    ] = `${publicRuntimeConfig.apiUrl}/graphql`
-  }
+  const isDev = process.env.NODE_ENV === 'development'
 
   const apolloConfig = {
-    connectToDevTools: isBrowser,
-    ssrMode: !isBrowser,
+    connectToDevTools: isDev,
+    ssrMode: false,
     link: new HttpLink(httpLinkConfig),
     cache: new InMemoryCache().restore({}),
   }
@@ -36,7 +24,9 @@ const create = () => {
   return new ApolloClient(apolloConfig)
 }
 
-export default () => {
+let apolloClient = null
+
+export default (): ApolloClient => {
   if (typeof window === 'undefined') {
     return create()
   }
@@ -45,5 +35,5 @@ export default () => {
     apolloClient = create()
   }
 
-  return apolloClient
+  return Promise.resolve(apolloClient)
 }

@@ -46,7 +46,7 @@ const configureStore = (
   return store
 }
 
-let store
+let store = null
 
 export default (): StoreWithSaga => {
   if (!store) {

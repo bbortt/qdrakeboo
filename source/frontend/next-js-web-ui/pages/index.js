@@ -9,7 +9,7 @@ export const IndexClass = () => {
   const { isAuthenticated, isLoading, login } = useAuth()
 
   return (
-    <div className="index">
+    <div id="index">
       <div className="container">
         <h1>Qdrakeboo</h1>
         <h4>

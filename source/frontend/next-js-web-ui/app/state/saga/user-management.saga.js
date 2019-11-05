@@ -30,6 +30,8 @@ function* resetPassword(action: ResetPasswordAction) {
 
     yield put(resetPasswordSucceedAction())
   } catch (error) {
+    console.log('error: ', error)
+
     const errorCode = error.graphQLErrors[0].extensions.code
 
     if (errorCode === 'BAD_USER_INPUT') {

@@ -15,6 +15,7 @@ require('./_app.scss')
 
 export class RootClass extends App {
   componentDidMount() {
+    // TODO: "unfoundation"?
     updateFoundation()
   }
 
@@ -26,7 +27,7 @@ export class RootClass extends App {
         <Provider store={getStore()}>
           <Header />
 
-          <div className="root">
+          <div id="root">
             <Component {...pageProps} />
           </div>
         </Provider>
