@@ -35,5 +35,5 @@ export default (): ApolloClient => {
     apolloClient = create()
   }
 
-  return Promise.resolve(apolloClient)
+  return apolloClient
 }

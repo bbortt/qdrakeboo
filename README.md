@@ -3,7 +3,7 @@ Qdrakeboo
 
 The private streaming service for geeks.
 
-[![Travis CI](https://travis-ci.org/bbortt/qdrakeboo.svg?branch=master)](https://travis-ci.org/bbortt/qdrakeboo)
+[![Travis CI](https://travis-ci.com/bbortt/qdrakeboo.svg?branch=master)](https://travis-ci.com/bbortt/qdrakeboo)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bbortt_qdrakeboo&metric=alert_status)](https://sonarcloud.io/dashboard?id=bbortt_qdrakeboo)
 [![codecov](https://codecov.io/gh/bbortt/qdrakeboo/branch/master/graph/badge.svg)](https://codecov.io/gh/bbortt/qdrakeboo)
 [![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
