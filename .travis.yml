@@ -1,8 +1,8 @@
 language: java
 dist: trusty
 
-sudo: false
 install: true
+os: linux
 
 if: tag is blank
 
@@ -27,7 +27,7 @@ env:
     - secure: "hZ0+KC8Ih6HUTl6A1yVTlXDQd5CfAIqfVLhQa1M0U/yKSg6hDiapRUMm/CvXAeWkT842i/Ja0UuopXz+BRIqoWU4QbCDDO5hvwQZ7lQUeW4z5AgDZMYeEhahbUiHbsa0G7vg6Bfs2iUud1GSZmMDYVPJdiBJx8SuQBnrIc8teKoroYSpBCbxBi1HuNBGYv9MYs3mESv3PAyZlcBJE2q6m2fMElsgKI92XTJfl+LMVd7ldruBfGO86N4dmFdyFeOuofkHtMnLjB10W3FujRCNQ+CcVrEYmHCzICFSUWeSpI8ItD6f0ZDw+IOxcdBGEOAJqp5qZn7V3y/LjWSX9Umo74P32ncoErjz4GID6YiWyo5mvG75peT3zfcGvYuf9DU/3NTl/Gp9bEoJYbaT9epGS04aEdGtpxTiHCh2DoqIWcpzxdzOler0BtERvpHcpeAdYY7+ID5b+tyuOT1DUVO2epb/2q5OtGcIFF8fAvprYGeAPhM3lcKbiXaNfNZZ+8usFBJ4GlyvLGiMKF5rZ6F/OCxcIYLJRiBGhLgcREMcYUTNKJITi4a0btgZyHLNWVsrXlG5cEgYZkFdvCqDVqiiWDp/Zzy/wyeoqGJksOC8MfKcSWW9CmUKmvUg2xDhrGtdYUuxuMnmJ7l5TgQl7bNYlvede7liQYIFKtw/Yi8X9NE="
     # ^^ DOCKER_PASSWORD
 
-matrix:
+jobs:
   include:
     # OracleJDK - Java 11 (lts, main build with Sonar)
     - env: MAIN_BUILD='true'
