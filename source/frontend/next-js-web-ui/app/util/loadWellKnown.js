@@ -9,13 +9,13 @@ const stub = {
   auth0: {
     domain: '',
     clientId: '',
-    callbackUrl: '',
+    callbackUrl: 'http://localhost:3000/app',
   },
   api: {
     audience: '',
-    url: '',
+    url: 'http://localhost:8080',
   },
-  logoutRedirect: '',
+  logoutRedirect: 'http://localhost:3000/goodbye',
 }
 
 let wellKnown: WellKnownType = stub
@@ -33,18 +33,19 @@ export const syncWellKnown = (): WellKnownType => {
   return wellKnown
 }
 
-export default async (): Promise<{ data: WellKnownType }> => {
-  if (process.env.NODE_ENV === 'development') {
-    // $FlowFixMe
-    wellKnown = require('../../public/.well-known.json')
-    return Promise.resolve({ data: wellKnown })
-  }
-
-  if (typeof window !== 'undefined') {
+export default async (): Promise<{ wellKnown: WellKnownType }> => {
+  if (process.env.NODE_ENV !== 'development' && typeof window !== 'undefined') {
     return axios.get('/.well-known.json').then(response => {
       wellKnown = response.data
+      return Promise.resolve({ wellKnown })
     })
   }
 
-  return Promise.resolve({ data: stub })
+  // $FlowFixMe
+  const context = require.context('../config', false, /^\.\/well-known\.json$/)
+  context.keys().forEach(key => {
+    wellKnown = context(key)
+  })
+
+  return Promise.resolve({ wellKnown })
 }

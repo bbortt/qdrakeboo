@@ -94,5 +94,5 @@ server-runtime.config.js
 # Exported static pages
 out/
 
-# Well known data
-public/.well-known.json
+# Configuration
+app/config/well-known.json

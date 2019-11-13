@@ -10,7 +10,7 @@
 set -ex
 
 git config --local user.name "Travis CI"
-git config --local user.email "builds@travis-ci.org"
+git config --local user.email "builds@travis-ci.com"
 
 git tag $TRAVIS_BUILD_NUMBER
 

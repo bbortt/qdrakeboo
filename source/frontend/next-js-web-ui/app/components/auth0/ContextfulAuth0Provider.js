@@ -57,9 +57,7 @@ class ContextfuldAuth0Provider extends React.Component<
 
     this.state = { wellKnown: {} }
 
-    loadWellKnown().then(response =>
-      this.setState({ wellKnown: response.data })
-    )
+    loadWellKnown().then(({ wellKnown }) => this.setState({ wellKnown }))
   }
 
   render() {

@@ -1,0 +1,12 @@
+{
+  "auth0": {
+    "domain": "",
+    "clientId": "",
+    "callbackUrl": "http://localhost:3000/app"
+  },
+  "api": {
+    "audience": "",
+    "url": "http://localhost:8080"
+  },
+  "logoutRedirect": "http://localhost:3000/goodbye"
+}
