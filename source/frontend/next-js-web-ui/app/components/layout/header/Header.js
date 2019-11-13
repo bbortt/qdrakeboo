@@ -23,16 +23,14 @@ export const HeaderClass = ({
   router: RouterType,
 }) => {
   const { pathname } = router
-  const { logout } = auth
+  const { isAuthenticated, logout } = auth
 
-  if (pathname === '/') {
-    return null
+  if (pathname !== '/' && isAuthenticated) {
+    updateFoundation('#nav-header')
   }
 
-  updateFoundation()
-
   return (
-    <header>
+    <header id="nav-header">
       <div
         className="title-bar"
         data-responsive-toggle="qdrakeboo-main-menu"

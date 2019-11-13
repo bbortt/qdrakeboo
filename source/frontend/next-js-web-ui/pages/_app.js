@@ -4,7 +4,7 @@ import React from 'react'
 import App from 'next/app'
 
 import { Provider } from 'react-redux'
-import configureStore from '../app/configureStore'
+import getStore from '../app/getStore'
 
 import updateFoundation from '../app/util/updateFoundation'
 
@@ -13,10 +13,9 @@ import Header from '../app/components/layout/header/Header'
 
 require('./_app.scss')
 
-const store = configureStore()
-
 export class RootClass extends App {
   componentDidMount() {
+    // TODO: "unfoundation"?
     updateFoundation()
   }
 
@@ -25,10 +24,10 @@ export class RootClass extends App {
 
     return (
       <ContextfuldAuth0Provider>
-        <Provider store={store}>
+        <Provider store={getStore()}>
           <Header />
 
-          <div className="root">
+          <div id="root">
             <Component {...pageProps} />
           </div>
         </Provider>

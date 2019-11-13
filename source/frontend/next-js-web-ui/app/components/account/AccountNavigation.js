@@ -4,7 +4,7 @@ import React from 'react'
 import ActiveMenuItem from '../layout/header/ActiveMenuItem'
 
 const AccountNavigationClass = () => (
-  <ul className="account-navigation vertical menu">
+  <ul id="account-navigation" className="vertical menu">
     <li>
       <ActiveMenuItem href="profile">
         <a>Profile</a>

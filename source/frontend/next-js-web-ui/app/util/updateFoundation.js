@@ -1,14 +1,20 @@
 // @flow
-let initialized = false
+let loaded = false
+const initialized = []
 
-export default () => {
+export default (selector: ?string) => {
   if (typeof window !== 'undefined') {
-    if (!initialized) {
+    if (!loaded) {
       require('foundation-sites')
-      initialized = !initialized
+      // $FlowFixMe
+      $(document).foundation()
+      loaded = !loaded
     }
 
-    // $FlowFixMe
-    $(document).foundation()
+    if (selector && !initialized.includes(selector)) {
+      // $FlowFixMe
+      $(selector).foundation()
+      initialized.push(selector)
+    }
   }
 }

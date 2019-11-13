@@ -10,7 +10,7 @@ export const OopsClass = () => {
   const { message } = router.query
 
   return (
-    <div className="oops">
+    <div id="oops">
       <div className="container">
         <h1>Oops</h1>
         <br />

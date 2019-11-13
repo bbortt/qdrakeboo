@@ -11,7 +11,7 @@ const backToHome = () => {
 
 export const GoodbyeClass = () => {
   return (
-    <div className="goodbye">
+    <div id="goodbye">
       <div className="container">
         <h1>Bye!</h1>
         <h4>
