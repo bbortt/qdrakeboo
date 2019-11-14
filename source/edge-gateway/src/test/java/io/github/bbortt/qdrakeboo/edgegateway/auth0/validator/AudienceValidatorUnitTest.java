@@ -28,7 +28,7 @@ public class AudienceValidatorUnitTest {
   @Test
   public void constructorInstantiatesClass() {
     assertThat(fixture).hasFieldOrPropertyWithValue("audience", TEST_AUDIENCE)
-        .extracting("oAuth2Error").first()
+        .extracting("oAuth2Error")
         .isEqualToComparingFieldByField(O_AUTH_2_ERROR);
   }
 
