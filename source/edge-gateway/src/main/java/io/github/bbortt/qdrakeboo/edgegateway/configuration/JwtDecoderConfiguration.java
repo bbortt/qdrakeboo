@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.JwtValidators;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoderJwkSupport;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 @Configuration
 public class JwtDecoderConfiguration {
@@ -25,7 +25,7 @@ public class JwtDecoderConfiguration {
 
   @Bean
   JwtDecoder jwtDecoder() {
-    NimbusJwtDecoderJwkSupport jwtDecoder = (NimbusJwtDecoderJwkSupport) JwtDecoders
+    NimbusJwtDecoder nimbusJwtDecoder = (NimbusJwtDecoder) JwtDecoders
         .fromOidcIssuerLocation(jwt.getIssuerUri());
 
     OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(auth0.getAudience());
@@ -34,8 +34,8 @@ public class JwtDecoderConfiguration {
     OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer,
         audienceValidator);
 
-    jwtDecoder.setJwtValidator(withAudience);
+    nimbusJwtDecoder.setJwtValidator(withAudience);
 
-    return jwtDecoder;
+    return nimbusJwtDecoder;
   }
 }

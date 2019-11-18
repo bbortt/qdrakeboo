@@ -1,9 +1,8 @@
 language: java
 dist: trusty
-jdk: openjdk11
 
-sudo: false
 install: true
+os: linux
 
 if: tag is blank
 
@@ -28,16 +27,28 @@ env:
     - secure: "hZ0+KC8Ih6HUTl6A1yVTlXDQd5CfAIqfVLhQa1M0U/yKSg6hDiapRUMm/CvXAeWkT842i/Ja0UuopXz+BRIqoWU4QbCDDO5hvwQZ7lQUeW4z5AgDZMYeEhahbUiHbsa0G7vg6Bfs2iUud1GSZmMDYVPJdiBJx8SuQBnrIc8teKoroYSpBCbxBi1HuNBGYv9MYs3mESv3PAyZlcBJE2q6m2fMElsgKI92XTJfl+LMVd7ldruBfGO86N4dmFdyFeOuofkHtMnLjB10W3FujRCNQ+CcVrEYmHCzICFSUWeSpI8ItD6f0ZDw+IOxcdBGEOAJqp5qZn7V3y/LjWSX9Umo74P32ncoErjz4GID6YiWyo5mvG75peT3zfcGvYuf9DU/3NTl/Gp9bEoJYbaT9epGS04aEdGtpxTiHCh2DoqIWcpzxdzOler0BtERvpHcpeAdYY7+ID5b+tyuOT1DUVO2epb/2q5OtGcIFF8fAvprYGeAPhM3lcKbiXaNfNZZ+8usFBJ4GlyvLGiMKF5rZ6F/OCxcIYLJRiBGhLgcREMcYUTNKJITi4a0btgZyHLNWVsrXlG5cEgYZkFdvCqDVqiiWDp/Zzy/wyeoqGJksOC8MfKcSWW9CmUKmvUg2xDhrGtdYUuxuMnmJ7l5TgQl7bNYlvede7liQYIFKtw/Yi8X9NE="
     # ^^ DOCKER_PASSWORD
 
+jobs:
+  include:
+    # OracleJDK - Java 11 (lts, main build with Sonar)
+    - env: MAIN_BUILD='true'
+      jdk: openjdk13
+    # OpenJDK - Java 13 (latest)
+    - env: MAIN_BUILD='false'
+      jdk: openjdk13
+
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
+  - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export GRADLE_COMMAND="build sonarqube"; else export GRADLE_COMMAND="check"; fi
   - ./gradlew dependencyUpdates
-  - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i build sonarqube
+  - ./gradlew -Pversion=$TRAVIS_BUILD_NUMBER --no-daemon -i ${GRADLE_COMMAND}
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - .travis/docker_build_all.sh $TRAVIS_BUILD_NUMBER
+after_success: >
+  if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then
+    bash <(curl -s https://codecov.io/bash) &&
+    .travis/docker_build_all.sh $TRAVIS_BUILD_NUMBER
+  fi
 
 deploy:
   - provider: script

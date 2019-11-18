@@ -1,16 +1,15 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.8.RELEASE' apply false
-    id 'org.sonarqube' version '2.7.1'
-    id 'com.github.ben-manes.versions' version '0.25.0'
+    id 'org.springframework.boot' version '2.2.1.RELEASE' apply false
+    id 'org.sonarqube' version '2.8'
+    id 'com.github.ben-manes.versions' version '0.27.0'
 }
 
 group = 'io.github.bbortt.qdrakeboo'
 
 ext {
-    set('springBootVersion', "2.1.8.RELEASE")
-    set('springCloudVersion', "Greenwich.SR3")
+    set('springBootVersion', "2.2.1.RELEASE")
+    set('springCloudVersion', "Hoxton.RC2")
 }
-
 
 sonarqube {
     properties {
@@ -23,6 +22,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        maven { url "https://repo.spring.io/milestone" } // Remove when using set('springCloudVersion', "Hoxton.RELEASE")
     }
 }
 
@@ -31,9 +31,6 @@ subprojects {
         apply plugin: 'org.springframework.boot'
         apply plugin: 'io.spring.dependency-management'
         apply plugin: 'jacoco'
-
-        sourceCompatibility = '11'
-        targetCompatibility = '11'
 
         buildscript {
             dependencies {
