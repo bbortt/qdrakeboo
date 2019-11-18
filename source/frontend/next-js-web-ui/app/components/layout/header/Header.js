@@ -81,7 +81,7 @@ export const HeaderClass = ({
               <a>Account</a>
               <ul className="menu vertical">
                 <li>
-                  <ActiveMenuItem href="app/account">
+                  <ActiveMenuItem href="/app/account">
                     <a>Settings</a>
                   </ActiveMenuItem>
                 </li>
