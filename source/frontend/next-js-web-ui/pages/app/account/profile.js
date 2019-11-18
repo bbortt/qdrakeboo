@@ -5,13 +5,17 @@ import Head from 'next/head'
 
 import { withAuth, withLoginRequired } from 'use-auth0-hooks'
 
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import type { AuthType } from '../../../app/domain/Auth.type'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
 
+require('./profile.scss')
+
 export const ProfileClass = ({ auth }: { auth: AuthType }) => {
   const { user } = auth
-  console.log('user: ', user)
 
   return (
     <AccountContainer>
@@ -21,16 +25,14 @@ export const ProfileClass = ({ auth }: { auth: AuthType }) => {
 
       <div id="profile">
         <div className="grid-x">
-          <div className="cell">
-            <div className="media-object row align-middle">
-              <div className="media-object-section columns">
-                <div className="thumbnail">
-                  <img src={user.picture} alt="Profile Picture" />
-                </div>
+          <div className="cell media-object grid-x">
+            <div className="media-object-section cell small-3 medium-2">
+              <div className="thumbnail">
+                <img src={user.picture} alt="Profile Picture" />
               </div>
-              <div className="media-object-section columns">
-                <h2>{user.name}</h2>
-              </div>
+            </div>
+            <div className="media-object-section cell small-8 medium-9 small-offset-1 container-align-middle">
+              <h2>{user.name}</h2>
             </div>
           </div>
 
@@ -74,6 +76,20 @@ export const ProfileClass = ({ auth }: { auth: AuthType }) => {
                 disabled
               />
             </label>
+          </div>
+
+          <div className="cell">
+            {user.email_verified ? (
+              <p>
+                <FontAwesomeIcon icon={faCheckCircle} className="success" />
+                &nbsp;E-Mail verified!
+              </p>
+            ) : (
+              <p>
+                <FontAwesomeIcon icon={faTimesCircle} className="error" />
+                &nbsp;E-Mail not verified!
+              </p>
+            )}
           </div>
         </div>
       </div>
