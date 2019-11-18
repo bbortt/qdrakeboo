@@ -10,11 +10,13 @@ public class HystrixConfigurationUnitTest {
 
   @Test
   public void isAnnotated() {
-    assertThat(HystrixConfiguration.class).hasAnnotations(Configuration.class, EnableHystrix.class);
+    assertThat(HystrixConfiguration.class)
+        .hasAnnotations(Configuration.class, EnableHystrix.class);
   }
 
   @Test
   public void hasPublicConstructor() {
-    assertThat(new HystrixConfiguration()).isNotNull();
+    assertThat(new HystrixConfiguration())
+        .isNotNull();
   }
 }

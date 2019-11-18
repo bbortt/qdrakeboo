@@ -17,11 +17,13 @@ public class UserIdFilterUnitTest {
 
   @Test
   public void isAnnotated() {
-    assertThat(fixture.getClass()).hasAnnotation(Component.class);
+    assertThat(fixture.getClass())
+        .hasAnnotation(Component.class);
   }
 
   @Test
   public void hasPublicConstructor() {
-    assertThat(new UserIdFilter()).isNotNull();
+    assertThat(new UserIdFilter())
+        .isNotNull();
   }
 }

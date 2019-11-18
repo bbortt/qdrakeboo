@@ -9,11 +9,13 @@ public class SecurityWebFilterChainConfigurationUnitTest {
 
   @Test
   public void isAnnotated() {
-    assertThat(SecurityWebFilterChainConfiguration.class).hasAnnotation(Configuration.class);
+    assertThat(SecurityWebFilterChainConfiguration.class)
+        .hasAnnotation(Configuration.class);
   }
 
   @Test
   public void hasPublicConstructor() {
-    assertThat(new SecurityWebFilterChainConfiguration()).isNotNull();
+    assertThat(new SecurityWebFilterChainConfiguration())
+        .isNotNull();
   }
 }

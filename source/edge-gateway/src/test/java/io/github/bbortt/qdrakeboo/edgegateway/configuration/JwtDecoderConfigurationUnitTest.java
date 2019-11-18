@@ -23,12 +23,14 @@ public class JwtDecoderConfigurationUnitTest {
 
   @Test
   public void isAnnotated() {
-    assertThat(fixture.getClass()).hasAnnotation(Configuration.class);
+    assertThat(fixture.getClass())
+        .hasAnnotation(Configuration.class);
   }
 
   @Test
   public void constructorInstantiatesClass() {
-    assertThat(fixture).hasFieldOrPropertyWithValue("auth0", auth0)
+    assertThat(fixture)
+        .hasFieldOrPropertyWithValue("auth0", auth0)
         .hasFieldOrPropertyWithValue("jwt", jwt);
   }
 }

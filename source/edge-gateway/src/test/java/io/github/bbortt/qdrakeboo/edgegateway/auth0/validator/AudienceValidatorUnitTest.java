@@ -27,7 +27,8 @@ public class AudienceValidatorUnitTest {
 
   @Test
   public void constructorInstantiatesClass() {
-    assertThat(fixture).hasFieldOrPropertyWithValue("audience", TEST_AUDIENCE)
+    assertThat(fixture)
+        .hasFieldOrPropertyWithValue("audience", TEST_AUDIENCE)
         .extracting("oAuth2Error")
         .isEqualToComparingFieldByField(O_AUTH_2_ERROR);
   }
@@ -35,25 +36,34 @@ public class AudienceValidatorUnitTest {
   @Test
   public void validateReturnsSuccessOnMatch() {
     Jwt jwt = Mockito.mock(Jwt.class);
-    doReturn(Collections.singletonList(TEST_AUDIENCE)).when(jwt).getAudience();
+    doReturn(Collections.singletonList(TEST_AUDIENCE))
+        .when(jwt)
+        .getAudience();
 
-    assertThat(fixture.validate(jwt)).isEqualTo(OAuth2TokenValidatorResult.success());
+    assertThat(fixture.validate(jwt))
+        .isEqualTo(OAuth2TokenValidatorResult.success());
   }
 
   @Test
   public void validateReturnsSuccessOnMatchInOneOf() {
     Jwt jwt = Mockito.mock(Jwt.class);
-    doReturn(Arrays.asList("invalid-audience", TEST_AUDIENCE)).when(jwt).getAudience();
+    doReturn(Arrays.asList("invalid-audience", TEST_AUDIENCE))
+        .when(jwt)
+        .getAudience();
 
-    assertThat(fixture.validate(jwt)).isEqualTo(OAuth2TokenValidatorResult.success());
+    assertThat(fixture.validate(jwt))
+        .isEqualTo(OAuth2TokenValidatorResult.success());
   }
 
   @Test
   public void validateReturnsFailureOnNoneMatch() {
     Jwt jwt = Mockito.mock(Jwt.class);
-    doReturn(Collections.singletonList("invalid-audience")).when(jwt).getAudience();
+    doReturn(Collections.singletonList("invalid-audience"))
+        .when(jwt)
+        .getAudience();
 
-    assertThat(fixture.validate(jwt)).isEqualToComparingFieldByFieldRecursively(
-        OAuth2TokenValidatorResult.failure(O_AUTH_2_ERROR));
+    assertThat(fixture.validate(jwt))
+        .usingRecursiveComparison()
+        .isEqualTo(OAuth2TokenValidatorResult.failure(O_AUTH_2_ERROR));
   }
 }
