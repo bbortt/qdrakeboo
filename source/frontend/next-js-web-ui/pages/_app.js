@@ -2,6 +2,7 @@
 import React from 'react'
 
 import App from 'next/app'
+import Head from 'next/head'
 
 import { Provider } from 'react-redux'
 import getStore from '../app/getStore'
@@ -15,7 +16,6 @@ require('./_app.scss')
 
 export class RootClass extends App {
   componentDidMount() {
-    // TODO: "unfoundation"?
     updateFoundation()
   }
 
@@ -24,6 +24,10 @@ export class RootClass extends App {
 
     return (
       <ContextfuldAuth0Provider>
+        <Head>
+          <title>Qdrakeboo</title>
+        </Head>
+
         <Provider store={getStore()}>
           <Header />
 

@@ -1,0 +1,22 @@
+@import '../../../app/scss/foundation/settings';
+
+#profile {
+  .media-object {
+    img {
+      max-height: 10vh;
+      max-width: 10vw;
+    }
+
+    .container-align-middle {
+      margin: auto;
+    }
+  }
+
+  .success {
+    color: $success-color;
+  }
+
+  .error {
+    color: $alert-color;
+  }
+}

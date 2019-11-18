@@ -1,11 +1,11 @@
 {
   "auth0": {
-    "domain": "",
-    "clientId": "",
+    "domain": "qdrakeboo.eu.auth0.com",
+    "clientId": "WlO4u8sFnmV0QyXqLmLlLthkRyB4zWg4",
     "callbackUrl": "http://localhost:3000/app"
   },
   "api": {
-    "audience": "",
+    "audience": "http://qdrakeboo.localhost",
     "url": "http://localhost:8080"
   },
   "logoutRedirect": "http://localhost:3000/goodbye"

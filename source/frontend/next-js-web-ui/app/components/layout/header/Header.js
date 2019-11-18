@@ -81,12 +81,17 @@ export const HeaderClass = ({
               <a>Account</a>
               <ul className="menu vertical">
                 <li>
-                  <ActiveMenuItem href="app/account">
+                  <ActiveMenuItem href="/app/account">
                     <a>Settings</a>
                   </ActiveMenuItem>
                 </li>
                 <li>
-                  <button type="button" aria-label="Logout" onClick={logout}>
+                  <button
+                    type="button"
+                    className="button-full-width"
+                    aria-label="Logout"
+                    onClick={logout}
+                  >
                     <a>Logout</a>
                   </button>
                 </li>
