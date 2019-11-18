@@ -1,206 +1,70 @@
 // @flow
 import React from 'react'
 
-import { Store, Unsubscribe } from 'redux'
-import debounce from 'lodash/debounce'
+import Head from 'next/head'
 
-import { withLoginRequired } from 'use-auth0-hooks'
+import getStore from '../../../app/getStore'
 
-import subscribeToReduxStore from '../../../app/util/redux/subscribeToReduxStore'
-import withReduxContext from '../../../app/util/redux/withReduxContext'
+import { withAuth, withLoginRequired } from 'use-auth0-hooks'
 
-import { resetPassword } from '../../../app/state/action'
+import axios from 'axios'
+import { syncWellKnown } from '../../../app/util/loadWellKnown'
 
-import updateFoundation from '../../../app/util/updateFoundation'
+import type { AuthType } from '../../../app/domain/Auth.type'
 
 import AccountContainer from '../../../app/components/account/AccountContainer'
-import type { ReduxState } from '../../../app/state/reducer'
+import { addErrorAlert, addSuccessAlert } from '../../../app/state/action'
 
-require('./reset-password.scss')
+const resetPassword = (email: string) => {
+  const store = getStore()
+  const { auth0 } = syncWellKnown()
 
-type ResetPasswordProps = {
-  store: {
-    dispatch: (action: any) => void,
-  },
-  remote: {
-    loading: boolean,
-    error: string,
-  },
-}
-
-type ResetPasswordState = {
-  password: string,
-  confirmation: string,
-  formErrors: Array<string>,
-  submitDisabled: boolean,
-  unsubscribe: Unsubscribe,
-}
-
-export class ResetPasswordClass extends React.Component<
-  ResetPasswordProps,
-  ResetPasswordState
-> {
-  constructor(props: ResetPasswordProps) {
-    super(props)
-
-    const { store } = props
-
-    this.state = {
-      password: '',
-      confirmation: '',
-      formErrors: [],
-      submitDisabled: true,
-      unsubscribe: this.subscribe(store),
-    }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.checkFormErrors = debounce(this.checkFormErrors.bind(this), 500)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidMount = () => {
-    updateFoundation('#reset-password')
-  }
-
-  componentWillUnmount = () => {
-    const { unsubscribe } = this.state
-    unsubscribe()
-  }
-
-  subscribe = (store: Store<ReduxState>) => {
-    return subscribeToReduxStore(
-      store,
-      reduxState => reduxState.userManagement.resetPassword,
-      this.handleStateChange(this)
+  axios
+    .post(`https://${auth0.domain}/dbconnections/change_password`, {
+      client_id: auth0.clientId,
+      email: email,
+      connection: 'Username-Password-Authentication',
+    })
+    .then(() =>
+      store.dispatch(
+        addSuccessAlert(
+          'Successfully send a password-reset link!' /* TODO: i18n code title */
+        )
+      )
     )
-  }
-
-  handleStateChange = (reference: ResetPasswordClass) => {
-    return (resetPasswordState: { loading: boolean, error: string }) => {
-      const { loading, error } = resetPasswordState
-
-      if (!loading) {
-        if (error) {
-          const { formErrors } = reference.state
-          formErrors.push(error)
-          reference.setState({ formErrors })
-        } else {
-          reference.setState({
-            password: '',
-            confirmation: '',
-            formErrors: [],
-            submitDisabled: true,
-          })
-        }
-
-        reference.checkFormErrors()
-      }
-    }
-  }
-
-  handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const { target } = event
-    this.setState({ [target.name]: target.value }, this.checkFormErrors())
-  }
-
-  checkFormErrors = () => {
-    const { password, confirmation } = this.state
-    const formErrors = []
-
-    if (password !== '' && password.length < 8) {
-      formErrors.push('Password must be at least 8 characters in length!')
-    }
-
-    if (confirmation !== '' && password !== confirmation) {
-      formErrors.push('Password and confirmation do not match!')
-    }
-
-    const submitDisabled =
-      password === '' || confirmation === '' || formErrors.length !== 0
-
-    this.setState({ formErrors, submitDisabled })
-  }
-
-  handleSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-
-    if (this.hasErrors()) {
-      return
-    }
-
-    const { store } = this.props
-    const { password, confirmation } = this.state
-
-    store.dispatch(resetPassword(password, confirmation))
-  }
-
-  hasErrors = () => {
-    const { formErrors } = this.state
-    return formErrors.length !== 0
-  }
-
-  render() {
-    const { password, confirmation, formErrors, submitDisabled } = this.state
-
-    return (
-      <AccountContainer>
-        <div id="reset-password">
-          <h2>Reset Password</h2>
-
-          <form onSubmit={this.handleSubmit}>
-            <div className="grid-container">
-              <div className="grid-x grid-padding-x">
-                <div className="medium-6 cell">
-                  <label htmlFor="password">
-                    {' '}
-                    New Password
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="New Password"
-                      value={password}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                </div>
-                <div className="medium-6 cell">
-                  <label htmlFor="confirmation">
-                    {' '}
-                    Confirm New Password
-                    <input
-                      id="confirmation"
-                      name="confirmation"
-                      type="password"
-                      placeholder="Confirm Password"
-                      value={confirmation}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                </div>
-                <div className="medium-10 cell">
-                  <span className="form-error" hidden={!this.hasErrors()}>
-                    {formErrors[0]}
-                  </span>
-                </div>
-                <div className="medium-2 cell">
-                  <div className="input-group-button float-right">
-                    <input
-                      id="button-submit"
-                      type="submit"
-                      className="button"
-                      disabled={submitDisabled}
-                      value="Submit"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </AccountContainer>
+    .catch(error =>
+      store.dispatch(addErrorAlert(error.message /* TODO: i18n code title */))
     )
-  }
 }
 
-export default withLoginRequired(withReduxContext(ResetPasswordClass))
+export const ResetPasswordClass = ({ auth }: { auth: AuthType }) => {
+  const { email } = auth.user
+
+  return (
+    <AccountContainer>
+      <Head>
+        <title>Qdrakeboo | Reset Password</title>
+      </Head>
+
+      <div id="resetpassword">
+        <h2>
+          <small>Reset Password</small>
+        </h2>
+        <p>
+          We will send you a confirmation e-mail containing a link to reset your
+          password.
+        </p>
+        <button
+          type="button"
+          className="button"
+          aria-label="Reset password"
+          onClick={() => resetPassword(email)}
+        >
+          Reset Password
+        </button>
+      </div>
+    </AccountContainer>
+  )
+}
+
+export default withLoginRequired(withAuth(ResetPasswordClass))

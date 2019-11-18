@@ -35,7 +35,7 @@ export const syncWellKnown = (): WellKnownType => {
 
 export default async (): Promise<{ wellKnown: WellKnownType }> => {
   if (process.env.NODE_ENV !== 'development' && typeof window !== 'undefined') {
-    return axios.get('/.well-known.json').then(response => {
+    return axios.get('/well-known.json').then(response => {
       wellKnown = response.data
       return Promise.resolve({ wellKnown })
     })
