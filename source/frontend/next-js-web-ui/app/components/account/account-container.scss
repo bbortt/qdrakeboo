@@ -1,3 +1,11 @@
+@import '../../scss/foundation/settings';
+
 #account {
-  padding-top: 5vh;
+  @include breakpoint(small) {
+    padding-top: 2vh;
+  }
+
+  @include breakpoint(medium up) {
+    padding-top: 5vh;
+  }
 }

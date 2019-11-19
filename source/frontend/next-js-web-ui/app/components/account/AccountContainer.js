@@ -9,11 +9,11 @@ require('./account-container.scss')
 export const AccountContainerClass = ({ children }: { children: Node }) => (
   <div id="account" className="grid-container">
     <div className="grid-x grid-padding-x">
-      <div className="cell small-3">
+      <div className="cell medium-3">
         <AccountNavigation />
       </div>
 
-      <div className="cell small-9">
+      <div className="cell medium-9">
         <div className="grid-y">
           <div className="cell">
             <h1>Account Management</h1>
