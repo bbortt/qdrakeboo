@@ -24,10 +24,6 @@ task bundle(type: NpmTask, dependsOn: test) {
     args = ['run', 'fullbuild']
 }
 
-task export(type: NpmTask, dependsOn: bundle) {
-    args = ['run', 'export']
-}
-
 task flow(type: NpmTask, dependsOn: npmInstall) {
     args = ['run', 'flow']
 }
