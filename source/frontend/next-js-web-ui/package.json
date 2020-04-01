@@ -50,7 +50,7 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "motion-ui": "^2.0.3",
-    "next": "^9.1.1",
+    "next": "^9.3.2",
     "node-sass": "^4.13.0",
     "node-sass-package-importer": "^5.3.2",
     "react": "^16.11.0",
