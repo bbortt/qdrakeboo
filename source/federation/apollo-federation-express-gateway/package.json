@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@apollo/gateway": "^0.10.8",
-    "apollo-server-express": "^2.9.7",
+    "apollo-server-express": "^2.14.2",
     "contextful-winston-logger": "file:../../contextful-winston-logger",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
